@@ -29,6 +29,7 @@
                                     <div class="form-group">
                                         <label for="EstadoCOD" class="control-label"></label>
                                         <select name="EstadoCOD" id="EstadoCOD" class="form-control">
+                                            <option selected disabled>-------Selecione um estado-------</option>
                                             @foreach($estados as $estado)
                                                 <option value="{{ $estado->EstadoID }}">{{ $estado->Descricao }}</option>
                                             @endforeach
