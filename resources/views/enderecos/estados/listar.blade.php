@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('titulo', 'Estados - Lista de estados')
+@section('titulo', 'Estados - Lista')
 @section('conteudo')
     <div class="container">
         <div class="row">
