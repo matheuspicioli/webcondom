@@ -10,7 +10,7 @@
                     </div>
 
                     <div class="panel-body">
-                        <a href="{{ route('enderecos.estados.criar') }}" class="btn btn-primary">Criar!</a>
+                        <a href="{{ route('enderecos.estados.criar') }}" class="btn btn-primary">Cadastrar</a>
                         <hr />
                         <table class="table table-bordered">
                             <thead>
