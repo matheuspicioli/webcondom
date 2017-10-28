@@ -33,4 +33,13 @@ Route::prefix('Enderecos')->group(function(){
         Route::put('{id}/Alterar', 'Enderecos\CidadesController@alterar')->name('enderecos.cidades.alterar');
         Route::get('{id}/Excluir', 'Enderecos\CidadesController@excluir')->name('enderecos.cidades.excluir');
     });
+
+    Route::prefix('Enderecos')->group(function(){
+        Route::get('/', 'Enderecos\EnderecosController@listar')->name('enderecos.enderecos.listar');
+        Route::get('Criar', 'Enderecos\EnderecosController@criar')->name('enderecos.enderecos.criar');
+        Route::post('/', 'Enderecos\EnderecosController@salvar')->name('enderecos.enderecos.salvar');
+        Route::get('{id}/Exibir', 'Enderecos\EnderecosController@exibir')->name('enderecos.enderecos.exibir');
+        Route::put('{id}/Alterar', 'Enderecos\EnderecosController@alterar')->name('enderecos.enderecos.alterar');
+        Route::get('{id}/Excluir', 'Enderecos\EnderecosController@excluir')->name('enderecos.enderecos.excluir');
+    });
 });
