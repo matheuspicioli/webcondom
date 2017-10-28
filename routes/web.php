@@ -24,4 +24,13 @@ Route::prefix('Enderecos')->group(function(){
         Route::put('{id}/Alterar', 'Enderecos\EstadosController@alterar')->name('enderecos.estados.alterar');
         Route::get('{id}/Excluir', 'Enderecos\EstadosController@excluir')->name('enderecos.estados.excluir');
     });
+
+    Route::prefix('Cidades')->group(function(){
+        Route::get('/', 'Enderecos\CidadesController@listar')->name('enderecos.cidades.listar');
+        Route::get('Criar', 'Enderecos\CidadesController@criar')->name('enderecos.cidades.criar');
+        Route::post('/', 'Enderecos\CidadesController@salvar')->name('enderecos.cidades.salvar');
+        Route::get('{id}/Exibir', 'Enderecos\CidadesController@exibir')->name('enderecos.cidades.exibir');
+        Route::put('{id}/Alterar', 'Enderecos\CidadesController@alterar')->name('enderecos.cidades.alterar');
+        Route::get('{id}/Excluir', 'Enderecos\CidadesController@excluir')->name('enderecos.cidades.excluir');
+    });
 });
