@@ -18,8 +18,8 @@
                                         {{ csrf_field() }}
                                         <input type="hidden" name="_method" value="PUT">
                                         <div class="form-group">
-                                            <label for="Rua" class="control-label">Rua</label>
-                                            <input id="Rua" type="text" class="form-control" name="Rua" value="{{ $endereco->Rua }}">
+                                            <label for="Logradouro" class="control-label">Logradouro</label>
+                                            <input id="Logradouro" type="text" class="form-control" name="Logradouro" value="{{ $endereco->Logradouro }}">
                                         </div>
 
                                         <div class="form-group">

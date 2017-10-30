@@ -28,6 +28,11 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label for="CodigoIBGE" class="control-label">Código IBGE</label>
+                                            <input type="text" id="CodigoIBGE" name="Codigo IBGE" class="form-control" value="{{ $estado->CodigoIBGE }}">
+                                        </div>
+
+                                        <div class="form-group">
                                             <button class="btn btn-primary" type="submit">Salvar</button>
                                             <button class="btn btn-danger">
                                                 <a style="color: #FFFFFF"

@@ -8,5 +8,5 @@ class Estado extends Model
 {
     protected $primaryKey = "EstadoID";
     protected $table = "Estados";
-    protected $fillable = [ "Descricao", "Sigla" ];
+    protected $fillable = [ "Descricao", "Sigla", "CodigoIBGE" ];
 }

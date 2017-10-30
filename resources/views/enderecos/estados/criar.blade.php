@@ -27,6 +27,11 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <label for="CodigoIBGE" class="control-label">Código IBGE</label>
+                                        <input type="text" id="CodigoIBGE" name="CodigoIBGE" class="form-control">
+                                    </div>
+
+                                    <div class="form-group">
                                         <button class="btn btn-primary" type="submit">Cadastrar</button>
                                     </div>
                                 </form>

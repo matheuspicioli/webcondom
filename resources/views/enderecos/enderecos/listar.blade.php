@@ -16,7 +16,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Rua</th>
+                                    <th>Logradouro</th>
                                     <th>Numero</th>
                                     <th>CEP</th>
                                     <th>Cidade</th>
@@ -27,7 +27,7 @@
                                 @foreach($enderecos as $endereco)
                                     <tr>
                                         <td>{{ $endereco->EnderecoID }}</td>
-                                        <td>{{ $endereco->Rua }}</td>
+                                        <td>{{ $endereco->Logradouro }}</td>
                                         <td>{{ $endereco->Numero }}</td>
                                         <td>{{ $endereco->CEP }}</td>
                                         <td>{{ $endereco->Cidade->Descricao }} - {{ $endereco->Cidade->Estado->Sigla }}</td>

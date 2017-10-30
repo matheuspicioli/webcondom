@@ -17,8 +17,8 @@
                                 <form method="post" action="{{ route('enderecos.enderecos.salvar') }}">
                                     {{ csrf_field() }}
                                     <div class="form-group">
-                                        <label for="Rua" class="control-label">Rua</label>
-                                        <input id="Rua" type="text" class="form-control" name="Rua">
+                                        <label for="Logradouro" class="control-label">Logradouro</label>
+                                        <input id="Logradouro" type="text" class="form-control" name="Logradouro">
                                     </div>
 
                                     <div class="form-group">

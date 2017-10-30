@@ -18,6 +18,7 @@
                                     <th>#</th>
                                     <th>Descrição</th>
                                     <th>Sigla</th>
+                                    <th>Código IBGE</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
@@ -27,6 +28,7 @@
                                         <td>{{ $estado->EstadoID }}</td>
                                         <td>{{ $estado->Descricao }}</td>
                                         <td>{{ $estado->Sigla }}</td>
+                                        <td>{{ $estado->CodigoIBGE }}</td>
                                         <td>
                                             <button class="btn btn-success">
                                                 <a style="color: #FFFFFF"
