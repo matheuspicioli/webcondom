@@ -8,7 +8,7 @@ class Endereco extends Model
 {
     protected $primaryKey = "EnderecoID";
     protected $table = "Enderecos";
-    protected $fillable = [ "Logradouro", "Numero", "CEP", "Complemento", "CidadeCOD" ];
+    protected $fillable = [ "Logradouro", "Numero", "CEP", "Complemento", "Bairro", "CidadeCOD" ];
 
     public function Cidade()
     {

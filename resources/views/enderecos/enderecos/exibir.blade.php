@@ -39,6 +39,12 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label for="Bairro" class="control-label">Bairro</label>
+                                            <input type="text" id="Bairro" name="Bairro" class="form-control" value="{{ $endereco->Bairro }}">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="CidadeCOD" class="control-label">Cidade:</label>
                                             <select name="CidadeCOD" id="CidadeCOD" class="form-control">
                                                 @foreach($cidades as $cidade)
                                                     <option {{ $cidade->CidadeID == $endereco->CidadeCOD ? 'selected' : '' }}

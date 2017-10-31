@@ -20,6 +20,7 @@ class CreateEnderecosTable extends Migration
             $table->integer('Numero');
             $table->string('CEP', 8);
             $table->string('Complemento', 50)->nullable();
+            $table->string('Bairro');
 
             $table->integer('CidadeCOD')->unsigned();
             $table->foreign('CidadeCOD')
@@ -38,6 +39,8 @@ class CreateEnderecosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('enderecos');
+        Schema::disableForeignKeyConstraints();
+        Schema::dropIfExists('Enderecos');
+        Schema::enableForeignKeyConstraints();
     }
 }

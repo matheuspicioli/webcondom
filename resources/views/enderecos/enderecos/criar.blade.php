@@ -33,11 +33,17 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="Numero" class="control-label">Complemento</label>
+                                        <label for="Complemento" class="control-label">Complemento</label>
                                         <input type="text" id="Complemento" name="Complemento" class="form-control">
                                     </div>
 
                                     <div class="form-group">
+                                        <label for="Bairro" class="control-label">Bairro</label>
+                                        <input type="text" id="Bairro" name="Bairro" class="form-control">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="CidadeCOD" class="control-label">Cidade:</label>
                                         <select name="CidadeCOD" id="CidadeCOD" class="form-control">
                                             <option selected disabled>-------Selecione uma cidade-------</option>
                                             @foreach($cidades as $cidade)
