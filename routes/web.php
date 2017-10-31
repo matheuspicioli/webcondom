@@ -15,6 +15,26 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::prefix('Condominios')->group(function(){
+    Route::prefix('Sindicos')->group(function(){
+        Route::get('/', 'Condominios\SindicosController@listar')->name('condominios.sindicos.listar');
+        Route::get('Criar', 'Condominios\SindicosController@criar')->name('condominios.sindicos.criar');
+        Route::post('/', 'Condominios\SindicosController@salvar')->name('condominios.sindicos.salvar');
+        Route::get('{id}/Exibir', 'Condominios\SindicosController@exibir')->name('condominios.sindicos.exibir');
+        Route::put('{id}/Alterar', 'Condominios\SindicosController@alterar')->name('condominios.sindicos.alterar');
+        Route::get('{id}/Excluir', 'Condominios\SindicosController@excluir')->name('condominios.sindicos.excluir');
+    });
+
+    Route::prefix('Condominios')->group(function(){
+        Route::get('/', 'Condominios\CondominiosController@listar')->name('condominios.condominios.listar');
+        Route::get('Criar', 'Condominios\CondominiosController@criar')->name('condominios.condominios.criar');
+        Route::post('/', 'Condominios\CondominiosController@salvar')->name('condominios.condominios.salvar');
+        Route::get('{id}/Exibir', 'Condominios\CondominiosController@exibir')->name('condominios.condominios.exibir');
+        Route::put('{id}/Alterar', 'Condominios\CondominiosController@alterar')->name('condominios.condominios.alterar');
+        Route::get('{id}/Excluir', 'Condominios\CondominiosController@excluir')->name('condominios.condominios.excluir');
+    });
+});
+
 Route::prefix('Enderecos')->group(function(){
     Route::prefix('Estados')->group(function(){
         Route::get('/', 'Enderecos\EstadosController@listar')->name('enderecos.estados.listar');
