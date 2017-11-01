@@ -35,6 +35,7 @@
                                     <div class="form-group">
                                         <label for="Complemento" class="control-label">Complemento</label>
                                         <input type="text" id="Complemento" name="Complemento" class="form-control">
+                                        <span class="helper-block">Este campo é opcional</span>
                                     </div>
 
                                     <div class="form-group">

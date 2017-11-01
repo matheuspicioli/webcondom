@@ -19,13 +19,14 @@
                                         {{ csrf_field() }}
                                         <input type="hidden" name="_method" value="PUT">
                                         <div class="form-group">
-                                            <label for="Descricao" class="control-label">Descrição</label>
+                                            <label for="Descricao" class="control-label">Descrição:</label>
                                             <input id="Descricao" type="text" class="form-control" name="Descricao" value="{{ $cidade->Descricao }}">
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="CodigoIBGE" class="control-label">Codigo IBGE(Opcional)</label>
+                                            <label for="CodigoIBGE" class="control-label">Codigo IBGE:</label>
                                             <input type="text" id="CodigoIBGE" name="CodigoIBGE" class="form-control" value="{{ $cidade->CodigoIBGE ? $cidade->CodigoIBGE : '' }}">
+                                            <span class="helper-block">Este campo é opcional</span>
                                         </div>
 
                                         <div class="form-group">

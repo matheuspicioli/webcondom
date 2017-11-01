@@ -17,17 +17,18 @@
                                 <form method="post" action="{{ route('enderecos.cidades.salvar') }}">
                                     {{ csrf_field() }}
                                     <div class="form-group">
-                                        <label for="Descricao" class="control-label">Descrição</label>
+                                        <label for="Descricao" class="control-label">Descrição:</label>
                                         <input id="Descricao" type="text" class="form-control" name="Descricao">
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="CodigoIBGE" class="control-label">Codigo IBGE(Opcional)</label>
+                                        <label for="CodigoIBGE" class="control-label">Codigo IBGE:</label>
                                         <input type="text" id="CodigoIBGE" name="CodigoIBGE" class="form-control">
+                                        <span class="helper-block">Este campo é opcional</span>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="EstadoCOD" class="control-label"></label>
+                                        <label for="EstadoCOD" class="control-label">Estado:</label>
                                         <select name="EstadoCOD" id="EstadoCOD" class="form-control">
                                             <option selected disabled>-------Selecione um estado-------</option>
                                             @foreach($estados as $estado)
