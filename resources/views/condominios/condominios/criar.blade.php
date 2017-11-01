@@ -106,14 +106,39 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="EnderecoCOD" class="control-label">Endereço:</label>
-                                        <select name="EnderecoCOD" id="EnderecoCOD" class="form-control">
-                                            <option disabled selected>----------Selecione----------</option>
-                                            @foreach($enderecos as $endereco)
-                                                <option value="{{ $endereco->EnderecoID }}">
-                                                    {{ $endereco->Logradouro }}, {{ $endereco->Numero }}
-                                                    , {{ $endereco->Bairro }} - {{ $endereco->Cidade->Descricao }}
-                                                </option>
+                                        <label for="Logradouro" class="control-label">Logradouro</label>
+                                        <input id="Logradouro" type="text" class="form-control" name="Logradouro">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="Numero" class="control-label">Número</label>
+                                        <input type="number" min="0" id="Numero" name="Numero" class="form-control">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="CEP" class="control-label">CEP</label>
+                                        <input type="number" id="CEP" name="CEP" class="form-control">
+                                        <span class="help-block">Apenas os números</span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="Complemento" class="control-label">Complemento</label>
+                                        <input type="text" id="Complemento" name="Complemento" class="form-control">
+                                        <span class="help-block">Este campo é opcional</span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="Bairro" class="control-label">Bairro</label>
+                                        <input type="text" id="Bairro" name="Bairro" class="form-control">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="CidadeCOD" class="control-label">Cidade:</label>
+                                        <select name="CidadeCOD" id="CidadeCOD" class="form-control">
+                                            <option selected disabled>-------Selecione uma cidade-------</option>
+                                            @foreach($cidades as $cidade)
+                                                <option value="{{ $cidade->CidadeID }}">{{ $cidade->Descricao }}
+                                                    - {{ $cidade->Estado->Descricao }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -135,7 +160,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <hr />
+                            <hr/>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
