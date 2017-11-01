@@ -59,7 +59,7 @@
                                     <div class="form-group">
                                         <label for="Multa" class="control-label">Multa</label>
                                         <input id="Multa" type="text" class="form-control" name="Multa">
-                                        <span class="helper-block">Este campo é opcional</span>
+                                        <span class="help-block">Este campo é opcional</span>
                                     </div>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                                     <div class="form-group">
                                         <label for="Juros" class="control-label">Juros</label>
                                         <input id="Juros" type="text" class="form-control" name="Juros">
-                                        <span class="helper-block">Este campo é opcional</span>
+                                        <span class="help-block">Este campo é opcional</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -149,7 +149,5 @@
                 </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
 @endsection

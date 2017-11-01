@@ -45,7 +45,7 @@ class CondominiosController extends Controller
 
     public function Alterar(Request $request, $id)
     {
-        //dd($request->except(['_token', '_method']));
+        //dd($request->except(['_token']));
         Condominio::find($id)->update($request->except('_token'));
         return redirect()->route('condominios.condominios.listar');
     }
