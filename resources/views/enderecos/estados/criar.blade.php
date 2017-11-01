@@ -29,6 +29,7 @@
                                     <div class="form-group">
                                         <label for="CodigoIBGE" class="control-label">Código IBGE</label>
                                         <input type="text" id="CodigoIBGE" name="CodigoIBGE" class="form-control">
+                                        <span class="helper-block">Este campo é opcional</span>
                                     </div>
 
                                     <div class="form-group">
