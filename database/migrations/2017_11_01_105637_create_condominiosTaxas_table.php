@@ -38,6 +38,8 @@ class CreateCondominiosTaxasTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('CondominiosTaxas');
+        Schema::enableForeignKeyConstraints();
     }
 }
