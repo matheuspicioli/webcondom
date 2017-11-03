@@ -24,6 +24,11 @@ class CondominiosController extends Controller
         return view('condominios.condominios.criar', compact('sindicos', 'cidades'));
     }
 
+    private function SetarEnderecoECondominio($request)
+    {
+
+    }
+
     public function Salvar(Request $request)
     {
         //dd($request->input('TemGas'));
@@ -34,7 +39,7 @@ class CondominiosController extends Controller
         $endereco->Logradouro = $request->input('Logradouro');
         $endereco->Numero = $request->input('Numero');
         $endereco->CEP = $request->input('CEP');
-        $endereco->Complemento = $request->input('Complemento') ? $request->input('Complemento') : null;
+        $endereco->Complemento = $request->input('Complemento');
         $endereco->Bairro = $request->input('Bairro');
         $endereco->CidadeCOD = $request->input('CidadeCOD');
         $endereco->save();
@@ -65,8 +70,8 @@ class CondominiosController extends Controller
 
         if($condominio){
             $sindicos = Sindico::all();
-            $enderecos = Endereco::all();
-            return view('condominios.condominios.exibir', compact('condominio', 'sindicos', 'enderecos'));
+            $cidades = Cidade::all();
+            return view('condominios.condominios.exibir', compact('condominio', 'sindicos', 'cidades'));
         }
         else
             return redirect()->route('condominios.condominios.criar');
@@ -75,7 +80,28 @@ class CondominiosController extends Controller
     public function Alterar(Request $request, $id)
     {
         //dd($request->except(['_token']));
-        Condominio::find($id)->update($request->except('_token'));
+        $condominio = Condominio::find($id);
+
+        //-----CONDOMINIO-----//
+        $condominio->Nome = $request->input('Nome');
+        $condominio->Apelido = $request->input('Apelido');
+        $condominio->Telefone = $request->input('Telefone');
+        $condominio->Celular = $request->input('Celular');
+        $condominio->Unidades = $request->input('Unidades');
+        $condominio->Multa = $request->input('Multa');
+        $condominio->Juros = $request->input('Juros');
+        $condominio->TipoJuros = $request->input('TipoJuros');
+        $condominio->TemGas = $request->input('TemGas');
+        $condominio->ValorGas = $request->input('ValorGas');
+        $condominio->SindicoCOD = $request->input('SindicoCOD');
+        //----ENDEREÇO DO CONDOMINIO---//
+        $condominio->Endereco->Logradouro = $request->input('Logradouro');
+        $condominio->Endereco->Numero = $request->input('Numero');
+        $condominio->Endereco->CEP = $request->input('CEP');
+        $condominio->Endereco->Complemento = $request->input('Complemento');
+        $condominio->Endereco->Bairro = $request->input('Bairro');
+        $condominio->Endereco->CidadeCOD = $request->input('CidadeCOD');
+        $condominio->push();
         return redirect()->route('condominios.condominios.listar');
     }
 
