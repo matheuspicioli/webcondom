@@ -11,8 +11,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call('seed_estado_table');
-        $this->call('seed_cidade_table');
-        $this->call('seed_endereco_table');
+        $this->call('EstadosSeeder');
+        $this->call('CidadesSeeder');
+        $this->call('CondominiosTaxasSeeder');
+        $this->call('SindicosSeeder');
     }
 }
