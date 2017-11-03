@@ -5,6 +5,7 @@ namespace WebCondom\Http\Controllers\Condominios;
 use Illuminate\Http\Request;
 use WebCondom\Http\Controllers\Controller;
 use WebCondom\Models\Condominios\Condominio;
+use WebCondom\Models\Condominios\CondominioTaxa;
 use WebCondom\Models\Condominios\Sindico;
 use WebCondom\Models\Enderecos\Cidade;
 use WebCondom\Models\Enderecos\Endereco;
@@ -21,19 +22,14 @@ class CondominiosController extends Controller
     {
         $sindicos = Sindico::all();
         $cidades = Cidade::all();
-        return view('condominios.condominios.criar', compact('sindicos', 'cidades'));
-    }
-
-    private function SetarEnderecoECondominio($request)
-    {
-
+        $taxas = CondominioTaxa::all();
+        return view('condominios.condominios.criar', compact('sindicos', 'cidades', 'taxas'));
     }
 
     public function Salvar(Request $request)
     {
-        //dd($request->input('TemGas'));
-        //Condominio::create($request->except('_token'));
-
+        //----TAXAS-----//
+        $taxas = $request->input('Taxas');
         //----ENDEREÇO DO CONDOMINIO---//
         $endereco = new Endereco();
         $endereco->Logradouro = $request->input('Logradouro');
@@ -59,8 +55,9 @@ class CondominiosController extends Controller
         $condominio->SindicoCOD = $request->input('SindicoCOD');
         //Pega o EnderecoID e joga no campo EnderecoCOD
         $condominio->Endereco()->associate($endereco);
+        //  $condominio->CondominiosTaxas()->attach($taxas);
         $condominio->save();
-
+        dd($condominio->Taxas);
         return redirect()->route('condominios.condominios.listar');
     }
 
@@ -71,7 +68,8 @@ class CondominiosController extends Controller
         if($condominio){
             $sindicos = Sindico::all();
             $cidades = Cidade::all();
-            return view('condominios.condominios.exibir', compact('condominio', 'sindicos', 'cidades'));
+            $taxas = CondominioTaxa::all();
+            return view('condominios.condominios.exibir', compact('condominio', 'sindicos', 'cidades', 'taxas'));
         }
         else
             return redirect()->route('condominios.condominios.criar');
