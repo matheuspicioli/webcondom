@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="Multa" class="control-label">Multa</label>
+                                        <label for="Multa" class="control-label">Multa (%)</label>
                                         <input id="Multa" type="text" class="form-control" name="Multa"
                                                value="{{ $condominio->Multa ? $condominio->Multa : '' }}">
                                         <span class="help-block">Este campo é opcional</span>
@@ -75,7 +75,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="Juros" class="control-label">Juros</label>
+                                        <label for="Juros" class="control-label">Juros (%)</label>
                                         <input id="Juros" type="text" class="form-control" name="Juros"
                                                value="{{ $condominio->Juros ? $condominio->Juros : '' }}">
                                         <span class="help-block">Este campo é opcional</span>
@@ -118,24 +118,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="EnderecoCOD" class="control-label">Endereço:</label>
-                                        <select name="EnderecoCOD" id="EnderecoCOD" class="form-control">
-                                            <option disabled selected>----------Selecione----------</option>
-                                            @foreach($enderecos as $endereco)
-                                                <option value="{{ $endereco->EnderecoID }}" {{ $endereco->EnderecoID == $condominio->EnderecoCOD ? 'selected' : '' }}>
-                                                    {{ $endereco->Logradouro }}, {{ $endereco->Numero }}
-                                                    , {{ $endereco->Bairro }} - {{ $endereco->Cidade->Descricao }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -151,6 +133,64 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- PARTE FORMULÁRIO ENDEREÇO --}}
+
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label for="Logradouro" class="control-label">Logradouro</label>
+                                        <input id="Logradouro" type="text" class="form-control" name="Logradouro" value="{{ $condominio->Endereco->Logradouro }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="Numero" class="control-label">Número</label>
+                                        <input type="number" min="0" id="Numero" name="Numero" class="form-control" value="{{ $condominio->Endereco->Numero }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label for="Complemento" class="control-label">Complemento</label>
+                                        <input type="text" id="Complemento" name="Complemento" class="form-control" value="{{ $condominio->Endereco->Complemento ? $condominio->Endereco->Numero : '' }}">
+                                        <span class="help-block">Este campo é opcional</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="CEP" class="control-label">CEP</label>
+                                        <input type="number" id="CEP" name="CEP" class="form-control" value="{{ $condominio->Endereco->CEP }}">
+                                        <span class="help-block">Apenas os números</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="Bairro" class="control-label">Bairro</label>
+                                        <input type="text" id="Bairro" name="Bairro" class="form-control" value="{{ $condominio->Endereco->Bairro }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label for="CidadeCOD" class="control-label">Cidade:</label>
+                                        <select name="CidadeCOD" id="CidadeCOD" class="form-control">
+                                            <option selected disabled>-------Selecione uma cidade-------</option>
+                                            @foreach($cidades as $cidade)
+                                                <option value="{{ $cidade->CidadeID }}" {{ $cidade->CidadeID == $condominio->Endereco->Cidade->CidadeID ? 'selected' : '' }}>{{ $cidade->Descricao }}
+                                                    - {{ $cidade->Estado->Descricao }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
                             <hr/>
                             <div class="row">
                                 <div class="col-md-12">

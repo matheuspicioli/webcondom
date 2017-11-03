@@ -49,30 +49,27 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="Unidades" class="control-label">Unidades</label>
                                         <input id="Unidades" type="number" min="0" class="form-control" name="Unidades">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="Multa" class="control-label">Multa</label>
                                         <input id="Multa" type="text" class="form-control" name="Multa">
                                         <span class="help-block">Este campo é opcional</span>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="Juros" class="control-label">Juros</label>
                                         <input id="Juros" type="text" class="form-control" name="Juros">
                                         <span class="help-block">Este campo é opcional</span>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="TipoJuros" class="control-label">Tipo de juros</label>
                                         <select name="TipoJuros" id="TipoJuros" class="form-control">
@@ -102,49 +99,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="Logradouro" class="control-label">Logradouro</label>
-                                        <input id="Logradouro" type="text" class="form-control" name="Logradouro">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="Numero" class="control-label">Número</label>
-                                        <input type="number" min="0" id="Numero" name="Numero" class="form-control">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="CEP" class="control-label">CEP</label>
-                                        <input type="number" id="CEP" name="CEP" class="form-control">
-                                        <span class="help-block">Apenas os números</span>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="Complemento" class="control-label">Complemento</label>
-                                        <input type="text" id="Complemento" name="Complemento" class="form-control">
-                                        <span class="help-block">Este campo é opcional</span>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="Bairro" class="control-label">Bairro</label>
-                                        <input type="text" id="Bairro" name="Bairro" class="form-control">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="CidadeCOD" class="control-label">Cidade:</label>
-                                        <select name="CidadeCOD" id="CidadeCOD" class="form-control">
-                                            <option selected disabled>-------Selecione uma cidade-------</option>
-                                            @foreach($cidades as $cidade)
-                                                <option value="{{ $cidade->CidadeID }}">{{ $cidade->Descricao }}
-                                                    - {{ $cidade->Estado->Descricao }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -160,6 +114,64 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- PARTE FORMULÁRIO ENDEREÇO --}}
+
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label for="Logradouro" class="control-label">Logradouro</label>
+                                        <input id="Logradouro" type="text" class="form-control" name="Logradouro">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="Numero" class="control-label">Número</label>
+                                        <input type="number" min="0" id="Numero" name="Numero" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label for="Complemento" class="control-label">Complemento</label>
+                                        <input type="text" id="Complemento" name="Complemento" class="form-control">
+                                        <span class="help-block">Este campo é opcional</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="CEP" class="control-label">CEP</label>
+                                        <input type="number" id="CEP" name="CEP" class="form-control">
+                                        <span class="help-block">Apenas os números</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="Bairro" class="control-label">Bairro</label>
+                                        <input type="text" id="Bairro" name="Bairro" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label for="CidadeCOD" class="control-label">Cidade:</label>
+                                        <select name="CidadeCOD" id="CidadeCOD" class="form-control">
+                                            <option selected disabled>-------Selecione uma cidade-------</option>
+                                            @foreach($cidades as $cidade)
+                                                <option value="{{ $cidade->CidadeID }}">{{ $cidade->Descricao }}
+                                                    - {{ $cidade->Estado->Descricao }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
                             <hr/>
                             <div class="row">
                                 <div class="col-md-12">
