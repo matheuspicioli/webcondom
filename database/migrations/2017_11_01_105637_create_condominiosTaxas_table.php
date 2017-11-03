@@ -18,7 +18,9 @@ class CreateCondominiosTaxasTable extends Migration
             $table->string('Descricao', 100);
             $table->string('Valor', 100);
 
-            $table->integer('CondominioCOD')->unsigned();
+            // PODE SER NULLABLE, PQ NÃO VAI ESCOLHER O CONDOMINIO NA CRIAÇÃO DELE
+            // E SIM NA HORA DE CADASTRAR/ALTERAR CONDOMÍNIOgit a
+            $table->integer('CondominioCOD')->unsigned()->nullable();
             $table->foreign('CondominioCOD')
                 ->references('CondominioID')
                 ->on('Condominios')
