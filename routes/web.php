@@ -33,6 +33,15 @@ Route::prefix('Condominios')->group(function(){
         Route::put('{id}/Alterar', 'Condominios\CondominiosController@alterar')->name('condominios.condominios.alterar');
         Route::get('{id}/Excluir', 'Condominios\CondominiosController@excluir')->name('condominios.condominios.excluir');
     });
+
+    Route::prefix('CondominiosTaxas')->group(function(){
+        Route::get('/', 'Condominios\CondominiosTaxasController@listar')->name('condominios.condominiostaxas.listar');
+        Route::get('Criar', 'Condominios\CondominiosTaxasController@criar')->name('condominios.condominiostaxas.criar');
+        Route::post('/', 'Condominios\CondominiosTaxasController@salvar')->name('condominios.condominiostaxas.salvar');
+        Route::get('{id}/Exibir', 'Condominios\CondominiosTaxasController@exibir')->name('condominios.condominiostaxas.exibir');
+        Route::put('{id}/Alterar', 'Condominios\CondominiosTaxasController@alterar')->name('condominios.condominiostaxas.alterar');
+        Route::get('{id}/Excluir', 'Condominios\CondominiosTaxasController@excluir')->name('condominios.condominiostaxas.excluir');
+    });
 });
 
 Route::prefix('Enderecos')->group(function(){
