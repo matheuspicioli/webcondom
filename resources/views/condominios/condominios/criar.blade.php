@@ -100,7 +100,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="SindicoCOD" class="control-label">Síndico</label>
                                         <select name="SindicoCOD" id="SindicoCOD" class="form-control">
@@ -109,6 +109,17 @@
                                                 <option value="{{ $sindico->SindicoID }}">
                                                     {{ $sindico->Nome }}
                                                 </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Taxas" class="control-label">Taxa</label>
+                                        <select name="Taxas[]" id="Taxas" class="form-control" multiple="multiple">
+                                            <option value="" selected disabled>---Nome taxa - valor taxa---</option>
+                                            @foreach($taxas as $taxa)
+                                                <option value="{{ $taxa->CondominioTaxaID }}">{{ $taxa->Taxa }}</option>
                                             @endforeach
                                         </select>
                                     </div>
