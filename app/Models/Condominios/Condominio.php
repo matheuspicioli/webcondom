@@ -4,10 +4,11 @@ namespace WebCondom\Models\Condominios;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use WebCondom\Traits\Condominios\Condominio as CondominioTrait;
 
 class Condominio extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, CondominioTrait;
 
     protected $primaryKey = "CondominioID";
     protected $table = "Condominios";
@@ -18,20 +19,6 @@ class Condominio extends Model
     protected $dates = [ "deleted_at" ];
     protected $appends = [ "EnderecoFormatado", "TipoJurosFormatado" ];
 
-    public function getEnderecoFormatadoAttribute()
-    {
-        $logradouro = $this->Endereco->Logradouro;
-        $numero     = $this->Endereco->Numero;
-        $bairro     = $this->Endereco->Bairro;
-        $cidade     = $this->Endereco->Cidade->Descricao." - ".$this->Endereco->Cidade->Estado->Sigla;
-        return "$logradouro, $numero, $bairro - $cidade";
-    }
-
-    public function getTipoJurosFormatadoAttribute()
-    {
-        return $this->TipoJuros == "AM" ? "Ao mês" : "Ao dia";
-    }
-
     public function Endereco()
     {
         return $this->belongsTo('WebCondom\Models\Enderecos\Endereco', 'EnderecoCOD', 'EnderecoID');
@@ -39,6 +26,11 @@ class Condominio extends Model
 
     public function Sindico()
     {
-        return $this->belongsTo('WebCondom\Models\Sindico', 'SindicoCOD', 'SindicoID');
+        return $this->belongsTo('WebCondom\Models\Condominios\Sindico', 'SindicoCOD', 'SindicoID');
+    }
+
+    public function CondominiosTaxas()
+    {
+        return $this->hasMany(CondominioTaxa::class, 'CondominioCOD', 'CondominioID');
     }
 }
