@@ -28,6 +28,18 @@ class CondominiosController extends Controller
     {
         //dd($request->input('TemGas'));
         //Condominio::create($request->except('_token'));
+
+        //----ENDEREÇO DO CONDOMINIO---//
+        $endereco = new Endereco();
+        $endereco->Logradouro = $request->input('Logradouro');
+        $endereco->Numero = $request->input('Numero');
+        $endereco->CEP = $request->input('CEP');
+        $endereco->Complemento = $request->input('Complemento') ? $request->input('Complemento') : null;
+        $endereco->Bairro = $request->input('Bairro');
+        $endereco->CidadeCOD = $request->input('CidadeCOD');
+        $endereco->save();
+
+        //-----CONDOMINIO-----//
         $condominio = new Condominio();
         $condominio->Nome = $request->input('Nome');
         $condominio->Apelido = $request->input('Apelido');
@@ -39,10 +51,10 @@ class CondominiosController extends Controller
         $condominio->TipoJuros = $request->input('TipoJuros');
         $condominio->TemGas = $request->input('TemGas');
         $condominio->ValorGas = $request->input('ValorGas');
-        $condominio->EnderecoCOD = $request->input('EnderecoCOD');
         $condominio->SindicoCOD = $request->input('SindicoCOD');
-
-        //----ENDEREÇO DO CONDOMINIO---//
+        //Pega o EnderecoID e joga no campo EnderecoCOD
+        $condominio->Endereco()->associate($endereco);
+        $condominio->save();
 
         return redirect()->route('condominios.condominios.listar');
     }
