@@ -24,14 +24,16 @@ $factory->define(WebCondom\Models\Enderecos\Estado::class, function (Faker $fake
 $factory->define(WebCondom\Models\Enderecos\Cidade::class, function (Faker $faker) {
     return [
         'Descricao'     => $faker->name,
-        'CodigoIBGE'    => $faker->randomNumber(7)
+        'CodigoIBGE'    => $faker->randomNumber(7),
+        'EstadoCOD'     => 1
     ];
 });
 
 $factory->define(WebCondom\Models\Condominios\CondominioTaxa::class, function (Faker $faker) {
     return [
         'Descricao'     => $faker->name,
-        'Valor'         => $faker->randomNumber(3)
+        'Valor'         => $faker->randomNumber(3),
+        'CondominioCOD' => 1
     ];
 });
 
