@@ -126,7 +126,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-2">
+                                <div class="col-md-2"> 
                                     <div class="form-group">
                                         <label for="Numero" class="control-label">Número</label>
                                         <input type="number" min="0" id="Numero" name="Numero" class="form-control">
@@ -145,7 +145,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="CEP" class="control-label">CEP</label>
-                                        <input type="number" id="CEP" name="CEP" class="form-control">
+                                        <input type="text" id="CEP" name="CEP" class="form-control">
                                         <span class="help-block">Apenas os números</span>
                                     </div>
                                 </div>
@@ -188,4 +188,13 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/jquery-mask-plugin/dist/jquery.mask.min.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+            $("#CEP").mask("00000-000");
+        });
+    </script>
 @endsection
