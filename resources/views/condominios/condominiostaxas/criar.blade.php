@@ -19,7 +19,7 @@
                         <form method="post" action="{{ route('condominios.condominiostaxas.salvar') }}">
                             {{ csrf_field() }}
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="Descricao" class="control-label">Descrição</label>
                                         <input id="Descricao" type="text" class="form-control" name="Descricao">
@@ -29,6 +29,17 @@
                                     <div class="form-group">
                                         <label for="Valor" class="control-label">Valor</label>
                                         <input id="Valor" type="text" class="form-control" name="Valor">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="CondominioCOD" class="control-label">Condomínio</label>
+                                        <select name="CondominioCOD" id="CondominioCOD" class="form-control">
+                                            <option value="" selected disabled>-----Escolha um-----</option>
+                                            @foreach($condominios as $condominio)
+                                                <option value="{{ $condominio->CondominioID }}">{{ $condominio->CondominioDescricao }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>

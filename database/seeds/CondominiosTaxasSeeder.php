@@ -11,6 +11,6 @@ class CondominiosTaxasSeeder extends Seeder
      */
     public function run()
     {
-        factory(WebCondom\Models\Condominios\CondominioTaxa::class, 10)->create();
+
     }
 }

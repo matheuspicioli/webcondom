@@ -24,7 +24,7 @@ class CreateCondominiosTable extends Migration
             $table->decimal('Juros', 8,4)->nullable();
             $table->enum('TipoJuros', ['AM', 'AD']);
             $table->boolean('TemGas')->default(0);
-            $table->decimal('ValorGas', 12, 2);
+            $table->decimal('ValorGas', 12, 2)->nullable();
 
             $table->integer('EnderecoCOD')->unsigned();
             $table->foreign('EnderecoCOD')

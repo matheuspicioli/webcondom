@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call('EstadosSeeder');
         $this->call('CidadesSeeder');
-        $this->call('CondominiosTaxasSeeder');
+        //$this->call('CondominiosTaxasSeeder');
         $this->call('SindicosSeeder');
     }
 }

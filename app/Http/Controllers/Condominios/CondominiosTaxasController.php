@@ -4,19 +4,25 @@ namespace WebCondom\Http\Controllers\Condominios;
 
 use Illuminate\Http\Request;
 use WebCondom\Http\Controllers\Controller;
+use WebCondom\Models\Condominios\Condominio;
 use WebCondom\Models\Condominios\CondominioTaxa;
 
 class CondominiosTaxasController extends Controller
 {
-    public function Listar()
+    public function Listar($idCondominio = null)
     {
+        if($idCondominio){
+            $taxas = CondominioTaxa::where('CondominioCOD', '=', $idCondominio)->get();
+            return view('condominios.condominiostaxas.listar', compact('taxas'));
+        }
         $taxas = CondominioTaxa::all();
         return view('condominios.condominiostaxas.listar', compact('taxas'));
     }
 
     public function Criar()
     {
-        return view('condominios.condominiostaxas.criar');
+        $condominios = Condominio::all();
+        return view('condominios.condominiostaxas.criar', compact('condominios'));
     }
 
     public function Salvar(Request $request)
@@ -29,9 +35,9 @@ class CondominiosTaxasController extends Controller
     public function Exibir($id)
     {
         $taxa = CondominioTaxa::find($id) ? CondominioTaxa::find($id) : null;
-
+        $condominios = Condominio::all();
         if($taxa){
-            return view('condominios.condominiostaxas.exibir', compact('taxa'));
+            return view('condominios.condominiostaxas.exibir', compact('taxa', 'condominios'));
         }
         else
             return redirect()->route('condominios.condominiostaxas.criar');
