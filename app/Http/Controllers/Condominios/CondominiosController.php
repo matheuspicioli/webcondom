@@ -22,8 +22,7 @@ class CondominiosController extends Controller
     {
         $sindicos = Sindico::all();
         $cidades = Cidade::all();
-        $taxas = CondominioTaxa::all();
-        return view('condominios.condominios.criar', compact('sindicos', 'cidades', 'taxas'));
+        return view('condominios.condominios.criar', compact('sindicos', 'cidades'));
     }
 
     public function Salvar(Request $request)
@@ -55,9 +54,8 @@ class CondominiosController extends Controller
         $condominio->SindicoCOD = $request->input('SindicoCOD');
         //Pega o EnderecoID e joga no campo EnderecoCOD
         $condominio->Endereco()->associate($endereco);
-        //  $condominio->CondominiosTaxas()->attach($taxas);
         $condominio->save();
-        dd($condominio->Taxas);
+
         return redirect()->route('condominios.condominios.listar');
     }
 
@@ -65,21 +63,19 @@ class CondominiosController extends Controller
     {
         $condominio = Condominio::find($id) ? Condominio::find($id) : null;
 
-        if($condominio){
+        if ($condominio) {
+            $taxas = $condominio->Taxas;
             $sindicos = Sindico::all();
             $cidades = Cidade::all();
-            $taxas = CondominioTaxa::all();
             return view('condominios.condominios.exibir', compact('condominio', 'sindicos', 'cidades', 'taxas'));
-        }
-        else
+        } else
             return redirect()->route('condominios.condominios.criar');
     }
 
     public function Alterar(Request $request, $id)
     {
-        //dd($request->except(['_token']));
         $condominio = Condominio::find($id);
-
+        $taxas = $request->input('Taxas');
         //-----CONDOMINIO-----//
         $condominio->Nome = $request->input('Nome');
         $condominio->Apelido = $request->input('Apelido');
@@ -99,7 +95,9 @@ class CondominiosController extends Controller
         $condominio->Endereco->Complemento = $request->input('Complemento');
         $condominio->Endereco->Bairro = $request->input('Bairro');
         $condominio->Endereco->CidadeCOD = $request->input('CidadeCOD');
+        //SALVA E SALVA O RELACIONAMENTO TAMBÉM
         $condominio->push();
+
         return redirect()->route('condominios.condominios.listar');
     }
 
