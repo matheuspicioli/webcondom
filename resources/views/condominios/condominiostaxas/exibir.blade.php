@@ -21,7 +21,7 @@
                             {{ csrf_field() }}
                             <input type="hidden" name="_method" value="PUT">
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="Descricao" class="control-label">Descrição</label>
                                         <input id="Descricao" type="text" class="form-control" name="Descricao" value="{{ $taxa->Descricao }}">
@@ -31,6 +31,19 @@
                                     <div class="form-group">
                                         <label for="Valor" class="control-label">Valor</label>
                                         <input id="Valor" type="text" class="form-control" name="Valor" value="{{ $taxa->Valor }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="CondominioCOD" class="control-label">Condomínio</label>
+                                        <select name="CondominioCOD" id="CondominioCOD" class="form-control">
+                                            <option value="" selected disabled>-----Escolha um-----</option>
+                                            @foreach($condominios as $condominio)
+                                                <option value="{{ $condominio->CondominioID }}" {{ $condominio->CondominioID == $taxa->CondominioCOD ? 'selected' : '' }}>
+                                                    {{ $condominio->CondominioDescricao }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
