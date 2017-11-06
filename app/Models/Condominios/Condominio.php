@@ -17,7 +17,7 @@ class Condominio extends Model
         "TipoJuros", "TemGas", "ValorGas", "EnderecoCOD", "SindicoCOD"
     ];
     protected $dates = [ "deleted_at" ];
-    protected $appends = [ "EnderecoFormatado", "TipoJurosFormatado" ];
+    protected $appends = [ "EnderecoFormatado", "TipoJurosFormatado", "CondominioDescricao" ];
 
     public function Endereco()
     {
@@ -29,8 +29,8 @@ class Condominio extends Model
         return $this->belongsTo('WebCondom\Models\Condominios\Sindico', 'SindicoCOD', 'SindicoID');
     }
 
-    public function CondominiosTaxas()
+    public function Taxas()
     {
-        return $this->hasMany(CondominioTaxa::class, 'CondominioCOD', 'CondominioID');
+        return $this->hasMany('WebCondom\Models\Condominios\CondominioTaxa', 'CondominioCOD', 'CondominioID');
     }
 }
