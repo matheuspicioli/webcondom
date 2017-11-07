@@ -29,6 +29,16 @@ $factory->define(WebCondom\Models\Enderecos\Cidade::class, function (Faker $fake
     ];
 });
 
+$factory->define(WebCondom\Models\Enderecos\Endereco::class, function (Faker $faker) {
+    return [
+        'Logradouro'    => $faker->name,
+        'Numero'        => $faker->randomNumber(4),
+        'CEP'           => $faker->randomNumber(8),
+        'Bairro'        => $faker->name,
+        'CidadeCOD'     => 1
+     ];
+});
+
 $factory->define(WebCondom\Models\Condominios\CondominioTaxa::class, function (Faker $faker) {
     return [
         'Descricao'     => $faker->name,
