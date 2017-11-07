@@ -27,8 +27,7 @@ class CondominiosController extends Controller
 
     public function Salvar(Request $request)
     {
-        //----TAXAS-----//
-        $taxas = $request->input('Taxas');
+        //dd($request->except('_token'));
         //----ENDEREÇO DO CONDOMINIO---//
         $endereco = new Endereco();
         $endereco->Logradouro = $request->input('Logradouro');

@@ -10,6 +10,9 @@ let mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-
+mix.copy('node_modules/bootstrap-sass/', 'resources/assets/sass/bootstrap-sass/');
+mix.copy('node_modules/jquery-mask-plugin/', 'public/js/jquery-mask-plugin/');
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+    .sass('resources/assets/sass/app.scss', 'public/css')
+    .sass('resources/assets/sass/bootstrap-sass/assets/stylesheets/_bootstrap.scss', 'public/css');
+
