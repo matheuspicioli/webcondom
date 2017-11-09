@@ -13,33 +13,33 @@ class CondominiosSeeder extends Seeder
     public function run()
     {
         Condominio::Create([
-            'CondominioID' => '5',
-            'Nome' => 'CONDOMINIO EDIFICIO SOLAR MEDITERRANEO',
-            'Apelido' => 'SOLAR',
-            'Telefone' => '1733221100',
-            'Celular' => '17998765432',
-            'Unidades' => '12',
-            'Multa' => '2',
-            'Juros' => '0.0333',
-            'TipoJuros' => 'AD',
-            'TemGas' => '1',
-            'ValorGas' => '8.35',
-            'EnderecoCOD' => '2',
-            'SindicoCOD' => '4']);
+            'id' => '5',
+            'nome' => 'CONDOMINIO EDIFICIO SOLAR MEDITERRANEO',
+            'apelido' => 'SOLAR',
+            'telefone' => '1733221100',
+            'celular' => '17998765432',
+            'unidades' => '12',
+            'multa' => '2',
+            'juros' => '0.0333',
+            'tipoJuros' => 'AD',
+            'temGas' => '1',
+            'valorGas' => '8.35',
+            'endereco_id' => '2',
+            'sindico_id' => '4']);
 
         Condominio::Create([
-            'CondominioID' => '6',
-            'Nome' => 'RESIDENCIAL SPAZIO RIO TEJO',
-            'Apelido' => 'RIO TEJO',
-            'Telefone' => '1732321199',
-            'Celular' => '17998760000',
-            'Unidades' => '144',
-            'Multa' => '2',
-            'Juros' => '0.0333',
-            'TipoJuros' => 'AD',
-            'TemGas' => '0',
-            'EnderecoCOD' => '1',
-            'SindicoCOD' => '3']);
+            'id' => '6',
+            'nome' => 'RESIDENCIAL SPAZIO RIO TEJO',
+            'apelido' => 'RIO TEJO',
+            'telefone' => '1732321199',
+            'celular' => '17998760000',
+            'unidades' => '144',
+            'multa' => '2',
+            'juros' => '0.0333',
+            'tipoJuros' => 'AD',
+            'temGas' => '0',
+            'endereco_id' => '1',
+            'sindico_id' => '3']);
 
     }
 }

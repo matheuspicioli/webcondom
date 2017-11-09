@@ -8,15 +8,14 @@ class CidadesSeeder extends Seeder
     public function run()
     {
         Cidade::Create([
-                        'CidadeID'   => '1',
-                        'Descricao'  => 'SAO JOSE DO RIO PRETO',
-                        'CodigoIBGE' => '3549805',
-                        'EstadoCOD'  => '25']);
+                        'descricao'  => 'SAO JOSE DO RIO PRETO',
+                        'codigoIbge' => '3549805',
+                        'estado_id'  => '25']);
 
         $estados = WebCondom\Models\Enderecos\Estado::all();
         factory(WebCondom\Models\Enderecos\Cidade::class, 49)->create()->each(function($cidade) use ($estados){
              $estado = $estados->random();
-             $cidade->Estado()->associate($estado);
+             $cidade->estado()->associate($estado);
              $cidade->save();
         });
     }

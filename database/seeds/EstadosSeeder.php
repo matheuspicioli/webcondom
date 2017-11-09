@@ -13,32 +13,32 @@ class EstadosSeeder extends Seeder
      */
     public function run()
     {
-        Estado::Create(['EstadoID' => '1', 'Descricao' => 'ACRE', 'Sigla' => 'AC', 'CodigoIBGE' => '12']);
-        Estado::Create(['EstadoID' => '2', 'Descricao' => 'ALAGOAS', 'Sigla' => 'AL', 'CodigoIBGE' => '27']);
-        Estado::Create(['EstadoID' => '3', 'Descricao' => 'AMAPÁ', 'Sigla' => 'AP', 'CodigoIBGE' => '16']);
-        Estado::Create(['EstadoID' => '4', 'Descricao' => 'AMAZONAS', 'Sigla' => 'AM', 'CodigoIBGE' => '13']);
-        Estado::Create(['EstadoID' => '5', 'Descricao' => 'BAHIA', 'Sigla' => 'BA', 'CodigoIBGE' => '29']);
-        Estado::Create(['EstadoID' => '6', 'Descricao' => 'CEARÁ', 'Sigla' => 'CE', 'CodigoIBGE' => '23']);
-        Estado::Create(['EstadoID' => '7', 'Descricao' => 'DISTRITO FEDERAL', 'Sigla' => 'DF', 'CodigoIBGE' => '53']);
-        Estado::Create(['EstadoID' => '8', 'Descricao' => 'ESPÍRITO SANTO', 'Sigla' => 'ES', 'CodigoIBGE' => '32']);
-        Estado::Create(['EstadoID' => '9', 'Descricao' => 'GOIÁS', 'Sigla' => 'GO', 'CodigoIBGE' => '52']);
-        Estado::Create(['EstadoID' => '10', 'Descricao' => 'MARANHÃO', 'Sigla' => 'MA', 'CodigoIBGE' => '21']);
-        Estado::Create(['EstadoID' => '11', 'Descricao' => 'MATO GROSSO', 'Sigla' => 'MT', 'CodigoIBGE' => '51']);
-        Estado::Create(['EstadoID' => '12', 'Descricao' => 'MATO GROSSO DO SUL', 'Sigla' => 'MS', 'CodigoIBGE' => '78']);
-        Estado::Create(['EstadoID' => '13', 'Descricao' => 'MINAS GERAIS', 'Sigla' => 'MG', 'CodigoIBGE' => '31']);
-        Estado::Create(['EstadoID' => '14', 'Descricao' => 'PARÁ', 'Sigla' => 'PA', 'CodigoIBGE' => '15']);
-        Estado::Create(['EstadoID' => '15', 'Descricao' => 'PARAIBA', 'Sigla' => 'PB', 'CodigoIBGE' => '25']);
-        Estado::Create(['EstadoID' => '16', 'Descricao' => 'PARANA', 'Sigla' => 'PR', 'CodigoIBGE' => '41']);
-        Estado::Create(['EstadoID' => '17', 'Descricao' => 'PERNAMBUCO', 'Sigla' => 'PE', 'CodigoIBGE' => '26']);
-        Estado::Create(['EstadoID' => '18', 'Descricao' => 'PIAUÍ­', 'Sigla' => 'PI', 'CodigoIBGE' => '22']);
-        Estado::Create(['EstadoID' => '19', 'Descricao' => 'RIO DE JANEIRO', 'Sigla' => 'RJ', 'CodigoIBGE' => '33']);
-        Estado::Create(['EstadoID' => '20', 'Descricao' => 'RIO GRANDE DO NORTE', 'Sigla' => 'RN', 'CodigoIBGE' => '24']);
-        Estado::Create(['EstadoID' => '21', 'Descricao' => 'RIO GRANDE DO SUL', 'Sigla' => 'RS', 'CodigoIBGE' => '43']);
-        Estado::Create(['EstadoID' => '22', 'Descricao' => 'RONDÔNIA', 'Sigla' => 'RO', 'CodigoIBGE' => '11']);
-        Estado::Create(['EstadoID' => '23', 'Descricao' => 'RORAIMA', 'Sigla' => 'RR', 'CodigoIBGE' => '14']);
-        Estado::Create(['EstadoID' => '24', 'Descricao' => 'SANTA CATARINA', 'Sigla' => 'SC', 'CodigoIBGE' => '42']);
-        Estado::Create(['EstadoID' => '25', 'Descricao' => 'SÃO PAULO', 'Sigla' => 'SP', 'CodigoIBGE' => '35']);
-        Estado::Create(['EstadoID' => '26', 'Descricao' => 'SERGIPE', 'Sigla' => 'SE', 'CodigoIBGE' => '28']);
-        Estado::Create(['EstadoID' => '27', 'Descricao' => 'TOCANTINS', 'Sigla' => 'TO', 'CodigoIBGE' => '17']);
+        Estado::create(['descricao' => 'ACRE', 'sigla' => 'AC', 'codigoIbge' => '12']);
+        Estado::create(['descricao' => 'ALAGOAS', 'sigla' => 'AL', 'codigoIbge' => '27']);
+        Estado::create(['descricao' => 'AMAPÁ', 'sigla' => 'AP', 'codigoIbge' => '16']);
+        Estado::create(['descricao' => 'AMAZONAS', 'sigla' => 'AM', 'codigoIbge' => '13']);
+        Estado::create(['descricao' => 'BAHIA', 'sigla' => 'BA', 'codigoIbge' => '29']);
+        Estado::create(['descricao' => 'CEARÁ', 'sigla' => 'CE', 'codigoIbge' => '23']);
+        Estado::create(['descricao' => 'DISTRITO FEDERAL', 'sigla' => 'DF', 'codigoIbge' => '53']);
+        Estado::create(['descricao' => 'ESPÍRITO SANTO', 'sigla' => 'ES', 'codigoIbge' => '32']);
+        Estado::create(['descricao' => 'GOIÁS', 'sigla' => 'GO', 'codigoIbge' => '52']);
+        Estado::create(['descricao' => 'MARANHÃO', 'sigla' => 'MA', 'codigoIbge' => '21']);
+        Estado::create(['descricao' => 'MATO GROSSO', 'sigla' => 'MT', 'codigoIbge' => '51']);
+        Estado::create(['descricao' => 'MATO GROSSO DO SUL', 'sigla' => 'MS', 'codigoIbge' => '78']);
+        Estado::create(['descricao' => 'MINAS GERAIS', 'sigla' => 'MG', 'codigoIbge' => '31']);
+        Estado::create(['descricao' => 'PARÁ', 'sigla' => 'PA', 'codigoIbge' => '15']);
+        Estado::create(['descricao' => 'PARAIBA', 'sigla' => 'PB', 'codigoIbge' => '25']);
+        Estado::create(['descricao' => 'PARANA', 'sigla' => 'PR', 'codigoIbge' => '41']);
+        Estado::create(['descricao' => 'PERNAMBUCO', 'sigla' => 'PE', 'codigoIbge' => '26']);
+        Estado::create(['descricao' => 'PIAUÍ­', 'sigla' => 'PI', 'codigoIbge' => '22']);
+        Estado::create(['descricao' => 'RIO DE JANEIRO', 'sigla' => 'RJ', 'codigoIbge' => '33']);
+        Estado::create(['descricao' => 'RIO GRANDE DO NORTE', 'sigla' => 'RN', 'codigoIbge' => '24']);
+        Estado::create(['descricao' => 'RIO GRANDE DO SUL', 'sigla' => 'RS', 'codigoIbge' => '43']);
+        Estado::create(['descricao' => 'RONDÔNIA', 'sigla' => 'RO', 'codigoIbge' => '11']);
+        Estado::create(['descricao' => 'RORAIMA', 'sigla' => 'RR', 'codigoIbge' => '14']);
+        Estado::create(['descricao' => 'SANTA CATARINA', 'sigla' => 'SC', 'codigoIbge' => '42']);
+        Estado::create(['descricao' => 'SÃO PAULO', 'sigla' => 'SP', 'codigoIbge' => '35']);
+        Estado::create(['descricao' => 'SERGIPE', 'sigla' => 'SE', 'codigoIbge' => '28']);
+        Estado::create(['descricao' => 'TOCANTINS', 'sigla' => 'TO', 'codigoIbge' => '17']);
     }
 }

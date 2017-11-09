@@ -8,18 +8,17 @@ class EnderecosSeeder extends Seeder
     public function run()
     {
         Endereco::Create([
-            'EnderecoID' => '1',
-            'Logradouro' => 'RUA P.CLEMENTE MARTON SEGURA',
-            'Numero' => '350',
-            'CEP' => '15085480',
-            'Complemento' => '',
-            'Bairro' => 'HIGIENOPOLIS',
-            'CidadeCOD' => '1']);
+            'logradouro'    => 'RUA P.CLEMENTE MARTON SEGURA',
+            'numero'        => '350',
+            'cep'           => '15085480',
+            'complemento'   => '',
+            'bairro'        => 'HIGIENOPOLIS',
+            'cidade_id'     => '1']);
 
         $cidades = WebCondom\Models\Enderecos\Cidade::all();
         factory(WebCondom\Models\Enderecos\Endereco::class, 9)->create()->each(function ($endereco) use ($cidades) {
             $cidade = $cidades->random();
-            $endereco->Cidade()->associate($cidade);
+            $endereco->cidade()->associate($cidade);
             $endereco->save();
         });
     }

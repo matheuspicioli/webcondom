@@ -13,21 +13,21 @@ class CondominiosTaxasSeeder extends Seeder
     public function run()
     {
         CondominioTaxa::Create([
-            'Descricao'  => 'TAXA DE MUDANÇA',
-            'Valor' => '350,00',
-            'CondominioCOD'  => '5']);
+            'descricao'  => 'TAXA DE MUDANÇA',
+            'valor' => '350,00',
+            'condominio_id'  => '5']);
         CondominioTaxa::Create([
-            'Descricao'  => 'TX.ALUGUEL SALAO DE FESTAS',
-            'Valor' => '30% VLR.CONDOMINIO',
-            'CondominioCOD'  => '5']);
+            'descricao'  => 'TX.ALUGUEL SALAO DE FESTAS',
+            'valor' => '30% VLR.CONDOMINIO',
+            'condominio_id'  => '5']);
         CondominioTaxa::Create([
-            'Descricao'  => 'TAXA DE LIMPEZA',
-            'Valor' => '50,00',
-            'CondominioCOD'  => '5']);
+            'descricao'  => 'TAXA DE LIMPEZA',
+            'valor' => '50,00',
+            'condominio_id'  => '5']);
         CondominioTaxa::Create([
-            'Descricao'  => 'TAXA DE MUDANÇA',
-            'Valor' => '1/2 SAL.MINIMO',
-            'CondominioCOD'  => '6']);
+            'descricao'  => 'TAXA DE MUDANÇA',
+            'valor' => '1/2 SAL.MINIMO',
+            'condominio_id'  => '6']);
 
     }
 }
