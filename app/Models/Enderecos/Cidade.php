@@ -6,12 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cidade extends Model
 {
-    protected $primaryKey = "CidadeID";
-    protected $table = "Cidades";
-    protected $fillable = [ "Descricao", "CodigoIBGE", "EstadoCOD" ];
+    protected $fillable = [ "descricao", "codigoIbge", "estado_id" ];
 
-    public function Estado()
+    public function estado()
     {
-        return $this->belongsTo('WebCondom\Models\Enderecos\Estado', 'EstadoCOD', 'EstadoID');
+        return $this->belongsTo('WebCondom\Models\Enderecos\Estado');
     }
 }

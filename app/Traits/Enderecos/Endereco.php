@@ -11,12 +11,12 @@ namespace WebCondom\Traits\Enderecos;
 
 trait Endereco
 {
-    public function getEnderecoFormatadoAttribute()
+    public function getenderecoFormatadoAttribute()
     {
-        $logradouro = $this->Logradouro;
-        $numero     = $this->Numero;
-        $bairro     = $this->Bairro;
-        $cidade     = $this->Cidade->Descricao." - ".$this->Cidade->Estado->Sigla;
+        $logradouro = $this->logradouro;
+        $numero     = $this->numero;
+        $bairro     = $this->bairro;
+        $cidade     = $this->cidade->descricao." - ".$this->cidade->estado->sigla;
         return "$logradouro, $numero, $bairro - $cidade";
     }
 }

@@ -6,18 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class CondominioTaxa extends Model
 {
-    protected $primaryKey = "CondominioTaxaID";
-    protected $table = "CondominiosTaxas";
-    protected $fillable = [ "Descricao", "Valor", "CondominioCOD" ];
-    protected $appends = [ "Taxa" ];
+    protected $fillable = [ "descricao", "valor", "condominio_id" ];
+    protected $appends = [ "taxa" ];
 
-    public function getTaxaAttribute()
+    public function gettaxaAttribute()
     {
-        return "$this->Descricao - $this->Valor";
+        return "$this->descricao - $this->valor";
     }
 
-    public function Condominio()
+    public function condominio()
     {
-        $this->belongsTo('WebCondom\Models\Condominios\Condominio', 'CondominioCOD', 'CondominioID');
+        $this->belongsTo('WebCondom\Models\Condominios\Condominio');
     }
 }

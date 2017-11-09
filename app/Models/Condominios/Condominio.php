@@ -10,27 +10,25 @@ class Condominio extends Model
 {
     use SoftDeletes, CondominioTrait;
 
-    protected $primaryKey = "CondominioID";
-    protected $table = "Condominios";
     protected $fillable = [
-        "Nome", "Apelido", "Telefone", "Celular", "Unidades", "Multa", "Juros",
-        "TipoJuros", "TemGas", "ValorGas", "EnderecoCOD", "SindicoCOD"
+        "nome", "apelido", "telefone", "celular", "unidades", "multa", "juros",
+        "tipoJuros", "temGas", "valorGas", "endereco_id", "sindico_id"
     ];
     protected $dates = [ "deleted_at" ];
-    protected $appends = [ "TipoJurosFormatado", "CondominioDescricao" ];
+    protected $appends = [ "tipoJurosFormatado", "condominioDescricao" ];
 
-    public function Endereco()
+    public function endereco()
     {
-        return $this->belongsTo('WebCondom\Models\Enderecos\Endereco', 'EnderecoCOD', 'EnderecoID');
+        return $this->belongsTo('WebCondom\Models\Enderecos\Endereco');
     }
 
-    public function Sindico()
+    public function sindico()
     {
-        return $this->belongsTo('WebCondom\Models\Condominios\Sindico', 'SindicoCOD', 'SindicoID');
+        return $this->belongsTo('WebCondom\Models\Condominios\Sindico');
     }
 
-    public function Taxas()
+    public function taxas()
     {
-        return $this->hasMany('WebCondom\Models\Condominios\CondominioTaxa', 'CondominioCOD', 'CondominioID');
+        return $this->hasMany('WebCondom\Models\Condominios\CondominioTaxa');
     }
 }

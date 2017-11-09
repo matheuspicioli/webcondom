@@ -9,13 +9,11 @@ class Endereco extends Model
 {
     use EnderecoTrait;
 
-    protected $primaryKey = "EnderecoID";
-    protected $table = "Enderecos";
-    protected $fillable = [ "Logradouro", "Numero", "CEP", "Complemento", "Bairro", "CidadeCOD" ];
-    protected $appends = [ "EnderecoFormatado" ];
+    protected $fillable = [ "logradouro", "numero", "cep", "complemento", "bairro", "cidade_id" ];
+    protected $appends = [ "enderecoFormatado" ];
 
-    public function Cidade()
+    public function cidade()
     {
-        return $this->belongsTo('WebCondom\Models\Enderecos\Cidade', 'CidadeCOD', 'CidadeID');
+        return $this->belongsTo('WebCondom\Models\Enderecos\Cidade');
     }
 }

@@ -3,13 +3,13 @@ namespace WebCondom\Traits\Condominios;
 
 trait Condominio
 {
-    public function getTipoJurosFormatadoAttribute()
+    public function gettipoJurosFormatadoAttribute()
     {
-        return $this->TipoJuros == "AM" ? "Ao mês" : "Ao dia";
+        return $this->tipoJuros == "AM" ? "Ao mês" : "Ao dia";
     }
 
-    public function getCondominioDescricaoAttribute()
+    public function getcondominioDescricaoAttribute()
     {
-        return "$this->Nome - $this->Apelido";
+        return "$this->nome - $this->apelido";
     }
 }
