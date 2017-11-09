@@ -12,7 +12,12 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <h4><a href="{{ route('condominios.condominiostaxas.listar') }}">Voltar</a></h4>
+                                    @foreach($condominios as $condominio)
+                                        @if($condominio->id == $taxa->condominio_id)
+                                            @php $idCondominio = $condominio->id; @endphp
+                                        @endif
+                                    @endforeach
+                                <h4><a href="{{ route('condominios.condominiostaxas.listar', ['idCondominio' => $idCondominio]) }}">Voltar</a></h4>
                                 <hr>
                             </div>
                         </div>
@@ -20,30 +25,18 @@
                               action="{{ route('condominios.condominiostaxas.alterar', ['id' => $taxa->id ]) }}">
                             {{ csrf_field() }}
                             <input type="hidden" name="_method" value="PUT">
+                            <input type="hidden" name="idCondominio" value="{{ $idCondominio }}">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="Descricao" class="control-label">Descrição</label>
                                         <input id="Descricao" type="text" class="form-control" name="descricao" value="{{ $taxa->descricao }}">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="Valor" class="control-label">Valor</label>
                                         <input id="Valor" type="text" class="form-control" name="valor" value="{{ $taxa->valor }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="CondominioCOD" class="control-label">Condomínio</label>
-                                        <select name="condominio_id" id="CondominioCOD" class="form-control">
-                                            <option value="" selected disabled>-----Escolha um-----</option>
-                                            @foreach($condominios as $condominio)
-                                                <option value="{{ $condominio->id }}" {{ $condominio->id == $taxa->condominio_id ? 'selected' : '' }}>
-                                                    {{ $condominio->CondominioDescricao }}
-                                                </option>
-                                            @endforeach
-                                        </select>
                                     </div>
                                 </div>
                             </div>
