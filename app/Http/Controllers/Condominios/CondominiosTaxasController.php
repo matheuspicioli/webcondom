@@ -12,7 +12,7 @@ class CondominiosTaxasController extends Controller
     public function Listar($idCondominio = null)
     {
         if($idCondominio){
-            $taxas = CondominioTaxa::where('CondominioCOD', '=', $idCondominio)->get();
+            $taxas = CondominioTaxa::where('condominio_id', '=', $idCondominio)->get();
             return view('condominios.condominiostaxas.listar', compact('taxas'));
         }
         $taxas = CondominioTaxa::all();

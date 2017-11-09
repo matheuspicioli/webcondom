@@ -18,37 +18,37 @@
                                     {{ csrf_field() }}
                                     <div class="form-group">
                                         <label for="Logradouro" class="control-label">Logradouro</label>
-                                        <input id="Logradouro" type="text" class="form-control" name="Logradouro">
+                                        <input id="Logradouro" type="text" class="form-control" name="logradouro">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="Numero" class="control-label">Número</label>
-                                        <input type="number" min="0" id="Numero" name="Numero" class="form-control">
+                                        <input type="number" min="0" id="Numero" name="numero" class="form-control">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="CEP" class="control-label">CEP</label>
-                                        <input type="number" id="CEP" name="CEP" class="form-control">
+                                        <input type="number" id="CEP" name="cep" class="form-control">
                                         <span class="help-block">Apenas os números</span>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="Complemento" class="control-label">Complemento</label>
-                                        <input type="text" id="Complemento" name="Complemento" class="form-control">
+                                        <input type="text" id="Complemento" name="complemento" class="form-control">
                                         <span class="help-block">Este campo é opcional</span>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="Bairro" class="control-label">Bairro</label>
-                                        <input type="text" id="Bairro" name="Bairro" class="form-control">
+                                        <input type="text" id="Bairro" name="bairro" class="form-control">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="CidadeCOD" class="control-label">Cidade:</label>
-                                        <select name="CidadeCOD" id="CidadeCOD" class="form-control">
+                                        <select name="cidade_id" id="CidadeCOD" class="form-control">
                                             <option selected disabled>-------Selecione uma cidade-------</option>
                                             @foreach($cidades as $cidade)
-                                                <option value="{{ $cidade->CidadeID }}">{{ $cidade->Descricao }} - {{ $cidade->Estado->Descricao }}</option>
+                                                <option value="{{ $cidade->id }}">{{ $cidade->descricao }} - {{ $cidade->estado->descricao }}</option>
                                             @endforeach
                                         </select>
                                     </div>

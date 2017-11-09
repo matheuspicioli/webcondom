@@ -15,7 +15,7 @@ class Condominio extends Model
         "tipo_juros", "tem_gas", "valor_gas", "endereco_id", "sindico_id"
     ];
     protected $dates = [ "deleted_at" ];
-    protected $appends = [ "tipo_juros_formatado", "condominio_descricao" ];
+    protected $appends = [ "tipoJurosFormatado", "condominioDescricao" ];
 
     public function endereco()
     {

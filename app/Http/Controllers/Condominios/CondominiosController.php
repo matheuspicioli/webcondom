@@ -30,27 +30,27 @@ class CondominiosController extends Controller
         //dd($request->except('_token'));
         //----ENDEREÇO DO CONDOMINIO---//
         $endereco = new Endereco();
-        $endereco->Logradouro = $request->input('Logradouro');
-        $endereco->Numero = $request->input('Numero');
-        $endereco->CEP = $request->input('CEP');
-        $endereco->Complemento = $request->input('Complemento');
-        $endereco->Bairro = $request->input('Bairro');
-        $endereco->CidadeCOD = $request->input('CidadeCOD');
+        $endereco->logradouro = $request->input('logradouro');
+        $endereco->numero = $request->input('numero');
+        $endereco->cep = $request->input('cep');
+        $endereco->complemento = $request->input('complemento');
+        $endereco->bairro = $request->input('bairro');
+        $endereco->cidade_id = $request->input('cidade_id');
         $endereco->save();
 
         //-----CONDOMINIO-----//
         $condominio = new Condominio();
-        $condominio->Nome = $request->input('Nome');
-        $condominio->Apelido = $request->input('Apelido');
-        $condominio->Telefone = $request->input('Telefone');
-        $condominio->Celular = $request->input('Celular');
-        $condominio->Unidades = $request->input('Unidades');
-        $condominio->Multa = $request->input('Multa');
-        $condominio->Juros = $request->input('Juros');
-        $condominio->TipoJuros = $request->input('TipoJuros');
-        $condominio->TemGas = $request->input('TemGas');
-        $condominio->ValorGas = $request->input('ValorGas');
-        $condominio->SindicoCOD = $request->input('SindicoCOD');
+        $condominio->nome = $request->input('nome');
+        $condominio->apelido = $request->input('apelido');
+        $condominio->telefone = $request->input('telefone');
+        $condominio->celular = $request->input('celular');
+        $condominio->unidades = $request->input('unidades');
+        $condominio->multa = $request->input('multa');
+        $condominio->juros = $request->input('juros');
+        $condominio->tipo_juros = $request->input('tipo_juros');
+        $condominio->tem_gas = $request->input('tem_gas');
+        $condominio->valor_gas = $request->input('valor_gas');
+        $condominio->sindico_id = $request->input('sindico_id');
         //Pega o EnderecoID e joga no campo EnderecoCOD
         $condominio->Endereco()->associate($endereco);
         $condominio->save();
@@ -63,7 +63,7 @@ class CondominiosController extends Controller
         $condominio = Condominio::find($id) ? Condominio::find($id) : null;
 
         if ($condominio) {
-            $taxas = $condominio->Taxas;
+            $taxas = $condominio->taxas;
             $sindicos = Sindico::all();
             $cidades = Cidade::all();
             return view('condominios.condominios.exibir', compact('condominio', 'sindicos', 'cidades', 'taxas'));
@@ -76,24 +76,24 @@ class CondominiosController extends Controller
         $condominio = Condominio::find($id);
         $taxas = $request->input('Taxas');
         //-----CONDOMINIO-----//
-        $condominio->Nome = $request->input('Nome');
-        $condominio->Apelido = $request->input('Apelido');
-        $condominio->Telefone = $request->input('Telefone');
-        $condominio->Celular = $request->input('Celular');
-        $condominio->Unidades = $request->input('Unidades');
-        $condominio->Multa = $request->input('Multa');
-        $condominio->Juros = $request->input('Juros');
-        $condominio->TipoJuros = $request->input('TipoJuros');
-        $condominio->TemGas = $request->input('TemGas');
-        $condominio->ValorGas = $request->input('ValorGas');
-        $condominio->SindicoCOD = $request->input('SindicoCOD');
+        $condominio->nome = $request->input('nome');
+        $condominio->apelido = $request->input('apelido');
+        $condominio->telefone = $request->input('telefone');
+        $condominio->celular = $request->input('celular');
+        $condominio->unidades = $request->input('unidades');
+        $condominio->multa = $request->input('multa');
+        $condominio->juros = $request->input('juros');
+        $condominio->tipo_juros = $request->input('tipo_juros');
+        $condominio->tem_gas = $request->input('tem_gas');
+        $condominio->valor_gas = $request->input('valor_gas');
+        $condominio->sindico_id = $request->input('sindico_id');
         //----ENDEREÇO DO CONDOMINIO---//
-        $condominio->Endereco->Logradouro = $request->input('Logradouro');
-        $condominio->Endereco->Numero = $request->input('Numero');
-        $condominio->Endereco->CEP = $request->input('CEP');
-        $condominio->Endereco->Complemento = $request->input('Complemento');
-        $condominio->Endereco->Bairro = $request->input('Bairro');
-        $condominio->Endereco->CidadeCOD = $request->input('CidadeCOD');
+        $condominio->Endereco->logradouro = $request->input('logradouro');
+        $condominio->Endereco->numero = $request->input('numero');
+        $condominio->Endereco->cep = $request->input('cep');
+        $condominio->Endereco->complemento = $request->input('complemento');
+        $condominio->Endereco->bairro = $request->input('bairro');
+        $condominio->Endereco->cidade_id = $request->input('cidade_id');
         //SALVA E SALVA O RELACIONAMENTO TAMBÉM
         $condominio->push();
 

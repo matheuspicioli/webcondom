@@ -26,15 +26,15 @@
                             <tbody>
                                 @foreach($enderecos as $endereco)
                                     <tr>
-                                        <td>{{ $endereco->EnderecoID }}</td>
-                                        <td>{{ $endereco->Logradouro }}</td>
-                                        <td>{{ $endereco->Numero }}</td>
-                                        <td>{{ $endereco->CEP }}</td>
-                                        <td>{{ $endereco->Cidade->Descricao }} - {{ $endereco->Cidade->Estado->Sigla }}</td>
+                                        <td>{{ $endereco->id }}</td>
+                                        <td>{{ $endereco->logradouro }}</td>
+                                        <td>{{ $endereco->numero }}</td>
+                                        <td>{{ $endereco->cep }}</td>
+                                        <td>{{ $endereco->cidade->descricao }} - {{ $endereco->cidade->estado->sigla }}</td>
                                         <td>
                                             <button class="btn btn-success">
                                                 <a style="color: #FFFFFF"
-                                                        href="{{ route('enderecos.enderecos.exibir', ['id' => $endereco->EnderecoID ]) }}">Alterar</a>
+                                                        href="{{ route('enderecos.enderecos.exibir', ['id' => $endereco->id ]) }}">Alterar</a>
                                             </button>
                                         </td>
                                     </tr>

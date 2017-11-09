@@ -25,14 +25,14 @@
                             <tbody>
                                 @foreach($estados as $estado)
                                     <tr>
-                                        <td>{{ $estado->EstadoID }}</td>
-                                        <td>{{ $estado->Descricao }}</td>
-                                        <td>{{ $estado->Sigla }}</td>
-                                        <td>{{ $estado->CodigoIBGE }}</td>
+                                        <td>{{ $estado->id }}</td>
+                                        <td>{{ $estado->descricao }}</td>
+                                        <td>{{ $estado->sigla }}</td>
+                                        <td>{{ $estado->codigo_ibge }}</td>
                                         <td>
                                             <button class="btn btn-success">
                                                 <a style="color: #FFFFFF"
-                                                        href="{{ route('enderecos.estados.exibir', ['id' => $estado->EstadoID]) }}">Alterar</a>
+                                                        href="{{ route('enderecos.estados.exibir', ['id' => $estado->id]) }}">Alterar</a>
                                             </button>
                                         </td>
                                     </tr>

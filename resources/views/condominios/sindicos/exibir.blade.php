@@ -15,32 +15,32 @@
                                 <h4><a href="{{ route('condominios.sindicos.listar') }}">Voltar</a></h4>
                                 <hr>
                                 <form method="post"
-                                      action="{{ route('condominios.sindicos.alterar', ['id' => $sindico->SindicoID ]) }}">
+                                      action="{{ route('condominios.sindicos.alterar', ['id' => $sindico->id ]) }}">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="_method" value="PUT">
                                     <div class="form-group">
                                         <label for="Nome" class="control-label">Nome</label>
-                                        <input id="Nome" type="text" class="form-control" name="Nome"
-                                               value="{{ $sindico->Nome }}">
+                                        <input id="Nome" type="text" class="form-control" name="nome"
+                                               value="{{ $sindico->nome }}">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="Telefone" class="control-label">Telefone</label>
-                                        <input type="text" id="Telefone" name="Telefone" class="form-control"
-                                               value="{{ $sindico->Telefone ? $sindico->Telefone : '' }}">
+                                        <input type="text" id="Telefone" name="telefone" class="form-control"
+                                               value="{{ $sindico->telefone ? $sindico->telefone : '' }}">
                                         <span class="helper-block">Este campo é opcional</span>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="Celular" class="control-label">Celular</label>
-                                        <input type="text" id="Celular" name="Celular" class="form-control"
-                                               value="{{ $sindico->Celular }}">
+                                        <input type="text" id="Celular" name="celular" class="form-control"
+                                               value="{{ $sindico->celular }}">
                                     </div>
 
                                     <div class="form-group">
                                         <button class="btn btn-primary" type="submit">Alterar</button>
                                         <button class="btn btn-danger"><a
-                                                    href="{{ route('condominios.sindicos.excluir', ['id' => $sindico->SindicoID]) }}"
+                                                    href="{{ route('condominios.sindicos.excluir', ['id' => $sindico->id]) }}"
                                                     style="color: #FFFFFF">Excluir</a></button>
                                     </div>
                                 </form>

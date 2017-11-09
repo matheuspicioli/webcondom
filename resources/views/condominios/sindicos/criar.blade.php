@@ -18,18 +18,18 @@
                                     {{ csrf_field() }}
                                     <div class="form-group">
                                         <label for="Nome" class="control-label">Nome</label>
-                                        <input id="Nome" type="text" class="form-control" name="Nome">
+                                        <input id="Nome" type="text" class="form-control" name="nome">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="Telefone" class="control-label">Telefone</label>
-                                        <input type="text" id="Telefone" name="Telefone" class="form-control">
+                                        <input type="text" id="Telefone" name="telefone" class="form-control">
                                         <span class="helper-block">Este campo é opcional</span>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="Celular" class="control-label">Celular</label>
-                                        <input type="text" id="Celular" name="Celular" class="form-control">
+                                        <input type="text" id="Celular" name="celular" class="form-control">
                                     </div>
 
                                     <div class="form-group">

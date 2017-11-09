@@ -16,23 +16,23 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Descrição</th>
-                                    <th>CodigoIBGE</th>
-                                    <th>Estado</th>
+                                    <th>Nome</th>
+                                    <th>Telefone</th>
+                                    <th>Celular</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($sindicos as $sindico)
                                     <tr>
-                                        <td>{{ $sindico->SindicoID }}</td>
-                                        <td>{{ $sindico->Nome }}</td>
-                                        <td>{{ $sindico->Telefone ? $sindico->Telefone : 'Vázio' }}</td>
-                                        <td>{{ $sindico->Celular }}</td>
+                                        <td>{{ $sindico->id }}</td>
+                                        <td>{{ $sindico->nome }}</td>
+                                        <td>{{ $sindico->telefone ? $sindico->telefone : 'Vázio' }}</td>
+                                        <td>{{ $sindico->celular }}</td>
                                         <td>
                                             <button class="btn btn-success">
                                                 <a style="color: #FFFFFF"
-                                                        href="{{ route('condominios.sindicos.exibir', ['id' => $sindico->SindicoID ]) }}">Alterar</a>
+                                                        href="{{ route('condominios.sindicos.exibir', ['id' => $sindico->id ]) }}">Alterar</a>
                                             </button>
                                         </td>
                                     </tr>

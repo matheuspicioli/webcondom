@@ -18,17 +18,17 @@
                                     {{ csrf_field() }}
                                     <div class="form-group">
                                         <label for="Descricao" class="control-label">Descrição</label>
-                                        <input id="Descricao" type="text" class="form-control" name="Descricao">
+                                        <input id="Descricao" type="text" class="form-control" name="descricao">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="Sigla" class="control-label">Sigla</label>
-                                        <input type="text" id="Sigla" name="Sigla" class="form-control">
+                                        <input type="text" id="Sigla" name="sigla" class="form-control">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="CodigoIBGE" class="control-label">Código IBGE</label>
-                                        <input type="text" id="CodigoIBGE" name="CodigoIBGE" class="form-control">
+                                        <input type="text" id="CodigoIBGE" name="codigo_ibge" class="form-control">
                                         <span class="help-block">Este campo é opcional</span>
                                     </div>
 

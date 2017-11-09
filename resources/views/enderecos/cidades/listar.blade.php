@@ -25,14 +25,14 @@
                             <tbody>
                                 @foreach($cidades as $cidade)
                                     <tr>
-                                        <td>{{ $cidade->CidadeID }}</td>
-                                        <td>{{ $cidade->Descricao }}</td>
-                                        <td>{{ $cidade->CodigoIBGE ? $cidade->CodigoIBGE : 'Vázio' }}</td>
-                                        <td>{{ $cidade->Estado->Descricao }}</td>
+                                        <td>{{ $cidade->id }}</td>
+                                        <td>{{ $cidade->descricao }}</td>
+                                        <td>{{ $cidade->codigo_ibge ? $cidade->codigo_ibge : 'Vázio' }}</td>
+                                        <td>{{ $cidade->estado->descricao }}</td>
                                         <td>
                                             <button class="btn btn-success">
                                                 <a style="color: #FFFFFF"
-                                                        href="{{ route('enderecos.cidades.exibir', ['id' => $cidade->CidadeID]) }}">Alterar</a>
+                                                        href="{{ route('enderecos.cidades.exibir', ['id' => $cidade->id]) }}">Alterar</a>
                                             </button>
                                         </td>
                                     </tr>

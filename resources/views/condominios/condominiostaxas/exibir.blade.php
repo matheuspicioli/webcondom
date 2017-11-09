@@ -17,29 +17,29 @@
                             </div>
                         </div>
                         <form method="post"
-                              action="{{ route('condominios.condominiostaxas.alterar', ['id' => $taxa->CondominioTaxaID ]) }}">
+                              action="{{ route('condominios.condominiostaxas.alterar', ['id' => $taxa->id ]) }}">
                             {{ csrf_field() }}
                             <input type="hidden" name="_method" value="PUT">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="Descricao" class="control-label">Descrição</label>
-                                        <input id="Descricao" type="text" class="form-control" name="Descricao" value="{{ $taxa->Descricao }}">
+                                        <input id="Descricao" type="text" class="form-control" name="descricao" value="{{ $taxa->descricao }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="Valor" class="control-label">Valor</label>
-                                        <input id="Valor" type="text" class="form-control" name="Valor" value="{{ $taxa->Valor }}">
+                                        <input id="Valor" type="text" class="form-control" name="valor" value="{{ $taxa->valor }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="CondominioCOD" class="control-label">Condomínio</label>
-                                        <select name="CondominioCOD" id="CondominioCOD" class="form-control">
+                                        <select name="condominio_id" id="CondominioCOD" class="form-control">
                                             <option value="" selected disabled>-----Escolha um-----</option>
                                             @foreach($condominios as $condominio)
-                                                <option value="{{ $condominio->CondominioID }}" {{ $condominio->CondominioID == $taxa->CondominioCOD ? 'selected' : '' }}>
+                                                <option value="{{ $condominio->id }}" {{ $condominio->id == $taxa->condominio_id ? 'selected' : '' }}>
                                                     {{ $condominio->CondominioDescricao }}
                                                 </option>
                                             @endforeach
@@ -54,7 +54,7 @@
                                         <button class="btn btn-primary" type="submit">Alterar</button>
                                         <button class="btn btn-danger">
                                             <a style="color: #FFFFFF"
-                                               href="{{ route('condominios.condominiostaxas.excluir', ['id' => $taxa->CondominioTaxaID ]) }}">Excluir!</a>
+                                               href="{{ route('condominios.condominiostaxas.excluir', ['id' => $taxa->id ]) }}">Excluir!</a>
                                         </button>
                                     </div>
                                 </div>

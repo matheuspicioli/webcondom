@@ -24,13 +24,13 @@
                             <tbody>
                                 @foreach($taxas as $taxa)
                                     <tr>
-                                        <td>{{ $taxa->CondominioTaxaID }}</td>
-                                        <td>{{ $taxa->Descricao }}</td>
-                                        <td>{{ $taxa->Valor }}</td>
+                                        <td>{{ $taxa->id }}</td>
+                                        <td>{{ $taxa->descricao }}</td>
+                                        <td>{{ $taxa->valor }}</td>
                                         <td>
                                             <button class="btn btn-success">
                                                 <a style="color: #FFFFFF"
-                                                        href="{{ route('condominios.condominiostaxas.exibir', ['id' => $taxa->CondominioTaxaID ]) }}">Alterar</a>
+                                                        href="{{ route('condominios.condominiostaxas.exibir', ['id' => $taxa->id ]) }}">Alterar</a>
                                             </button>
                                         </td>
                                     </tr>
