@@ -48,7 +48,7 @@ class CondominiosTaxasController extends Controller
         //dd($request->except(['_token', '_method']));
         CondominioTaxa::find($id)->update($request->except('_token'));
         $idCondominio = $request->input('idCondominio');
-        return redirect()->route('condominios.condominiostaxas.listar', ['idCondominio' => $idCondominio]);
+        return redirect()->route('condominios.condominios.exibir', ['id' => $idCondominio]);
     }
 
     public function Excluir($id)

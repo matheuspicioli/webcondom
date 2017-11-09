@@ -4,32 +4,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="text-center">
-                            Taxas desse condomínio - <a href="{{ route('condominios.condominiostaxas.listar', ['idCondominio' => $condominio->id]) }}">alterar as taxas desse condominio</a>
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <th>Descrição</th>
-                                <th>Valor</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($taxas as $taxa)
-                                <tr>
-                                    <td>{{ $taxa->descricao }}</td>
-                                    <td>{{ $taxa->valor }}</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
                 {{--PAINEL DE FORMULÁRIO--}}
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
@@ -228,6 +202,34 @@
                             </div>
 
                         </form>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="text-center">
+                            Taxas desse condomínio - <a href="{{ route('condominios.condominiostaxas.listar', ['idCondominio' => $condominio->id]) }}">alterar as taxas desse condominio</a>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Descrição</th>
+                                <th>Valor</th>
+                                <th>Ações</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($taxas as $taxa)
+                                <tr>
+                                    <td>{{ $taxa->descricao }}</td>
+                                    <td>{{ $taxa->valor }}</td>
+                                    <td><a href="{{ route('condominios.condominiostaxas.exibir', ['id' => $taxa->id ]) }}" class="btn btn-success">Alterar</a></td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

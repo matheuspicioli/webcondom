@@ -16,7 +16,7 @@
                                 <hr>
                                 <form method="post" action="{{ route('enderecos.cidades.salvar') }}">
                                     {{ csrf_field() }}
-                                    
+
                                     <div class="form-group">
                                         <label for="EstadoCOD" class="control-label">Estado</label>
                                         <select name="estado_id" id="EstadoCOD" class="form-control">
