@@ -50,8 +50,6 @@ Route::prefix('Enderecos')->group(function(){
         Route::get('Criar', 'Enderecos\EstadosController@criar')->name('enderecos.estados.criar');
         Route::post('/', 'Enderecos\EstadosController@salvar')->name('enderecos.estados.salvar');
         Route::get('{id}/Exibir', 'Enderecos\EstadosController@exibir')->name('enderecos.estados.exibir');
-        Route::put('{id}/Alterar', 'Enderecos\EstadosController@alterar')->name('enderecos.estados.alterar');
-        Route::get('{id}/Excluir', 'Enderecos\EstadosController@excluir')->name('enderecos.estados.excluir');
     });
 
     Route::prefix('Cidades')->group(function(){

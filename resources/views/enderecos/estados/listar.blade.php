@@ -19,7 +19,6 @@
                                     <th>Descrição</th>
                                     <th>Sigla</th>
                                     <th>Código IBGE</th>
-                                    <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -29,12 +28,6 @@
                                         <td>{{ $estado->descricao }}</td>
                                         <td>{{ $estado->sigla }}</td>
                                         <td>{{ $estado->codigo_ibge }}</td>
-                                        <td>
-                                            <button class="btn btn-success">
-                                                <a style="color: #FFFFFF"
-                                                        href="{{ route('enderecos.estados.exibir', ['id' => $estado->id]) }}">Alterar</a>
-                                            </button>
-                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
