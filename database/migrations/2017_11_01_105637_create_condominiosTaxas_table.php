@@ -13,17 +13,15 @@ class CreateCondominiosTaxasTable extends Migration
      */
     public function up()
     {
-        Schema::create('CondominiosTaxas', function (Blueprint $table) {
-            $table->increments('CondominioTaxaID');
-            $table->string('Descricao', 100);
-            $table->string('Valor', 100);
+        Schema::create('condominiosTaxas', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('descricao', 100);
+            $table->string('valor', 100);
 
-            // PODE SER NULLABLE, PQ NÃO VAI ESCOLHER O CONDOMINIO NA CRIAÇÃO DELE
-            // E SIM NA HORA DE CADASTRAR/ALTERAR CONDOMÍNIOgit a
-            $table->integer('CondominioCOD')->unsigned();
-            $table->foreign('CondominioCOD')
-                ->references('CondominioID')
-                ->on('Condominios')
+            $table->integer('condominio_id')->unsigned();
+            $table->foreign('condominio_id')
+                ->references('id')
+                ->on('condominios')
                 ->onDelete('cascade');
 
             $table->softDeletes();

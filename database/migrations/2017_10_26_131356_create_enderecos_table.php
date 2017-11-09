@@ -13,19 +13,18 @@ class CreateEnderecosTable extends Migration
      */
     public function up()
     {
-        Schema::create('Enderecos', function (Blueprint $table) {
-            $table->increments('EnderecoID');
+        Schema::create('enderecos', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('logradouro', 255);
+            $table->integer('numero');
+            $table->string('cep', 8);
+            $table->string('complemento', 50)->nullable();
+            $table->string('bairro');
 
-            $table->string('Logradouro', 255);
-            $table->integer('Numero');
-            $table->string('CEP', 8);
-            $table->string('Complemento', 50)->nullable();
-            $table->string('Bairro');
-
-            $table->integer('CidadeCOD')->unsigned();
-            $table->foreign('CidadeCOD')
-                ->references('CidadeID')
-                ->on('Cidades')
+            $table->integer('cidade_id')->unsigned();
+            $table->foreign('cidade_id')
+                ->references('id')
+                ->on('cidades')
                 ->onDelete('cascade');
 
             $table->timestamps();
@@ -40,7 +39,7 @@ class CreateEnderecosTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('Enderecos');
+        Schema::dropIfExists('enderecos');
         Schema::enableForeignKeyConstraints();
     }
 }

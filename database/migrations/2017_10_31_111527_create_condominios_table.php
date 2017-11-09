@@ -13,29 +13,29 @@ class CreateCondominiosTable extends Migration
      */
     public function up()
     {
-        Schema::create('Condominios', function (Blueprint $table) {
-            $table->increments('CondominioID');
-            $table->string('Nome', 100);
-            $table->string('Apelido', 20);
-            $table->string('Telefone', 13)->nullable();
-            $table->string('Celular', 14);
-            $table->integer('Unidades')->unsigned();
-            $table->decimal('Multa', 8, 4)->nullable();
-            $table->decimal('Juros', 8,4)->nullable();
-            $table->enum('TipoJuros', ['AM', 'AD']);
-            $table->boolean('TemGas')->default(0);
-            $table->decimal('ValorGas', 12, 2)->nullable();
+        Schema::create('condominios', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('nome', 100);
+            $table->string('apelido', 20);
+            $table->string('telefone', 13)->nullable();
+            $table->string('celular', 14);
+            $table->integer('unidades')->unsigned();
+            $table->decimal('multa', 8, 4)->nullable();
+            $table->decimal('juros', 8,4)->nullable();
+            $table->enum('tipoJuros', ['AM', 'AD']);
+            $table->boolean('temGas')->default(0);
+            $table->decimal('valorGas', 12, 2)->nullable();
 
-            $table->integer('EnderecoCOD')->unsigned();
-            $table->foreign('EnderecoCOD')
-                ->references('EnderecoID')
-                ->on('Enderecos')
+            $table->integer('endereco_id')->unsigned();
+            $table->foreign('endereco_id')
+                ->references('id')
+                ->on('enderecos')
                 ->onDelete('cascade');
 
-            $table->integer('SindicoCOD')->unsigned();
-            $table->foreign('SindicoCOD')
-                ->references('SindicoID')
-                ->on('Sindicos')
+            $table->integer('sindico_id')->unsigned();
+            $table->foreign('sindico_id')
+                ->references('id')
+                ->on('sindicos')
                 ->onDelete('cascade');
 
             $table->timestamps();
@@ -51,7 +51,7 @@ class CreateCondominiosTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('Condominios');
+        Schema::dropIfExists('condominios');
         Schema::enableForeignKeyConstraints();
     }
 }

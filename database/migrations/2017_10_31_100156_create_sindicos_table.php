@@ -13,11 +13,11 @@ class CreateSindicosTable extends Migration
      */
     public function up()
     {
-        Schema::create('Sindicos', function (Blueprint $table) {
-            $table->increments('SindicoID');
-            $table->string('Nome', 100);
-            $table->string('Telefone', 13)->nullable();
-            $table->string('Celular', 14);
+        Schema::create('sindicos', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('nome', 100);
+            $table->string('telefone', 13)->nullable();
+            $table->string('celular', 14);
 
             $table->softDeletes();
             $table->timestamps();
@@ -31,6 +31,6 @@ class CreateSindicosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Sindicos');
+        Schema::dropIfExists('sindicos');
     }
 }

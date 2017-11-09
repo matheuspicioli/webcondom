@@ -13,15 +13,15 @@ class CreateCidadesTable extends Migration
      */
     public function up()
     {
-        Schema::create('Cidades', function (Blueprint $table) {
-            $table->increments('CidadeID');
-            $table->string('Descricao', 100);
-            $table->string('CodigoIBGE', 7)->nullable();
-            $table->integer('EstadoCOD')->unsigned();
+        Schema::create('cidades', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('descricao', 100);
+            $table->string('codigoIbge', 7)->nullable();
 
-            $table->foreign('EstadoCOD')
-                ->references('EstadoID')
-                ->on('Estados')
+            $table->integer('estado_id')->unsigned();
+            $table->foreign('estado_id')
+                ->references('id')
+                ->on('estados')
                 ->onDelete('cascade');
             $table->timestamps();
         });
@@ -35,7 +35,7 @@ class CreateCidadesTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('Cidades');
+        Schema::dropIfExists('cidades');
         Schema::enableForeignKeyConstraints();
     }
 }

@@ -13,11 +13,11 @@ class CreateEstadosTable extends Migration
      */
     public function up()
     {
-        Schema::create('Estados', function (Blueprint $table) {
-            $table->increments('EstadoID');
-            $table->string('Descricao', 100);
-            $table->string('Sigla', 2);
-            $table->string('CodigoIBGE',2)->nullable();
+        Schema::create('estados', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('descricao', 100);
+            $table->string('sigla', 2);
+            $table->string('codigoIbge',2)->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateEstadosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Estados');
+        Schema::dropIfExists('estados');
     }
 }
