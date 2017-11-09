@@ -17,14 +17,14 @@ $factory->define(WebCondom\Models\Enderecos\Estado::class, function (Faker $fake
     return [
         'descricao'     => $faker->name,
         'sigla'         => $faker->SP,
-        'codigoIbge'    => $faker->randomNumber(2)
+        'codigo_ibge'    => $faker->randomNumber(2)
     ];
 });
 
 $factory->define(WebCondom\Models\Enderecos\Cidade::class, function (Faker $faker) {
     return [
         'descricao'     => $faker->name,
-        'codigoIbge'    => $faker->randomNumber(7),
+        'codigo_ibge'    => $faker->randomNumber(7),
         'estado_id'     => 1
     ];
 });

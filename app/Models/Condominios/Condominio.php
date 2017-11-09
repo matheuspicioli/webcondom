@@ -12,10 +12,10 @@ class Condominio extends Model
 
     protected $fillable = [
         "nome", "apelido", "telefone", "celular", "unidades", "multa", "juros",
-        "tipoJuros", "temGas", "valorGas", "endereco_id", "sindico_id"
+        "tipo_juros", "tem_gas", "valor_gas", "endereco_id", "sindico_id"
     ];
     protected $dates = [ "deleted_at" ];
-    protected $appends = [ "tipoJurosFormatado", "condominioDescricao" ];
+    protected $appends = [ "tipo_juros_formatado", "condominio_descricao" ];
 
     public function endereco()
     {

@@ -27,16 +27,16 @@
                             <tbody>
                                 @foreach($condominios as $condominio)
                                     <tr>
-                                        <td>{{ $condominio->CondominioID }}</td>
-                                        <td>{{ $condominio->Nome }}</td>
-                                        <td>{{ $condominio->Apelido }}</td>
-                                        <td>{{ $condominio->Unidades }}</td>
-                                        <td>{{ $condominio->TipoJurosFormatado }}</td>
-                                        <td>{{ $condominio->Endereco->EnderecoFormatado }}</td>
+                                        <td>{{ $condominio->id }}</td>
+                                        <td>{{ $condominio->nome }}</td>
+                                        <td>{{ $condominio->apelido }}</td>
+                                        <td>{{ $condominio->unidades }}</td>
+                                        <td>{{ $condominio->tipoJurosFormatado }}</td>
+                                        <td>{{ $condominio->endereco->enderecoFormatado }}</td>
                                         <td>
                                             <button class="btn btn-success">
                                                 <a style="color: #FFFFFF"
-                                                        href="{{ route('condominios.condominios.exibir', ['id' => $condominio->CondominioID ]) }}">Alterar</a>
+                                                        href="{{ route('condominios.condominios.exibir', ['id' => $condominio->id ]) }}">Alterar</a>
                                             </button>
                                         </td>
                                     </tr>

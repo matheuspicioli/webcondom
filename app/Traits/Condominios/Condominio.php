@@ -5,7 +5,7 @@ trait Condominio
 {
     public function gettipoJurosFormatadoAttribute()
     {
-        return $this->tipoJuros == "AM" ? "Ao mês" : "Ao dia";
+        return $this->tipo_juros == "AM" ? "Ao mês" : "Ao dia";
     }
 
     public function getcondominioDescricaoAttribute()

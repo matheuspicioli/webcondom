@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cidade extends Model
 {
-    protected $fillable = [ "descricao", "codigoIbge", "estado_id" ];
+    protected $fillable = [ "descricao", "codigo_ibge", "estado_id" ];
 
     public function estado()
     {

@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Estado extends Model
 {
-    protected $fillable = [ "descricao", "sigla", "codigoIbge" ];
+    protected $fillable = [ "descricao", "sigla", "codigo_ibge" ];
 }

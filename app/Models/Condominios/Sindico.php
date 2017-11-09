@@ -9,6 +9,6 @@ class Sindico extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [ "Nome", "Telefone", "Celular" ];
+    protected $fillable = [ "nome", "telefone", "celular" ];
     protected $dates = ['deleted_at'];
 }

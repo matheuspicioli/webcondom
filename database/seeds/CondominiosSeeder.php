@@ -21,9 +21,9 @@ class CondominiosSeeder extends Seeder
             'unidades' => '12',
             'multa' => '2',
             'juros' => '0.0333',
-            'tipoJuros' => 'AD',
-            'temGas' => '1',
-            'valorGas' => '8.35',
+            'tipo_juros' => 'AD',
+            'tem_gas' => '1',
+            'valor_gas' => '8.35',
             'endereco_id' => '2',
             'sindico_id' => '4']);
 
@@ -36,8 +36,8 @@ class CondominiosSeeder extends Seeder
             'unidades' => '144',
             'multa' => '2',
             'juros' => '0.0333',
-            'tipoJuros' => 'AD',
-            'temGas' => '0',
+            'tipo_juros' => 'AD',
+            'tem_gas' => '0',
             'endereco_id' => '1',
             'sindico_id' => '3']);
 

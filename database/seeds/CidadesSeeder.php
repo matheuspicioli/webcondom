@@ -9,7 +9,7 @@ class CidadesSeeder extends Seeder
     {
         Cidade::Create([
                         'descricao'  => 'SAO JOSE DO RIO PRETO',
-                        'codigoIbge' => '3549805',
+                        'codigo_ibge' => '3549805',
                         'estado_id'  => '25']);
 
         $estados = WebCondom\Models\Enderecos\Estado::all();

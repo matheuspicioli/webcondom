@@ -13,7 +13,7 @@ class CreateCondominiosTaxasTable extends Migration
      */
     public function up()
     {
-        Schema::create('condominiosTaxas', function (Blueprint $table) {
+        Schema::create('condominio_taxas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('descricao', 100);
             $table->string('valor', 100);
@@ -37,7 +37,7 @@ class CreateCondominiosTaxasTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('CondominiosTaxas');
+        Schema::dropIfExists('condominio_taxas');
         Schema::enableForeignKeyConstraints();
     }
 }

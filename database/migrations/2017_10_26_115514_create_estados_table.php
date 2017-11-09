@@ -17,7 +17,7 @@ class CreateEstadosTable extends Migration
             $table->increments('id');
             $table->string('descricao', 100);
             $table->string('sigla', 2);
-            $table->string('codigoIbge',2)->nullable();
+            $table->string('codigo_ibge',2)->nullable();
             $table->timestamps();
         });
     }

@@ -22,13 +22,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="Nome" class="control-label">Nome</label>
-                                        <input id="Nome" type="text" class="form-control" name="Nome">
+                                        <input id="Nome" type="text" class="form-control" name="nome">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="Apelido" class="control-label">Apelido</label>
-                                        <input id="Apelido" type="text" class="form-control" name="Apelido">
+                                        <input id="Apelido" type="text" class="form-control" name="apelido">
                                     </div>
                                 </div>
                             </div>
@@ -36,14 +36,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="Telefone" class="control-label">Telefone</label>
-                                        <input id="Telefone" type="text" class="form-control" name="Telefone" data-mask="(00) 0000-0000">
+                                        <input id="Telefone" type="text" class="form-control" name="telefone" data-mask="(00) 0000-0000">
                                         <span class="help-block">Este campo é opcional</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="Celular" class="control-label">Celular</label>
-                                        <input id="Celular" type="text" class="form-control" name="Celular" data-mask="(00) 0 0000-0000">
+                                        <input id="Celular" type="text" class="form-control" name="celular" data-mask="(00) 0 0000-0000">
                                     </div>
                                 </div>
                             </div>
@@ -52,27 +52,27 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="Unidades" class="control-label">Unidades</label>
-                                        <input id="Unidades" type="number" min="0" class="form-control" name="Unidades">
+                                        <input id="Unidades" type="number" min="0" class="form-control" name="unidades">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="Multa" class="control-label">Multa (R$)</label>
-                                        <input id="Multa" type="text" class="form-control" name="Multa" placeholder="150,00" data-mask="#.##0,00" data-mask-reverse="true">
+                                        <input id="Multa" type="text" class="form-control" name="multa" placeholder="150,00" data-mask="#.##0,00" data-mask-reverse="true">
                                         <span class="help-block">Este campo é opcional</span>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="Juros" class="control-label">Juros (R$)</label>
-                                        <input id="Juros" type="text" class="form-control" name="Juros" placeholder="150,00" data-mask="#.##0,00" data-mask-reverse="true">
+                                        <input id="Juros" type="text" class="form-control" name="juros" placeholder="150,00" data-mask="#.##0,00" data-mask-reverse="true">
                                         <span class="help-block">Este campo é opcional</span>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="TipoJuros" class="control-label">Tipo de juros</label>
-                                        <select name="TipoJuros" id="TipoJuros" class="form-control">
+                                        <select name="tipo_juros" id="TipoJuros" class="form-control">
                                             <option disabled selected>----------Selecione----------</option>
                                             <option value="AD">Ao dia</option>
                                             <option value="AM">Ao mês</option>
@@ -85,7 +85,7 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="TemGas" class="control-label">Tem gás?</label>
-                                        <select name="TemGas" id="TemGas" class="form-control">
+                                        <select name="tem_gas" id="TemGas" class="form-control">
                                             <option disabled selected>Selecione</option>
                                             <option value="1">Sim</option>
                                             <option value="0">Não</option>
@@ -95,17 +95,17 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="ValorGas" class="control-label">Valor do gás (R$)</label>
-                                        <input id="ValorGas" type="text" class="form-control" name="ValorGas" placeholder="150,00" data-mask="#.##0,00" data-mask-reverse="true" disabled>
+                                        <input id="ValorGas" type="text" class="form-control" name="valor_gas" placeholder="150,00" data-mask="#.##0,00" data-mask-reverse="true" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="SindicoCOD" class="control-label">Síndico</label>
-                                        <select name="SindicoCOD" id="SindicoCOD" class="form-control">
+                                        <select name="sindico_id" id="SindicoCOD" class="form-control">
                                             <option disabled selected>----------Selecione----------</option>
                                             @foreach($sindicos as $sindico)
-                                                <option value="{{ $sindico->SindicoID }}">
-                                                    {{ $sindico->Nome }}
+                                                <option value="{{ $sindico->id }}">
+                                                    {{ $sindico->nome }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -119,14 +119,14 @@
                                 <div class="col-md-10">
                                     <div class="form-group">
                                         <label for="Logradouro" class="control-label">Logradouro</label>
-                                        <input id="Logradouro" type="text" class="form-control" name="Logradouro">
+                                        <input id="Logradouro" type="text" class="form-control" name="logradouro">
                                     </div>
                                 </div>
 
                                 <div class="col-md-2"> 
                                     <div class="form-group">
                                         <label for="Numero" class="control-label">Número</label>
-                                        <input type="number" min="0" id="Numero" name="Numero" class="form-control">
+                                        <input type="number" min="0" id="Numero" name="numero" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +134,7 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="Complemento" class="control-label">Complemento</label>
-                                        <input type="text" id="Complemento" name="Complemento" class="form-control">
+                                        <input type="text" id="Complemento" name="complemento" class="form-control">
                                         <span class="help-block">Este campo é opcional</span>
                                     </div>
                                 </div>
@@ -142,7 +142,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="CEP" class="control-label">CEP</label>
-                                        <input type="text" id="CEP" name="CEP" class="form-control" data-mask="00000-000">
+                                        <input type="text" id="CEP" name="cep" class="form-control" data-mask="00000-000">
                                         <span class="help-block">Apenas os números</span>
                                     </div>
                                 </div>
@@ -152,18 +152,18 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="Bairro" class="control-label">Bairro</label>
-                                        <input type="text" id="Bairro" name="Bairro" class="form-control">
+                                        <input type="text" id="Bairro" name="bairro" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="CidadeCOD" class="control-label">Cidade:</label>
-                                        <select name="CidadeCOD" id="CidadeCOD" class="form-control">
+                                        <select name="cidade_id" id="CidadeCOD" class="form-control">
                                             <option selected disabled>-------Selecione uma cidade-------</option>
                                             @foreach($cidades as $cidade)
-                                                <option value="{{ $cidade->CidadeID }}">{{ $cidade->Descricao }}
-                                                    - {{ $cidade->Estado->Descricao }}</option>
+                                                <option value="{{ $cidade->id }}">{{ $cidade->descricao }}
+                                                    - {{ $cidade->estado->descricao }}</option>
                                             @endforeach
                                         </select>
                                     </div>
