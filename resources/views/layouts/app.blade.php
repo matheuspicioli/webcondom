@@ -9,9 +9,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('titulo')</title>
-
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        html, body{
+            font-family: 'Oswald', sans-serif;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
