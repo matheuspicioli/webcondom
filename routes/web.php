@@ -44,15 +44,15 @@ Route::prefix('Condominios')->group(function(){
     });
 });
 
-Route::prefix('Enderecos')->group(function(){
-    Route::prefix('Estados')->group(function(){
+Route::prefix('Enderecos')->group(function() {
+    Route::prefix('Estados')->group(function () {
         Route::get('/', 'Enderecos\EstadosController@listar')->name('enderecos.estados.listar');
         Route::get('Criar', 'Enderecos\EstadosController@criar')->name('enderecos.estados.criar');
         Route::post('/', 'Enderecos\EstadosController@salvar')->name('enderecos.estados.salvar');
         Route::get('{id}/Exibir', 'Enderecos\EstadosController@exibir')->name('enderecos.estados.exibir');
     });
 
-    Route::prefix('Cidades')->group(function(){
+    Route::prefix('Cidades')->group(function () {
         Route::get('/', 'Enderecos\CidadesController@listar')->name('enderecos.cidades.listar');
         Route::get('Criar', 'Enderecos\CidadesController@criar')->name('enderecos.cidades.criar');
         Route::post('/', 'Enderecos\CidadesController@salvar')->name('enderecos.cidades.salvar');
@@ -61,12 +61,22 @@ Route::prefix('Enderecos')->group(function(){
         Route::get('{id}/Excluir', 'Enderecos\CidadesController@excluir')->name('enderecos.cidades.excluir');
     });
 
-    Route::prefix('Enderecos')->group(function(){
+    Route::prefix('Enderecos')->group(function () {
         Route::get('/', 'Enderecos\EnderecosController@listar')->name('enderecos.enderecos.listar');
         Route::get('Criar', 'Enderecos\EnderecosController@criar')->name('enderecos.enderecos.criar');
         Route::post('/', 'Enderecos\EnderecosController@salvar')->name('enderecos.enderecos.salvar');
         Route::get('{id}/Exibir', 'Enderecos\EnderecosController@exibir')->name('enderecos.enderecos.exibir');
         Route::put('{id}/Alterar', 'Enderecos\EnderecosController@alterar')->name('enderecos.enderecos.alterar');
         Route::get('{id}/Excluir', 'Enderecos\EnderecosController@excluir')->name('enderecos.enderecos.excluir');
+    });
+});
+Route::prefix('Diversos')->group(function(){
+    Route::prefix('EstadoCivil')->group(function(){
+        Route::get('/', 'Diversos\EstadoCivilController@listar')->name('diversos.estadoCivil.listar');
+        Route::get('Criar', 'Diversos\EstadoCivilController@criar')->name('diversos.estadoCivil.criar');
+        Route::post('/', 'Diversos\EstadoCivilController@salvar')->name('diversos.estadoCivil.salvar');
+        Route::get('{id}/Exibir', 'Diversos\EstadoCivilController@exibir')->name('diversos.estadoCivil.exibir');
+        Route::put('{id}/Alterar', 'Diversos\EstadoCivilController@alterar')->name('diversos.estadoCivil.alterar');
+        Route::get('{id}/Excluir', 'Diversos\EstadoCivilController@excluir')->name('diversos.estadoCivil.excluir');
     });
 });
