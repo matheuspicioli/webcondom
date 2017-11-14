@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call('CondominiosSeeder');
         $this->call('CondominiosTaxasSeeder');
         $this->call('EstadoCivilSeeder');
+        $this->call('RegimeCasamentoSeeder');
     }
 }

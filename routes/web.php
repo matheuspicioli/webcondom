@@ -79,4 +79,12 @@ Route::prefix('Diversos')->group(function(){
         Route::put('{id}/Alterar', 'Diversos\EstadoCivilController@alterar')->name('diversos.estadoCivil.alterar');
         Route::get('{id}/Excluir', 'Diversos\EstadoCivilController@excluir')->name('diversos.estadoCivil.excluir');
     });
+    Route::prefix('RegimesCasamentos')->group(function(){
+        Route::get('/', 'Diversos\RegimesCasamentosController@listar')->name('diversos.regimeCasamento.listar');
+        Route::get('Criar', 'Diversos\RegimesCasamentosController@criar')->name('diversos.regimeCasamento.criar');
+        Route::post('/', 'Diversos\RegimesCasamentosController@salvar')->name('diversos.regimeCasamento.salvar');
+        Route::get('{id}/Exibir', 'Diversos\RegimesCasamentosController@exibir')->name('diversos.regimeCasamento.exibir');
+        Route::put('{id}/Alterar', 'Diversos\RegimesCasamentosController@alterar')->name('diversos.regimeCasamento.alterar');
+        Route::get('{id}/Excluir', 'Diversos\RegimesCasamentosController@excluir')->name('diversos.regimeCasamento.excluir');
+    });
 });

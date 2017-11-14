@@ -12,8 +12,8 @@ class EstadoCivilSeeder extends Seeder
      */
     public function run()
     {
-        EstadoCivil::Create(['Id' => '1', 'Descricao' => 'SOLTEIRO']);
-        EstadoCivil::Create(['Id' => '2', 'Descricao' => 'CASADO']);
-        EstadoCivil::Create(['Id' => '3', 'Descricao' => 'DESQUITADO']);
+        EstadoCivil::Create(['Descricao' => 'SOLTEIRO', 'ExigeConjuge' => '0']);
+        EstadoCivil::Create(['Descricao' => 'CASADO', 'ExigeConjuge' => '1']);
+        EstadoCivil::Create(['Descricao' => 'DESQUITADO', 'ExigeConjuge' => '0']);
     }
 }
