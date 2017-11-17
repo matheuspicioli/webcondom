@@ -11,6 +11,7 @@
 
                     <div class="panel-body">
                         <a href="{{ route('condominios.sindicos.criar') }}" class="btn btn-primary">Cadastrar</a>
+                        <a href="{{ route('home') }}" class="btn btn-default" >Voltar</a>
                         <hr />
                         <table class="table table-bordered">
                             <thead>

@@ -20,7 +20,17 @@
                                         <label for="Descricao" class="control-label">Descrição</label>
                                         <input id="Descricao" type="text" class="form-control" name="Descricao">
                                     </div>
-
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="ExigeConjuge" class="control-label">Exige Conjuge?</label>
+                                                <select name="ExigeConjuge" id="ExigeConjuge" class="form-control pula">
+                                                    <option disabled selected>Selecione</option>
+                                                    <option value="1">Sim</option>
+                                                    <option value="0">Não</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     <div class="form-group">
                                         <button class="btn btn-primary" type="submit">Cadastrar</button>
                                     </div>
