@@ -87,4 +87,12 @@ Route::prefix('Diversos')->group(function(){
         Route::put('{id}/Alterar', 'Diversos\RegimesCasamentosController@alterar')->name('diversos.regimeCasamento.alterar');
         Route::get('{id}/Excluir', 'Diversos\RegimesCasamentosController@excluir')->name('diversos.regimeCasamento.excluir');
     });
+    Route::prefix('Departamentos')->group(function(){
+        Route::get('/', 'Diversos\DepartamentosController@listar')->name('diversos.departamento.listar');
+        Route::get('Criar', 'Diversos\DepartamentosController@criar')->name('diversos.departamento.criar');
+        Route::post('/', 'Diversos\DepartamentosController@salvar')->name('diversos.departamento.salvar');
+        Route::get('{id}/Exibir', 'Diversos\DepartamentosController@exibir')->name('diversos.departamento.exibir');
+        Route::put('{id}/Alterar', 'Diversos\DepartamentosController@alterar')->name('diversos.departamento.alterar');
+        Route::get('{id}/Excluir', 'Diversos\DepartamentosController@excluir')->name('diversos.departamento.excluir');
+    });
 });
