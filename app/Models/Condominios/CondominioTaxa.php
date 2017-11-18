@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class CondominioTaxa extends Model
 {
     protected $fillable = [ "descricao", "valor", "condominio_id" ];
-    protected $appends = [ "taxa" ];
 
     public function gettaxaAttribute()
     {

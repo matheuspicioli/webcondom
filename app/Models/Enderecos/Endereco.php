@@ -10,7 +10,6 @@ class Endereco extends Model
     use EnderecoTrait;
 
     protected $fillable = [ "logradouro", "numero", "cep", "complemento", "bairro", "cidade_id" ];
-    protected $appends = [ "enderecoFormatado" ];
 
     public function cidade()
     {
