@@ -11,7 +11,11 @@ class EstadosController extends Controller
     public function Listar()
     {
         $estados = Estado::all();
-        return view('enderecos.estados.listar', compact('estados'));
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Estados', 'url' => '']
+        ]);
+        return view('enderecos.estados.listar', compact('estados', 'migalhas'));
     }
 
     public function Criar()
