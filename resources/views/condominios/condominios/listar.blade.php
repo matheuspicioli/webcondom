@@ -32,8 +32,8 @@
                                         <td>{{ $condominio->nome }}</td>
                                         <td>{{ $condominio->apelido }}</td>
                                         <td>{{ $condominio->unidades }}</td>
-                                        <td>{{ $condominio->tipoJurosFormatado }}</td>
-                                        <td>{{ $condominio->endereco->enderecoFormatado }}</td>
+                                        <td>{{ $condominio->tipo_juros_formatado }}</td>
+                                        <td>{{ $condominio->endereco->endereco_formatado }}</td>
                                         <td>
                                             <button class="btn btn-success">
                                                 <a style="color: #FFFFFF"
