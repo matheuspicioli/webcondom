@@ -15,14 +15,23 @@ class CondominiosController extends Controller
     public function Listar()
     {
         $condominios = Condominio::all();
-        return view('condominios.condominios.listar', compact('condominios'));
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Condominios', 'url' => '']
+        ]);
+        return view('condominios.condominios.listar', compact('condominios', 'migalhas'));
     }
 
     public function Criar()
     {
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Condominios', 'url' => route('condominios.condominios.listar')],
+            ['titulo' => 'Cadastrar condomínio', 'url' => '']
+        ]);
         $sindicos = Sindico::all();
         $cidades = Cidade::all();
-        return view('condominios.condominios.criar', compact('sindicos', 'cidades'));
+        return view('condominios.condominios.criar', compact('sindicos', 'cidades', 'migalhas'));
     }
 
     public function Salvar(Request $request)
@@ -60,15 +69,20 @@ class CondominiosController extends Controller
 
     public function Exibir($id)
     {
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Condominios', 'url' => route('condominios.condominios.listar')],
+            ['titulo' => 'Alterar condomínio', 'url' => '']
+        ]);
         $condominio = Condominio::find($id) ? Condominio::find($id) : null;
 
         if ($condominio) {
             $taxas = $condominio->taxas;
             $sindicos = Sindico::all();
             $cidades = Cidade::all();
-            return view('condominios.condominios.exibir', compact('condominio', 'sindicos', 'cidades', 'taxas'));
+            return view('condominios.condominios.exibir', compact('condominio', 'sindicos', 'cidades', 'taxas', 'migalhas'));
         } else
-            return redirect()->route('condominios.condominios.criar');
+            return redirect()->route('condominios.condominios.criar', 'migalhas');
     }
 
     public function Alterar(Request $request, $id)
