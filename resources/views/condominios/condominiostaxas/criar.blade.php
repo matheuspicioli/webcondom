@@ -12,7 +12,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <h4><a href="{{ route('condominios.condominiostaxas.listar') }}">Voltar</a></h4>
+                                <h4><a href="{{ route('condominios.condominiostaxas.listar', ['idCondominio' => $idCondominio]) }}">Voltar</a></h4>
                                 <hr>
                             </div>
                         </div>

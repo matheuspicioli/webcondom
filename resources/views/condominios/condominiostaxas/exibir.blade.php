@@ -12,31 +12,29 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                    @foreach($condominios as $condominio)
-                                        @if($condominio->id == $taxa->condominio_id)
-                                            @php $idCondominio = $condominio->id; @endphp
-                                        @endif
-                                    @endforeach
-                                <h4><a href="{{ route('condominios.condominiostaxas.listar', ['idCondominio' => $idCondominio]) }}">Voltar</a></h4>
+                                <h4>
+                                    <a href="{{ route('condominios.condominiostaxas.listar', ['idCondominio' => $idCondominio]) }}">Voltar</a>
+                                </h4>
                                 <hr>
                             </div>
                         </div>
                         <form method="post"
-                              action="{{ route('condominios.condominiostaxas.alterar', ['id' => $taxa->id ]) }}">
+                              action="{{ route('condominios.condominiostaxas.alterar', ['id' => $taxa->id, 'idCondominio' => $idCondominio]) }}">
                             {{ csrf_field() }}
                             <input type="hidden" name="_method" value="PUT">
-                            <input type="hidden" name="idCondominio" value="{{ $idCondominio }}">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="Descricao" class="control-label">Descrição</label>
-                                        <input id="Descricao" type="text" class="form-control" name="descricao" value="{{ $taxa->descricao }}">
+                                        <input id="Descricao" type="text" class="form-control" name="descricao"
+                                               value="{{ $taxa->descricao }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="Valor" class="control-label">Valor</label>
-                                        <input id="Valor" type="text" class="form-control" name="valor" value="{{ $taxa->valor }}">
+                                        <input id="Valor" type="text" class="form-control" name="valor"
+                                               value="{{ $taxa->valor }}">
                                     </div>
                                 </div>
                             </div>
@@ -45,10 +43,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <button class="btn btn-primary" type="submit">Alterar</button>
-                                        <button class="btn btn-danger">
-                                            <a style="color: #FFFFFF"
-                                               href="{{ route('condominios.condominiostaxas.excluir', ['id' => $taxa->id ]) }}">Excluir!</a>
-                                        </button>
+                                        <a class="btn btn-danger"
+                                           href="{{ route('condominios.condominiostaxas.excluir', ['id' => $taxa->id, 'idCondominio' => $idCondominio ]) }}">Excluir!</a>
                                     </div>
                                 </div>
                             </div>

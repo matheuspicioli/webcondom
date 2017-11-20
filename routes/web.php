@@ -35,12 +35,12 @@ Route::prefix('Condominios')->group(function(){
     });
 
     Route::prefix('CondominiosTaxas')->group(function(){
-        Route::get('Criar', 'Condominios\CondominiosTaxasController@criar')->name('condominios.condominiostaxas.criar');
+        Route::get('Criar/{idCondominio}', 'Condominios\CondominiosTaxasController@criar')->name('condominios.condominiostaxas.criar');
         Route::get('/{idCondominio?}', 'Condominios\CondominiosTaxasController@listar')->name('condominios.condominiostaxas.listar');
         Route::post('/', 'Condominios\CondominiosTaxasController@salvar')->name('condominios.condominiostaxas.salvar');
-        Route::get('{id}/Exibir/{idCondominio?}', 'Condominios\CondominiosTaxasController@exibir')->name('condominios.condominiostaxas.exibir');
-        Route::put('{id}/Alterar/{idCondominio?}', 'Condominios\CondominiosTaxasController@alterar')->name('condominios.condominiostaxas.alterar');
-        Route::get('{id}/Excluir/{idCondominio?}', 'Condominios\CondominiosTaxasController@excluir')->name('condominios.condominiostaxas.excluir');
+        Route::get('{id}/Exibir/{idCondominio}', 'Condominios\CondominiosTaxasController@exibir')->name('condominios.condominiostaxas.exibir');
+        Route::put('{id}/Alterar/{idCondominio}', 'Condominios\CondominiosTaxasController@alterar')->name('condominios.condominiostaxas.alterar');
+        Route::get('{id}/Excluir/{idCondominio}', 'Condominios\CondominiosTaxasController@excluir')->name('condominios.condominiostaxas.excluir');
     });
 });
 
