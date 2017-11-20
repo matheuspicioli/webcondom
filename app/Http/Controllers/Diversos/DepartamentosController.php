@@ -10,13 +10,22 @@ class DepartamentosController extends Controller
 {
     public function Listar()
     {
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Departamentos', 'url' => '']
+        ]);
         $departamento = Departamento::all();
-        return view('diversos.departamento.listar', compact('departamento'));
+        return view('diversos.departamento.listar', compact('departamento', 'migalhas'));
     }
 
     public function Criar()
     {
-        return view('diversos.departamento.criar');
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Departamentos', 'url' => route('diversos.departamento.listar')],
+            ['titulo' => 'Cadastrar departamento', 'url' => '']
+        ]);
+        return view('diversos.departamento.criar', compact('migalhas'));
     }
 
     public function Salvar(Request $request)
@@ -28,10 +37,15 @@ class DepartamentosController extends Controller
 
     public function Exibir($id)
     {
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Departamentos', 'url' => route('diversos.departamento.listar')],
+            ['titulo' => 'Alterar departamento', 'url' => '']
+        ]);
         $departamento = Departamento::find($id) ? Departamento::find($id) : null;
 
         if($departamento)
-            return view('diversos.departamento.exibir', compact('departamento'));
+            return view('diversos.departamento.exibir', compact('departamento', 'migalhas'));
         else
             return redirect()->route('diversos.departamento.criar');
     }

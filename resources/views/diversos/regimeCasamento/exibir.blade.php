@@ -1,43 +1,28 @@
 @extends('layouts.app')
 @section('titulo', 'Regime de Casamento - Exibir/Alterar')
 @section('conteudo')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading text-center">
-                        <h3>Alterar Regimes de Casamento</h3>
-                    </div>
-
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2">
-                                <h4><a href="{{ route('diversos.regimeCasamento.listar') }}">Voltar</a></h4>
-                                <hr>
-                                    <form method="post" action="{{ route('diversos.regimeCasamento.alterar', ['id' => $regimeCasamento->id ]) }}">
-                                        {{ csrf_field() }}
-                                        <input type="hidden" name="_method" value="PUT">
-                                        <div class="row">
-                                            <div class="form-group">
-                                                <label for="Descricao" class="control-label">Descrição</label>
-                                                <input id="Descricao" type="text" class="form-control" name="Descricao" value="{{ $regimeCasamento->Descricao}}">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <button class="btn btn-primary" type="submit">Salvar</button>
-                                                <button class="btn btn-danger">
-                                                    <a style="color: #FFFFFF"
-                                                       href="{{ route('diversos.regimeCasamento.excluir', ['id' => $regimeCasamento->id ]) }}">Excluir!</a>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                            </div>
+    <pagina tamanho="10">
+        <painel cor="panel-primary" titulo="Alterar Regimes de Casamento">
+            <migalha v-bind:lista="{{ $migalhas }}"></migalha>
+            <formulario action="{{ route('diversos.regimeCasamento.alterar', ['id' => $regimeCasamento->id ]) }}"
+                        method="PUT" token="{{ csrf_token() }}">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="Descricao" class="control-label">Descrição</label>
+                            <input id="Descricao" type="text" class="form-control" name="Descricao"
+                                   value="{{ $regimeCasamento->Descricao}}">
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" type="submit">Salvar</button>
+                        <a class="btn btn-danger"
+                           href="{{ route('diversos.regimeCasamento.excluir', ['id' => $regimeCasamento->id ]) }}">Excluir!</a>
+                    </div>
+                </div>
+            </formulario>
+        </painel>
+    </pagina>
 @endsection

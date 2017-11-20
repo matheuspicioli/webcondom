@@ -10,13 +10,22 @@ class EstadoCivilController extends Controller
 {
     public function Listar()
     {
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Estado civil', 'url' => '']
+        ]);
         $estadoCivil = EstadoCivil::all();
-        return view('diversos.estadoCivil.listar', compact('estadoCivil'));
+        return view('diversos.estadoCivil.listar', compact('estadoCivil', 'migalhas'));
     }
 
     public function Criar()
     {
-        return view('diversos.estadoCivil.criar');
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Estado civil', 'url' => route('diversos.estadoCivil.listar')],
+            ['titulo' => 'Cadastrar estado cívil', 'url' => '']
+        ]);
+        return view('diversos.estadoCivil.criar', compact('migalhas'));
     }
 
     public function Salvar(Request $request)
@@ -28,10 +37,15 @@ class EstadoCivilController extends Controller
 
     public function Exibir($id)
     {
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Estado civil', 'url' => route('diversos.estadoCivil.listar')],
+            ['titulo' => 'Alterar estado cívil', 'url' => '']
+        ]);
         $estadoCivil = EstadoCivil::find($id) ? EstadoCivil::find($id) : null;
 
         if($estadoCivil)
-            return view('diversos.estadoCivil.exibir', compact('estadoCivil'));
+            return view('diversos.estadoCivil.exibir', compact('estadoCivil', 'migalhas'));
         else
             return redirect()->route('diversos.estadoCivil.criar');
     }

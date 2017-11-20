@@ -11,14 +11,23 @@ class CidadesController extends Controller
 {
     public function Listar()
     {
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Cidades', 'url' => '']
+        ]);
         $cidades = Cidade::all();
-        return view('enderecos.cidades.listar', compact('cidades'));
+        return view('enderecos.cidades.listar', compact('cidades','migalhas'));
     }
 
     public function Criar()
     {
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Cidades', 'url' => route('enderecos.cidades.listar')],
+            ['titulo' => 'Cadastrar cidades', 'url' => '']
+        ]);
         $estados = Estado::all();
-        return view('enderecos.cidades.criar', compact('estados'));
+        return view('enderecos.cidades.criar', compact('estados', 'migalhas'));
     }
 
     public function Salvar(Request $request)
@@ -30,11 +39,16 @@ class CidadesController extends Controller
 
     public function Exibir($id)
     {
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Cidades', 'url' => route('enderecos.cidades.listar')],
+            ['titulo' => 'Alterar cidade', 'url' => '']
+        ]);
         $cidade = Cidade::find($id) ? Cidade::find($id) : null;
 
         if($cidade){
             $estados = Estado::all();
-            return view('enderecos.cidades.exibir', compact('cidade', 'estados'));
+            return view('enderecos.cidades.exibir', compact('cidade', 'estados', 'migalhas'));
         }
         else
             return redirect()->route('enderecos.cidades.criar');
