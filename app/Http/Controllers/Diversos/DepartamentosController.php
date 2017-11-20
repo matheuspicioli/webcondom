@@ -31,7 +31,7 @@ class DepartamentosController extends Controller
     public function Salvar(Request $request)
     {
         //dd($request->except('_token'));
-        Departamento::create($request->except('_token'));
+        Departamento::create($request->all());
         return redirect()->route('diversos.departamento.listar');
     }
 
@@ -54,8 +54,8 @@ class DepartamentosController extends Controller
     {
         //dd($request->except(['_token', '_method']));
         $departamento = Departamento::find($id);
-        $departamento->update($request->except('_token'));
-        return redirect()->route('diversos.departamento.listar');
+        $departamento->update($request->all());
+        return redirect()->route('diversos.departamento.exibir', ['id' => $id]);
     }
 
     public function Excluir($id)

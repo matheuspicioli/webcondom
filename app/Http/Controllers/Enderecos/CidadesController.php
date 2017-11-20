@@ -33,7 +33,7 @@ class CidadesController extends Controller
     public function Salvar(Request $request)
     {
         //dd($request->except('_token'));
-        Cidade::create($request->except('_token'));
+        Cidade::create($request->all());
         return redirect()->route('enderecos.cidades.listar');
     }
 
@@ -56,10 +56,8 @@ class CidadesController extends Controller
 
     public function Alterar(Request $request, $id)
     {
-        //dd($request->except(['_token', '_method']));
-        $cidade = Cidade::find($id);
-        $cidade->update($request->except('_token'));
-        return redirect()->route('enderecos.cidades.listar');
+        Cidade::find($id)->update($request->all());
+        return redirect()->route('enderecos.cidades.exibir', ['id' => $id]);
     }
 
     public function Excluir($id)

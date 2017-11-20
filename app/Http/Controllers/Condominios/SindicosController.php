@@ -32,7 +32,7 @@ class SindicosController extends Controller
     public function Salvar(Request $request)
     {
         //dd($request->except('_token'));
-        Sindico::create($request->except('_token'));
+        Sindico::create($request->all());
         return redirect()->route('condominios.sindicos.listar');
     }
 
@@ -56,8 +56,8 @@ class SindicosController extends Controller
     public function Alterar(Request $request, $id)
     {
         //dd($request->except(['_token', '_method']));
-        Sindico::find($id)->update($request->except('_token'));
-        return redirect()->route('condominios.sindicos.listar');
+        Sindico::find($id)->update($request->all());
+        return redirect()->route('condominios.sindicos.exibir', ['id' => $id]);
     }
 
     public function Excluir($id)

@@ -30,8 +30,7 @@ class EstadosController extends Controller
 
     public function Salvar(Request $request)
     {
-        //dd($request->except('_token'));
-        Estado::create($request->except('_token'));
+        Estado::create($request->all());
         return redirect()->route('enderecos.estados.listar');
     }
 
@@ -52,9 +51,7 @@ class EstadosController extends Controller
 
     public function Alterar(Request $request, $id)
     {
-        //dd($request->except(['_token', '_method']));
-        $estado = Estado::find($id);
-        $estado->update($request->except('_token'));
-        return redirect()->route('enderecos.estados.listar');
+        Estado::find($id)->update($request->all());
+        return redirect()->route('enderecos.estados.listar', ['id' => $id]);
     }
 }

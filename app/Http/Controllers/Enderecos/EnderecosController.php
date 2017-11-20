@@ -32,8 +32,7 @@ class EnderecosController extends Controller
 
     public function Salvar(Request $request)
     {
-        //dd($request->except('_token'));
-        Endereco::create($request->except('_token'));
+        Endereco::create($request->all());
         return redirect()->route('enderecos.enderecos.listar');
     }
 
@@ -57,8 +56,8 @@ class EnderecosController extends Controller
     public function Alterar(Request $request, $id)
     {
         //dd($request->except(['_token', '_method']));
-        Endereco::find($id)->update($request->except('_token'));
-        return redirect()->route('enderecos.enderecos.listar');
+        Endereco::find($id)->update($request->all());
+        return redirect()->route('enderecos.enderecos.exibir', ['id' => $id]);
     }
 
     public function Excluir($id)

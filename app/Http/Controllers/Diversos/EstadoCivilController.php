@@ -31,7 +31,7 @@ class EstadoCivilController extends Controller
     public function Salvar(Request $request)
     {
         //dd($request->except('_token'));
-        EstadoCivil::create($request->except('_token'));
+        EstadoCivil::create($request->all());
         return redirect()->route('diversos.estadoCivil.listar');
     }
 
@@ -54,8 +54,8 @@ class EstadoCivilController extends Controller
     {
         //dd($request->except(['_token', '_method']));
         $estadoCivil = EstadoCivil::find($id);
-        $estadoCivil->update($request->except('_token'));
-        return redirect()->route('diversos.estadoCivil.listar');
+        $estadoCivil->update($request->all());
+        return redirect()->route('diversos.estadoCivil.exibir', ['id' => $id]);
     }
 
     public function Excluir($id)

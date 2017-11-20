@@ -36,7 +36,6 @@ class CondominiosController extends Controller
 
     public function Salvar(Request $request)
     {
-        //dd($request->except('_token'));
         //----ENDEREÇO DO CONDOMINIO---//
         $endereco = new Endereco();
         $endereco->logradouro = $request->input('logradouro');
@@ -111,7 +110,7 @@ class CondominiosController extends Controller
         //SALVA E SALVA O RELACIONAMENTO TAMBÉM
         $condominio->push();
 
-        return redirect()->route('condominios.condominios.listar');
+        return redirect()->route('condominios.condominios.exibir', ['id' => $id]);
     }
 
     public function Excluir($id)

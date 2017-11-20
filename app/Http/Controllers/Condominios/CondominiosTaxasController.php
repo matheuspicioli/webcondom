@@ -32,7 +32,7 @@ class CondominiosTaxasController extends Controller
 
     public function Salvar(Request $request)
     {
-        CondominioTaxa::create($request->except('_token'));
+        CondominioTaxa::create($request->all());
         return redirect()->route('condominios.condominiostaxas.listar');
     }
 
@@ -54,7 +54,7 @@ class CondominiosTaxasController extends Controller
     public function Alterar(Request $request, $id, $idCondominio)
     {
         //dd($request->except($request->all()));
-        CondominioTaxa::find($id)->update($request->except('_token'));
+        CondominioTaxa::find($id)->update($request->all());
         return redirect()->route('condominios.condominiostaxas.exibir', ['id' => $id, 'idCondominio' => $idCondominio]);
     }
 

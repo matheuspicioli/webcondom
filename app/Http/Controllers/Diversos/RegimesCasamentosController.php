@@ -31,7 +31,7 @@ class RegimesCasamentosController extends Controller
     public function Salvar(Request $request)
     {
         //dd($request->except('_token'));
-        RegimeCasamento::create($request->except('_token'));
+        RegimeCasamento::create($request->all());
         return redirect()->route('diversos.regimeCasamento.listar');
     }
 
@@ -54,8 +54,8 @@ class RegimesCasamentosController extends Controller
     {
         //dd($request->except(['_token', '_method']));
         $regimeCasamento = RegimeCasamento::find($id);
-        $regimeCasamento->update($request->except('_token'));
-        return redirect()->route('diversos.regimeCasamento.listar');
+        $regimeCasamento->update($request->all());
+        return redirect()->route('diversos.regimeCasamento.exibir', ['id' => $id]);
     }
 
     public function Excluir($id)
