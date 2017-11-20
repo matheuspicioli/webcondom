@@ -11,13 +11,22 @@ class SindicosController extends Controller
 {
     public function Listar()
     {
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Sindicos', 'url' => '']
+        ]);
         $sindicos = Sindico::all();
-        return view('condominios.sindicos.listar', compact('sindicos'));
+        return view('condominios.sindicos.listar', compact('sindicos', 'migalhas'));
     }
 
     public function Criar()
     {
-        return view('condominios.sindicos.criar');
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Sindicos', 'url' => route('condominios.sindicos.listar')],
+            ['titulo' => 'Cadastrar síndico', 'url' => '']
+        ]);
+        return view('condominios.sindicos.criar', compact('migalhas'));
     }
 
     public function Salvar(Request $request)
@@ -29,11 +38,16 @@ class SindicosController extends Controller
 
     public function Exibir($id)
     {
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Sindicos', 'url' => route('condominios.sindicos.listar')],
+            ['titulo' => 'Alterar síndico', 'url' => '']
+        ]);
         $sindico = Sindico::find($id) ? Sindico::find($id) : null;
 
         if($sindico){
             $condominios = Condominio::all();
-            return view('condominios.sindicos.exibir', compact('sindico', 'condominios'));
+            return view('condominios.sindicos.exibir', compact('sindico', 'condominios', 'migalhas'));
         }
         else
             return redirect()->route('condominios.sindicos.criar');
