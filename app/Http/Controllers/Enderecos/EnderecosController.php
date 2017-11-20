@@ -11,14 +11,23 @@ class EnderecosController extends Controller
 {
     public function Listar()
     {
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Endereços', 'url' => ''],
+        ]);
         $enderecos = Endereco::all();
-        return view('enderecos.enderecos.listar', compact('enderecos'));
+        return view('enderecos.enderecos.listar', compact('enderecos', 'migalhas'));
     }
 
     public function Criar()
     {
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Endereços', 'url' => route('enderecos.enderecos.listar')],
+            ['titulo' => 'Cadastrar endereço', 'url' => ''],
+        ]);
         $cidades = Cidade::all();
-        return view('enderecos.enderecos.criar', compact('cidades'));
+        return view('enderecos.enderecos.criar', compact('cidades', 'migalhas'));
     }
 
     public function Salvar(Request $request)
@@ -30,11 +39,16 @@ class EnderecosController extends Controller
 
     public function Exibir($id)
     {
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Endereços', 'url' => route('enderecos.enderecos.listar')],
+            ['titulo' => 'Alterar endereço', 'url' => ''],
+        ]);
         $endereco = Endereco::find($id) ? Endereco::find($id) : null;
 
         if($endereco){
             $cidades = Cidade::all();
-            return view('enderecos.enderecos.exibir', compact('endereco', 'cidades'));
+            return view('enderecos.enderecos.exibir', compact('endereco', 'cidades', 'migalhas'));
         }
         else
             return redirect()->route('enderecos.enderecos.criar');

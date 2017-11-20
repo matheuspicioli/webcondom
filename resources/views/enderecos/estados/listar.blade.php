@@ -6,7 +6,6 @@
             <migalha v-bind:lista="{{ $migalhas }}"></migalha>
             <modal-link tipo="button" nome="modalCadastraEstado" titulo="Modal cadastra estado"></modal-link>
             <a href="{{ route('enderecos.estados.criar') }}" class="btn btn-primary">Cadastrar</a>
-            <a href="{{ route('home') }}" class="btn btn-default" >Voltar</a>
             <hr />
             <table class="table table-bordered">
                 <thead>

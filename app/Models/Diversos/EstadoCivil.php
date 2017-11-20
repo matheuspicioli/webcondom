@@ -9,8 +9,12 @@ class EstadoCivil extends Model
 {
     use SoftDeletes;
 
-    protected $primaryKey = "id";
     protected $table = "EstadoCivil";
     protected $fillable = [ "Descricao", "ExigeConjuge" ];
     protected $dates = ['deleted_at'];
+
+    public function getExigeConjugeFormatadoAttribute()
+    {
+        return $this->ExigeConjuge == 1 ? "Sim" : "Não";
+    }
 }

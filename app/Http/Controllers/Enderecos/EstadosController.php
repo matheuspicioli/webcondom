@@ -20,7 +20,12 @@ class EstadosController extends Controller
 
     public function Criar()
     {
-        return view('enderecos.estados.criar');
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Estados', 'url' => route('enderecos.estados.listar')],
+            ['titulo' => 'Cadastrar estado', 'url' => '']
+        ]);
+        return view('enderecos.estados.criar', compact('migalhas'));
     }
 
     public function Salvar(Request $request)
@@ -32,6 +37,11 @@ class EstadosController extends Controller
 
     public function Exibir($id)
     {
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Estados', 'url' => route('enderecos.estados.listar')],
+            ['titulo' => 'Alterar estado', 'url' => '']
+        ]);
         $estado = Estado::find($id) ? Estado::find($id) : null;
 
         if($estado)
@@ -45,12 +55,6 @@ class EstadosController extends Controller
         //dd($request->except(['_token', '_method']));
         $estado = Estado::find($id);
         $estado->update($request->except('_token'));
-        return redirect()->route('enderecos.estados.listar');
-    }
-
-    public function Excluir($id)
-    {
-        Estado::find($id)->delete();
         return redirect()->route('enderecos.estados.listar');
     }
 }
