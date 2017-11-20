@@ -11,14 +11,23 @@ class CondominiosTaxasController extends Controller
 {
     public function Listar($idCondominio)
     {
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Taxas de condomínio', 'url' => '']
+        ]);
         $taxas = CondominioTaxa::where('condominio_id', '=', $idCondominio)->get();
-        return view('condominios.condominiostaxas.listar', compact('taxas', 'idCondominio'));
+        return view('condominios.condominiostaxas.listar', compact('taxas', 'idCondominio', 'migalhas'));
     }
 
     public function Criar($idCondominio)
     {
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Taxas de condomínio', 'url' => route('condominios.condominiostaxas.listar', ['idCondominio' => $idCondominio])],
+            ['titulo' => 'Cadastrar taxa para um condomínio', 'url' => '']
+        ]);
         $condominios = Condominio::all();
-        return view('condominios.condominiostaxas.criar', compact('condominios', 'idCondominio'));
+        return view('condominios.condominiostaxas.criar', compact('condominios', 'idCondominio', 'migalhas'));
     }
 
     public function Salvar(Request $request)
@@ -29,10 +38,15 @@ class CondominiosTaxasController extends Controller
 
     public function Exibir($id, $idCondominio)
     {
+        $migalhas = json_encode([
+            ['titulo' => 'Home', 'url' => route('home')],
+            ['titulo' => 'Taxas de condomínio', 'url' => route('condominios.condominiostaxas.listar', ['idCondominio' => $idCondominio])],
+            ['titulo' => 'Alterar taxa de condomínio', 'url' => '']
+        ]);
         $taxa = CondominioTaxa::find($id) ? CondominioTaxa::find($id) : null;
         $condominios = Condominio::all();
         if ($taxa)
-            return view('condominios.condominiostaxas.exibir', compact('taxa', 'condominios', 'idCondominio'));
+            return view('condominios.condominiostaxas.exibir', compact('taxa', 'condominios', 'idCondominio', 'migalhas'));
         else
             return redirect()->route('condominios.condominiostaxas.criar');
     }
