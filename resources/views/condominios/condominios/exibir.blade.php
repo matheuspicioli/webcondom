@@ -217,7 +217,6 @@
     </pagina>
 @endsection
 @section('scripts')
-    <script src="{{ asset('js/pula-enter.js') }}"></script>
     <script>
         $(document).ready(function () {
             if ($("select[id=TemGas]").val() != 1)

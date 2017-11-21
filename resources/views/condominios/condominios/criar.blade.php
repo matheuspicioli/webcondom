@@ -4,7 +4,6 @@
     <pagina tamanho="12">
         <painel cor="panel-primary" titulo="Cadastrar condomínio">
             <migalha v-bind:lista="{{ $migalhas }}"></migalha>
-            <hr>
             <formulario action="{{ route('condominios.condominios.salvar') }}" method="POST" token="{{ csrf_token() }}">
                 <div class="row">
                     <div class="col-md-6">
@@ -174,7 +173,7 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('js/pula-enter.js') }}"></script>
+
     <script>
         $(document).ready(function () {
             $("#Nome").focus();
