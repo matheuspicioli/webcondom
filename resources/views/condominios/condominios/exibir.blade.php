@@ -4,7 +4,6 @@
     <pagina tamanho="12">
         <painel titulo="Alterar condomínio" cor="panel-primary">
             <migalha v-bind:lista="{{ $migalhas }}"></migalha>
-            <hr>
             <formulario method="PUT" action="{{ route('condominios.condominios.alterar', ['id' => $condominio->id ]) }}"
                         token="{{ csrf_token() }}">
                 <div class="row">
