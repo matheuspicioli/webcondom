@@ -1,6 +1,6 @@
 <template>
     <div v-bind:id="nome" class="modal fade" tabindex="-1" role="dialog" v-bind:aria-labelledby="nome">
-        <div class="modal-dialog modal-lg" role="document">
+        <div v-bind:class="defineTamanho" role="document">
             <div class="modal-content">
                 <slot></slot>
             </div>
@@ -10,7 +10,12 @@
 
 <script>
     export default {
-        props: ['nome']
+        props: ['nome', 'tamanho'],
+        computed: {
+            defineTamanho: () => {
+                return "modal-dialog "+this.tamanho;
+            }
+        }
     }
 </script>
 <style>
