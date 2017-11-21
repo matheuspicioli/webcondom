@@ -45,7 +45,7 @@ class CondominiosController extends Controller
         $condominio = Condominio::create($request->all());
         $condominio->endereco()->associate($endereco);
         $condominio->save();
-
+        $request->session()->flash('sucesso', 'Condomínio criado com sucesso!');
         return redirect()->route('condominios.condominios.listar');
     }
 
@@ -76,13 +76,14 @@ class CondominiosController extends Controller
           $condominio->endereco()->update($request->all());
         //SALVA E SALVA O RELACIONAMENTO TAMBÉM
         $condominio->push();
-
+        $request->session()->flash('info', 'Condomínio alterado com sucesso!');
         return redirect()->route('condominios.condominios.exibir', ['id' => $id]);
     }
 
-    public function Excluir($id)
+    public function Excluir(Request $request, $id)
     {
         Condominio::find($id)->delete();
+        $request->session()->flash('warning', 'Condomínio deletado com sucesso!');
         return redirect()->route('condominios.condominios.listar');
     }
 }
