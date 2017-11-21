@@ -7,7 +7,7 @@
             <formulario action="{{ route('diversos.regimeCasamento.salvar') }}" method="POST" token="{{ csrf_token() }}">
                 <div class="form-group">
                     <label for="Descricao" class="control-label">Descrição</label>
-                    <input id="Descricao" type="text" class="form-control" name="Descricao">
+                    <input id="Descricao" type="text" class="form-control" name="descricao">
                 </div>
 
                 <div class="form-group">

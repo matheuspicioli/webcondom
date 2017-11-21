@@ -13,9 +13,9 @@ class CreateRegimeCasamentoTable extends Migration
      */
     public function up()
     {
-        Schema::create('RegimeCasamento', function (Blueprint $table) {
+        Schema::create('regime_casamento', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Descricao',100);
+            $table->string('descricao',100);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ class CreateRegimeCasamentoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('RegimeCasamento');
+        Schema::dropIfExists('regime_casamento');
     }
 }

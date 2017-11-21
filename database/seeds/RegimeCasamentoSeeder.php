@@ -12,9 +12,9 @@ class RegimeCasamentoSeeder extends Seeder
      */
     public function run()
     {
-        RegimeCasamento::Create(['Descricao' => 'COMUNHÃO TOTAL DE BENS']);
-        RegimeCasamento::Create(['Descricao' => 'COMUNHÃO PARCIAL DE BENS']);
-        RegimeCasamento::Create(['Descricao' => 'SEPARAÇÃO DE BENS']);
+        RegimeCasamento::create(['descricao' => 'COMUNHÃO TOTAL DE BENS']);
+        RegimeCasamento::create(['descricao' => 'COMUNHÃO PARCIAL DE BENS']);
+        RegimeCasamento::create(['descricao' => 'SEPARAÇÃO DE BENS']);
 
     }
 }

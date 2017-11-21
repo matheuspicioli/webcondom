@@ -18,7 +18,7 @@
                 @foreach($regimeCasamento as $regimesCasamentos)
                     <tr>
                         <td>{{ $regimesCasamentos->id }}</td>
-                        <td>{{ $regimesCasamentos->Descricao }}</td>
+                        <td>{{ $regimesCasamentos->descricao }}</td>
                         <td>
                             <a class="btn btn-success"
                                href="{{ route('diversos.regimeCasamento.exibir', ['id' => $regimesCasamentos->id]) }}">Alterar</a>

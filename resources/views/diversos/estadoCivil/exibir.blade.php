@@ -10,18 +10,18 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="Descricao" class="control-label">Descrição</label>
-                            <input id="Descricao" type="text" class="form-control" name="Descricao"
-                                   value="{{ $estadoCivil->Descricao}}">
+                            <input id="Descricao" type="text" class="form-control" name="descricao"
+                                   value="{{ $estadoCivil->descricao}}">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="ExigeConjuge" class="control-label">Exige Conjuge?</label>
-                            <select name="ExigeConjuge" id="ExigeConjuge" class="form-control pula">
+                            <select name="exige_conjuge" id="ExigeConjuge" class="form-control pula">
                                 <option disabled selected>----------Selecione----------</option>
-                                <option value="1" {{ $estadoCivil->ExigeConjuge == 1 ? 'selected' : '' }}>Sim
+                                <option value="1" {{ $estadoCivil->exige_conjuge == 1 ? 'selected' : '' }}>Sim
                                 </option>
-                                <option value="0" {{ $estadoCivil->ExigeConjuge == 0 ? 'selected' : '' }}>Não
+                                <option value="0" {{ $estadoCivil->exige_conjuge == 0 ? 'selected' : '' }}>Não
                                 </option>
                             </select>
                         </div>

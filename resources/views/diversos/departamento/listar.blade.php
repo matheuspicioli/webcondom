@@ -18,7 +18,7 @@
                 @foreach($departamento as $departamentos)
                     <tr>
                         <td>{{ $departamentos->id }}</td>
-                        <td>{{ $departamentos->Descricao }}</td>
+                        <td>{{ $departamentos->descricao }}</td>
                         <td>
                             <a class="btn btn-success"
                                href="{{ route('diversos.departamento.exibir', ['id' => $departamentos->id]) }}">Alterar</a>

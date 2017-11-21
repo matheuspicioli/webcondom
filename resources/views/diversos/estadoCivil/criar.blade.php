@@ -9,13 +9,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="Descricao" class="control-label">Descrição</label>
-                            <input id="Descricao" type="text" class="form-control" name="Descricao">
+                            <input id="Descricao" type="text" class="form-control" name="descricao">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="ExigeConjuge" class="control-label">Exige Conjuge?</label>
-                            <select name="ExigeConjuge" id="ExigeConjuge" class="form-control pula">
+                            <select name="exige_conjuge" id="ExigeConjuge" class="form-control pula">
                                 <option disabled selected>Selecione</option>
                                 <option value="1">Sim</option>
                                 <option value="0">Não</option>

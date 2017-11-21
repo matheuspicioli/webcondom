@@ -8,10 +8,10 @@ class CreateEstadoCivilTable extends Migration
 {
     public function up()
     {
-        Schema::create('EstadoCivil', function (Blueprint $table) {
+        Schema::create('estado_civil', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Descricao', 100);
-            $table->boolean('ExigeConjuge')->default(0);
+            $table->string('descricao', 100);
+            $table->boolean('exige_conjuge')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -24,6 +24,6 @@ class CreateEstadoCivilTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('EstadoCivil');
+        Schema::dropIfExists('estado_civil');
     }
 }

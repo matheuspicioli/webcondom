@@ -9,8 +9,7 @@ class RegimeCasamento extends Model
 {
     use SoftDeletes;
 
-    protected $primaryKey = "id";
-    protected $table = "RegimeCasamento";
-    protected $fillable = [ "Descricao" ];
+    protected $table = "regime_casamento";
+    protected $fillable = [ "descricao" ];
     protected $dates = ['deleted_at'];
 }

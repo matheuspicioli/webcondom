@@ -10,8 +10,8 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="Descricao" class="control-label">Descrição</label>
-                            <input id="Descricao" type="text" class="form-control" name="Descricao"
-                                   value="{{ $regimeCasamento->Descricao}}">
+                            <input id="Descricao" type="text" class="form-control" name="descricao"
+                                   value="{{ $regimeCasamento->descricao }}">
                         </div>
                     </div>
                 </div>

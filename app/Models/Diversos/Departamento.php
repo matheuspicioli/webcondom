@@ -9,9 +9,7 @@ class Departamento extends Model
 {
     use SoftDeletes;
 
-    protected $primaryKey = "id";
-    protected $table = "Departamentos";
-    protected $fillable = [ "Descricao" ];
+    protected $fillable = [ "descricao" ];
     protected $dates = ['deleted_at'];
 
 }

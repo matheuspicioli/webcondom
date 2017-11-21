@@ -19,7 +19,7 @@
                 @foreach($estadoCivil as $estadosCivis)
                     <tr>
                         <td>{{ $estadosCivis->id }}</td>
-                        <td>{{ $estadosCivis->Descricao }}</td>
+                        <td>{{ $estadosCivis->descricao }}</td>
                         <td>{{ $estadosCivis->exige_conjuge_formatado }}</td>
                         <td>
                             <a class="btn btn-success"
