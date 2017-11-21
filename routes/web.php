@@ -22,7 +22,7 @@ Route::prefix('Condominios')->group(function(){
         Route::post('/', 'Condominios\SindicosController@salvar')->name('condominios.sindicos.salvar');
         Route::get('{id}/Exibir', 'Condominios\SindicosController@exibir')->name('condominios.sindicos.exibir');
         Route::put('{id}/Alterar', 'Condominios\SindicosController@alterar')->name('condominios.sindicos.alterar');
-        Route::get('{id}/Excluir', 'Condominios\SindicosController@excluir')->name('condominios.sindicos.excluir');
+        Route::delete('{id}', 'Condominios\SindicosController@excluir')->name('condominios.sindicos.excluir');
     });
 
     Route::prefix('Condominios')->group(function(){
@@ -31,7 +31,7 @@ Route::prefix('Condominios')->group(function(){
         Route::post('/', 'Condominios\CondominiosController@salvar')->name('condominios.condominios.salvar');
         Route::get('{id}/Exibir', 'Condominios\CondominiosController@exibir')->name('condominios.condominios.exibir');
         Route::put('{id}/Alterar', 'Condominios\CondominiosController@alterar')->name('condominios.condominios.alterar');
-        Route::get('{id}/Excluir', 'Condominios\CondominiosController@excluir')->name('condominios.condominios.excluir');
+        Route::delete('{id}', 'Condominios\CondominiosController@excluir')->name('condominios.condominios.excluir');
     });
 
     Route::prefix('CondominiosTaxas')->group(function(){
@@ -40,7 +40,7 @@ Route::prefix('Condominios')->group(function(){
         Route::post('/', 'Condominios\CondominiosTaxasController@salvar')->name('condominios.condominiostaxas.salvar');
         Route::get('{id}/Exibir/{idCondominio}', 'Condominios\CondominiosTaxasController@exibir')->name('condominios.condominiostaxas.exibir');
         Route::put('{id}/Alterar/{idCondominio}', 'Condominios\CondominiosTaxasController@alterar')->name('condominios.condominiostaxas.alterar');
-        Route::get('{id}/Excluir/{idCondominio}', 'Condominios\CondominiosTaxasController@excluir')->name('condominios.condominiostaxas.excluir');
+        Route::delete('{id}/{idCondominio}', 'Condominios\CondominiosTaxasController@excluir')->name('condominios.condominiostaxas.excluir');
     });
 });
 
@@ -58,7 +58,7 @@ Route::prefix('Enderecos')->group(function() {
         Route::post('/', 'Enderecos\CidadesController@salvar')->name('enderecos.cidades.salvar');
         Route::get('{id}/Exibir', 'Enderecos\CidadesController@exibir')->name('enderecos.cidades.exibir');
         Route::put('{id}/Alterar', 'Enderecos\CidadesController@alterar')->name('enderecos.cidades.alterar');
-        Route::get('{id}/Excluir', 'Enderecos\CidadesController@excluir')->name('enderecos.cidades.excluir');
+        Route::delete('{id}', 'Enderecos\CidadesController@excluir')->name('enderecos.cidades.excluir');
     });
 
     Route::prefix('Enderecos')->group(function () {
@@ -67,7 +67,7 @@ Route::prefix('Enderecos')->group(function() {
         Route::post('/', 'Enderecos\EnderecosController@salvar')->name('enderecos.enderecos.salvar');
         Route::get('{id}/Exibir', 'Enderecos\EnderecosController@exibir')->name('enderecos.enderecos.exibir');
         Route::put('{id}/Alterar', 'Enderecos\EnderecosController@alterar')->name('enderecos.enderecos.alterar');
-        Route::get('{id}/Excluir', 'Enderecos\EnderecosController@excluir')->name('enderecos.enderecos.excluir');
+        Route::delete('{id}', 'Enderecos\EnderecosController@excluir')->name('enderecos.enderecos.excluir');
     });
 });
 Route::prefix('Diversos')->group(function(){
@@ -77,7 +77,7 @@ Route::prefix('Diversos')->group(function(){
         Route::post('/', 'Diversos\EstadoCivilController@salvar')->name('diversos.estadoCivil.salvar');
         Route::get('{id}/Exibir', 'Diversos\EstadoCivilController@exibir')->name('diversos.estadoCivil.exibir');
         Route::put('{id}/Alterar', 'Diversos\EstadoCivilController@alterar')->name('diversos.estadoCivil.alterar');
-        Route::get('{id}/Excluir', 'Diversos\EstadoCivilController@excluir')->name('diversos.estadoCivil.excluir');
+        Route::delete('{id}', 'Diversos\EstadoCivilController@excluir')->name('diversos.estadoCivil.excluir');
     });
     Route::prefix('RegimesCasamentos')->group(function(){
         Route::get('/', 'Diversos\RegimesCasamentosController@listar')->name('diversos.regimeCasamento.listar');
@@ -85,7 +85,7 @@ Route::prefix('Diversos')->group(function(){
         Route::post('/', 'Diversos\RegimesCasamentosController@salvar')->name('diversos.regimeCasamento.salvar');
         Route::get('{id}/Exibir', 'Diversos\RegimesCasamentosController@exibir')->name('diversos.regimeCasamento.exibir');
         Route::put('{id}/Alterar', 'Diversos\RegimesCasamentosController@alterar')->name('diversos.regimeCasamento.alterar');
-        Route::get('{id}/Excluir', 'Diversos\RegimesCasamentosController@excluir')->name('diversos.regimeCasamento.excluir');
+        Route::delete('{id}', 'Diversos\RegimesCasamentosController@excluir')->name('diversos.regimeCasamento.excluir');
     });
     Route::prefix('Departamentos')->group(function(){
         Route::get('/', 'Diversos\DepartamentosController@listar')->name('diversos.departamento.listar');
@@ -93,6 +93,6 @@ Route::prefix('Diversos')->group(function(){
         Route::post('/', 'Diversos\DepartamentosController@salvar')->name('diversos.departamento.salvar');
         Route::get('{id}/Exibir', 'Diversos\DepartamentosController@exibir')->name('diversos.departamento.exibir');
         Route::put('{id}/Alterar', 'Diversos\DepartamentosController@alterar')->name('diversos.departamento.alterar');
-        Route::get('{id}/Excluir', 'Diversos\DepartamentosController@excluir')->name('diversos.departamento.excluir');
+        Route::delete('{id}', 'Diversos\DepartamentosController@excluir')->name('diversos.departamento.excluir');
     });
 });
