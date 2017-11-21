@@ -43493,7 +43493,7 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -43504,6 +43504,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _this = this;
+
 //
 //
 //
@@ -43516,7 +43518,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['nome']
+    props: ['nome', 'tamanho'],
+    computed: {
+        defineTamanho: function defineTamanho() {
+            return "modal-dialog " + _this.tamanho;
+        }
+    }
 });
 
 /***/ }),
@@ -43539,11 +43546,9 @@ var render = function() {
       }
     },
     [
-      _c(
-        "div",
-        { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
-        [_c("div", { staticClass: "modal-content" }, [_vm._t("default")], 2)]
-      )
+      _c("div", { class: _vm.defineTamanho, attrs: { role: "document" } }, [
+        _c("div", { staticClass: "modal-content" }, [_vm._t("default")], 2)
+      ])
     ]
   )
 }
