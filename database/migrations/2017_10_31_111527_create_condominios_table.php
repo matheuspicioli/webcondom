@@ -26,7 +26,7 @@ class CreateCondominiosTable extends Migration
             $table->boolean('tem_gas')->default(0);
             $table->decimal('valor_gas', 12, 2)->nullable();
 
-            $table->integer('endereco_id')->unsigned();
+            $table->integer('endereco_id')->unsigned()->nullable();
             $table->foreign('endereco_id')
                 ->references('id')
                 ->on('enderecos')
