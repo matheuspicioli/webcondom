@@ -17,7 +17,7 @@ class CreateProprietariosTable extends Migration
             $table->increments('id');
             $table->integer('codigo');
 
-            $table->integer('entidade_id');
+            $table->integer('entidade_id')->unsigned()->nullable();
             $table->foreign('entidade_id')
                 ->references('id')
                 ->on('entidades')
@@ -35,6 +35,8 @@ class CreateProprietariosTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('proprietarios');
+        Schema::enableForeignKeyConstraints();
     }
 }
