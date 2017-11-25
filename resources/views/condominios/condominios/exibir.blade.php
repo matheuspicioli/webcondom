@@ -183,8 +183,6 @@
                             <button class="btn btn-primary" type="submit">Alterar</button>
                             <modal-link nome="modal-deletar" tipo="button" titulo="Deletar"
                                         css="btn btn-danger"></modal-link>
-                            <a class="btn btn-danger"
-                               href="{{ route('condominios.condominios.excluir', ['id' => $condominio->id ]) }}">Excluir!</a>
                         </div>
                     </div>
                 </div>
