@@ -96,3 +96,14 @@ Route::prefix('Diversos')->namespace('Diversos')->group(function(){
         Route::delete('{id}', 'DepartamentosController@excluir')->name('diversos.departamento.excluir');
     });
 });
+
+Route::prefix('Entidades')->namespace('Entidades')->group(function(){
+    Route::prefix('Proprietarios')->group(function(){
+        Route::get('/', 'ProprietariosController@listar')->name('entidades.proprietarios.listar');
+        Route::get('Criar', 'ProprietariosController@criar')->name('entidades.proprietarios.criar');
+        Route::post('/', 'ProprietariosController@salvar')->name('entidades.proprietarios.salvar');
+        Route::get('{id}/Exibir', 'ProprietariosController@exibir')->name('entidades.proprietarios.exibir');
+        Route::put('{id}/Alterar', 'ProprietariosController@alterar')->name('entidades.proprietarios.alterar');
+        Route::delete('{id}', 'ProprietariosController@excluir')->name('entidades.proprietarios.excluir');
+    });
+});
