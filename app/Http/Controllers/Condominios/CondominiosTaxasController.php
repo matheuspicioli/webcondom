@@ -63,6 +63,6 @@ class CondominiosTaxasController extends Controller
     public function Excluir($id, $idCondominio)
     {
         CondominioTaxa::find($id)->delete();
-        return redirect()->route('condominios.condominiostaxas.listar', ['idCondominio' => $idCondominio]);
+        return redirect()->route('condominios.condominios.exibir', ['idCondominio' => $idCondominio]);
     }
 }
