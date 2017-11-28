@@ -57,7 +57,7 @@ class SindicosController extends Controller
     {
         //dd($request->except(['_token', '_method']));
         Sindico::find($id)->update($request->all());
-        return redirect()->route('condominios.sindicos.exibir', ['id' => $id]);
+        return redirect()->route('condominios.sindicos.listar');
     }
 
     public function Excluir($id)

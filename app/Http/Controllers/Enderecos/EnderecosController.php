@@ -57,7 +57,7 @@ class EnderecosController extends Controller
     {
         //dd($request->except(['_token', '_method']));
         Endereco::find($id)->update($request->all());
-        return redirect()->route('enderecos.enderecos.exibir', ['id' => $id]);
+        return redirect()->route('enderecos.enderecos.listar');
     }
 
     public function Excluir($id)

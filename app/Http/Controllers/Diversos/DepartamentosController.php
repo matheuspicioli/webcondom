@@ -55,7 +55,7 @@ class DepartamentosController extends Controller
         //dd($request->except(['_token', '_method']));
         $departamento = Departamento::find($id);
         $departamento->update($request->all());
-        return redirect()->route('diversos.departamento.exibir', ['id' => $id]);
+        return redirect()->route('diversos.departamento.listar');
     }
 
     public function Excluir($id)

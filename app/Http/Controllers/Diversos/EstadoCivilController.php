@@ -55,7 +55,7 @@ class EstadoCivilController extends Controller
         //dd($request->except(['_token', '_method']));
         $estadoCivil = EstadoCivil::find($id);
         $estadoCivil->update($request->all());
-        return redirect()->route('diversos.estadoCivil.exibir', ['id' => $id]);
+        return redirect()->route('diversos.estadoCivil.listar');
     }
 
     public function Excluir($id)

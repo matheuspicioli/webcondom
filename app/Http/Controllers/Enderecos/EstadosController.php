@@ -52,6 +52,6 @@ class EstadosController extends Controller
     public function Alterar(Request $request, $id)
     {
         Estado::find($id)->update($request->all());
-        return redirect()->route('enderecos.estados.listar', ['id' => $id]);
+        return redirect()->route('enderecos.estados.listar');
     }
 }

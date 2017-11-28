@@ -55,7 +55,7 @@ class RegimesCasamentosController extends Controller
         //dd($request->except(['_token', '_method']));
         $regimeCasamento = RegimeCasamento::find($id);
         $regimeCasamento->update($request->all());
-        return redirect()->route('diversos.regimeCasamento.exibir', ['id' => $id]);
+        return redirect()->route('diversos.regimeCasamento.listar');
     }
 
     public function Excluir($id)

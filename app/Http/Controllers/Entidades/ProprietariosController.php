@@ -108,7 +108,7 @@ class ProprietariosController extends Controller
         $proprietario->push();
 
         $request->session()->flash('info', 'Proprietário alterado com sucesso!');
-        return redirect()->route('entidades.proprietarios.exibir', ['id' => $id]);
+        return redirect()->route('entidades.proprietarios.listar');
     }
 
     public function Excluir(Request $request, $id)

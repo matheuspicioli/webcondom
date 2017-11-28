@@ -57,7 +57,7 @@ class CidadesController extends Controller
     public function Alterar(Request $request, $id)
     {
         Cidade::find($id)->update($request->all());
-        return redirect()->route('enderecos.cidades.exibir', ['id' => $id]);
+        return redirect()->route('enderecos.cidades.listar');
     }
 
     public function Excluir($id)

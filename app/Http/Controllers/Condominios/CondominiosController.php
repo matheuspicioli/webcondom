@@ -77,7 +77,7 @@ class CondominiosController extends Controller
         //SALVA E SALVA O RELACIONAMENTO TAMBÉM
         $condominio->push();
         $request->session()->flash('info', 'Condomínio alterado com sucesso!');
-        return redirect()->route('condominios.condominios.exibir', ['id' => $id]);
+        return redirect()->route('condominios.condominios.listar');
     }
 
     public function Excluir(Request $request, $id)
