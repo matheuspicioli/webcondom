@@ -12,7 +12,7 @@
                     <th>#</th>
                     <th>Nome</th>
                     <th>CPF/CNPJ</th>
-                    <th>Data de nascimento</th>
+                    <th>Código</th>
                     <th>Ações</th>
                 </tr>
                 </thead>
@@ -22,11 +22,7 @@
                         <td>{{ $proprietario->id }}</td>
                         <td>{{ $proprietario->entidade->nome }}</td>
                         <td>{{ $proprietario->entidade->cpf_cnpj }}</td>
-                        <td>
-                            {{ $proprietario->entidade->tipo == 1
-                                ? $proprietario->entidade->data_nascimento_formatado
-                                : $proprietario->entidade->data_abertura_formatado }}
-                        </td>
+                        <td>{{ $proprietario->codigo }}</td>
                         <td>
                             <a class="btn btn-success"
                                href="{{ route('entidades.proprietarios.exibir', ['id' => $proprietario->id]) }}">Alterar</a>
