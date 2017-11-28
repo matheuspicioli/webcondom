@@ -18,7 +18,7 @@ class CreateCondominiosTaxasTable extends Migration
             $table->string('descricao', 100);
             $table->string('valor', 100);
 
-            $table->integer('condominio_id')->unsigned();
+            $table->integer('condominio_id')->unsigned()->nullable();
             $table->foreign('condominio_id')
                 ->references('id')
                 ->on('condominios')
