@@ -1,8 +1,8 @@
 @extends('layouts.app')
-@section('titulo', 'Estado Civil - Exibir/Alterar')
+@section('titulo', 'Proprietários - Exibir/Alterar')
 @section('conteudo')
     <pagina tamanho="10">
-        <painel cor="panel-primary" titulo="Alterar Estado Civil">
+        <painel cor="panel-primary" titulo="Alterar proprietário">
             <div class="row">
                 <div class="col-md-1">
                     <a href="{{ route('entidades.proprietarios.listar') }}" class="btn btn-default">Voltar</a>
@@ -203,7 +203,7 @@
                         <div class="form-group">
                             <label for="site" class="control-label">Site</label>
                             <input type="text" name="site" id="site"
-                                   class="form-control" value="{{ $proprietario->entidade->celular_2 }}">
+                                   class="form-control" value="{{ $proprietario->entidade->site }}">
                             <span class="help-block">Este campo é opcional</span>
                         </div>
                     </div>

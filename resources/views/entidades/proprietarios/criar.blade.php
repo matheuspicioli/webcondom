@@ -1,8 +1,8 @@
 @extends('layouts.app')
-@section('titulo', 'Estado Civil - Criar')
+@section('titulo', 'Proprietários - Criar')
 @section('conteudo')
     <pagina tamanho="10">
-        <painel cor="panel-primary" titulo="Cadastrar Estado Civil">
+        <painel cor="panel-primary" titulo="Cadastrar proprietário">
             <div class="row">
                 <div class="col-md-1">
                     <a href="{{ route('entidades.proprietarios.listar') }}" class="btn btn-default">Voltar</a>
