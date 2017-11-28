@@ -30,10 +30,12 @@ class CondominiosTaxasController extends Controller
         return view('condominios.condominiostaxas.criar', compact('condominios', 'idCondominio', 'migalhas'));
     }
 
-    public function Salvar(Request $request)
+    public function Salvar(Request $request, $idCondominio)
     {
-        CondominioTaxa::create($request->all());
-        return redirect()->route('condominios.condominiostaxas.listar');
+        $taxa = CondominioTaxa::create($request->all());
+        $taxa->condominio_id = $idCondominio;
+        $taxa->save();
+        return redirect()->route('condominios.condominiostaxas.listar', ['idCondominio' => $idCondominio]);
     }
 
     public function Exibir($id, $idCondominio)
@@ -55,7 +57,7 @@ class CondominiosTaxasController extends Controller
     {
         //dd($request->except($request->all()));
         CondominioTaxa::find($id)->update($request->all());
-        return redirect()->route('condominios.condominiostaxas.exibir', ['id' => $id, 'idCondominio' => $idCondominio]);
+        return redirect()->route('condominios.condominios.exibir', ['id' => $idCondominio]);
     }
 
     public function Excluir($id, $idCondominio)
