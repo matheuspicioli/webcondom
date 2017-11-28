@@ -190,8 +190,8 @@
         </painel>
 
         <painel cor="panel-primary" titulo="Taxas desse condominio"
-                url="{{ route('condominios.condominiostaxas.listar', ['idCondominio' => $condominio->id]) }}"
-                nomeurl="alterar as taxas desse condominio">
+                url="{{ route('condominios.condominiostaxas.criar', ['idCondominio' => $condominio->id]) }}"
+                nomeurl="cadastrar taxas">
             <table class="table table-bordered">
                 <thead>
                 <tr>
@@ -207,7 +207,21 @@
                         <td>{{ $taxa->valor }}</td>
                         <td>
                             <a href="{{ route('condominios.condominiostaxas.exibir', ['id' => $taxa->id, 'idCondominio' => $condominio->id]) }}"
-                               class="btn btn-success">Alterar</a></td>
+                               class="btn btn-success">Alterar</a>
+                            <modal-link nome="modal-deletar-{{ $taxa->id }}" titulo="Excluir" tipo="button" css="btn btn-danger"></modal-link>
+                            <modal nome="modal-deletar-{{ $taxa->id }}" tamanho="modal-sm">
+                                <painel cor="panel-primary" titulo="Tem certeza que deseja deletar este condomínio?">
+                                    <formulario method="DELETE" action="{{ route('condominios.condominiostaxas.excluir', ['id' => $taxa->id, 'idCondominio' => $condominio->id]) }}"
+                                                token="{{ csrf_token() }}">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <button type="submit" class="btn btn-danger">CONFIRMAR</button>
+                                            </div>
+                                        </div>
+                                    </formulario>
+                                </painel>
+                            </modal>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
