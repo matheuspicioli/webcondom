@@ -31,3 +31,10 @@
         </painel>
     </pagina>
 @endsection
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            $('#Descricao').focus();
+        });
+    </script>
+@endsection

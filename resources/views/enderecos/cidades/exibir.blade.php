@@ -54,3 +54,10 @@
         </painel>
     </pagina>
 @endsection
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            $('#EstadoCOD').focus();
+        });
+    </script>
+@endsection

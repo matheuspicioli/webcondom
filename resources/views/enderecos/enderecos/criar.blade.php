@@ -57,3 +57,10 @@
         </painel>
     </pagina>
 @endsection
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            $('#Logradouro').focus();
+        });
+    </script>
+@endsection

@@ -252,6 +252,7 @@
 @section('scripts')
     <script>
         $(document).ready(function () {
+            $('#Nome').focus();
             if ($("select[id=TemGas]").val() != 1)
                 $("#ValorGas").prop("disabled", true);
             else

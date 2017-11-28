@@ -39,7 +39,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
@@ -50,4 +50,11 @@
             </formulario>
         </painel>
     </pagina>
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            $('#EstadoCOD').focus();
+        });
+    </script>
 @endsection

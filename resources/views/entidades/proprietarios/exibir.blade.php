@@ -372,6 +372,7 @@
 @section('scripts')
     <script>
         $(document).ready(function () {
+            $('#tipo').focus();
             if ($("select[id=tipo]").val() == 2) {
                 $(".cnpj").show();
                 $(".cpf").hide();
