@@ -26,8 +26,19 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit">Alterar</button>
-                            <a class="btn btn-danger"
-                               href="{{ route('condominios.condominiostaxas.excluir', ['id' => $taxa->id, 'idCondominio' => $idCondominio ]) }}">Excluir!</a>
+                            <modal-link nome="modal-deletar" titulo="Excluir" tipo="button" css="btn btn-danger"></modal-link>
+                            <modal nome="modal-deletar" tamanho="modal-sm">
+                                <painel cor="panel-primary" titulo="Tem certeza que deseja deletar este condomínio?">
+                                    <formulario method="DELETE" action="{{ route('condominios.condominiostaxas.excluir', ['id' => $taxa->id, 'idCondominio' => $idCondominio]) }}"
+                                                token="{{ csrf_token() }}">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <button type="submit" class="btn btn-danger">CONFIRMAR</button>
+                                            </div>
+                                        </div>
+                                    </formulario>
+                                </painel>
+                            </modal>
                         </div>
                     </div>
                 </div>
