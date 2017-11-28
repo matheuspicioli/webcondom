@@ -3,7 +3,15 @@
 @section('conteudo')
     <pagina tamanho="12">
         <painel titulo="Alterar condomínio" cor="panel-primary">
-            <migalha v-bind:lista="{{ $migalhas }}"></migalha>
+            <div class="row">
+                <div class="col-md-1">
+                    <a href="{{ route('condominios.condominios.listar') }}" class="btn btn-default">Voltar</a>
+                    <hr>
+                </div>
+                <div class="col-md-11">
+                    <migalha v-bind:lista="{{ $migalhas }}"></migalha>
+                </div>
+            </div>
             <formulario method="PUT" action="{{ route('condominios.condominios.alterar', ['id' => $condominio->id ]) }}"
                         token="{{ csrf_token() }}">
                 <div class="row">

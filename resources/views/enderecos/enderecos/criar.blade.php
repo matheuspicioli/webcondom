@@ -3,7 +3,15 @@
 @section('conteudo')
     <pagina tamanho="10">
         <painel cor="panel-primary" titulo="Cadastrar endereço">
-            <migalha v-bind:lista="{{ $migalhas }}"></migalha>
+            <div class="row">
+                <div class="col-md-1">
+                    <a href="{{ route('enderecos.enderecos.listar') }}" class="btn btn-default">Voltar</a>
+                    <hr>
+                </div>
+                <div class="col-md-11">
+                    <migalha v-bind:lista="{{ $migalhas }}"></migalha>
+                </div>
+            </div>
             <formulario method="POST" action="{{ route('enderecos.enderecos.criar') }}" token="{{ csrf_token() }}">
                 <div class="form-group">
                     <label for="Logradouro" class="control-label">Logradouro</label>
