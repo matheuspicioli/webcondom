@@ -4,29 +4,18 @@
     <pagina tamanho="12">
         <painel cor="panel-primary" titulo="Cadastrar taxa de condomínio">
             <migalha v-bind:lista="{{ $migalhas }}"></migalha>
-            <formulario action="{{ route('condominios.condominiostaxas.salvar') }}" method="POST" token="{{ csrf_token() }}">
+            <formulario action="{{ route('condominios.condominiostaxas.salvar', ['idCondominio' => $idCondominio]) }}" method="POST" token="{{ csrf_token() }}">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="Descricao" class="control-label">Descrição</label>
                             <input id="Descricao" type="text" class="form-control" name="descricao">
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="Valor" class="control-label">Valor</label>
                             <input id="Valor" type="text" class="form-control" name="valor">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="CondominioCOD" class="control-label">Condomínio</label>
-                            <select name="condominio_id" id="CondominioCOD" class="form-control">
-                                <option value="" selected disabled>-----Escolha um-----</option>
-                                @foreach($condominios as $condominio)
-                                    <option value="{{ $condominio->id }}">{{ $condominio->condominioDescricao }}</option>
-                                @endforeach
-                            </select>
                         </div>
                     </div>
                 </div>
