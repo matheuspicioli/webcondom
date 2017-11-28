@@ -37,7 +37,7 @@ Route::prefix('Condominios')->namespace('Condominios')->group(function(){
     Route::prefix('CondominiosTaxas')->group(function(){
         Route::get('Criar/{idCondominio}', 'CondominiosTaxasController@criar')->name('condominios.condominiostaxas.criar');
         Route::get('/{idCondominio?}', 'CondominiosTaxasController@listar')->name('condominios.condominiostaxas.listar');
-        Route::post('/', 'CondominiosTaxasController@salvar')->name('condominios.condominiostaxas.salvar');
+        Route::post('/{idCondominio}', 'CondominiosTaxasController@salvar')->name('condominios.condominiostaxas.salvar');
         Route::get('{id}/Exibir/{idCondominio}', 'CondominiosTaxasController@exibir')->name('condominios.condominiostaxas.exibir');
         Route::put('{id}/Alterar/{idCondominio}', 'CondominiosTaxasController@alterar')->name('condominios.condominiostaxas.alterar');
         Route::delete('{id}/{idCondominio}', 'CondominiosTaxasController@excluir')->name('condominios.condominiostaxas.excluir');
