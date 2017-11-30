@@ -11,9 +11,6 @@
                 <tr>
                     <th>#</th>
                     <th>Nome</th>
-                    <th>Apelido</th>
-                    <th>Unidades</th>
-                    <th>Tipo de juros</th>
                     <th>Endereço</th>
                     <th>Ações</th>
                 </tr>
@@ -23,9 +20,6 @@
                     <tr>
                         <td>{{ $condominio->id }}</td>
                         <td>{{ $condominio->nome }}</td>
-                        <td>{{ $condominio->apelido }}</td>
-                        <td>{{ $condominio->unidades }}</td>
-                        <td>{{ $condominio->tipo_juros_formatado }}</td>
                         <td>{{ $condominio->endereco->endereco_formatado }}</td>
                         <td>
                             <a class="btn btn-success"

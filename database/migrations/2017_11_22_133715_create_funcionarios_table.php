@@ -17,19 +17,19 @@ class CreateFuncionariosTable extends Migration
             $table->increments('id');
             $table->integer('codigo');
 
-            $table->integer('setor_id')->unsigned();
+            $table->integer('setor_id')->nullable()->unsigned();
             $table->foreign('setor_id')
                 ->references('id')
                 ->on('setores')
                 ->onDelete('cascade');
 
-            $table->integer('departamento_id')->unsigned();
+            $table->integer('departamento_id')->nullable()->unsigned();
             $table->foreign('departamento_id')
                 ->references('id')
                 ->on('departamentos')
                 ->onDelete('cascade');
 
-            $table->integer('entidade_id')->unsigned();
+            $table->integer('entidade_id')->nullable()->unsigned();
             $table->foreign('entidade_id')
                 ->references('id')
                 ->on('entidades')
@@ -47,6 +47,8 @@ class CreateFuncionariosTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('funcionarios');
+        Schema::enableForeignKeyConstraints();
     }
 }

@@ -10,11 +10,11 @@ class Fornecedor extends Model
     use SoftDeletes;
 
     protected $table = "fornecedores";
-    protected $fillable = [ "codigo", "tipo", "entidade_id" ];
+    protected $fillable = [ "codigo", "tipo_fornecer", "entidade_id" ];
     protected $dates = [ "deleted_at" ];
 
     public function entidade()
     {
-        return $this->belongsTo('Entidade');
+        return $this->belongsTo('WebCondom\Models\Entidades\Entidade');
     }
 }

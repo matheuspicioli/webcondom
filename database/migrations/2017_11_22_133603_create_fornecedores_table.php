@@ -15,10 +15,10 @@ class CreateFornecedoresTable extends Migration
     {
         Schema::create('fornecedores', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('codigo');
-            $table->enum('tipo', ['PECAS', 'SERVICOS']);
+            $table->integer('codigo')->unsigned();
+            $table->enum('tipo_fornecer', ['PECAS', 'SERVICOS']);
 
-            $table->integer('entidade_id')->unsigned();
+            $table->integer('entidade_id')->nullable()->unsigned();
             $table->foreign('entidade_id')
                     ->references('id')
                     ->on('entidades')
@@ -36,6 +36,8 @@ class CreateFornecedoresTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('fornecedores');
+        Schema::enableForeignKeyConstraints();
     }
 }

@@ -1,5 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/css/_bootstrap.css": "/css/_bootstrap.css"
+    "/css/_bootstrap.css": "/css/_bootstrap.css",
+    "/css/vue-material/vue-material.css": "/css/vue-material/vue-material.css",
+    "/css/vue-material/vue-material.css.map": "/css/vue-material/vue-material.css.map"
 }

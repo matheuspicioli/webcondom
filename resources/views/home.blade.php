@@ -17,6 +17,12 @@
                                         <li><a class="btn btn-default" href="{{ route('condominios.condominios.listar') }}">Condomínios</a></li>
                                         <li><a class="btn btn-default" href="{{ route('condominios.sindicos.listar') }}">Sindicos</a></li>
                                     </ul>
+                                    <h3>Entidades</h3>
+                                    <ul>
+                                        <li><a class="btn btn-default" href="{{ route('entidades.proprietarios.listar') }}">Proprietarios</a></li>
+                                        <li><a class="btn btn-default" href="{{ route('entidades.fornecedores.listar') }}">Fornecedores</a></li>
+                                        <li><a class="btn btn-default" href="{{ route('entidades.funcionarios.listar') }}">Funcionários</a></li>
+                                    </ul>
                                     <h3>Endereços</h3>
                                     <ul>
                                         <li><a class="btn btn-default" href="{{ route('enderecos.cidades.listar') }}">Cidades</a></li>
@@ -27,6 +33,9 @@
                                         <li><a class="btn btn-default" href="{{ route('diversos.departamento.listar') }}">Departamentos</a></li>
                                         <li><a class="btn btn-default" href="{{ route('diversos.estadoCivil.listar') }}">Estado Civil</a></li>
                                         <li><a class="btn btn-default" href="{{ route('diversos.regimeCasamento.listar') }}">Regimes de Casamento</a></li>
+                                        <li><a class="btn btn-default" href="{{ route('diversos.setores.listar') }}">Setores</a></li>
+                                        <li><a class="btn btn-default" href="{{ route('diversos.categorias.listar') }}">Categorias</a></li>
+                                        <li><a class="btn btn-default" href="{{ route('diversos.tiposimoveis.listar') }}">Tipos imóveis</a></li>
                                     </ul>
                                 </div>
                             </div>

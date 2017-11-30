@@ -95,6 +95,30 @@ Route::prefix('Diversos')->namespace('Diversos')->group(function(){
         Route::put('{id}/Alterar', 'DepartamentosController@alterar')->name('diversos.departamento.alterar');
         Route::delete('{id}', 'DepartamentosController@excluir')->name('diversos.departamento.excluir');
     });
+    Route::prefix('Setores')->group(function(){
+        Route::get('/', 'SetoresController@listar')->name('diversos.setores.listar');
+        Route::get('Criar', 'SetoresController@criar')->name('diversos.setores.criar');
+        Route::post('/', 'SetoresController@salvar')->name('diversos.setores.salvar');
+        Route::get('{id}/Exibir', 'SetoresController@exibir')->name('diversos.setores.exibir');
+        Route::put('{id}/Alterar', 'SetoresController@alterar')->name('diversos.setores.alterar');
+        Route::delete('{id}', 'SetoresController@excluir')->name('diversos.setores.excluir');
+    });
+    Route::prefix('Categorias')->group(function(){
+        Route::get('/', 'CategoriasController@listar')->name('diversos.categorias.listar');
+        Route::get('Criar', 'CategoriasController@criar')->name('diversos.categorias.criar');
+        Route::post('/', 'CategoriasController@salvar')->name('diversos.categorias.salvar');
+        Route::get('{id}/Exibir', 'CategoriasController@exibir')->name('diversos.categorias.exibir');
+        Route::put('{id}/Alterar', 'CategoriasController@alterar')->name('diversos.categorias.alterar');
+        Route::delete('{id}', 'CategoriasController@excluir')->name('diversos.categorias.excluir');
+    });
+    Route::prefix('TiposImoveis')->group(function(){
+        Route::get('/', 'TipoImovelController@listar')->name('diversos.tiposimoveis.listar');
+        Route::get('Criar', 'TipoImovelController@criar')->name('diversos.tiposimoveis.criar');
+        Route::post('/', 'TipoImovelController@salvar')->name('diversos.tiposimoveis.salvar');
+        Route::get('{id}/Exibir', 'TipoImovelController@exibir')->name('diversos.tiposimoveis.exibir');
+        Route::put('{id}/Alterar', 'TipoImovelController@alterar')->name('diversos.tiposimoveis.alterar');
+        Route::delete('{id}', 'TipoImovelController@excluir')->name('diversos.tiposimoveis.excluir');
+    });
 });
 
 Route::prefix('Entidades')->namespace('Entidades')->group(function(){
@@ -105,5 +129,21 @@ Route::prefix('Entidades')->namespace('Entidades')->group(function(){
         Route::get('{id}/Exibir', 'ProprietariosController@exibir')->name('entidades.proprietarios.exibir');
         Route::put('{id}/Alterar', 'ProprietariosController@alterar')->name('entidades.proprietarios.alterar');
         Route::delete('{id}', 'ProprietariosController@excluir')->name('entidades.proprietarios.excluir');
+    });
+    Route::prefix('Fornecedores')->group(function(){
+        Route::get('/', 'FornecedoresController@listar')->name('entidades.fornecedores.listar');
+        Route::get('Criar', 'FornecedoresController@criar')->name('entidades.fornecedores.criar');
+        Route::post('/', 'FornecedoresController@salvar')->name('entidades.fornecedores.salvar');
+        Route::get('{id}/Exibir', 'FornecedoresController@exibir')->name('entidades.fornecedores.exibir');
+        Route::put('{id}/Alterar', 'FornecedoresController@alterar')->name('entidades.fornecedores.alterar');
+        Route::delete('{id}', 'FornecedoresController@excluir')->name('entidades.fornecedores.excluir');
+    });
+    Route::prefix('Funcionarios')->group(function(){
+        Route::get('/', 'FuncionariosController@listar')->name('entidades.funcionarios.listar');
+        Route::get('Criar', 'FuncionariosController@criar')->name('entidades.funcionarios.criar');
+        Route::post('/', 'FuncionariosController@salvar')->name('entidades.funcionarios.salvar');
+        Route::get('{id}/Exibir', 'FuncionariosController@exibir')->name('entidades.funcionarios.exibir');
+        Route::put('{id}/Alterar', 'FuncionariosController@alterar')->name('entidades.funcionarios.alterar');
+        Route::delete('{id}', 'FuncionariosController@excluir')->name('entidades.funcionarios.excluir');
     });
 });
