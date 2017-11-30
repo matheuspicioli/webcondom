@@ -106,4 +106,12 @@ Route::prefix('Entidades')->namespace('Entidades')->group(function(){
         Route::put('{id}/Alterar', 'ProprietariosController@alterar')->name('entidades.proprietarios.alterar');
         Route::delete('{id}', 'ProprietariosController@excluir')->name('entidades.proprietarios.excluir');
     });
+    Route::prefix('Fornecedores')->group(function(){
+        Route::get('/', 'FornecedoresController@listar')->name('entidades.fornecedores.listar');
+        Route::get('Criar', 'FornecedoresController@criar')->name('entidades.fornecedores.criar');
+        Route::post('/', 'FornecedoresController@salvar')->name('entidades.fornecedores.salvar');
+        Route::get('{id}/Exibir', 'FornecedoresController@exibir')->name('entidades.fornecedores.exibir');
+        Route::put('{id}/Alterar', 'FornecedoresController@alterar')->name('entidades.fornecedores.alterar');
+        Route::delete('{id}', 'FornecedoresController@excluir')->name('entidades.fornecedores.excluir');
+    });
 });
