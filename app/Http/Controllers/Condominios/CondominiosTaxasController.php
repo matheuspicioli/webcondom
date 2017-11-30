@@ -35,7 +35,8 @@ class CondominiosTaxasController extends Controller
         $taxa = CondominioTaxa::create($request->all());
         $taxa->condominio_id = $idCondominio;
         $taxa->save();
-        return redirect()->route('condominios.condominiostaxas.listar', ['idCondominio' => $idCondominio]);
+        //return redirect()->route('condominios.condominiostaxas.listar', ['idCondominio' => $idCondominio]);
+        return redirect()->route('condominios.condominios.exibir', ['id' => $idCondominio]);
     }
 
     public function Exibir($id, $idCondominio)
