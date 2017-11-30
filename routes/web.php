@@ -95,6 +95,14 @@ Route::prefix('Diversos')->namespace('Diversos')->group(function(){
         Route::put('{id}/Alterar', 'DepartamentosController@alterar')->name('diversos.departamento.alterar');
         Route::delete('{id}', 'DepartamentosController@excluir')->name('diversos.departamento.excluir');
     });
+    Route::prefix('Setores')->group(function(){
+        Route::get('/', 'SetoresController@listar')->name('diversos.setores.listar');
+        Route::get('Criar', 'SetoresController@criar')->name('diversos.setores.criar');
+        Route::post('/', 'SetoresController@salvar')->name('diversos.setores.salvar');
+        Route::get('{id}/Exibir', 'SetoresController@exibir')->name('diversos.setores.exibir');
+        Route::put('{id}/Alterar', 'SetoresController@alterar')->name('diversos.setores.alterar');
+        Route::delete('{id}', 'SetoresController@excluir')->name('diversos.setores.excluir');
+    });
 });
 
 Route::prefix('Entidades')->namespace('Entidades')->group(function(){
