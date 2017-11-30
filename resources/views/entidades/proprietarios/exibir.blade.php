@@ -84,7 +84,7 @@
                         <div class="form-group">
                             <label for="data_abertura" class="control-label cnpj">Data abertura</label>
                             <input type="date" name="data_abertura" id="data_abertura"
-                                   class="form-control cnpj" value="{{ $proprietario->entidade->data_abertura_formatado }}">
+                                   class="form-control cnpj" value="{{ $proprietario->entidade->data_abertura }}">
                         </div>
                     </div>
                 </div>
