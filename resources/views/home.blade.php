@@ -17,6 +17,11 @@
                                         <li><a class="btn btn-default" href="{{ route('condominios.condominios.listar') }}">Condomínios</a></li>
                                         <li><a class="btn btn-default" href="{{ route('condominios.sindicos.listar') }}">Sindicos</a></li>
                                     </ul>
+                                    <h3>Entidades</h3>
+                                    <ul>
+                                        <li><a class="btn btn-default" href="{{ route('entidades.proprietarios.listar') }}">Proprietarios</a></li>
+                                        <li><a class="btn btn-default" href="{{ route('entidades.fornecedores.listar') }}">Fornecedores</a></li>
+                                    </ul>
                                     <h3>Endereços</h3>
                                     <ul>
                                         <li><a class="btn btn-default" href="{{ route('enderecos.cidades.listar') }}">Cidades</a></li>
