@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('titulo', 'Setores - Exibir/Alterar')
 @section('conteudo')
-    <pagina tamanho="8">
+    <pagina tamanho="10">
         <painel titulo="Alterar setor" cor="panel-primary">
             <div class="row">
                 <div class="col-md-1">
@@ -12,27 +12,42 @@
                     <migalha v-bind:lista="{{ $migalhas }}"></migalha>
                 </div>
             </div>
-            <formulario method="PUT" action="{{ route('diversos.setores.alterar', ['id' => $setor->id ]) }}"
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <formulario method="PUT" action="{{ route('diversos.setores.alterar', ['id' => $setor->id ]) }}"
+                                token="{{ csrf_token() }}">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="Descricao" class="control-label">Descrição</label>
+                                    <input id="Descricao" type="text" class="form-control" name="descricao"
+                                           value="{{ $setor->descricao }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="btn btn-primary" type="submit">Salvar</button>
+                                <modal-link tipo="button" css="btn btn-danger" nome="modal-deletar" titulo="Excluir"></modal-link>
+                            </div>
+                        </div>
+                    </formulario>
+                </div>
+            </div>
+        </painel>
+    </pagina>
+    <modal nome="modal-deletar" tamanho="modal-sm">
+        <painel cor="panel-primary" titulo="Tem certeza que deseja deletar este fornecedor?">
+            <formulario method="DELETE" action="{{ route('diversos.setores.excluir', ['id' => $setor->id]) }}"
                         token="{{ csrf_token() }}">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="Descricao" class="control-label">Descrição</label>
-                            <input id="Descricao" type="text" class="form-control" name="descricao"
-                                   value="{{ $setor->descricao }}">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <button class="btn btn-primary" type="submit">Salvar</button>
-                        <a class="btn btn-danger"
-                           href="{{ route('diversos.setores.excluir', ['id' => $setor->id ]) }}">Excluir!</a>
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-danger">CONFIRMAR</button>
                     </div>
                 </div>
             </formulario>
         </painel>
-    </pagina>
+    </modal>
 @endsection
 @section('scripts')
     <script>
