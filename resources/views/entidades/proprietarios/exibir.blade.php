@@ -83,7 +83,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="data_abertura" class="control-label cnpj">Data abertura</label>
-                            <input type="text" name="data_abertura" id="data_abertura"
+                            <input type="date" name="data_abertura" id="data_abertura"
                                    class="form-control cnpj" value="{{ $proprietario->entidade->data_abertura_formatado }}">
                         </div>
                     </div>
@@ -348,7 +348,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <button class="btn btn-primary" type="submit">Cadastrar</button>
+                            <button class="btn btn-primary" type="submit">Alterar</button>
                             <modal-link tipo="button" css="btn btn-danger" nome="modal-deletar" titulo="Excluir"></modal-link>
                         </div>
                     </div>
