@@ -103,6 +103,22 @@ Route::prefix('Diversos')->namespace('Diversos')->group(function(){
         Route::put('{id}/Alterar', 'SetoresController@alterar')->name('diversos.setores.alterar');
         Route::delete('{id}', 'SetoresController@excluir')->name('diversos.setores.excluir');
     });
+    Route::prefix('Categorias')->group(function(){
+        Route::get('/', 'CategoriasController@listar')->name('diversos.categorias.listar');
+        Route::get('Criar', 'CategoriasController@criar')->name('diversos.categorias.criar');
+        Route::post('/', 'CategoriasController@salvar')->name('diversos.categorias.salvar');
+        Route::get('{id}/Exibir', 'CategoriasController@exibir')->name('diversos.categorias.exibir');
+        Route::put('{id}/Alterar', 'CategoriasController@alterar')->name('diversos.categorias.alterar');
+        Route::delete('{id}', 'CategoriasController@excluir')->name('diversos.categorias.excluir');
+    });
+    Route::prefix('TiposImoveis')->group(function(){
+        Route::get('/', 'TipoImovelController@listar')->name('diversos.tiposimoveis.listar');
+        Route::get('Criar', 'TipoImovelController@criar')->name('diversos.tiposimoveis.criar');
+        Route::post('/', 'TipoImovelController@salvar')->name('diversos.tiposimoveis.salvar');
+        Route::get('{id}/Exibir', 'TipoImovelController@exibir')->name('diversos.tiposimoveis.exibir');
+        Route::put('{id}/Alterar', 'TipoImovelController@alterar')->name('diversos.tiposimoveis.alterar');
+        Route::delete('{id}', 'TipoImovelController@excluir')->name('diversos.tiposimoveis.excluir');
+    });
 });
 
 Route::prefix('Entidades')->namespace('Entidades')->group(function(){
