@@ -42,6 +42,14 @@ Route::prefix('Condominios')->namespace('Condominios')->group(function(){
         Route::put('{id}/Alterar/{idCondominio}', 'CondominiosTaxasController@alterar')->name('condominios.condominiostaxas.alterar');
         Route::delete('{id}/{idCondominio}', 'CondominiosTaxasController@excluir')->name('condominios.condominiostaxas.excluir');
     });
+    Route::prefix('Imoveis')->group(function(){
+        Route::get('/', 'ImoveisController@listar')->name('condominios.imoveis.listar');
+        Route::get('Criar', 'ImoveisController@criar')->name('condominios.imoveis.criar');
+        Route::post('/', 'ImoveisController@salvar')->name('condominios.imoveis.salvar');
+        Route::get('{id}/Exibir', 'ImoveisController@exibir')->name('condominios.imoveis.exibir');
+        Route::put('{id}/Alterar', 'ImoveisController@alterar')->name('condominios.imoveis.alterar');
+        Route::delete('{id}', 'ImoveisController@excluir')->name('condominios.imoveis.excluir');
+    });
 });
 
 Route::prefix('Enderecos')->namespace('Enderecos')->group(function() {
