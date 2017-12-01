@@ -16,6 +16,7 @@
                                     <ul>
                                         <li><a class="btn btn-default" href="{{ route('condominios.condominios.listar') }}">Condomínios</a></li>
                                         <li><a class="btn btn-default" href="{{ route('condominios.sindicos.listar') }}">Sindicos</a></li>
+                                        <li><a class="btn btn-default" href="{{ route('condominios.imoveis.listar') }}">Imóveis</a></li>
                                     </ul>
                                     <h3>Entidades</h3>
                                     <ul>
