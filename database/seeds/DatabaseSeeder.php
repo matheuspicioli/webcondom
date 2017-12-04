@@ -22,5 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call('DepartamentoSeeder');
         $this->call('EntidadesSeeder');
         $this->call('ProprietariosSeeder');
+        $this->call('CategoriasSeeder');
+        $this->call('TipoImoveisSeeder');
+        $this->call('ImoveisSeeder');
     }
 }

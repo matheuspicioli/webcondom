@@ -20,7 +20,7 @@ class CreateImoveisTable extends Migration
             $table->integer('endereco_id')->unsigned()->nullable();
             $table->integer('tipo_imovel_id')->unsigned();
             $table->integer('categoria_id')->unsigned();
-            $table->integer('condominio_id')->unsigned();
+            $table->integer('condominio_id')->unsigned()->nullable();
             $table->decimal('valor_locacao', 12, 2)->unsigned();
             $table->decimal('valor_venda', 12, 2)->unsigned();
             $table->string('codigo_agua', 20);

@@ -92,3 +92,18 @@ $factory->define(WebCondom\Models\Entidades\Proprietario::class, function (Faker
         'entidade_id'   => 1
     ];
 });
+
+$factory->define(WebCondom\Models\Condominios\Imovel::class, function (Faker $faker) {
+    return [
+        'codigo'            => $faker->randomNumber(3),
+        'referencia'        => $faker->word,
+        'tipo_imovel_id'    => 1,
+        'categoria_id'      => 1,
+        'valor_locacao'     => $faker->randomFloat(2,800, 12000),
+        'valor_venda'       => $faker->randomFloat(2, 50000, 10000000),
+        'codigo_agua'       => $faker->word . $faker->numberBetween(1,150),
+        'codigo_iptu'       => $faker->word . $faker->numberBetween(1,150),
+        'codigo_energia'    => $faker->word . $faker->numberBetween(1,150),
+        'descritivo'        => $faker->sentence()
+    ];
+});
