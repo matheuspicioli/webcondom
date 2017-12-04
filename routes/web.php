@@ -154,4 +154,12 @@ Route::prefix('Entidades')->namespace('Entidades')->group(function(){
         Route::put('{id}/Alterar', 'FuncionariosController@alterar')->name('entidades.funcionarios.alterar');
         Route::delete('{id}', 'FuncionariosController@excluir')->name('entidades.funcionarios.excluir');
     });
+    Route::prefix('Empresas')->group(function(){
+        Route::get('/', 'EmpresasController@listar')->name('entidades.empresas.listar');
+        Route::get('Criar', 'EmpresasController@criar')->name('entidades.empresas.criar');
+        Route::post('/', 'EmpresasController@salvar')->name('entidades.empresas.salvar');
+        Route::get('{id}/Exibir', 'EmpresasController@exibir')->name('entidades.empresas.exibir');
+        Route::put('{id}/Alterar', 'EmpresasController@alterar')->name('entidades.empresas.alterar');
+        Route::delete('{id}', 'EmpresasController@excluir')->name('entidades.empresas.excluir');
+    });
 });

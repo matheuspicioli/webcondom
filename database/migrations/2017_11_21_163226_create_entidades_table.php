@@ -18,8 +18,8 @@ class CreateEntidadesTable extends Migration
             $table->increments('id');
             $table->integer('tipo')->unsigned();
             $table->string('cpf_cnpj', 14)->unique();
-            $table->string('nome', 100);
-            $table->string('apelido', 20);
+            $table->string('nome', 100)->nullable();
+            $table->string('apelido', 20)->nullable();
             $table->string('rg_ie', 30)->nullable();
             $table->string('celular_1', 15)->nullable();
             $table->string('celular_2', 15)->nullable();
