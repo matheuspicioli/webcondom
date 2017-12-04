@@ -26,13 +26,24 @@
                 <div class="row">
                     <div class="col-md-12">
                         <button class="btn btn-primary" type="submit">Salvar</button>
-                        <a class="btn btn-danger"
-                           href="{{ route('diversos.regimeCasamento.excluir', ['id' => $regimeCasamento->id ]) }}">Excluir!</a>
+                        <modal-link nome="modal-deletar" titulo="Deletar" tipo="button" css="btn btn-danger"></modal-link>
                     </div>
                 </div>
             </formulario>
         </painel>
     </pagina>
+    <modal nome="modal-deletar" tamanho="modal-sm">
+        <painel cor="panel-primary" titulo="Tem certeza que deseja deletar este departamento?">
+            <formulario method="DELETE" action="{{ route('diversos.regimeCasamento.excluir', ['id' => $regimeCasamento->id]) }}"
+                        token="{{ csrf_token() }}">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-danger">CONFIRMAR</button>
+                    </div>
+                </div>
+            </formulario>
+        </painel>
+    </modal>
 @endsection
 @section('scripts')
     <script>
