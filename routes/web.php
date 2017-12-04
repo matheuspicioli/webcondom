@@ -162,4 +162,12 @@ Route::prefix('Entidades')->namespace('Entidades')->group(function(){
         Route::put('{id}/Alterar', 'EmpresasController@alterar')->name('entidades.empresas.alterar');
         Route::delete('{id}', 'EmpresasController@excluir')->name('entidades.empresas.excluir');
     });
+    Route::prefix('Inquilinos')->group(function(){
+        Route::get('/', 'InquilinosController@listar')->name('entidades.inquilinos.listar');
+        Route::get('Criar', 'InquilinosController@criar')->name('entidades.inquilinos.criar');
+        Route::post('/', 'InquilinosController@salvar')->name('entidades.inquilinos.salvar');
+        Route::get('{id}/Exibir', 'InquilinosController@exibir')->name('entidades.inquilinos.exibir');
+        Route::put('{id}/Alterar', 'InquilinosController@alterar')->name('entidades.inquilinos.alterar');
+        Route::delete('{id}', 'InquilinosController@excluir')->name('entidades.inquilinos.excluir');
+    });
 });

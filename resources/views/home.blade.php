@@ -24,6 +24,7 @@
                                         <li><a class="btn btn-default" href="{{ route('entidades.fornecedores.listar') }}">Fornecedores</a></li>
                                         <li><a class="btn btn-default" href="{{ route('entidades.funcionarios.listar') }}">Funcionários</a></li>
                                         <li><a class="btn btn-default" href="{{ route('entidades.empresas.listar') }}">Empresas</a></li>
+                                        <li><a class="btn btn-default" href="{{ route('entidades.inquilinos.listar') }}">Inquilinos</a></li>
                                     </ul>
                                     <h3>Endereços</h3>
                                     <ul>
