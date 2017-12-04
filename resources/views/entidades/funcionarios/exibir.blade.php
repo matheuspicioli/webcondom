@@ -19,8 +19,8 @@
                             <label for="Descricao" class="control-label">Tipo pessoa</label>
                             <select name="tipo" id="tipo" class="form-control">
                                 <option value="-1" selected disabled>-----SELECIONE-----</option>
-                                <option value="1" {{ $funcionario->entidade->tipo == 1 ? 'selected' : '' }}>CPF</option>
-                                <option value="2" {{ $funcionario->entidade->tipo == 2 ? 'selected' : '' }}>CNPJ</option>
+                                <option value="CPF" {{ $funcionario->entidade->tipo == 'CPF' ? 'selected' : '' }}>CPF</option>
+                                <option value="CNPJ" {{ $funcionario->entidade->tipo == 'CNPJ' ? 'selected' : '' }}>CNPJ</option>
                             </select>
                         </div>
                     </div>
@@ -337,7 +337,7 @@
     <script>
         $(document).ready(function () {
             $('#tipo').focus();
-            if ($("select[id=tipo]").val() == 2) {
+            if ($("select[id=tipo]").val() == 'CNPJ') {
                 $(".cnpj").show();
                 $(".cpf").hide();
             } else {
@@ -346,7 +346,7 @@
             }
 
             $("select[id=tipo]").on('change', function () {
-                if ($("select[id=tipo]").val() == 2) {
+                if ($("select[id=tipo]").val() == 'CNPJ') {
                     $(".cnpj").show();
                     $(".cpf").hide();
                 } else {

@@ -16,7 +16,7 @@ class CreateEntidadesTable extends Migration
         Schema::create('entidades', function (Blueprint $table) {
             //-----CAMPOS GERAIS-----//
             $table->increments('id');
-            $table->integer('tipo')->unsigned();
+            $table->enum('tipo', ['CPF', 'CNPJ']);
             $table->string('cpf_cnpj', 14)->unique();
             $table->string('nome', 100)->nullable();
             $table->string('apelido', 20)->nullable();

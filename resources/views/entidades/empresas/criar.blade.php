@@ -14,7 +14,7 @@
             </div>
             <formulario method="POST" action="{{ route('entidades.empresas.salvar') }}" token="{{ csrf_token() }}"
                         enctype="multipart/form-data">
-                <input type="hidden" name="tipo" value="2">
+                <input type="hidden" name="tipo" value="CNPJ">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">

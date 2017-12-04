@@ -336,7 +336,7 @@
             $(".cnpj").hide();
 
             $("select[id=tipo]").on('change', function () {
-                if ($("select[id=tipo]").val() == 2) {
+                if ($("select[id=tipo]").val() == 'CNPJ') {
                     $(".cnpj").show();
                     $(".cpf").hide();
                 } else {

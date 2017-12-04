@@ -19,8 +19,8 @@
                             <label for="Descricao" class="control-label">Tipo pessoa</label>
                             <select name="tipo" id="tipo" class="form-control">
                                 <option value="-1" selected disabled>-----SELECIONE-----</option>
-                                <option value="1">CPF</option>
-                                <option value="2">CNPJ</option>
+                                <option value="CPF">CPF</option>
+                                <option value="CNPJ">CNPJ</option>
                             </select>
                         </div>
                     </div>
@@ -336,7 +336,7 @@
             $(".cnpj").hide();
 
             $("select[id=tipo]").on('change', function () {
-                if ($("select[id=tipo]").val() == 2) {
+                if ($("select[id=tipo]").val() == 'CNPJ') {
                     $(".cnpj").show();
                     $(".cpf").hide();
                 } else {
