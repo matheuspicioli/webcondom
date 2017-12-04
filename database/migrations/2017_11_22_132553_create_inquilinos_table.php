@@ -17,7 +17,7 @@ class CreateInquilinosTable extends Migration
             $table->increments('id');
             $table->integer('codigo');
 
-            $table->integer('entidade_id')->unsigned();
+            $table->integer('entidade_id')->nullable()->unsigned();
             $table->foreign('entidade_id')
                 ->references('id')
                 ->on('entidades')
