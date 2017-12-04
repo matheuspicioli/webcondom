@@ -14,6 +14,6 @@ class Inquilino extends Model
 
     public function entidade()
     {
-        return $this->belongsTo('Entidade');
+        return $this->belongsTo('WebCondom\Models\Entidades\Entidade');
     }
 }
