@@ -22,23 +22,24 @@
                             <input type="text" name="cpf_cnpj" id="cpf_cnpj" class="form-control">
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-9">
                         <div class="form-group">
-                            <label for="fantasia" class="control-label cnpj">Fantasia</label>
-                            <input type="text" name="fantasia" id="fantasia" class="form-control cnpj">
+                            <label for="razao_social" class="control-label cnpj">Razão social</label>
+                            <input type="text" name="razao_social" id="razao_social" class="form-control cnpj">
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="inscricao_municipal" class="control-label cnpj">Inscrição municipal</label>
-                            <input type="text" name="inscricao_municipal" id="inscricao_municipal"
-                                   class="form-control cnpj">
-                        </div>
-                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="inscricao_estadual" class="control-label cnpj">Inscrição estadual</label>
                             <input type="text" name="inscricao_estadual" id="inscricao_estadual" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <label for="fantasia" class="control-label cnpj">Fantasia</label>
+                            <input type="text" name="fantasia" id="fantasia" class="form-control cnpj">
                         </div>
                     </div>
                 </div>
@@ -57,8 +58,9 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="razao_social" class="control-label cnpj">Razão social</label>
-                            <input type="text" name="razao_social" id="razao_social" class="form-control cnpj">
+                            <label for="inscricao_municipal" class="control-label cnpj">Inscrição municipal</label>
+                            <input type="text" name="inscricao_municipal" id="inscricao_municipal"
+                                   class="form-control cnpj">
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -68,20 +70,17 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="telefone_principal" class="control-label">Telefone principal</label>
                             <input type="text" name="telefone_principal" id="telefone_principal" class="form-control">
-                            <span class="help-block">Este campo é opcional</span>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="telefone_comercial" class="control-label">Telefone comercial</label>
                             <input type="text" name="telefone_comercial" id="telefone_comercial" class="form-control">
-                            <span class="help-block">Este campo é opcional</span>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -94,25 +93,17 @@
                         <div class="form-group">
                             <label for="celular_2" class="control-label">Celular 2</label>
                             <input type="text" name="celular_2" id="celular_2" class="form-control">
-                            <span class="help-block">Este campo é opcional</span>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="codigo" class="control-label">Código</label>
-                            <input type="text" name="codigo" id="codigo" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="email" class="control-label">E-mail</label>
                             <input type="email" name="email" id="email" class="form-control">
-                            <span class="help-block">Este campo é opcional</span>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="email_nfe" class="control-label">E-mail NFE</label>
                             <input type="email" name="email_nfe" id="email_nfe" class="form-control">
@@ -124,14 +115,12 @@
                         <div class="form-group">
                             <label for="site" class="control-label">Site</label>
                             <input type="text" name="site" id="site" class="form-control">
-                            <span class="help-block">Este campo é opcional</span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="logo" class="control-label">Logo</label>
                             <input type="file" name="logo_imagem" id="logo" class="form-control">
-                            <span class="help-block">Este campo é opcional</span>
                         </div>
                     </div>
                 </div>
@@ -143,7 +132,6 @@
                         <div class="form-group">
                             <label for="cep" class="control-label">CEP</label>
                             <input type="text" id="cep" name="cep" class="form-control pula">
-                            <span class="help-block">Apenas os números</span>
                         </div>
                     </div>
 
@@ -166,7 +154,6 @@
                         <div class="form-group">
                             <label for="complemento" class="control-label">Complemento</label>
                             <input type="text" id="complemento" name="complemento" class="form-control pula">
-                            <span class="help-block">Este campo é opcional</span>
                         </div>
                     </div>
                 </div>

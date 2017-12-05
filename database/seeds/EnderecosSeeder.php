@@ -15,6 +15,15 @@ class EnderecosSeeder extends Seeder
             'bairro'        => 'HIGIENOPOLIS',
             'cidade_id'     => '1']);
 
+        Endereco::Create([
+            'logradouro'    => 'AV.ADOLFO LUTZ',
+            'numero'        => '875',
+            'cep'           => '15014140',
+            'complemento'   => '',
+            'bairro'        => 'SANTA CRUZ',
+            'cidade_id'     => '1']);
+
+
         $cidades = WebCondom\Models\Enderecos\Cidade::all();
         factory(WebCondom\Models\Enderecos\Endereco::class, 9)->create()->each(function ($endereco) use ($cidades) {
             $cidade = $cidades->random();
