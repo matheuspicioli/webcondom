@@ -16,7 +16,7 @@ class CreateFornecedoresTable extends Migration
         Schema::create('fornecedores', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('codigo')->unsigned();
-            $table->enum('tipo_fornecer', ['PECAS', 'SERVICOS']);
+            $table->enum('tipo_fornecedor', ['PECAS', 'SERVICOS']);
 
             $table->integer('entidade_id')->nullable()->unsigned();
             $table->foreign('entidade_id')

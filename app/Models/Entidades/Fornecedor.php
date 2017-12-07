@@ -10,7 +10,7 @@ class Fornecedor extends Model
     use SoftDeletes;
 
     protected $table = "fornecedores";
-    protected $fillable = [ "codigo", "tipo_fornecer", "entidade_id" ];
+    protected $fillable = [ "codigo", "tipo_fornecedor", "entidade_id" ];
     protected $dates = [ "deleted_at" ];
 
     public function entidade()

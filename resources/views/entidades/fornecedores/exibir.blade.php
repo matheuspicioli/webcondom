@@ -26,11 +26,11 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="tipo_fornecer" class="control-label">Tipo</label>
-                            <select name="tipo_fornecer" id="tipo_fornecer" class="form-control">
+                            <label for="tipo_fornecedor" class="control-label">Tipo</label>
+                            <select name="tipo_fornecedor" id="tipo_fornecedor" class="form-control">
                                 <option value="-1" selected disabled>-----SELECIONE-----</option>
-                                <option value="PECAS" {{ $fornecedor->tipo_fornecer == 'PECAS' ? 'selected' : '' }}>PECAS</option>
-                                <option value="SERVICOS" {{ $fornecedor->tipo_fornecer == 'SERVICOS' ? 'selected' : '' }}>SERVICOS</option>
+                                <option value="PECAS" {{ $fornecedor->tipo_fornecedor == 'PECAS' ? 'selected' : '' }}>PECAS</option>
+                                <option value="SERVICOS" {{ $fornecedor->tipo_fornecedor == 'SERVICOS' ? 'selected' : '' }}>SERVICOS</option>
                             </select>
                         </div>
                     </div>

@@ -23,6 +23,21 @@ class EnderecosSeeder extends Seeder
             'bairro'        => 'SANTA CRUZ',
             'cidade_id'     => '1']);
 
+        Endereco::Create([
+            'logradouro'    => 'RUA PEDRO AMARAL',
+            'numero'        => '3274',
+            'cep'           => '15015025',
+            'complemento'   => 'APTO 101',
+            'bairro'        => 'CENTRO',
+            'cidade_id'     => '1']);
+
+        Endereco::Create([
+            'logradouro'    => 'AV. ALBERTO ANDALO',
+            'numero'        => '3555',
+            'cep'           => '15018050',
+            'complemento'   => '',
+            'bairro'        => 'ESPLANADA',
+            'cidade_id'     => '1']);
 
         $cidades = WebCondom\Models\Enderecos\Cidade::all();
         factory(WebCondom\Models\Enderecos\Endereco::class, 9)->create()->each(function ($endereco) use ($cidades) {

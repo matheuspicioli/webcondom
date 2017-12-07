@@ -26,8 +26,8 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="tipo_fornecer" class="control-label">Tipo</label>
-                            <select name="tipo_fornecer" id="tipo_fornecer" class="form-control">
+                            <label for="tipo_fornecedor" class="control-label">Tipo</label>
+                            <select name="tipo_fornecedor" id="tipo_fornecedor" class="form-control">
                                 <option value="-1" selected disabled>-----SELECIONE-----</option>
                                 <option value="PECAS">PECAS</option>
                                 <option value="SERVICOS">SERVICOS</option>
