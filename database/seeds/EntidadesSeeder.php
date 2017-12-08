@@ -12,7 +12,7 @@ class EntidadesSeeder extends Seeder
 
         Entidade::create([
             'cpf_cnpj'              => '68261965000171',
-            'nome'                  => 'METROPOLITAN ADM.CONDOMINOS LTDA.',
+            'nome'                  => 'METROPOLITAN ADM.CONDOMINIOS LTDA.',
             'rg_ie'                 => 'ISENTO',
             'fantasia'              => 'METROPOLITAN ADM.CONDOMINIOS',
             'inscricao_municipal'   => '5.567-3',
