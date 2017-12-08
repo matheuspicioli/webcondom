@@ -18,7 +18,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="EstadoCOD" class="control-label">Estado</label>
-                            <select name="estado_id" id="EstadoCOD" class="form-control">
+                            <select name="estado_id" id="EstadoCOD" class="form-control pula">
                                 @foreach($estados as $estado)
                                     <option {{ $estado->id == $cidade->estado_id ? 'selected' : '' }} value="{{ $estado->id }}">{{ $estado->descricao }}</option>
                                 @endforeach
@@ -28,16 +28,15 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="Descricao" class="control-label">Descrição</label>
-                            <input id="Descricao" type="text" class="form-control" name="descricao"
+                            <input id="Descricao" type="text" class="form-control pula" name="descricao"
                                    value="{{ $cidade->descricao }}">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="CodigoIBGE" class="control-label">Codigo IBGE</label>
-                            <input type="text" id="CodigoIBGE" name="codigo_ibge" class="form-control"
+                            <input type="text" id="CodigoIBGE" name="codigo_ibge" class="form-control pula"
                                    value="{{ $cidade->codigo_ibge ? $cidade->codigo_ibge : '' }}">
-                            <span class="help-block">Este campo é opcional</span>
                         </div>
                     </div>
                 </div>

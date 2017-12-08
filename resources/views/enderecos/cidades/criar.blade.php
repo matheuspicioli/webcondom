@@ -17,7 +17,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="EstadoCOD" class="control-label">Estado</label>
-                            <select name="estado_id" id="EstadoCOD" class="form-control">
+                            <select name="estado_id" id="EstadoCOD" class="form-control pula">
                                 <option selected disabled>-------Selecione um estado-------</option>
                                 @foreach($estados as $estado)
                                     <option value="{{ $estado->id }}">{{ $estado->descricao }}</option>
@@ -28,18 +28,16 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="Descricao" class="control-label">Descrição</label>
-                            <input id="Descricao" type="text" class="form-control" name="descricao">
+                            <input id="Descricao" type="text" class="form-control pula" name="descricao">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="CodigoIBGE" class="control-label">Codigo IBGE</label>
-                            <input type="text" id="CodigoIBGE" name="codigo_ibge" class="form-control">
-                            <span class="help-block">Este campo é opcional</span>
+                            <input type="text" id="CodigoIBGE" name="codigo_ibge" class="form-control pula">
                         </div>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">

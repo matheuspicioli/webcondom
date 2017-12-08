@@ -18,7 +18,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="Descricao" class="control-label">Descrição</label>
-                            <input id="Descricao" type="text" class="form-control" name="descricao"
+                            <input id="Descricao" type="text" class="form-control pula" name="descricao"
                                    value="{{ $estadoCivil->descricao}}">
                         </div>
                     </div>

@@ -9,14 +9,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="Descricao" class="control-label">Descrição</label>
-                            <input id="Descricao" type="text" class="form-control" name="descricao"
+                            <input id="Descricao" type="text" class="form-control pula" name="descricao"
                                    value="{{ $taxa->descricao }}">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="Valor" class="control-label">Valor</label>
-                            <input id="Valor" type="text" class="form-control" name="valor"
+                            <input id="Valor" type="text" class="form-control pula" name="valor"
                                    value="{{ $taxa->valor }}">
                         </div>
                     </div>

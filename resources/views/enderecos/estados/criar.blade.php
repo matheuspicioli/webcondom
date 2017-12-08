@@ -7,18 +7,17 @@
             <formulario method="POST" action="{{ route('enderecos.estados.salvar') }}" token="{{ csrf_token() }}">
                 <div class="form-group">
                     <label for="Descricao" class="control-label">Descrição</label>
-                    <input id="Descricao" type="text" class="form-control" name="descricao">
+                    <input id="Descricao" type="text" class="form-control pula" name="descricao">
                 </div>
 
                 <div class="form-group">
                     <label for="Sigla" class="control-label">Sigla</label>
-                    <input type="text" id="Sigla" name="sigla" class="form-control">
+                    <input type="text" id="Sigla" name="sigla" class="form-control pula">
                 </div>
 
                 <div class="form-group">
                     <label for="CodigoIBGE" class="control-label">Código IBGE</label>
-                    <input type="text" id="CodigoIBGE" name="codigo_ibge" class="form-control">
-                    <span class="help-block">Este campo é opcional</span>
+                    <input type="text" id="CodigoIBGE" name="codigo_ibge" class="form-control pula">
                 </div>
 
                 <div class="form-group">
