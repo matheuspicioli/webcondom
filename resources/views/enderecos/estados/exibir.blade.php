@@ -8,20 +8,19 @@
                         token="{{ csrf_token() }}">
                 <div class="form-group">
                     <label for="Descricao" class="control-label">Descrição</label>
-                    <input id="Descricao" type="text" class="form-control" name="descricao"
+                    <input id="Descricao" type="text" class="form-control pula" name="descricao"
                            value="{{ $estado->descricao}}">
                 </div>
 
                 <div class="form-group">
                     <label for="Sigla" class="control-label">Sigla</label>
-                    <input type="text" id="Sigla" name="sigla" class="form-control" value="{{ $estado->sigla }}">
+                    <input type="text" id="Sigla" name="sigla" class="form-control pula" value="{{ $estado->sigla }}">
                 </div>
 
                 <div class="form-group">
                     <label for="CodigoIBGE" class="control-label">Código IBGE</label>
-                    <input type="text" id="CodigoIBGE" name="codigo_ibge" class="form-control"
+                    <input type="text" id="CodigoIBGE" name="codigo_ibge" class="form-control pula"
                            value="{{ $estado->codigo_ibge }}">
-                    <span class="help-block">Este campo é opcional</span>
                 </div>
 
                 <div class="form-group">

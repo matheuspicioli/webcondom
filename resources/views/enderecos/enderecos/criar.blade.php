@@ -15,41 +15,33 @@
             <formulario method="POST" action="{{ route('enderecos.enderecos.criar') }}" token="{{ csrf_token() }}">
                 <div class="form-group">
                     <label for="Logradouro" class="control-label">Logradouro</label>
-                    <input id="Logradouro" type="text" class="form-control" name="logradouro">
+                    <input id="Logradouro" type="text" class="form-control pula" name="logradouro">
                 </div>
-
                 <div class="form-group">
                     <label for="Numero" class="control-label">Número</label>
-                    <input type="number" min="0" id="Numero" name="numero" class="form-control">
+                    <input type="number" min="0" id="Numero" name="numero" class="form-control pula">
                 </div>
-
                 <div class="form-group">
                     <label for="CEP" class="control-label">CEP</label>
-                    <input type="number" id="CEP" name="cep" class="form-control">
-                    <span class="help-block">Apenas os números</span>
+                    <input type="number" id="CEP" name="cep" class="form-control pula">
                 </div>
-
                 <div class="form-group">
                     <label for="Complemento" class="control-label">Complemento</label>
-                    <input type="text" id="Complemento" name="complemento" class="form-control">
-                    <span class="help-block">Este campo é opcional</span>
+                    <input type="text" id="Complemento" name="complemento" class="form-control pula">
                 </div>
-
                 <div class="form-group">
                     <label for="Bairro" class="control-label">Bairro</label>
-                    <input type="text" id="Bairro" name="bairro" class="form-control">
+                    <input type="text" id="Bairro" name="bairro" class="form-control pula">
                 </div>
-
                 <div class="form-group">
                     <label for="CidadeCOD" class="control-label">Cidade:</label>
-                    <select name="cidade_id" id="CidadeCOD" class="form-control">
+                    <select name="cidade_id" id="CidadeCOD" class="form-control pula">
                         <option selected disabled>-------Selecione uma cidade-------</option>
                         @foreach($cidades as $cidade)
                             <option value="{{ $cidade->id }}">{{ $cidade->descricao }} - {{ $cidade->estado->descricao }}</option>
                         @endforeach
                     </select>
                 </div>
-
                 <div class="form-group">
                     <button class="btn btn-primary" type="submit">Cadastrar</button>
                 </div>

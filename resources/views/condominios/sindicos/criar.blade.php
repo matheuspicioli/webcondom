@@ -7,18 +7,17 @@
             <formulario action="{{ route('condominios.sindicos.salvar') }}" method="POST" token="{{ csrf_token() }}">
                 <div class="form-group">
                     <label for="Nome" class="control-label">Nome</label>
-                    <input id="Nome" type="text" class="form-control" name="nome">
+                    <input id="Nome" type="text" class="form-control" name="nome pula">
                 </div>
 
                 <div class="form-group">
                     <label for="Telefone" class="control-label">Telefone</label>
-                    <input type="text" id="Telefone" name="telefone" class="form-control">
-                    <span class="help-block">Este campo é opcional</span>
+                    <input type="text" id="Telefone" name="telefone" class="form-control pula">
                 </div>
 
                 <div class="form-group">
                     <label for="Celular" class="control-label">Celular</label>
-                    <input type="text" id="Celular" name="celular" class="form-control">
+                    <input type="text" id="Celular" name="celular" class="form-control pula">
                 </div>
 
                 <div class="form-group">

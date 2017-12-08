@@ -109,70 +109,67 @@
                     <div class="col-md-6 col-md-offset-3">
                         <div class="form-group">
                             <label for="descritivo" class="control-label pula">Descritivo</label>
-                            <textarea name="descritivo" id="descritivo" class="form-control" rows="2">{{ $imovel->descritivo }}</textarea>
+                            <textarea name="descritivo" id="descritivo" class="form-control pula" rows="2">{{ $imovel->descritivo }}</textarea>
                         </div>
                     </div>
                 </div>
-                <hr>
-                {{-- PARTE FORMULÁRIO ENDEREÇO --}}
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="CEP" class="control-label">CEP</label>
-                            <input type="text" id="CEP" name="cep" class="form-control pula"
-                                   value="{{ $imovel->endereco->cep }}">
-                            <span class="help-block">Apenas os números</span>
+                <painel cor="panel-info" titulo="Endereço" posicao="text-center">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="CEP" class="control-label">CEP</label>
+                                <input type="text" id="CEP" name="cep" class="form-control pula"
+                                       value="{{ $imovel->endereco->cep }}">
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="Logradouro" class="control-label">Logradouro</label>
+                                <input id="Logradouro" type="text" class="form-control pula" name="logradouro"
+                                       value="{{ $imovel->endereco->logradouro }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="Numero" class="control-label">Número</label>
+                                <input type="number" min="0" id="Numero" name="numero" class="form-control pula"
+                                       value="{{ $imovel->endereco->numero }}">
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label for="Complemento" class="control-label">Complemento</label>
+                                <input type="text" id="Complemento" name="complemento" class="form-control pula"
+                                       value="{{ $imovel->endereco->complemento ? $imovel->endereco->complemento : '' }}">
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label for="Logradouro" class="control-label">Logradouro</label>
-                            <input id="Logradouro" type="text" class="form-control pula" name="logradouro"
-                                   value="{{ $imovel->endereco->logradouro }}">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Bairro" class="control-label">Bairro</label>
+                                <input type="text" id="Bairro" name="bairro" class="form-control pula"
+                                       value="{{ $imovel->endereco->bairro }}">
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="CidadeCOD" class="control-label">Cidade</label>
+                                <select name="cidade_id" id="CidadeCOD" class="form-control pula">
+                                    <option selected disabled>-------Selecione uma cidade-------</option>
+                                    @foreach($cidades as $cidade)
+                                        <option value="{{ $cidade->id }}" {{ $cidade->id == $imovel->endereco->cidade->id ? 'selected' : '' }}>{{ $cidade->descricao }}
+                                            - {{ $cidade->estado->descricao }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="Numero" class="control-label">Número</label>
-                            <input type="number" min="0" id="Numero" name="numero" class="form-control pula"
-                                   value="{{ $imovel->endereco->numero }}">
-                        </div>
-                    </div>
-                    <div class="col-md-10">
-                        <div class="form-group">
-                            <label for="Complemento" class="control-label">Complemento</label>
-                            <input type="text" id="Complemento" name="complemento" class="form-control pula"
-                                   value="{{ $imovel->endereco->complemento ? $imovel->endereco->complemento : '' }}">
-                            <span class="help-block">Este campo é opcional</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="Bairro" class="control-label">Bairro</label>
-                            <input type="text" id="Bairro" name="bairro" class="form-control pula"
-                                   value="{{ $imovel->endereco->bairro }}">
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label for="CidadeCOD" class="control-label">Cidade</label>
-                            <select name="cidade_id" id="CidadeCOD" class="form-control pula">
-                                <option selected disabled>-------Selecione uma cidade-------</option>
-                                @foreach($cidades as $cidade)
-                                    <option value="{{ $cidade->id }}" {{ $cidade->id == $imovel->endereco->cidade->id ? 'selected' : '' }}>{{ $cidade->descricao }}
-                                        - {{ $cidade->estado->descricao }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <hr/>
+                </painel>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">

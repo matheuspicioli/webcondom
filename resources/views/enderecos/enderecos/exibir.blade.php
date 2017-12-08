@@ -16,37 +16,37 @@
                         token="{{ csrf_token() }}">
                 <div class="form-group">
                     <label for="Logradouro" class="control-label">Logradouro</label>
-                    <input id="Logradouro" type="text" class="form-control" name="logradouro"
+                    <input id="Logradouro" type="text" class="form-control pula" name="logradouro"
                            value="{{ $endereco->logradouro }}">
                 </div>
 
                 <div class="form-group">
                     <label for="Numero" class="control-label">Número</label>
-                    <input type="number" min="0" id="Numero" name="numero" class="form-control"
+                    <input type="number" min="0" id="Numero" name="numero" class="form-control pula"
                            value="{{ $endereco->numero }}">
                 </div>
 
                 <div class="form-group">
                     <label for="CEP" class="control-label">CEP</label>
-                    <input type="number" id="CEP" name="cep" class="form-control" value="{{ $endereco->cep }}">
+                    <input type="number" id="CEP" name="cep" class="form-control pula" value="{{ $endereco->cep }}">
                     <span class="help-block">Apenas os números</span>
                 </div>
 
                 <div class="form-group">
                     <label for="Numero" class="control-label">Complemento</label>
-                    <input type="text" id="Complemento" name="complemento" class="form-control"
+                    <input type="text" id="Complemento" name="complemento" class="form-control pula"
                            value="{{ $endereco->complemento ? $endereco->complemento : '' }}">
                     <span class="help-block">Este campo é opcional</span>
                 </div>
 
                 <div class="form-group">
                     <label for="Bairro" class="control-label">Bairro</label>
-                    <input type="text" id="Bairro" name="bairro" class="form-control" value="{{ $endereco->bairro }}">
+                    <input type="text" id="Bairro" name="bairro" class="form-control pula" value="{{ $endereco->bairro }}">
                 </div>
 
                 <div class="form-group">
                     <label for="CidadeCOD" class="control-label">Cidade:</label>
-                    <select name="cidade_id" id="CidadeCOD" class="form-control">
+                    <select name="cidade_id" id="CidadeCOD" class="form-control pula">
                         @foreach($cidades as $cidade)
                             <option {{ $cidade->id == $endereco->cidade_id ? 'selected' : '' }}
                                     value="{{ $cidade->id }}">{{ $cidade->descricao }}
