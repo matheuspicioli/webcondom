@@ -13,7 +13,6 @@ class EmpresasSeeder extends Seeder
     public function run()
     {
         Empresa::Create([
-            'razao_social'  => 'METROPOLITAN ADM.CONDOMINIOS LTDA.',
             'creci'         => 'J.5.567-3',
             'logo'          => 'c:\sistemas\metrop\dados\logo_metrop.jpg',
             'email_nfe'     => 'nfe@metropolitanadm.com.br',
