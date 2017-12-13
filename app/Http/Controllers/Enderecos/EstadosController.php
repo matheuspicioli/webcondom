@@ -4,6 +4,7 @@ namespace WebCondom\Http\Controllers\Enderecos;
 
 use Illuminate\Http\Request;
 use WebCondom\Http\Controllers\Controller;
+use WebCondom\Http\Requests\Enderecos\EstadosRequest;
 use WebCondom\Models\Enderecos\Estado;
 
 class EstadosController extends Controller
@@ -28,7 +29,7 @@ class EstadosController extends Controller
         return view('enderecos.estados.criar', compact('migalhas'));
     }
 
-    public function Salvar(Request $request)
+    public function Salvar(EstadosRequest $request)
     {
         Estado::create($request->all());
         return redirect()->route('enderecos.estados.listar');
