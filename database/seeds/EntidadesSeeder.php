@@ -33,7 +33,7 @@ class EntidadesSeeder extends Seeder
             'apelido'               => 'JC',
             'rg_ie'                 => '20300400-5',
             'tipo'                  => '1',
-            'nome_mae'              => 'jOSEFA DA SILVA',
+            'nome_mae'              => 'JOSEFA DA SILVA',
             'estado_civil_id'       => 2,
             'regime_casamento_id'   => 2,
             'profissao'             => 'ADVOGADO',
@@ -67,6 +67,28 @@ class EntidadesSeeder extends Seeder
             'site'                  => 'atlas.com.br',
             'email'                 => 'contato@atlas.com.br']);
 
+        Entidade::create([
+            'cpf_cnpj'              => '8810020001',
+            'nome'                  => 'VANESSA RIBEIRO',
+            'apelido'               => 'VANESSA',
+            'rg_ie'                 => '20.300.888-5',
+            'tipo'                  => '1',
+            'nome_mae'              => 'MAE DA VANESSA',
+            'estado_civil_id'       => 2,
+            'regime_casamento_id'   => 1,
+            'profissao'             => 'SECRETARIA',
+            'data_nascimento'       => '1980-08-02',
+            'nacionalidade'         => 'BRASILEIRA',
+            'empresa'               => 'METROPOLITAN ADM',
+            'dependentes'           => '0',
+            'inss'                  => '123456555-00-5',
+            'endereco_principal_id' => 4,
+            'telefone_principal'    => '1732323030',
+            'telefone_comercial'    => '1732112500',
+            'celular_1'             => '17981334455',
+            'celular_2'             => '',
+            'email'                 => 'processamento@metropolitanadm.com.br',
+            'endereco_cobranca_id'  => 5]);
         factory(WebCondom\Models\Entidades\Entidade::class, 5)
             ->create()
             ->each(function($entidade) use ($enderecosPrincipal, $enderecosCobranca) {

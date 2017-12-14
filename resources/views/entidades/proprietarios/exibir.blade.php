@@ -227,7 +227,7 @@
                         </div>
                     </div>
                 </div>
-                <painel cor="panel-info" titulo="Endereço principal" posicao="text-center">
+                <painel cor="panel-info" titulo="Endereço Principal" posicao="text-center">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -288,7 +288,7 @@
                         </div>
                     </div>
                 </painel>
-                <painel cor="panel-info" posicao="text-center" titulo="Endereço cobrança">
+                <painel cor="panel-info" posicao="text-center" titulo="Endereço Cobrança">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
