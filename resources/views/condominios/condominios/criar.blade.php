@@ -1,6 +1,15 @@
-@extends('layouts.app')
-@section('titulo', 'Condominios - Cadastrar')
-@section('conteudo')
+@extends('adminlte::page')
+@section('title', 'Condominios - criar')
+@section('content_header')
+    <h1>Listagem de condomínios</h1>
+    <div class="pull-rigth">
+        <a href="{{ route('condominios.condominios.voltar') }}" class="btn btn-default">
+            Voltar
+        </a>
+    </div>
+@stop
+
+@section('content')
     <pagina tamanho="12">
         <painel cor="panel-primary" titulo="Cadastrar condomínio" posicao="text-center">
             <div class="row">
@@ -170,7 +179,7 @@
             </formulario>
         </painel>
     </pagina>
-@endsection
+@stop
 
 @section('scripts')
 
@@ -185,4 +194,4 @@
             });
         });
     </script>
-@endsection
+@stop
