@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="box-body">
-                    <table class="table table-bordered table-hover dataTable" id="tabela" role="grid">
+                    <table class="table table-striped table-hover dataTable" id="tabela" role="grid">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -54,7 +54,33 @@
                                 <td>
                                     <a class="btn btn-warning" href="{{ route('condominios.condominios.exibir', ['id' => $condominio->id ]) }}">
                                         <i class="fa fa-pencil"></i> Alterar</a>
-                                    <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i> Excluir</a>
+                                    <button type="button" data-toggle="modal" data-target="#modal-danger-{{$condominio->id}}" href="#" class="btn btn-danger">
+                                        <i class="fa fa-trash"></i> Excluir
+                                    </button>
+                                    <!-- MODAL EXCLUSÃO -->
+                                    <div id="modal-danger-{{$condominio->id}}" class="modal modal-danger fade">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                    <h4 class="modal-title">Confirmar exclusão</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h1>Deseja realmente excluir o condomínio "{{ $condominio->nome }}"?</h1>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
+                                                    <form method="POST" action="{{ route('condominios.condominios.excluir', ['id' => $condominio->id]) }}">
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('DELETE') }}
+                                                        <button class="btn btn-outline" type="submit">Confirmar exclusão</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
