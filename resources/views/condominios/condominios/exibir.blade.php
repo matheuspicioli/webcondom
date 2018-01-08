@@ -1,251 +1,321 @@
-@extends('layouts.app')
-@section('titulo', 'Condomínios - Exibir/Alterar')
-@section('conteudo')
-    <pagina tamanho="12">
-        <painel titulo="Alterar condomínio" cor="panel-primary" posicao="text-center">
-            <div class="row">
-                <div class="col-md-1">
-                    <a href="{{ route('condominios.condominios.listar') }}" class="btn btn-default">Voltar</a>
-                    <hr>
+@extends('adminlte::page')
+@section('title', 'Condominios - Editar')
+@section('content_header')
+    <h1>Condomínios - <small>edição</small></h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a>
+        </li>
+        <li>
+            <a href="{{ route('condominios.condominios.listar') }}"><i class="fa fa-home"></i> Condomínios</a>
+        </li>
+        <li class="active">
+            <i class="fa fa-pencil"></i> Editar condomínio
+        </li>
+    </ol>
+@stop
+@section('content')
+    <div class="row">
+        <div class="col-md-1">
+            <a href="{{ route('condominios.condominios.listar') }}" class="btn btn-default">
+                <i class="fa fa-rotate-left"></i> Voltar</a>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Editar condomínio
+                    </h3>
                 </div>
-                <div class="col-md-11">
-                    <migalha v-bind:lista="{{ $migalhas }}"></migalha>
+                <div class="box-body">
+                    <form method="POST" action="{{ route('condominios.condominios.alterar', ['id' => $condominio->id ]) }}">
+                        {{ csrf_field() }}
+                        {{ method_field('PUT') }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Nome" class="control-label">Nome</label>
+                                    <input id="Nome" type="text" class="form-control pula" name="nome"
+                                           value="{{ $condominio->nome }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Apelido" class="control-label">Apelido</label>
+                                    <input id="Apelido" type="text" class="form-control pula" name="apelido"
+                                           value="{{ $condominio->apelido }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Telefone" class="control-label">Telefone</label>
+                                    <input id="Telefone" type="text" class="form-control pula" name="telefone"
+                                           value="{{ $condominio->telefone ? $condominio->telefone : '' }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Celular" class="control-label">Celular</label>
+                                    <input id="Celular" type="text" class="form-control pula" name="celular"
+                                           value="{{ $condominio->celular }}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Unidades" class="control-label">Unidades</label>
+                                    <input id="Unidades" type="number" min="0" class="form-control pula" name="unidades"
+                                           value="{{ $condominio->unidades }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Multa" class="control-label">Multa (%)</label>
+                                    <input id="Multa" type="text" class="form-control pula" name="multa" placeholder="150,00"
+                                           value="{{ $condominio->multa ? $condominio->multa : '' }}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Juros" class="control-label">Juros (%)</label>
+                                    <input id="Juros" type="text" class="form-control pula" name="juros" placeholder="150,00"
+                                           value="{{ $condominio->juros ? $condominio->juros : '' }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="TipoJuros" class="control-label">Tipo de juros</label>
+                                    <select name="tipo_juros" id="TipoJuros" class="form-control pula">
+                                        <option disabled selected>----------Selecione----------</option>
+                                        <option value="AD" {{ $condominio->tipo_juros == 'AD' ? 'selected' : '' }}>Ao
+                                            dia
+                                        </option>
+                                        <option value="AM" {{ $condominio->tipo_juros == 'AM' ? 'selected' : '' }}>Ao
+                                            mês
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="TemGas" class="control-label">Tem gás?</label>
+                                    <select name="tem_gas" id="TemGas" class="form-control pula">
+                                        <option disabled selected>----------Selecione----------</option>
+                                        <option value="1" {{ $condominio->tem_gas == 1 ? 'selected' : '' }}>Sim
+                                        </option>
+                                        <option value="0" {{ $condominio->tem_gas == 0 ? 'selected' : '' }}>Não
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="ValorGas" class="control-label">Valor do gás</label>
+                                    <input id="ValorGas" type="text" class="form-control pula" name="valor_gas"
+                                           placeholder="150,00"
+                                           value="{{ $condominio->valor_gas }}">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="SindicoCOD" class="control-label">Síndico</label>
+                                    <select name="sindico_id" id="SindicoCOD" tabindex="-1" aria-hidden="true" class="form-control select2 pula">
+                                        <option disabled selected>----------Selecione----------</option>
+                                        @foreach($sindicos as $sindico)
+                                            <option value="{{ $sindico->id }}" {{ $sindico->id == $condominio->sindico_id ? 'selected' : '' }}>
+                                                {{ $sindico->nome }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box box-warning">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">
+                                    Endereço
+                                </h3>
+                            </div>
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="CEP" class="control-label">CEP</label>
+                                            <input type="text" id="CEP" name="cep" class="form-control pula" value="{{ $condominio->endereco->cep }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label for="Logradouro" class="control-label">Logradouro</label>
+                                            <input id="Logradouro" type="text" class="form-control pula" name="logradouro"
+                                                   value="{{ $condominio->endereco->logradouro }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="Numero" class="control-label">Número</label>
+                                            <input type="number" min="0" id="Numero" name="numero" class="form-control pula"
+                                                   value="{{ $condominio->endereco->numero }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="form-group">
+                                            <label for="Complemento" class="control-label">Complemento</label>
+                                            <input type="text" id="Complemento" name="complemento" class="form-control pula"
+                                                   value="{{ $condominio->endereco->complemento ? $condominio->endereco->complemento : '' }}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="Bairro" class="control-label">Bairro</label>
+                                            <input type="text" id="Bairro" name="bairro" class="form-control pula"
+                                                   value="{{ $condominio->endereco->bairro }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label for="CidadeCOD" class="control-label">Cidade</label>
+                                            <select name="cidade_id" id="CidadeCOD" class="form-control pula select2">
+                                                <option selected disabled>-------Selecione uma cidade-------</option>
+                                                @foreach($cidades as $cidade)
+                                                    <option value="{{ $cidade->id }}" {{ $cidade->id == $condominio->endereco->cidade->id ? 'selected' : '' }}>{{ $cidade->descricao }}
+                                                        - {{ $cidade->estado->descricao }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <button class="btn btn-info" type="submit">
+                                        <i class="fa fa-pencil"></i> Alterar</button>
+                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
+                                        <i class="fa fa-trash"></i> Excluir
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <formulario method="PUT" action="{{ route('condominios.condominios.alterar', ['id' => $condominio->id ]) }}"
-                        token="{{ csrf_token() }}">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="Nome" class="control-label">Nome</label>
-                            <input id="Nome" type="text" class="form-control pula" name="nome"
-                                   value="{{ $condominio->nome }}">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="Apelido" class="control-label">Apelido</label>
-                            <input id="Apelido" type="text" class="form-control pula" name="apelido"
-                                   value="{{ $condominio->apelido }}">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="Telefone" class="control-label">Telefone</label>
-                            <input id="Telefone" type="text" class="form-control pula" name="telefone"
-                                   value="{{ $condominio->telefone ? $condominio->telefone : '' }}">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="Celular" class="control-label">Celular</label>
-                            <input id="Celular" type="text" class="form-control pula" name="celular"
-                                   value="{{ $condominio->celular }}">
-                        </div>
-                    </div>
-                </div>
+        </div>
+    </div>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="Unidades" class="control-label">Unidades</label>
-                            <input id="Unidades" type="number" min="0" class="form-control pula" name="unidades"
-                                   value="{{ $condominio->unidades }}">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="Multa" class="control-label">Multa (%)</label>
-                            <input id="Multa" type="text" class="form-control pula" name="multa" placeholder="150,00"
-                                   value="{{ $condominio->multa ? $condominio->multa : '' }}">
-                        </div>
-                    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Taxas do condomínio
+                        - <a href="{{ route('condominios.condominiostaxas.criar', ['idCondominio' => $condominio->id]) }}">
+                            cadastrar taxas
+                        </a></h3>
                 </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="Juros" class="control-label">Juros (%)</label>
-                            <input id="Juros" type="text" class="form-control pula" name="juros" placeholder="150,00"
-                                   value="{{ $condominio->juros ? $condominio->juros : '' }}">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="TipoJuros" class="control-label">Tipo de juros</label>
-                            <select name="tipo_juros" id="TipoJuros" class="form-control pula">
-                                <option disabled selected>----------Selecione----------</option>
-                                <option value="AD" {{ $condominio->tipo_juros == 'AD' ? 'selected' : '' }}>Ao
-                                    dia
-                                </option>
-                                <option value="AM" {{ $condominio->tipo_juros == 'AM' ? 'selected' : '' }}>Ao
-                                    mês
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="TemGas" class="control-label">Tem gás?</label>
-                            <select name="tem_gas" id="TemGas" class="form-control pula">
-                                <option disabled selected>----------Selecione----------</option>
-                                <option value="1" {{ $condominio->tem_gas == 1 ? 'selected' : '' }}>Sim
-                                </option>
-                                <option value="0" {{ $condominio->tem_gas == 0 ? 'selected' : '' }}>Não
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="ValorGas" class="control-label">Valor do gás</label>
-                            <input id="ValorGas" type="text" class="form-control pula" name="valor_gas"
-                                   placeholder="150,00"
-                                   value="{{ $condominio->valor_gas }}">
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label for="SindicoCOD" class="control-label">Síndico</label>
-                            <select name="sindico_id" id="SindicoCOD" class="form-control pula">
-                                <option disabled selected>----------Selecione----------</option>
-                                @foreach($sindicos as $sindico)
-                                    <option value="{{ $sindico->id }}" {{ $sindico->id == $condominio->sindico_id ? 'selected' : '' }}>
-                                        {{ $sindico->nome }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <painel titulo="Endereço" cor="panel-info" posicao="text-center">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="CEP" class="control-label">CEP</label>
-                                <input type="text" id="CEP" name="cep" class="form-control pula"
-                                       value="{{ $condominio->endereco->cep }}">
-                            </div>
-                        </div>
-
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <label for="Logradouro" class="control-label">Logradouro</label>
-                                <input id="Logradouro" type="text" class="form-control pula" name="logradouro"
-                                       value="{{ $condominio->endereco->logradouro }}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Numero" class="control-label">Número</label>
-                                <input type="number" min="0" id="Numero" name="numero" class="form-control pula"
-                                       value="{{ $condominio->endereco->numero }}">
-                            </div>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="form-group">
-                                <label for="Complemento" class="control-label">Complemento</label>
-                                <input type="text" id="Complemento" name="complemento" class="form-control pula"
-                                       value="{{ $condominio->endereco->complemento ? $condominio->endereco->complemento : '' }}">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="Bairro" class="control-label">Bairro</label>
-                                <input type="text" id="Bairro" name="bairro" class="form-control pula"
-                                       value="{{ $condominio->endereco->bairro }}">
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <label for="CidadeCOD" class="control-label">Cidade</label>
-                                <select name="cidade_id" id="CidadeCOD" class="form-control pula">
-                                    <option selected disabled>-------Selecione uma cidade-------</option>
-                                    @foreach($cidades as $cidade)
-                                        <option value="{{ $cidade->id }}" {{ $cidade->id == $condominio->endereco->cidade->id ? 'selected' : '' }}>{{ $cidade->descricao }}
-                                            - {{ $cidade->estado->descricao }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </painel>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <button class="btn btn-primary" type="submit">Alterar</button>
-                            <modal-link nome="modal-deletar" tipo="button" titulo="Deletar"
-                                        css="btn btn-danger"></modal-link>
-                        </div>
-                    </div>
-                </div>
-            </formulario>
-        </painel>
-
-        <painel cor="panel-primary" titulo="Taxas desse condominio"
-                url="{{ route('condominios.condominiostaxas.criar', ['idCondominio' => $condominio->id]) }}"
-                nomeurl="cadastrar taxas">
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>Descrição</th>
-                    <th>Valor</th>
-                    <th>Ações</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($taxas as $taxa)
-                    <tr>
-                        <td>{{ $taxa->descricao }}</td>
-                        <td>{{ $taxa->valor }}</td>
-                        <td>
-                            <a href="{{ route('condominios.condominiostaxas.exibir', ['id' => $taxa->id, 'idCondominio' => $condominio->id]) }}"
-                               class="btn btn-success">Alterar</a>
-                            <modal-link nome="modal-deletar-{{ $taxa->id }}" titulo="Excluir" tipo="button" css="btn btn-danger"></modal-link>
-                            <modal nome="modal-deletar-{{ $taxa->id }}" tamanho="modal-sm">
-                                <painel cor="panel-primary" titulo="Tem certeza que deseja deletar este condomínio?">
-                                    <formulario method="DELETE" action="{{ route('condominios.condominiostaxas.excluir', ['id' => $taxa->id, 'idCondominio' => $condominio->id]) }}"
-                                                token="{{ csrf_token() }}">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <button type="submit" class="btn btn-danger">CONFIRMAR</button>
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Descrição</th>
+                            <th>Valor</th>
+                            <th>Ações</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($taxas as $taxa)
+                            <tr>
+                                <td>{{ $taxa->descricao }}</td>
+                                <td>{{ $taxa->valor }}</td>
+                                <td>
+                                    <a href="{{ route('condominios.condominiostaxas.exibir', ['id' => $taxa->id, 'idCondominio' => $condominio->id]) }}"
+                                       class="btn btn-success">
+                                        <i class="fa fa-pencil"></i> Alterar</a>
+                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-danger-{{$taxa->id}}">
+                                        <i class="fa fa-trash"></i> Excluir
+                                    </button>
+                                    <!-- MODAL EXCLUIR TAXA GERANDO DINÂMICO -->
+                                    <div id="modal-danger-{{$taxa->id}}" class="modal modal-danger fade">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                    <h4 class="modal-title">Confirmar exclusão</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h1>Deseja realmente excluir a taxa "{{ $taxa->descricao }}"?</h1>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
+                                                    <form method="POST" action="{{ route('condominios.condominiostaxas.excluir', ['id' => $taxa->id, 'idCondominio' => $condominio->id]) }}">
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('DELETE') }}
+                                                        <button class="btn btn-outline" type="submit">Confirmar exclusão</button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
-                                    </formulario>
-                                </painel>
-                            </modal>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </painel>
-    </pagina>
-    <modal nome="modal-deletar" tamanho="modal-sm">
-        <painel cor="panel-primary" titulo="Tem certeza que deseja deletar este condomínio?">
-            <formulario method="DELETE" action="{{ route('condominios.condominios.excluir', ['id' => $condominio->id]) }}"
-                        token="{{ csrf_token() }}">
-                <div class="row">
-                    <div class="col-md-6">
-                        <button type="submit" class="btn btn-danger">CONFIRMAR</button>
-                    </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
-            </formulario>
-        </painel>
-    </modal>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL EXCLUIR CONDOMÍNIO -->
+    <div id="modal-excluir" class="modal modal-danger fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">Confirmar exclusão</h4>
+                </div>
+
+                <div class="modal-body">
+                    <h1>Deseja realmente excluir o condomínio "{{ $condominio->nome }}"?</h1>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
+                    <form method="POST" action="{{ route('condominios.condominiostaxas.excluir', ['id' => $taxa->id, 'idCondominio' => $condominio->id]) }}">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <button class="btn btn-outline" type="submit">Confirmar exclusão</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
-@section('scripts')
+@section('js')
     <script>
         $(document).ready(function () {
+            $('.select2').select2();
             $('#Nome').focus();
             if ($("select[id=TemGas]").val() != 1)
                 $("#ValorGas").prop("disabled", true);
