@@ -10,7 +10,7 @@
             <a href="{{ route('condominios.condominios.listar') }}"><i class="fa fa-home"></i> Condomínios</a>
         </li>
         <li class="active">
-            <i class="fa fa-pencil"></i> Editar condomínio
+            <i class="fa fa-pencil"></i> Editar Condomínio
         </li>
     </ol>
 @stop
@@ -26,7 +26,7 @@
         <div class="col-md-12">
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Editar condomínio</h3>
+                    <h3 class="box-title">Editar Condomínio</h3>
                     <div class="box-tools pull-right">
                         <button class="btn btn-box-tool" type="button" data-widget="collapse">
                             <i class="fa fa-minus"></i></button>
@@ -264,10 +264,10 @@
                                                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">×</span>
                                                     </button>
-                                                    <h4 class="modal-title">Confirmar exclusão</h4>
+                                                    <h3 class="modal-title">Confirmar exclusão</h3>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <h1>Deseja realmente excluir a taxa "{{ $taxa->descricao }}"?</h1>
+                                                    <h4>Deseja realmente excluir a taxa "{{ $taxa->descricao }}"?</h4>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
@@ -298,16 +298,16 @@
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
-                    <h4 class="modal-title">Confirmar exclusão</h4>
+                    <h3 class="modal-title">Confirmar exclusão</h3>
                 </div>
 
                 <div class="modal-body">
-                    <h1>Deseja realmente excluir o condomínio "{{ $condominio->nome }}"?</h1>
+                    <h4>Deseja realmente excluir o condomínio "{{ $condominio->nome }}"?</h4>
                 </div>
 
                 <div class="modal-footer">
                     <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
-                    <form method="POST" action="{{ route('condominios.condominiostaxas.excluir', ['id' => $taxa->id, 'idCondominio' => $condominio->id]) }}">
+                    <form method="POST" action="{{ route('condominios.condominios.excluir', ['id' => $condominio->id]) }}">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <button class="btn btn-outline" type="submit">Confirmar exclusão</button>

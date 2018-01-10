@@ -64,11 +64,11 @@
                                                 <div class="modal-header">
                                                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">×</span>
-                                                    </button>
-                                                    <h4 class="modal-title">Confirmar exclusão</h4>
+                                                       </button>
+                                                    <h3 class="modal-title">Confirmar exclusão</h3>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <h1>Deseja realmente excluir o condomínio "{{ $condominio->nome }}"?</h1>
+                                                    <h4>Deseja realmente excluir o condomínio "{{ $condominio->nome }}"?</h4>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
