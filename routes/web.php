@@ -171,10 +171,3 @@ Route::prefix('Entidades')->namespace('Entidades')->group(function(){
         Route::delete('{id}', 'InquilinosController@excluir')->name('entidades.inquilinos.excluir');
     });
 });
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
