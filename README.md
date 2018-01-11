@@ -1,29 +1,10 @@
-# README #
+# LEIA-ME #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Todas as resoluções foram resolvidas subindo os arquivos em questão para o git.
 
-### What is this repository for? ###
+No entanto está registrado aqui em caso de problemas futuros.
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+### Possiveis problemas ###
+* Mesmo que o .env esteja no git, dê um `php artisan key:generate` sempre que clonar o projeto
+* Page not found -> verifique se existe o arquivo .env (por padrão ele sobe pro git)
+* Os textos do admin LTE não estão encontrando a tradução. Vá em `resources/lang/vendor/adminlte/` verifique se a pasta está com o nome de `pt-BR`. PS: É case-sensitive.
