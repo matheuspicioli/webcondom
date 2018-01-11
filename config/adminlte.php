@@ -109,13 +109,18 @@ return [
 
     'menu' => [
         [
-            'text'    => 'Condominios',
-            'icon'    => 'home',
-            'submenu' => [
+        'text'    => 'Cadastros',
+        'icon'    => 'list-alt',
+        'submenu' => [
+        [
+            'text'    => 'Condomínios',
+            'icon'    => 'building-o',
+            'submenu' =>
+            [
                 [
                     'text'  => 'Condominios',
                     'url'   => 'Condominios/Condominios',
-                    'icon'  => 'home'
+                    'icon'  => 'building-o'
                 ],
                 [
                     'text'  => 'Síndicos',
@@ -127,10 +132,23 @@ return [
                     'url'   => 'Condominios/Imoveis',
                     'icon'  => 'home'
                 ]
+            ],
+        ],
+        [
+                'text'    => 'Entidades',
+                'icon'    => 'users',
+                'submenu' =>
+                    [
+                [
+                    'text'  => 'Proprietários',
+                    'url'   => 'Entidades/Proprietarios',
+                    'icon'  => 'user'
+                ]
             ]
         ]
+            ]
+            ]
     ],
-
     /*
     |--------------------------------------------------------------------------
     | Menu Filters
