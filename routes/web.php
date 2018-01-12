@@ -52,6 +52,17 @@ Route::prefix('Condominios')->namespace('Condominios')->group(function(){
     });
 });
 
+Route::prefix('Financeiros')->namespace('Financeiros')->group(function(){
+    Route::prefix('GrupoDeContas')->group(function(){
+        Route::get('/', 'GrupoDeContasController@listar')->name('financeiros.grupodecontas.listar');
+        Route::get('Criar', 'GrupoDeContasController@criar')->name('financeiros.grupodecontas.criar');
+        Route::post('/', 'GrupoDeContasController@salvar')->name('financeiros.grupodecontas.salvar');
+        Route::get('{id}/Exibir', 'GrupoDeContasController@exibir')->name('financeiros.grupodecontas.exibir');
+        Route::put('{id}/Alterar', 'GrupoDeContasController@alterar')->name('financeiros.grupodecontas.alterar');
+        Route::delete('{id}', 'GrupoDeContasController@excluir')->name('financeiros.grupodecontas.excluir');
+    });
+});
+
 Route::prefix('Enderecos')->namespace('Enderecos')->group(function() {
     Route::prefix('Estados')->group(function () {
         Route::get('/', 'EstadosController@listar')->name('enderecos.estados.listar');
