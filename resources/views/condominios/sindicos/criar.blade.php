@@ -56,7 +56,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <button class="btn btn-primary" type="submit">Cadastrar</button>
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fa fa-save"></i> Cadastrar</button>
                                 </div>
                             </div>
                         </div>

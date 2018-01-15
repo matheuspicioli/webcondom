@@ -11,6 +11,6 @@ class SindicosSeeder extends Seeder
      */
     public function run()
     {
-        factory(WebCondom\Models\Condominios\Sindico::class, 10)->create();
+        factory(WebCondom\Models\Condominios\Sindico::class, 30)->create();
     }
 }

@@ -146,7 +146,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="box box-warning box-solid">
+                                <div class="box box-primary box-solid">
                                     <div class="box-header with-border">
                                         <h3 class="box-title">Endereço</h3>
                                     </div>
@@ -213,7 +213,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <button class="btn btn-info" type="submit">
-                                        <i class="fa fa-pencil"></i> Alterar</button>
+                                        <i class="fa fa-save"></i> Salvar</button>
                                     <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
                                         <i class="fa fa-trash"></i> Excluir
                                     </button>
