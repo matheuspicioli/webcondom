@@ -29,7 +29,6 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Cadastrar condomínio</h3>
                 </div>
-
                 <div class="box-body">
                     <form action="{{ route('condominios.condominios.salvar') }}" method="POST">
                         {{ csrf_field() }}

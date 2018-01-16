@@ -30,5 +30,6 @@ class DatabaseSeeder extends Seeder
         $this->call('EmpresasSeeder');
         $this->call('FornecedoresSeeder');
         $this->call('FuncionariosSeeder');
+        $this->call('BancosSeeder');
     }
 }

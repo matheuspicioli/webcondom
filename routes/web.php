@@ -61,6 +61,14 @@ Route::prefix('Financeiros')->namespace('Financeiros')->group(function(){
         Route::put('{id}/Alterar', 'GrupoDeContasController@alterar')->name('financeiros.grupodecontas.alterar');
         Route::delete('{id}', 'GrupoDeContasController@excluir')->name('financeiros.grupodecontas.excluir');
     });
+    Route::prefix('Bancos')->group(function(){
+        Route::get('/', 'BancosController@listar')->name('financeiros.bancos.listar');
+        Route::get('Criar', 'BancosController@criar')->name('financeiros.bancos.criar');
+        Route::post('/', 'BancosController@salvar')->name('financeiros.bancos.salvar');
+        Route::get('{id}/Exibir', 'BancosController@exibir')->name('financeiros.bancos.exibir');
+        Route::put('{id}/Alterar', 'BancosController@alterar')->name('financeiros.bancos.alterar');
+        Route::delete('{id}', 'BancosController@excluir')->name('financeiros.bancos.excluir');
+    });
 });
 
 Route::prefix('Enderecos')->namespace('Enderecos')->group(function() {

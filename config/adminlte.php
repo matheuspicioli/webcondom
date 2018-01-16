@@ -135,6 +135,18 @@ return [
             ],
         ],
         [
+            'text'    => 'Entidades',
+            'icon'    => 'users',
+            'submenu' =>
+            [
+                [
+                'text'  => 'Proprietários',
+                'url'   => 'Entidades/Proprietarios',
+                'icon'  => 'user'
+                ]
+            ]
+        ],
+        [
             'text'    => 'Financeiro',
             'icon'    => 'dollar',
             'submenu' =>
@@ -149,20 +161,13 @@ return [
                         'url'   => 'Financeiros/GrupoDeContas',
                         'icon'  => 'circle-o'
                     ],
+                    [
+                        'text'  => 'Bancos',
+                        'url'   => 'Financeiros/Bancos',
+                        'icon'  => 'bank'
+                    ],
 
                 ]
-        ],
-        [
-            'text'    => 'Entidades',
-            'icon'    => 'users',
-            'submenu' =>
-            [
-                [
-                'text'  => 'Proprietários',
-                'url'   => 'Entidades/Proprietarios',
-                'icon'  => 'user'
-                ]
-            ]
         ],
         [
             'text'    => 'Diversos',

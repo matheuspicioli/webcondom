@@ -14,7 +14,6 @@
         </li>
     </ol>
 @stop
-
 @section('content')
     <div class="row">
         <div class="col-md-1">
@@ -29,10 +28,10 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Cadastrar Síndico</h3>
                 </div>
-
                 <div class="box-body">
                     <form action="{{ route('condominios.sindicos.salvar') }}" method="POST">
                         {{ csrf_field() }}
+                        {{ method_field('PUT') }}
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
