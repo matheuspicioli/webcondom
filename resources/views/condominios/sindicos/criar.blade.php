@@ -31,7 +31,6 @@
                 <div class="box-body">
                     <form action="{{ route('condominios.sindicos.salvar') }}" method="POST">
                         {{ csrf_field() }}
-                        {{ method_field('PUT') }}
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">

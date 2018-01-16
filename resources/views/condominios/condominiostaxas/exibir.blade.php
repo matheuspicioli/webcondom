@@ -71,7 +71,7 @@
     </div>
 
     <!-- MODAL EXCLUIR TAXA GERANDO DINÂMICO -->
-    <div id="modal-danger-{{$taxa->id}}" class="modal modal-danger fade">
+    <div id="modal-excluir" class="modal modal-danger fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

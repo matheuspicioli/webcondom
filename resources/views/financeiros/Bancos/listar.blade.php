@@ -48,9 +48,9 @@
                         <tbody>
                         @foreach($bancos as $banco)
                             <tr>
-                                <td>{{ $banco->codigoBanco }}</td>
+                                <td>{{ $banco->codigo_banco }}</td>
                                 <td>{{ $banco->CNAB }}</td>
-                                <td>{{ $banco->nomeBanco }}</td>
+                                <td>{{ $banco->nome_banco }}</td>
                                 <td>
                                     <a class="btn btn-warning" href="{{ route('financeiros.bancos.exibir', ['id' => $banco->id ]) }}">
                                         <i class="fa fa-pencil"></i> Alterar</a>
@@ -68,7 +68,7 @@
                                                     <h3 class="modal-title">Confirmar exclusão</h3>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <h4>Deseja realmente excluir o banco "{{ $banco->nomeBanco }}" no padrão CNAB "{{ $banco->CNAB }}"?</h4>
+                                                    <h4>Deseja realmente excluir o banco "{{ $banco->nome_banco }}" no padrão CNAB "{{ $banco->CNAB }}"?</h4>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
