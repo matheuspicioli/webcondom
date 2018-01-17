@@ -1,13 +1,13 @@
 @extends('adminlte::page')
-@section('title', 'Condominios - Listar')
+@section('title', 'Grupo de contas - Listar')
 @section('content_header')
-    <h1>Condomínios - <small>listagem</small></h1>
+    <h1>Grupo de contas - <small>listagem</small></h1>
     <ol class="breadcrumb">
         <li>
             <a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a>
         </li>
         <li class="active">
-            <i class="fa fa-home"></i> Condomínios
+            <i class="fa fa-group"></i> Grupo de contas
         </li>
     </ol>
 @stop
@@ -15,7 +15,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-1">
-            <a href="{{ route('condominios.condominios.criar') }}" class="btn btn-success">
+            <a href="{{ route('financeiros.grupodecontas.criar') }}" class="btn btn-success">
                 <i class="fa fa-plus"></i> Cadastrar</a>
             <hr>
         </div>
@@ -24,7 +24,7 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Condomínios</h3>
+                    <h3 class="box-title">Grupo de contas</h3>
                 </div>
 
                 <div class="box-body">
@@ -32,33 +32,33 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Nome</th>
-                            <th>Endereço</th>
+                            <th>Descrição</th>
+                            <th>Ratear?</th>
                             <th>Ações</th>
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
                             <th>#</th>
-                            <th>Nome</th>
-                            <th>Endereço</th>
+                            <th>Descrição</th>
+                            <th>Ratear?</th>
                             <th>Ações</th>
                         </tr>
                         </tfoot>
                         <tbody>
-                        @foreach($condominios as $condominio)
+                        @foreach($grupos->dados as $grupo)
                             <tr>
-                                <td>{{ $condominio->id }}</td>
-                                <td>{{ $condominio->nome }}</td>
-                                <td>{{ $condominio->endereco->endereco_formatado }}</td>
+                                <td>{{ $grupo->id }}</td>
+                                <td>{{ $grupo->descricao }}</td>
+                                <td>{{ $grupo->ratear_formatado }}</td>
                                 <td>
-                                    <a class="btn btn-warning" href="{{ route('condominios.condominios.exibir', ['id' => $condominio->id ]) }}">
+                                    <a class="btn btn-warning" href="{{ route('financeiros.grupodecontas.exibir', ['id' => $grupo->id ]) }}">
                                         <i class="fa fa-pencil"></i> Alterar</a>
-                                    <button type="button" data-toggle="modal" data-target="#modal-danger-{{$condominio->id}}" href="#" class="btn btn-danger">
+                                    <button type="button" data-toggle="modal" data-target="#modal-danger-{{$grupo->id}}" href="#" class="btn btn-danger">
                                         <i class="fa fa-trash"></i> Excluir
                                     </button>
                                     <!-- MODAL EXCLUSÃO -->
-                                    <div id="modal-danger-{{$condominio->id}}" class="modal modal-danger fade">
+                                    <div id="modal-danger-{{$grupo->id}}" class="modal modal-danger fade">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -68,11 +68,11 @@
                                                     <h3 class="modal-title">Confirmar exclusão</h3>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <h4>Deseja realmente excluir o condomínio "{{ $condominio->nome }}"?</h4>
+                                                    <h4>Deseja realmente excluir o grupo de contas "{{ $grupo->descricao }}"?</h4>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
-                                                    <form method="POST" action="{{ route('condominios.condominios.excluir', ['id' => $condominio->id]) }}">
+                                                    <form method="POST" action="{{ route('financeiros.grupodecontas.excluir', ['id' => $grupo->id]) }}">
                                                         {{ csrf_field() }}
                                                         {{ method_field('DELETE') }}
                                                         <button class="btn btn-outline" type="submit">Confirmar exclusão</button>

@@ -4,13 +4,21 @@ namespace WebCondom\Http\Controllers\Financeiros;
 
 use Illuminate\Http\Request;
 use WebCondom\Http\Controllers\Controller;
-use WebCondom\Models\Financeiros\GrupoDeConta;
+use WebCondom\Services\Financeiros\GrupoDeContasService;
 
 class GrupoDeContasController extends Controller
 {
+    private $service;
+
+    public function __construct(GrupoDeContasService $service)
+    {
+        $this->service  = $service;
+    }
+
     public function Listar()
     {
-        $grupos = GrupoDeConta::all();
+        $grupos = $this->service->Listar();
+
         return view('financeiros.grupodecontas.listar', compact('grupos'));
     }
 
@@ -21,37 +29,26 @@ class GrupoDeContasController extends Controller
 
     public function Salvar(Request $request)
     {
-        GrupoDeConta::create($request->all());
+        $grupo = $this->service->Salvar($request->all());
         return redirect()->route('financeiros.grupodecontas.listar');
     }
 
     public function Exibir($id)
     {
-        $grupo = GrupoDeConta::find($id) ? GrupoDeConta::find($id) : null;
-
-        if ($grupo) {
-            return view('financeiros.grupodecontas.exibir', compact('grupo'));
-        } else
-            return redirect()->route('financeiros.grupodecontas.criar');
+        $grupo = $this->service->Exibir($id);
+        return view('financeiros.grupodecontas.exibir', compact('grupo'));
     }
 
     public function Alterar(Request $request, $id)
     {
-        $grupo = GrupoDeConta::find($id);
-        if($grupo){
-            $grupo->update($request->all());
-            return redirect()->route('financeiros.grupodecontas.listar');
-        }
+        $grupo = $this->service->Alterar($request, $id);
         return redirect()->route('financeiros.grupodecontas.listar');
     }
 
     public function Excluir($id)
     {
-        $grupo = GrupoDeConta::find($id);
-        if($grupo){
-            $grupo->delete();
-            return redirect()->route('condominios.condominios.listar');
-        }
+        $grupo = $this->service->Excluir($id);
+        return redirect()->route('financeiros.grupodecontas.listar');
     }
 
 }

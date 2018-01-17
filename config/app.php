@@ -171,6 +171,7 @@ return [
         /*
          * Application Service Providers...
          */
+        WebCondom\Providers\RepositoryServiceProvider::class,
         WebCondom\Providers\AppServiceProvider::class,
         WebCondom\Providers\AuthServiceProvider::class,
         // WebCondom\Providers\BroadcastServiceProvider::class,
