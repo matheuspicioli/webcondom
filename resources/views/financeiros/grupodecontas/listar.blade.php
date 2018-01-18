@@ -34,6 +34,8 @@
                             <th>#</th>
                             <th>Descrição</th>
                             <th>Ratear?</th>
+                            <th>Criado em</th>
+                            <th>Alterado em</th>
                             <th>Ações</th>
                         </tr>
                         </thead>
@@ -42,6 +44,8 @@
                             <th>#</th>
                             <th>Descrição</th>
                             <th>Ratear?</th>
+                            <th>Criado em</th>
+                            <th>Alterado em</th>
                             <th>Ações</th>
                         </tr>
                         </tfoot>
@@ -51,6 +55,8 @@
                                 <td>{{ $grupo->id }}</td>
                                 <td>{{ $grupo->descricao }}</td>
                                 <td>{{ $grupo->ratear_formatado }}</td>
+                                <td>{{ $grupo->criado_em }}</td>
+                                <td>{{ $grupo->alterado_em }}</td>
                                 <td>
                                     <a class="btn btn-warning" href="{{ route('financeiros.grupodecontas.exibir', ['id' => $grupo->id ]) }}">
                                         <i class="fa fa-pencil"></i> Alterar</a>

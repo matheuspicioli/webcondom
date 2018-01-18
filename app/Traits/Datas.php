@@ -12,15 +12,11 @@ trait Datas
 {
     public function getcriadoEmAttribute()
     {
-        $dia = $this->created_at->day; $mes = $this->created_at->month; $ano = $this->created_at->year;
-        $hora = $this->created_at->hour; $minuto = $this->created_at->minute; $segundo = $this->created_at->second;
-        return "{$dia}/{$mes}/{$ano} {$hora}:{$minuto}:{$segundo}";
+        return $this->created_at->format('d/m/Y');
     }
 
     public function getalteradoEmAttribute()
     {
-        $dia = $this->updated_at->day; $mes = $this->updated_at->month; $ano = $this->updated_at->year;
-        $hora = $this->updated_at->hour; $minuto = $this->updated_at->minute; $segundo = $this->updated_at->second;
-        return "{$dia}/{$mes}/{$ano} {$hora}:{$minuto}:{$segundo}";
+        return $this->updated_at && $this->updated_at != $this->created_at ? $this->updated_at->format('d/m/Y') : 'Não sofreu alterações.';
     }
 }
