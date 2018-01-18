@@ -24,6 +24,7 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(\WebCondom\Repositories\Financeiros\GrupoDeContasRepository::class, \WebCondom\Repositories\Financeiros\GrupoDeContasRepositoryEloquent::class);
+        $this->app->bind(\WebCondom\Repositories\Financeiros\PlanoDeContasRepository::class, \WebCondom\Repositories\Financeiros\PlanoDeContasRepositoryEloquent::class);
         //:end-bindings:
     }
 }

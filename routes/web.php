@@ -61,6 +61,16 @@ Route::prefix('Financeiros')->namespace('Financeiros')->group(function(){
         Route::put('{id}/Alterar', 'GrupoDeContasController@alterar')->name('financeiros.grupodecontas.alterar');
         Route::delete('{id}', 'GrupoDeContasController@excluir')->name('financeiros.grupodecontas.excluir');
     });
+
+    Route::prefix('PlanoDeContas')->group(function(){
+        Route::get('/', 'PlanoDeContasController@listar')->name('financeiros.planodecontas.listar');
+        Route::get('Criar', 'PlanoDeContasController@criar')->name('financeiros.planodecontas.criar');
+        Route::post('/', 'PlanoDeContasController@salvar')->name('financeiros.planodecontas.salvar');
+        Route::get('{id}/Exibir', 'PlanoDeContasController@exibir')->name('financeiros.planodecontas.exibir');
+        Route::put('{id}/Alterar', 'PlanoDeContasController@alterar')->name('financeiros.planodecontas.alterar');
+        Route::delete('{id}', 'PlanoDeContasController@excluir')->name('financeiros.planodecontas.excluir');
+    });
+
     Route::prefix('Bancos')->group(function(){
         Route::get('/', 'BancosController@listar')->name('financeiros.bancos.listar');
         Route::get('Criar', 'BancosController@criar')->name('financeiros.bancos.criar');
