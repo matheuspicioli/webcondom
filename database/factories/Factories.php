@@ -75,14 +75,12 @@ $factory->define(WebCondom\Models\Entidades\Entidade::class, function (Faker $fa
         'empresa'               => $faker->company,
         'dependentes'           => $faker->randomNumber(1),
         'inss'                  => $faker->randomNumber(8),
-        'endereco_principal_id' => 1,
         'telefone_principal'    => rand(1,3) == 1 ? $faker->e164PhoneNumber : '',
         'telefone_comercial'    => rand(1,5) == 1 ? $faker->e164PhoneNumber : '',
         'celular_1'             => $faker->e164PhoneNumber,
         'celular_2'             => rand(1,3) == 1 ? $faker->e164PhoneNumber : '',
         'site'                  => $faker->url,
         'email'                 => $faker->email,
-        'endereco_cobranca_id'  => 1,
     ];
 });
 
@@ -101,9 +99,9 @@ $factory->define(WebCondom\Models\Condominios\Imovel::class, function (Faker $fa
         'categoria_id'      => 1,
         'valor_locacao'     => $faker->randomFloat(2,800, 12000),
         'valor_venda'       => $faker->randomFloat(2, 50000, 10000000),
-        'codigo_agua'       => $faker->word . $faker->numberBetween(1,150),
-        'codigo_iptu'       => $faker->word . $faker->numberBetween(1,150),
-        'codigo_energia'    => $faker->word . $faker->numberBetween(1,150),
+        'codigo_agua'       => $faker->word . $faker->numberBetween(1000,9000),
+        'codigo_iptu'       => $faker->word . $faker->numberBetween(20100,55000),
+        'codigo_energia'    => $faker->word . $faker->numberBetween(135711,533000),
         'descritivo'        => $faker->sentence()
     ];
 });
