@@ -127,61 +127,66 @@
                                 </div>
                             </div>
                         </div>
-                       <painel cor="panel-info" titulo="Endereço" posicao="text-center">
-                           <div class="row">
-                               <div class="col-md-4">
-                                   <div class="form-group">
-                                       <label for="CEP" class="control-label">CEP</label>
-                                       <input type="text" id="CEP" name="cep" class="form-control pula">
-                                       <span class="help-block">Apenas os números</span>
-                                   </div>
-                               </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="box box-primary box-solid">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Endereço</h3>
+                                    </div>
+                                    <div class="box-body">
+                                    <div class="row">
+                                       <div class="col-md-4">
+                                           <div class="form-group">
+                                               <label for="CEP" class="control-label">CEP</label>
+                                               <input type="text" id="CEP" name="cep" class="form-control pula">
+                                               <span class="help-block">Apenas os números</span>
+                                           </div>
+                                       </div>
 
-                               <div class="col-md-8">
-                                   <div class="form-group">
-                                       <label for="Logradouro" class="control-label">Logradouro</label>
-                                       <input id="Logradouro" type="text" class="form-control pula" name="logradouro">
-                                   </div>
-                               </div>
-                           </div>
-
-                           <div class="row">
-                               <div class="col-md-2">
-                                   <div class="form-group">
-                                       <label for="Numero" class="control-label">Número</label>
-                                       <input type="number" min="0" id="Numero" name="numero" class="form-control pula">
-                                   </div>
-                               </div>
-
-                               <div class="col-md-10">
-                                   <div class="form-group">
-                                       <label for="Complemento" class="control-label">Complemento</label>
-                                       <input type="text" id="Complemento" name="complemento" class="form-control pula">
-                                   </div>
-                               </div>
-                           </div>
-
-                           <div class="row">
-                               <div class="col-md-4">
-                                   <div class="form-group">
-                                       <label for="Bairro" class="control-label">Bairro</label>
-                                       <input type="text" id="Bairro" name="bairro" class="form-control pula">
-                                   </div>
-                               </div>
-
-                               <div class="col-md-8">
-                                   <div class="form-group">
-                                       <label for="CidadeCOD" class="control-label">Cidade</label>
-                                       <select name="cidade_id" id="CidadeCOD" class="form-control pula">
-                                           <option selected disabled>-------Selecione uma cidade-------</option>
-                                           @foreach($cidades as $cidade)
-                                               <option value="{{ $cidade->id }}">{{ $cidade->descricao }} - {{ $cidade->estado->sigla }}</option>
-                                           @endforeach
-                                       </select>
-                                   </div>
-                               </div>
-                           </div>
-                       </painel>
+                                       <div class="col-md-8">
+                                           <div class="form-group">
+                                               <label for="Logradouro" class="control-label">Logradouro</label>
+                                               <input id="Logradouro" type="text" class="form-control pula" name="logradouro">
+                                           </div>
+                                       </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-md-2">
+                                           <div class="form-group">
+                                               <label for="Numero" class="control-label">Número</label>
+                                               <input type="number" min="0" id="Numero" name="numero" class="form-control pula">
+                                           </div>
+                                       </div>
+                                       <div class="col-md-10">
+                                           <div class="form-group">
+                                               <label for="Complemento" class="control-label">Complemento</label>
+                                               <input type="text" id="Complemento" name="complemento" class="form-control pula">
+                                           </div>
+                                       </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-md-4">
+                                           <div class="form-group">
+                                               <label for="Bairro" class="control-label">Bairro</label>
+                                               <input type="text" id="Bairro" name="bairro" class="form-control pula">
+                                           </div>
+                                       </div>
+                                       <div class="col-md-8">
+                                           <div class="form-group">
+                                               <label for="CidadeCOD" class="control-label">Cidade</label>
+                                               <select name="cidade_id" id="CidadeCOD" class="form-control pula">
+                                                   <option selected disabled>-------Selecione uma cidade-------</option>
+                                                   @foreach($cidades as $cidade)
+                                                       <option value="{{ $cidade->id }}">{{ $cidade->descricao }} - {{ $cidade->estado->sigla }}</option>
+                                                   @endforeach
+                                               </select>
+                                           </div>
+                                       </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">

@@ -20,12 +20,16 @@ class EntidadesSeeder extends Seeder
             'endereco_principal_id' => '2',
             'ramo_atividade'        => 'ADM.CONDOMINIOS',
             'data_abertura'         => '1994-05-28',
+            'endereco_principal_id' => 1,
             'telefone_principal'    => '1732112500',
             'telefone_comercial'    => '17 32112500',
             'celular_1'             => '17987654321',
             'celular_2'             => '17991111111',
+            'endereco_cobranca_id'  => 1,
             'site'                  => 'www.metropolitanadm.com.br',
             'email'                 => 'contato@metropolitanadm.com.br']);
+
+
 
         Entidade::create([
             'cpf_cnpj'              => '11122233344',

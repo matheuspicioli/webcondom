@@ -16,7 +16,15 @@ trait Endereco
         $logradouro = $this->logradouro;
         $numero     = $this->numero;
         $bairro     = $this->bairro;
+        return "$logradouro, $numero - $bairro   ";
+    }
+    public function getenderecoCompletoAttribute()
+    {
+        $logradouro = $this->logradouro;
+        $numero     = $this->numero;
+        $bairro     = $this->bairro;
         $cidade     = $this->cidade->descricao." - ".$this->cidade->estado->sigla;
         return "$logradouro, $numero, $bairro - $cidade";
     }
+
 }
