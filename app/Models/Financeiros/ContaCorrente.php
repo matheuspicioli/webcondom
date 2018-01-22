@@ -1,0 +1,47 @@
+<?php
+
+namespace WebCondom\Models\Financeiros;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use WebCondom\Traits\Datas;
+use WebCondom\Models\Condominios\Condominio;
+/**
+ * Class ContasCorrente.
+ *
+ * @package namespace WebCondom\Models;
+ */
+class ContaCorrente extends Model
+{
+    use Datas, SoftDeletes;
+
+    protected $table = 'contas_corrente';
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'condominio_id', 'codigo', 'banco_id', 'agencia', 'conta', 'inicio', 'principal',
+        'nome', 'boleto_agencia', 'boleto_conta', 'cedente', 'carteira',
+        'aceita', 'nosso_numero', 'prazo_baixa'
+    ];
+
+    protected $dates = [ "inicio" ];
+
+    public function getinicioFormatadoAttribue()
+    {
+        return $this->inicio;
+    }
+
+    public function condomonio()
+    {
+        return $this->belongsTo(Condominio::class);
+    }
+
+    public function banco()
+    {
+        return $this->belongsTo(Banco::class);
+    }
+
+}

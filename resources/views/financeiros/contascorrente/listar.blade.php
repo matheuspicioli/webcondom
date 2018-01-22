@@ -1,13 +1,13 @@
 @extends('adminlte::page')
-@section('title', 'Plano de contas - Listar')
+@section('title', 'Contas corrente - Listar')
 @section('content_header')
-    <h1>Plano de contas - <small>listagem</small></h1>
+    <h1>Contas corrente - <small>listagem</small></h1>
     <ol class="breadcrumb">
         <li>
             <a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a>
         </li>
         <li class="active">
-            <i class="fa fa-group"></i> Plano de contas
+            <i class="fa fa-group"></i> Contas corrente
         </li>
     </ol>
 @stop
@@ -15,7 +15,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-1">
-            <a href="{{ route('financeiros.planodecontas.criar') }}" class="btn btn-success">
+            <a href="{{ route('financeiros.contascorrente.criar') }}" class="btn btn-success">
                 <i class="fa fa-plus"></i> Cadastrar</a>
             <hr>
         </div>
@@ -32,10 +32,10 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Descrição</th>
-                            <th>Grupo de conta</th>
-                            <th>Classificação</th>
-                            <th>Criado em</th>
+                            <th>Banco</th>
+                            <th>Conta</th>
+                            <th>Agencia</th>
+                            <th>Nosso número (boleto)</th>
                             <th>Alterado em</th>
                             <th>Ações</th>
                         </tr>
@@ -43,31 +43,31 @@
                         <tfoot>
                         <tr>
                             <th>#</th>
-                            <th>Descrição</th>
-                            <th>Grupo de conta</th>
-                            <th>Classificação</th>
-                            <th>Criado em</th>
+                            <th>Banco</th>
+                            <th>Conta</th>
+                            <th>Agencia</th>
+                            <th>Nosso número (boleto)</th>
                             <th>Alterado em</th>
                             <th>Ações</th>
                         </tr>
                         </tfoot>
                         <tbody>
-                        @foreach($planos->dados as $plano)
+                        @foreach($contas->dados as $conta)
                             <tr>
-                                <td>{{ $plano->id }}</td>
-                                <td>{{ $plano->descricao }}</td>
-                                <td>{{ $plano->grupo_contas ? $plano->grupo_contas->descricao : 'Registro pai excluído' }}</td>
-                                <td>{{ $plano->classificacao }}</td>
-                                <td>{{ $plano->criado_em }}</td>
-                                <td>{{ $plano->alterado_em }}</td>
+                                <td>{{ $conta->id }}</td>
+                                <td>{{ $conta->banco ? $conta->banco->nome_banco : 'O registro pai foi excluído' }}</td>
+                                <td>{{ $conta->conta }}</td>
+                                <td>{{ $conta->agencia }}</td>
+                                <td>{{ $conta->nosso_numero }}</td>
+                                <td>{{ $conta->alterado_em }}</td>
                                 <td>
-                                    <a class="btn btn-warning" href="{{ route('financeiros.planodecontas.exibir', ['id' => $plano->id ]) }}">
+                                    <a class="btn btn-warning" href="{{ route('financeiros.contascorrente.exibir', ['id' => $conta->id ]) }}">
                                         <i class="fa fa-pencil"></i> Alterar</a>
-                                    <button type="button" data-toggle="modal" data-target="#modal-danger-{{$plano->id}}" href="#" class="btn btn-danger">
+                                    <button type="button" data-toggle="modal" data-target="#modal-danger-{{$conta->id}}" href="#" class="btn btn-danger">
                                         <i class="fa fa-trash"></i> Excluir
                                     </button>
                                     <!-- MODAL EXCLUSÃO -->
-                                    <div id="modal-danger-{{$plano->id}}" class="modal modal-danger fade">
+                                    <div id="modal-danger-{{$conta->id}}" class="modal modal-danger fade">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -77,11 +77,15 @@
                                                     <h3 class="modal-title">Confirmar exclusão</h3>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <h4>Deseja realmente excluir o plano de contas "{{ $plano->descricao }}"?</h4>
+                                                    <h2>Dados da exclusão: </h2>
+                                                    <p>Conta:   {{ $conta->conta }}</p>
+                                                    <p>Agência: {{ $conta->agencia }}</p>
+                                                    <p>Banco:   {{ $conta->banco ? $conta->banco->nome_banco : 'Registro pai foi excluído.' }}</p>
+                                                    <p>Nosso número (boleto): {{ $conta->nosso_numero }}</p>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
-                                                    <form method="POST" action="{{ route('financeiros.planodecontas.excluir', ['id' => $plano->id]) }}">
+                                                    <form method="POST" action="{{ route('financeiros.contascorrente.excluir', ['id' => $conta->id]) }}">
                                                         {{ csrf_field() }}
                                                         {{ method_field('DELETE') }}
                                                         <button class="btn btn-outline" type="submit">Confirmar exclusão</button>

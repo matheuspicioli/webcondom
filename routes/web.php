@@ -79,6 +79,15 @@ Route::prefix('Financeiros')->namespace('Financeiros')->group(function(){
         Route::put('{id}/Alterar', 'BancosController@alterar')->name('financeiros.bancos.alterar');
         Route::delete('{id}', 'BancosController@excluir')->name('financeiros.bancos.excluir');
     });
+
+    Route::prefix('ContasCorrente')->group(function(){
+        Route::get('/', 'ContasCorrenteController@listar')->name('financeiros.contascorrente.listar');
+        Route::get('Criar', 'ContasCorrenteController@criar')->name('financeiros.contascorrente.criar');
+        Route::post('/', 'ContasCorrenteController@salvar')->name('financeiros.contascorrente.salvar');
+        Route::get('{id}/Exibir', 'ContasCorrenteController@exibir')->name('financeiros.contascorrente.exibir');
+        Route::put('{id}/Alterar', 'ContasCorrenteController@alterar')->name('financeiros.contascorrente.alterar');
+        Route::delete('{id}', 'ContasCorrenteController@excluir')->name('financeiros.contascorrente.excluir');
+    });
 });
 
 Route::prefix('Enderecos')->namespace('Enderecos')->group(function() {

@@ -3,6 +3,7 @@
 namespace WebCondom\Models\Financeiros;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use WebCondom\Traits\Datas;
 
 /**
@@ -12,7 +13,7 @@ use WebCondom\Traits\Datas;
  */
 class PlanoDeConta extends Model
 {
-    use Datas;
+    use Datas, SoftDeletes;
     /**
      * The attributes that are mass assignable.
      *
