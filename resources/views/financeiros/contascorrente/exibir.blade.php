@@ -35,7 +35,7 @@
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-10">
                                 <div class="form-group">
                                     <label for="condominio" class="control-label"></label>
                                     <select name="condominio_id" id="condominio" class="form-control">
@@ -47,6 +47,12 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="codigo" class="control-label">Código</label>
+                                    <input id="codigo" type="text" class="form-control pula" name="codigo" value="{{ $conta->dados->codigo }}">
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
@@ -55,7 +61,7 @@
                                     <select name="banco_id" class="form-control select2" id="banco">
                                         @foreach($bancosDados as $banco)
                                             <option value="{{ $banco->id }}" {{ $banco->id == $conta->dados->banco_id ? 'selected' : '' }}>
-                                                {{ $banco->nome_banco }}
+                                                {{ $banco->nome_banco }} - {{ $banco->CNAB}}
                                             </option>
                                         @endforeach
                                     </select>
@@ -132,7 +138,7 @@
                                                         value="{{ $conta->dados->carteira }}">
                                                 </div>
                                             </div>
-                                            <div class="col-md-5">
+                                            <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="nosso_numero" class="control-label">Nosso número</label>
                                                     <input id="nosso_numero" type="text" class="form-control pula" name="nosso_numero"
@@ -146,14 +152,90 @@
                                                         value="{{ $conta->dados->prazo_baixa }}">
                                                 </div>
                                             </div>
+                                            <div class="col-md-2">
+                                                <label for="aceite" class="control-label">Aceite (S/N) </label>
+                                                <select name="aceite" id="aceite" class="form-control pula">
+                                                    <option disabled selected>----------Selecione----------</option>
+                                                    <option value="1" {{ $conta->dados->aceite == 1 ? 'selected' : '' }}>Sim
+                                                    </option>
+                                                    <option value="0" {{ $conta->dados->aceite == 0 ? 'selected' : '' }}>Não
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="multa" class="control-label">Multa (%)</label>
+                                                    <input id="multa" type="text" class="form-control pula" name="juros" placeholder="150,00"
+                                                           value="{{ $conta->dados->multa ? $conta->dados->multa : '' }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="Juros" class="control-label">Juros (%)</label>
+                                                    <input id="Juros" type="text" class="form-control pula" name="juros" placeholder="150,00"
+                                                           value="{{ $conta->dados->juros ? $conta->dados->juros : '' }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="tipoJuros" class="control-label">Tipo de juros</label>
+                                                    <select name="tipojuros" id="tipojuros" class="form-control pula">
+                                                        <option disabled selected>----------Selecione----------</option>
+                                                        <option value="AD" {{ $conta->dados->tipo_juros == 'AD' ? 'selected' : '' }}>Ao
+                                                            Dia
+                                                        </option>
+                                                        <option value="AM" {{ $conta->dados->tipo_juros == 'AM' ? 'selected' : '' }}>Ao
+                                                            Mês
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label for="protestar" class="control-label">Protestar (S/N) </label>
+                                                <select name="protestar" id="protestar" class="form-control pula">
+                                                    <option disabled selected>----------Selecione----------</option>
+                                                    <option value="1" {{ $conta->dados->protestar == 1 ? 'selected' : '' }}>Sim
+                                                    </option>
+                                                    <option value="0" {{ $conta->dados->protestar == 0 ? 'selected' : '' }}>Não
+                                                    </option>
+                                                </select>
+                                            </div>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="box box-warning">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Mensagens do Boleto</h3>
+                                    </div>
+                                    <div class="box-body">
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="checkbox">
-                                                    <label for="aceita">
-                                                        <input type="checkbox" id="aceita" name="aceita"  {{ $conta->dados->aceita == 1 ? "checked" : '' }}>
-                                                        Aceitar recebimento após vencimento?
-                                                    </label>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="mensagem1" class="control-label">Mensagem</label>
+                                                    <input id="mensagem1" type="text" class="form-control pula" name="mensagem1"
+                                                           value="{{ $conta->dados->mensagem1 }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input id="mensagem2" type="text" class="form-control pula" name="mensagem2"
+                                                           value="{{ $conta->dados->mensagem2 }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input id="mensagem3" type="text" class="form-control pula" name="mensagem3"
+                                                           value="{{ $conta->dados->mensagem3 }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input id="mensagem4" type="text" class="form-control pula" name="mensagem4"
+                                                           value="{{ $conta->dados->mensagem4 }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -164,10 +246,42 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <button class="btn btn-primary" type="submit">Alterar</button>
+                                    <button class="btn btn-info" type="submit">
+                                        <i class="fa fa-save"></i> Salvar</button>
+                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
+                                        <i class="fa fa-trash"></i> Excluir
+                                    </button>
                                 </div>
                             </div>
                         </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL EXCLUIR BANCO -->
+    <div id="modal-excluir" class="modal modal-danger fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h3 class="modal-title">Confirmar exclusão</h3>
+                </div>
+                <div class="modal-body">
+                    <h3>Dados da exclusão: </h3>
+                    <p>Conta:   {{ $conta->dados->conta }}</p>
+                    <p>Agência: {{ $conta->dados->agencia }}</p>
+                    <p>Banco:   {{ $conta->dados->banco ? $conta->dados->banco->nome_banco : 'Registro pai foi excluído.' }}</p>
+                    <p>Nome : {{ $conta->dados->nome }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
+                    <form method="POST" action="{{ route('financeiros.contascorrente.excluir', ['id' => $conta->dados->id]) }}">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <button class="btn btn-outline" type="submit">Confirmar exclusão</button>
                     </form>
                 </div>
             </div>
@@ -179,7 +293,7 @@
     <script>
         $(document).ready(function () {
             $('.select2').select2();
-            $("#condominio").focus();
+            $("#tabela").focus();
         });
     </script>
 @stop

@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 @section('title', 'Contas corrente - Cadastrar')
 @section('content_header')
-    <h1>Cadastro <small>de conta corrente</small></h1>
+    <h1>Cadastro <small>de contas correntes</small></h1>
     <ol class="breadcrumb">
         <li>
             <a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a>
@@ -34,14 +34,21 @@
                     <form action="{{ route('financeiros.contascorrente.salvar') }}" method="POST">
                         {{ csrf_field() }}
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-10">
                                 <div class="form-group">
                                     <label for="condominio" class="control-label"></label>
                                     <select name="condominio_id" id="condominio" class="form-control">
+                                        <option disabled selected>----------Selecione----------</option>
                                         @foreach($condominiosDados as $condominio)
                                             <option value="{{ $condominio->id }}">{{ $condominio->nome }}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="codigo" class="control-label">Código</label>
+                                    <input id="codigo" type="text" class="form-control pula" name="codigo">
                                 </div>
                             </div>
                         </div>
@@ -50,8 +57,9 @@
                                 <div class="form-group">
                                     <label for="banco" class="control-label">Banco</label>
                                     <select name="banco_id" class="form-control select2" id="banco">
+                                        <option disabled selected>----------Selecione----------</option>
                                         @foreach($bancosDados as $banco)
-                                            <option value="{{ $banco->id }}">{{ $banco->nome_banco }}</option>
+                                            <option value="{{ $banco->id }}">{{ $banco->nome_banco }} - {{ $banco->CNAB }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -123,7 +131,7 @@
                                                     <input id="carteira" type="text" class="form-control pula" name="carteira">
                                                 </div>
                                             </div>
-                                            <div class="col-md-5">
+                                            <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="nosso_numero" class="control-label">Nosso número</label>
                                                     <input id="nosso_numero" type="text" class="form-control pula" name="nosso_numero">
@@ -135,13 +143,77 @@
                                                     <input id="prazo_baixa" type="number" class="form-control pula" name="prazo_baixa">
                                                 </div>
                                             </div>
+                                            <div class="col-md-2">
+                                                <label for="aceite" class="control-label">Aceite (S/N) </label>
+                                                <select name="aceite" id="aceite" class="form-control pula">
+                                                    <option disabled selected>Selecione</option>
+                                                    <option value="1">Sim</option>
+                                                    <option value="0">Não</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="multa" class="control-label">Multa (%)</label>
+                                                    <input id="multa" type="text" class="form-control pula" name="juros" placeholder="150,00">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="Juros" class="control-label">Juros (%)</label>
+                                                    <input id="Juros" type="text" class="form-control pula" name="juros" placeholder="150,00">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="tipojuros" class="control-label">Tipo de juros</label>
+                                                    <select name="tipojuros" id="tipojuros" class="form-control pula">
+                                                        <option disabled selected>----------Selecione----------</option>
+                                                        <option value="AD">Ao Dia</option>
+                                                        <option value="AM">Ao Mês</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="protestar" class="control-label">Protestar (S/N) </label>
+                                                <select name="protestar" id="protestar" class="form-control pula">
+                                                    <option disabled selected>Selecione</option>
+                                                    <option value="1">Sim</option>
+                                                    <option value="0">Não</option>
+                                                </select>
+                                            </div>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="box box-warning">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Mensagens do Boleto</h3>
+                                    </div>
+                                    <div class="box-body">
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="checkbox">
-                                                    <label for="aceita">
-                                                        <input type="checkbox" id="aceita" name="aceita"> Aceitar recebimento após vencimento?
-                                                    </label>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="mensagem1" class="control-label">Mensagem</label>
+                                                    <input id="mensagem1" type="text" class="form-control pula" name="mensagem1">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input id="mensagem2" type="text" class="form-control pula" name="mensagem2">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input id="mensagem3" type="text" class="form-control pula" name="mensagem3">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input id="mensagem4" type="text" class="form-control pula" name="mensagem4">
                                                 </div>
                                             </div>
                                         </div>
@@ -152,7 +224,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <button class="btn btn-primary" type="submit">Cadastrar</button>
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fa fa-save"></i> Cadastrar</button>
                                 </div>
                             </div>
                         </div>

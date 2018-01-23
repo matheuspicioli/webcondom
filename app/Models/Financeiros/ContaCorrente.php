@@ -5,7 +5,8 @@ namespace WebCondom\Models\Financeiros;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use WebCondom\Traits\Datas;
-use WebCondom\Models\Condominios\Condominio;
+use WebCondom\Traits\Financeiros\ContaCorrente as ContaCorrenteTrait;
+
 /**
  * Class ContasCorrente.
  *
@@ -13,7 +14,7 @@ use WebCondom\Models\Condominios\Condominio;
  */
 class ContaCorrente extends Model
 {
-    use Datas, SoftDeletes;
+    use Datas, SoftDeletes, ContaCorrenteTrait;
 
     protected $table = 'contas_corrente';
     /**
@@ -24,7 +25,8 @@ class ContaCorrente extends Model
     protected $fillable = [
         'condominio_id', 'codigo', 'banco_id', 'agencia', 'conta', 'inicio', 'principal',
         'nome', 'boleto_agencia', 'boleto_conta', 'cedente', 'carteira',
-        'aceita', 'nosso_numero', 'prazo_baixa'
+        'aceite', 'nosso_numero', 'prazo_baixa', 'multa', 'juros', 'tipo_juros', 'protestar',
+        'mensagem1', 'mensagem2', 'mensagem3', 'mensagem4'
     ];
 
     protected $dates = [ "inicio" ];

@@ -1,13 +1,13 @@
 @extends('adminlte::page')
 @section('title', 'Contas corrente - Listar')
 @section('content_header')
-    <h1>Contas corrente - <small>listagem</small></h1>
+    <h1>Contas Correntes - <small>listagem</small></h1>
     <ol class="breadcrumb">
         <li>
             <a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a>
         </li>
         <li class="active">
-            <i class="fa fa-group"></i> Contas corrente
+            <i class="fa fa-group"></i> Conta Corrente
         </li>
     </ol>
 @stop
@@ -24,7 +24,7 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Grupo de contas</h3>
+                    <h3 class="box-title">Conta Corrente</h3>
                 </div>
 
                 <div class="box-body">
@@ -32,22 +32,24 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Banco</th>
-                            <th>Conta</th>
+                            <th>Condomínio</th>
+                            <th>Código</th>
+                            <th>Nome do Correntista</th>
                             <th>Agencia</th>
-                            <th>Nosso número (boleto)</th>
-                            <th>Alterado em</th>
+                            <th>Conta</th>
+                            <th>Banco</th>
                             <th>Ações</th>
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
                             <th>#</th>
-                            <th>Banco</th>
-                            <th>Conta</th>
+                            <th>Condomínio</th>
+                            <th>Código</th>
+                            <th>Nome do Correntista</th>
                             <th>Agencia</th>
-                            <th>Nosso número (boleto)</th>
-                            <th>Alterado em</th>
+                            <th>Conta</th>
+                            <th>Banco</th>
                             <th>Ações</th>
                         </tr>
                         </tfoot>
@@ -55,11 +57,12 @@
                         @foreach($contas->dados as $conta)
                             <tr>
                                 <td>{{ $conta->id }}</td>
-                                <td>{{ $conta->banco ? $conta->banco->nome_banco : 'O registro pai foi excluído' }}</td>
-                                <td>{{ $conta->conta }}</td>
+                                <td>{{ $conta->condominio_id }}</td>
+                                <td>{{ $conta->codigo }}</td>
+                                <td>{{ $conta->nome }}</td>
                                 <td>{{ $conta->agencia }}</td>
-                                <td>{{ $conta->nosso_numero }}</td>
-                                <td>{{ $conta->alterado_em }}</td>
+                                <td>{{ $conta->conta }}</td>
+                                <td>{{ $conta->banco ? $conta->banco->nome_banco : 'O registro pai foi excluído' }}</td>
                                 <td>
                                     <a class="btn btn-warning" href="{{ route('financeiros.contascorrente.exibir', ['id' => $conta->id ]) }}">
                                         <i class="fa fa-pencil"></i> Alterar</a>
@@ -73,15 +76,15 @@
                                                 <div class="modal-header">
                                                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">×</span>
-                                                       </button>
+                                                    </button>
                                                     <h3 class="modal-title">Confirmar exclusão</h3>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <h2>Dados da exclusão: </h2>
+                                                    <h3>Dados da exclusão: </h3>
                                                     <p>Conta:   {{ $conta->conta }}</p>
                                                     <p>Agência: {{ $conta->agencia }}</p>
-                                                    <p>Banco:   {{ $conta->banco ? $conta->banco->nome_banco : 'Registro pai foi excluído.' }}</p>
-                                                    <p>Nosso número (boleto): {{ $conta->nosso_numero }}</p>
+                                                    <p>Banco:   {{ $conta->banco->nome_banco }}</p>
+                                                    <p>Nome:   {{ $conta->nome }}</p>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>

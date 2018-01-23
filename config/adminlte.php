@@ -105,6 +105,7 @@ return [
     | Font Awesome. A string instead of an array represents a header in sidebar
     | layout. The 'can' is a filter on Laravel's built in Gate functionality.
     |
+    | icones:  https://adminlte.io/themes/AdminLTE/pages/UI/icons.html
     */
 
     'menu' => [
@@ -165,6 +166,11 @@ return [
                         'text'  => 'Bancos',
                         'url'   => 'Financeiros/Bancos',
                         'icon'  => 'bank'
+                    ],
+                    [
+                        'text'  => 'Conta Corrente',
+                        'url'   => 'Financeiros/ContasCorrente',
+                        'icon'  => 'cc'
                     ],
 
                 ]
