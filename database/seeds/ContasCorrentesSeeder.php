@@ -62,6 +62,6 @@ class ContasCorrentesSeeder extends Seeder
             'mensagem1'         => 'APOS VENCIMENTO COBRAR MULTAS E JUROS.',
             'mensagem2'         => 'NAO RECEBER APOS 60 DIAS DO VENCIMENTO.',
             'mensagem3'         => 'MULTA 2% + JUROS DE 0,0333% AO DIA.',
-            'mensagem4'         => '** FELIZ PASCOA. **']);
+            'mensagem4'         => '** FELIZ PASCOA **']);
     }
 }

@@ -247,7 +247,7 @@
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label for="numero" class="control-label">Número</label>
-                                                <input type="number" min="0" id="numero" name="numero_principal" class="form-control pula">
+                                                <input type="text" id="numero" name="numero_principal" class="form-control pula">
                                             </div>
                                         </div>
                                         <div class="col-md-10">
@@ -309,7 +309,7 @@
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label for="numero" class="control-label">Número</label>
-                                                <input type="number" min="0" id="numero" name="numero_cobranca" class="form-control pula">
+                                                <input type="text" id="numero" name="numero_cobranca" class="form-control pula">
                                             </div>
                                         </div>
                                         <div class="col-md-10">

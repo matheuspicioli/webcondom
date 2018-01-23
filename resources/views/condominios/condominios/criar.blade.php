@@ -62,38 +62,12 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="Unidades" class="control-label">Unidades</label>
                                     <input id="Unidades" type="number" min="0" class="form-control pula" name="unidades">
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="Multa" class="control-label">Multa (R$)</label>
-                                    <input id="Multa" type="text" class="form-control pula" name="multa" placeholder="150,00">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="Juros" class="control-label">Juros (R$)</label>
-                                    <input id="Juros" type="text" class="form-control pula" name="juros"
-                                           placeholder="150,00">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="TipoJuros" class="control-label">Tipo de juros</label>
-                                    <select name="tipo_juros" id="TipoJuros" class="form-control pula">
-                                        <option disabled selected>----------Selecione----------</option>
-                                        <option value="AD">Ao dia</option>
-                                        <option value="AM">Ao mês</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="TemGas" class="control-label">Tem gás?</label>
@@ -110,7 +84,7 @@
                                     <input id="ValorGas" type="text" class="form-control pula" name="valor_gas" disabled>
                                 </div>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="SindicoCOD" class="control-label pula">Síndico</label>
                                     <select name="sindico_id" id="SindicoCOD" class="form-control pula select2">
@@ -149,7 +123,7 @@
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label for="Numero" class="control-label">Número</label>
-                                            <input type="number" min="0" id="Numero" name="numero" class="form-control pula">
+                                            <input type="text" id="Numero" name="numero" class="form-control pula">
                                         </div>
                                     </div>
 

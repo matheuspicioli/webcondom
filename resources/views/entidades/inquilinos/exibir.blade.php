@@ -234,7 +234,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="numero" class="control-label">Número</label>
-                                <input type="number" min="0" id="numero" name="numero_principal"
+                                <input type="text" id="numero" name="numero_principal"
                                        class="form-control pula" value="{{ $inquilino->entidade->endereco_principal->numero }}">
                             </div>
                         </div>
@@ -291,7 +291,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="numero" class="control-label">Número</label>
-                                <input type="number" min="0" id="numero" name="numero_cobranca"
+                                <input type="text"  id="numero" name="numero_cobranca"
                                        class="form-control pula" value="{{ $inquilino->entidade->endereco_cobranca->numero }}">
                             </div>
                         </div>

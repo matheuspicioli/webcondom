@@ -20,9 +20,6 @@ class CreateCondominiosTable extends Migration
             $table->string('telefone', 13)->nullable();
             $table->string('celular', 14);
             $table->integer('unidades')->unsigned();
-            $table->decimal('multa', 8, 4)->nullable();
-            $table->decimal('juros', 8,4)->nullable();
-            $table->enum('tipo_juros', ['AM', 'AD']);
             $table->boolean('tem_gas')->default(0);
             $table->decimal('valor_gas', 12, 2)->nullable();
 

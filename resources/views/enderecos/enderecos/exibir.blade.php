@@ -22,7 +22,7 @@
 
                 <div class="form-group">
                     <label for="Numero" class="control-label">Número</label>
-                    <input type="number" min="0" id="Numero" name="numero" class="form-control pula"
+                    <input type="text" id="Numero" name="numero" class="form-control pula"
                            value="{{ $endereco->numero }}">
                 </div>
 
@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="Numero" class="control-label">Complemento</label>
+                    <label for="complemento" class="control-label">Complemento</label>
                     <input type="text" id="Complemento" name="complemento" class="form-control pula"
                            value="{{ $endereco->complemento ? $endereco->complemento : '' }}">
                     <span class="help-block">Este campo é opcional</span>

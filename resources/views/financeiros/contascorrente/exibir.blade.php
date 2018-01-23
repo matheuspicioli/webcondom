@@ -190,7 +190,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-3">
                                                 <label for="protestar" class="control-label">Protestar (S/N) </label>
                                                 <select name="protestar" id="protestar" class="form-control pula">
                                                     <option disabled selected>----------Selecione----------</option>

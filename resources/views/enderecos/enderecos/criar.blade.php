@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group">
                     <label for="Numero" class="control-label">Número</label>
-                    <input type="number" min="0" id="Numero" name="numero" class="form-control pula">
+                    <input type="text"  id="Numero" name="numero" class="form-control pula">
                 </div>
                 <div class="form-group">
                     <label for="CEP" class="control-label">CEP</label>

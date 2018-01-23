@@ -262,7 +262,7 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="numero" class="control-label">Número</label>
-                            <input type="number" min="0" id="numero" name="numero"
+                            <input type="text" id="numero" name="numero"
                                    class="form-control pula" value="{{ $funcionario->entidade->endereco_principal->numero }}">
                         </div>
                     </div>

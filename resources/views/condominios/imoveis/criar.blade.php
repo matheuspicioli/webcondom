@@ -154,7 +154,7 @@
                                        <div class="col-md-2">
                                            <div class="form-group">
                                                <label for="Numero" class="control-label">Número</label>
-                                               <input type="number" min="0" id="Numero" name="numero" class="form-control pula">
+                                               <input type="text" id="Numero" name="numero" class="form-control pula">
                                            </div>
                                        </div>
                                        <div class="col-md-10">

@@ -68,48 +68,14 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="Unidades" class="control-label">Unidades</label>
                                     <input id="Unidades" type="number" min="0" class="form-control pula" name="unidades"
                                            value="{{ $condominio->unidades }}">
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="Multa" class="control-label">Multa (%)</label>
-                                    <input id="Multa" type="text" class="form-control pula" name="multa" placeholder="150,00"
-                                           value="{{ $condominio->multa ? $condominio->multa : '' }}">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="Juros" class="control-label">Juros (%)</label>
-                                    <input id="Juros" type="text" class="form-control pula" name="juros" placeholder="150,00"
-                                           value="{{ $condominio->juros ? $condominio->juros : '' }}">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="TipoJuros" class="control-label">Tipo de juros</label>
-                                    <select name="tipo_juros" id="TipoJuros" class="form-control pula">
-                                        <option disabled selected>----------Selecione----------</option>
-                                        <option value="AD" {{ $condominio->tipo_juros == 'AD' ? 'selected' : '' }}>Ao
-                                            dia
-                                        </option>
-                                        <option value="AM" {{ $condominio->tipo_juros == 'AM' ? 'selected' : '' }}>Ao
-                                            mês
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="TemGas" class="control-label">Tem gás?</label>
@@ -130,7 +96,7 @@
                                            value="{{ $condominio->valor_gas }}">
                                 </div>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="SindicoCOD" class="control-label">Síndico</label>
                                     <select name="sindico_id" id="SindicoCOD" tabindex="-1" aria-hidden="true" class="form-control select2 pula">
@@ -171,7 +137,7 @@
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label for="Numero" class="control-label">Número</label>
-                                                    <input type="number" min="0" id="Numero" name="numero" class="form-control pula"
+                                                    <input type="text" id="Numero" name="numero" class="form-control pula"
                                                            value="{{ $condominio->endereco->numero }}">
                                                 </div>
                                             </div>
