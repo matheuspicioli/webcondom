@@ -1,6 +1,5 @@
 @extends('adminlte::page')
 @section('titulo', 'Proprietários - Exibir/Alterar')
-
 @section('content_header')
     <h1>Proprietários - <small>edição</small></h1>
     <ol class="breadcrumb">
@@ -286,7 +285,8 @@
                                             <div class="col-md-10">
                                                 <div class="form-group">
                                                     <label for="complemento" class="control-label">Complemento</label>
-                                                    <input type="text" id="complemento" name="complemento_principal"  class="form-control pula"
+                                                    <input type="text" id="complemento" name="complemento_principal"
+                                                           class="form-control pula"
                                                            value="{{ $proprietario->entidade->endereco_principal->complemento }}">
                                                 </div>
                                             </div>

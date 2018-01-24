@@ -8,33 +8,33 @@ class EnderecosSeeder extends Seeder
     public function run()
     {
         Endereco::Create([
+            'cep'           => '15085480',
             'logradouro'    => 'RUA P.CLEMENTE MARTON SEGURA',
             'numero'        => '350',
-            'cep'           => '15085480',
             'complemento'   => '',
             'bairro'        => 'HIGIENOPOLIS',
             'cidade_id'     => '1']);
 
         Endereco::Create([
+            'cep'           => '15014140',
             'logradouro'    => 'AV.ADOLFO LUTZ',
             'numero'        => '875',
-            'cep'           => '15014140',
             'complemento'   => '',
             'bairro'        => 'SANTA CRUZ',
             'cidade_id'     => '1']);
 
         Endereco::Create([
+            'cep'           => '15015025',
             'logradouro'    => 'RUA PEDRO AMARAL',
             'numero'        => '3274',
-            'cep'           => '15015025',
             'complemento'   => 'APTO 101',
             'bairro'        => 'CENTRO',
             'cidade_id'     => '1']);
 
         Endereco::Create([
+            'cep'           => '15018050',
             'logradouro'    => 'AV. ALBERTO ANDALO',
             'numero'        => '3555',
-            'cep'           => '15018050',
             'complemento'   => '',
             'bairro'        => 'ESPLANADA',
             'cidade_id'     => '1']);

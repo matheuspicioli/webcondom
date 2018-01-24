@@ -15,10 +15,9 @@ class CreateEmpresasTable extends Migration
     {
         Schema::create('empresas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('codigo')->nullable();
             $table->string('creci', 10)->nullable();
             $table->string('logo', 255)->nullable();
-            $table->string('email_nfe', 200);
+            $table->string('email_nfe', 200)->nullable();
 
             $table->integer('entidade_id')->unsigned()->nullable();
             $table->foreign('entidade_id')

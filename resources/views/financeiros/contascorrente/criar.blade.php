@@ -166,8 +166,8 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="tipojuros" class="control-label">Tipo de juros</label>
-                                                    <select name="tipojuros" id="tipojuros" class="form-control pula">
+                                                    <label for="tipo_juros" class="control-label">Tipo de juros</label>
+                                                    <select name="tipo_juros" id="tipo_juros" class="form-control pula">
                                                         <option disabled selected>----------Selecione----------</option>
                                                         <option value="AD">Ao Dia</option>
                                                         <option value="AM">Ao Mês</option>

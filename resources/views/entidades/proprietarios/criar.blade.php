@@ -179,14 +179,12 @@
                                 <div class="form-group">
                                     <label for="telefone_principal" class="control-label">Telefone principal</label>
                                     <input type="text" name="telefone_principal" id="telefone_principal" class="form-control">
-                                    <span class="help-block">Este campo é opcional</span>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="telefone_comercial" class="control-label">Telefone comercial</label>
                                     <input type="text" name="telefone_comercial" id="telefone_comercial" class="form-control">
-                                    <span class="help-block">Este campo é opcional</span>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -199,7 +197,6 @@
                                 <div class="form-group">
                                     <label for="celular_2" class="control-label">Celular 2</label>
                                     <input type="text" name="celular_2" id="celular_2" class="form-control">
-                                    <span class="help-block">Este campo é opcional</span>
                                 </div>
                             </div>
                         </div>
@@ -208,14 +205,12 @@
                                 <div class="form-group">
                                     <label for="site" class="control-label">Site</label>
                                     <input type="text" name="site" id="site" class="form-control">
-                                    <span class="help-block">Este campo é opcional</span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="email" class="control-label">E-mail</label>
                                     <input type="email" name="email" id="email" class="form-control">
-                                    <span class="help-block">Este campo é opcional</span>
                                 </div>
                             </div>
                         </div>
@@ -254,7 +249,6 @@
                                             <div class="form-group">
                                                 <label for="complemento" class="control-label">Complemento</label>
                                                 <input type="text" id="complemento" name="complemento_principal" class="form-control pula">
-                                                <span class="help-block">Este campo é opcional</span>
                                             </div>
                                         </div>
                                     </div>
@@ -316,7 +310,6 @@
                                             <div class="form-group">
                                                 <label for="complemento" class="control-label">Complemento</label>
                                                 <input type="text" id="complemento" name="complemento_cobranca" class="form-control pula">
-                                                <span class="help-block">Este campo é opcional</span>
                                             </div>
                                         </div>
                                     </div>
@@ -352,6 +345,11 @@
                                 </div>
                             </div>
                         </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('js')
     <script>

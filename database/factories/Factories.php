@@ -31,9 +31,10 @@ $factory->define(WebCondom\Models\Enderecos\Cidade::class, function (Faker $fake
 
 $factory->define(WebCondom\Models\Enderecos\Endereco::class, function (Faker $faker) {
     return [
+        'cep'           => $faker->randomNumber(8),
         'logradouro'    => $faker->name,
         'numero'        => $faker->randomNumber(4),
-        'cep'           => $faker->randomNumber(8),
+        'complemento'   => $faker->word,
         'bairro'        => $faker->name,
         'cidade_id'     => 1
      ];

@@ -33,6 +33,7 @@
                         <tr>
                             <th>#</th>
                             <th>Nome</th>
+                            <th>Apelido</th>
                             <th>CPF/CNPJ</th>
                             <th>Código</th>
                             <th>Ações</th>
@@ -41,6 +42,7 @@
                         <tr>
                             <th>#</th>
                             <th>Nome</th>
+                            <th>Apelido</th>
                             <th>CPF/CNPJ</th>
                             <th>Código</th>
                             <th>Ações</th>
@@ -51,6 +53,7 @@
                             <tr>
                                 <td>{{ $proprietario->id }}</td>
                                 <td>{{ $proprietario->entidade->nome }}</td>
+                                <td>{{ $proprietario->entidade->apelido }}</td>
                                 <td>{{ $proprietario->entidade->cpf_cnpj }}</td>
                                 <td>{{ $proprietario->codigo }}</td>
                                 <td>

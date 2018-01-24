@@ -5,7 +5,7 @@ namespace WebCondom\Models\Financeiros;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use WebCondom\Traits\Datas;
-use WebCondom\Traits\Financeiros\ContaCorrente as ContaCorrenteTrait;
+use WebCondom\Models\Condominios\Condominio;
 
 /**
  * Class ContasCorrente.
@@ -14,7 +14,7 @@ use WebCondom\Traits\Financeiros\ContaCorrente as ContaCorrenteTrait;
  */
 class ContaCorrente extends Model
 {
-    use Datas, SoftDeletes, ContaCorrenteTrait;
+    use Datas, SoftDeletes;
 
     protected $table = 'contas_corrente';
     /**

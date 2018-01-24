@@ -9,7 +9,7 @@ class Empresa extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [ "codigo", "creci", "logo", "email_nfe", "entidade_id"];
+    protected $fillable = [ "creci", "logo", "email_nfe", "entidade_id"];
 
     public function entidade()
     {

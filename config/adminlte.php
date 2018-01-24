@@ -141,10 +141,31 @@ return [
             'submenu' =>
             [
                 [
+                'text'  => 'Empresas',
+                'url'   => 'Entidades/Empresas',
+                'icon'  => 'building'
+                ],
+                [
+                'text'  => 'Fornecedores',
+                'url'   => 'Entidades/Fornecedores',
+                'icon'  => 'building'
+                ],
+                [
+                'text'  => 'Funcionarios',
+                'url'   => 'Entidades/Funcionarios',
+                'icon'  => 'user'
+                ],
+                [
                 'text'  => 'Proprietários',
                 'url'   => 'Entidades/Proprietarios',
                 'icon'  => 'user'
+                ],
+                [
+                'text'  => 'Inquilinos',
+                'url'   => 'Entidades/Inquilinos',
+                'icon'  => 'user'
                 ]
+
             ]
         ],
         [
