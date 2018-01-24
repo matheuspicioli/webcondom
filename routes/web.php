@@ -13,9 +13,10 @@
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home')->middleware('auth');
+Route::get('/debug', 'DebugController@debug')->name('debug')->middleware('auth');
 
-Route::prefix('Condominios')->namespace('Condominios')->group(function(){
+Route::prefix('Condominios')->namespace('Condominios')->middleware('auth')->group(function(){
     Route::prefix('Sindicos')->group(function(){
         Route::get('/', 'SindicosController@listar')->name('condominios.sindicos.listar');
         Route::get('Criar', 'SindicosController@criar')->name('condominios.sindicos.criar');
@@ -52,7 +53,7 @@ Route::prefix('Condominios')->namespace('Condominios')->group(function(){
     });
 });
 
-Route::prefix('Financeiros')->namespace('Financeiros')->group(function(){
+Route::prefix('Financeiros')->namespace('Financeiros')->middleware('auth')->group(function(){
     Route::prefix('GrupoDeContas')->group(function(){
         Route::get('/', 'GrupoDeContasController@listar')->name('financeiros.grupodecontas.listar');
         Route::get('Criar', 'GrupoDeContasController@criar')->name('financeiros.grupodecontas.criar');
@@ -90,7 +91,7 @@ Route::prefix('Financeiros')->namespace('Financeiros')->group(function(){
     });
 });
 
-Route::prefix('Enderecos')->namespace('Enderecos')->group(function() {
+Route::prefix('Enderecos')->namespace('Enderecos')->middleware('auth')->group(function() {
     Route::prefix('Estados')->group(function () {
         Route::get('/', 'EstadosController@listar')->name('enderecos.estados.listar');
         Route::get('Criar', 'EstadosController@criar')->name('enderecos.estados.criar');
@@ -116,7 +117,7 @@ Route::prefix('Enderecos')->namespace('Enderecos')->group(function() {
         Route::delete('{id}', 'EnderecosController@excluir')->name('enderecos.enderecos.excluir');
     });
 });
-Route::prefix('Diversos')->namespace('Diversos')->group(function(){
+Route::prefix('Diversos')->namespace('Diversos')->middleware('auth')->group(function(){
     Route::prefix('EstadoCivil')->group(function(){
         Route::get('/', 'EstadoCivilController@listar')->name('diversos.estadoCivil.listar');
         Route::get('Criar', 'EstadoCivilController@criar')->name('diversos.estadoCivil.criar');
@@ -167,7 +168,15 @@ Route::prefix('Diversos')->namespace('Diversos')->group(function(){
     });
 });
 
-Route::prefix('Entidades')->namespace('Entidades')->group(function(){
+Route::prefix('Autorizacoes')->namespace('Autorizacoes')->middleware('auth')->group(function(){
+    Route::get('/', 'AutorizacoesController@listar')->name('autorizacoes.listar');
+    Route::post('/salvar_role', 'AutorizacoesController@salvar_role')->name('autorizacoes.roles.salvar');
+    Route::post('/salvar_permissao', 'AutorizacoesController@salvar_permissao')->name('autorizacoes.permissoes.salvar');
+    Route::post('/role_permissao_associar', 'AutorizacoesController@salvar_role_permissao_associar')->name('autorizacoes.role_permissao_associar.salvar');
+    Route::post('/role_usuario_associar', 'AutorizacoesController@salvar_role_usuario_associar')->name('autorizacoes.role_usuario_associar.salvar');
+});
+
+Route::prefix('Entidades')->namespace('Entidades')->middleware('auth')->group(function(){
     Route::prefix('Proprietarios')->group(function(){
         Route::get('/', 'ProprietariosController@listar')->name('entidades.proprietarios.listar');
         Route::get('Criar', 'ProprietariosController@criar')->name('entidades.proprietarios.criar');

@@ -4,6 +4,7 @@ namespace WebCondom\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use WebCondom\Models\Autorizacao\Permissao;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -12,9 +13,9 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $policies = [
-        'WebCondom\Model' => 'WebCondom\Policies\ModelPolicy',
-    ];
+//    protected $policies = [
+//        'WebCondom\Model' => 'WebCondom\Policies\ModelPolicy',
+//    ];
 
     /**
      * Register any authentication / authorization services.
@@ -25,6 +26,13 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        $permissoes = Permissao::with('roles')->get();
+
+        foreach($permissoes as $permissao)
+        {
+            Gate::define($permissao->nome, function($user) use ($permissao){
+                return $user->temPermissao($permissao);
+            });
+        }
     }
 }

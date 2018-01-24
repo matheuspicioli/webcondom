@@ -31,7 +31,8 @@
                 </div>
 
                 <div class="box-body">
-                    <form action="{{ route('financeiros.contascorrente.salvar') }}" method="POST">
+                    @can('cadastrar')
+                        <form action="{{ route('financeiros.contascorrente.salvar') }}" method="POST">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-md-10">
@@ -230,6 +231,9 @@
                             </div>
                         </div>
                     </form>
+                    @else
+                        <h3 class="box-title">Você não tem permissão para cadastrar nesse módulo</h3>
+                    @endcan
                 </div>
             </div>
         </div>
