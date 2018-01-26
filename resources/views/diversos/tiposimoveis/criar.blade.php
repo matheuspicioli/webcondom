@@ -1,38 +1,59 @@
-@extends('layouts.app')
-@section('titulo', 'Tipos imóveis - Criar')
-@section('conteudo')
-    <pagina tamanho="10">
-        <painel cor="panel-primary" titulo="Cadastrar tipo imóvel">
-            <div class="row">
-                <div class="col-md-1">
-                    <a href="{{ route('diversos.tiposimoveis.listar') }}" class="btn btn-default">Voltar</a>
-                    <hr>
+@extends('adminlte::page')
+@section('titulo', 'Tipos de Imóveis - Criar')
+@section('content_header')
+    <h1>Cadastro <small>de Tipos de Imóveis</small></h1>
+    <ol class="breadcrumb">
+        <li>
+            <a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a>
+        </li>
+        <li>
+            <a href="{{ route('diversos.tiposimoveis.listar') }}"><i class="fa fa-home"></i> Tipos de Imóveis</a>
+        </li>
+        <li class="active">
+            <i class="fa fa-plus"></i> Cadastrar tipo de imóvel
+        </li>
+    </ol>
+@stop
+@section('content')
+    <div class="row">
+        <div class="col-md-1">
+            <a href="{{ route('diversos.tiposimoveis.listar') }}" class="btn btn-default">
+                <i class="fa fa-rotate-left"></i> Voltar</a>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Cadastrar tipo de imóvel</h3>
                 </div>
-                <div class="col-md-11">
-                    <migalha v-bind:lista="{{ $migalhas }}"></migalha>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                    <formulario action="{{ route('diversos.tiposimoveis.salvar') }}" method="POST" token="{{ csrf_token() }}">
+                <div class="box-body">
+                    <form action="{{ route('diversos.tiposimoveis.salvar') }}" method="POST">
+                        {{ csrf_field() }}
                         <div class="form-group">
                             <label for="Descricao" class="control-label">Descrição</label>
                             <input id="Descricao" type="text" class="form-control" name="descricao">
                         </div>
-
-                        <div class="form-group">
-                            <button class="btn btn-primary" type="submit">Cadastrar</button>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fa fa-save"></i> Cadastrar</button>
+                                </div>
+                            </div>
                         </div>
-                    </formulario>
+                    </form>
+                    </div:
                 </div>
             </div>
-        </painel>
-    </pagina>
+        </div>
+    </div>
 @endsection
-@section('scripts')
+@section('js')
     <script>
         $(document).ready(function () {
             $('#Descricao').focus();
         });
     </script>
-@endsection
+@stop

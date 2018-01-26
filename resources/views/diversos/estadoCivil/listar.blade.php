@@ -52,9 +52,9 @@
                                 <td>{{ $estadocivis->exige_conjuge_formatado }}</td>
                                 <td>
                                     <a class="btn btn-warning" href="{{ route('diversos.estadoCivil.exibir', ['id' => $estadocivis->id ]) }}">
-                                        <i class="fa fa-pencil"></i> Alterar</a>
+                                        <i class="fa fa-pencil"></i></a>
                                     <button type="button" data-toggle="modal" data-target="#modal-danger-{{$estadocivis->id}}" href="#" class="btn btn-danger">
-                                        <i class="fa fa-trash"></i> Excluir
+                                        <i class="fa fa-trash"></i>
                                     </button>
                                     <!-- MODAL EXCLUSÃO -->
                                     <div id="modal-danger-{{$estadocivis->id}}" class="modal modal-danger fade">
@@ -67,7 +67,7 @@
                                                     <h3 class="modal-title">Confirmar exclusão</h3>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <h4>Deseja realmente excluir o estado civil "{{ $estadocivis->nome }}"?</h4>
+                                                    <h4>Deseja realmente excluir o estado civil "{{ $estadocivis->descricao }}"?</h4>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>

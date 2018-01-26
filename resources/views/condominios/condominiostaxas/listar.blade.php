@@ -53,9 +53,9 @@
                                 <td>
                                     <a href="{{ route('condominios.condominiostaxas.exibir', ['id' => $taxa->id, 'idCondominio' => $condominio->id]) }}"
                                        class="btn btn-success">
-                                        <i class="fa fa-pencil"></i> Alterar</a>
+                                        <i class="fa fa-pencil"></i></a>
                                     <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-danger-{{$taxa->id}}">
-                                        <i class="fa fa-trash"></i> Excluir
+                                        <i class="fa fa-trash"></i>
                                     </button>
                                     <!-- MODAL EXCLUIR TAXA GERANDO DINÂMICO -->
                                     <div id="modal-danger-{{$taxa->id}}" class="modal modal-danger fade">

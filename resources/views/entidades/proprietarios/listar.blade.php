@@ -58,9 +58,9 @@
                                 <td>{{ $proprietario->codigo }}</td>
                                 <td>
                                     <a class="btn btn-warning" href="{{ route('entidades.proprietarios.exibir', ['id' => $proprietario->id ]) }}">
-                                        <i class="fa fa-pencil"></i> Alterar</a>
+                                        <i class="fa fa-pencil"></i></a>
                                     <button type="button" data-toggle="modal" data-target="#modal-danger-{{$proprietario->id}}" href="#" class="btn btn-danger">
-                                        <i class="fa fa-trash"></i> Excluir
+                                        <i class="fa fa-trash"></i>
                                     </button>
                                     <!-- MODAL EXCLUSÃO -->
                                     <div id="modal-danger-{{$proprietario->id}}" class="modal modal-danger fade">

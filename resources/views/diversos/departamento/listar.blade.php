@@ -49,9 +49,9 @@
                                 <td>{{ $departamento->descricao }}</td>
                                 <td>
                                     <a class="btn btn-warning" href="{{ route('diversos.departamento.exibir', ['id' => $departamento->id ]) }}">
-                                        <i class="fa fa-pencil"></i> Alterar</a>
+                                        <i class="fa fa-pencil"></i></a>
                                     <button type="button" data-toggle="modal" data-target="#modal-danger-{{$departamento->id}}" href="#" class="btn btn-danger">
-                                        <i class="fa fa-trash"></i> Excluir
+                                        <i class="fa fa-trash"></i>
                                     </button>
                                     <!-- MODAL EXCLUSÃO -->
                                     <div id="modal-danger-{{$departamento->id}}" class="modal modal-danger fade">
@@ -64,7 +64,7 @@
                                                     <h3 class="modal-title">Confirmar exclusão</h3>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <h4>Deseja realmente excluir o departamento "{{ $departamento->nome }}"?</h4>
+                                                    <h4>Deseja realmente excluir o departamento "{{ $departamento->descricao }}"?</h4>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>

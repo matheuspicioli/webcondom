@@ -57,9 +57,9 @@
                                 <!-- <td><img src="{{ Storage::url($empresa->logo) }}" alt="Logo" width="90px" height="50px"></td> -->
                                 <td>
                                     <a class="btn btn-warning" href="{{ route('entidades.empresas.exibir', ['id' => $empresa->id ]) }}">
-                                        <i class="fa fa-pencil"></i> Alterar</a>
+                                        <i class="fa fa-pencil"></i></a>
                                     <button type="button" data-toggle="modal" data-target="#modal-danger-{{$empresa->id}}" href="#" class="btn btn-danger">
-                                        <i class="fa fa-trash"></i> Excluir
+                                        <i class="fa fa-trash"></i>
                                     </button>
                                     <!-- MODAL EXCLUSÃO -->
                                     <div id="modal-danger-{{$empresa->id}}" class="modal modal-danger fade">

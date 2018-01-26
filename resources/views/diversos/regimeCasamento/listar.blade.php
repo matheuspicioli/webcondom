@@ -49,9 +49,9 @@
                                 <td>{{ $regimecasamento->descricao }}</td>
                                 <td>
                                     <a class="btn btn-warning" href="{{ route('diversos.regimeCasamento.exibir', ['id' => $regimecasamento->id ]) }}">
-                                        <i class="fa fa-pencil"></i> Alterar</a>
+                                        <i class="fa fa-pencil"></i></a>
                                     <button type="button" data-toggle="modal" data-target="#modal-danger-{{$regimecasamento->id}}" href="#" class="btn btn-danger">
-                                        <i class="fa fa-trash"></i> Excluir
+                                        <i class="fa fa-trash"></i>
                                     </button>
                                     <!-- MODAL EXCLUSÃO -->
                                     <div id="modal-danger-{{$regimecasamento->id}}" class="modal modal-danger fade">
@@ -64,7 +64,7 @@
                                                     <h3 class="modal-title">Confirmar exclusão</h3>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <h4>Deseja realmente excluir o Regime de Casamento"{{ $regimecasamento->nome }}"?</h4>
+                                                    <h4>Deseja realmente excluir o Regime de Casamento"{{ $regimecasamento->descricao }}"?</h4>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>

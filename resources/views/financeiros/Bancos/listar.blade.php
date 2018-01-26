@@ -53,9 +53,9 @@
                                 <td>{{ $banco->nome_banco }}</td>
                                 <td>
                                     <a class="btn btn-warning" href="{{ route('financeiros.bancos.exibir', ['id' => $banco->id ]) }}">
-                                        <i class="fa fa-pencil"></i> Alterar</a>
+                                        <i class="fa fa-pencil"></i> </a>
                                     <button type="button" data-toggle="modal" data-target="#modal-danger-{{$banco->id}}" href="#" class="btn btn-danger">
-                                        <i class="fa fa-trash"></i> Excluir
+                                        <i class="fa fa-trash"></i>
                                     </button>
                                     <!-- MODAL EXCLUSÃO -->
                                     <div id="modal-danger-{{$banco->id}}" class="modal modal-danger fade">

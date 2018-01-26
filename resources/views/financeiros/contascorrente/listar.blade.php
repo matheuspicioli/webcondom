@@ -65,9 +65,9 @@
                                 <td>{{ $conta->banco ? $conta->banco->nome_banco : 'O registro pai foi excluído' }}</td>
                                 <td>
                                     <a class="btn btn-warning" href="{{ route('financeiros.contascorrente.exibir', ['id' => $conta->id ]) }}">
-                                        <i class="fa fa-pencil"></i> Alterar</a>
+                                        <i class="fa fa-pencil"></i></a>
                                     <button type="button" data-toggle="modal" data-target="#modal-danger-{{$conta->id}}" href="#" class="btn btn-danger">
-                                        <i class="fa fa-trash"></i> Excluir
+                                        <i class="fa fa-trash"></i>
                                     </button>
                                     <!-- MODAL EXCLUSÃO -->
                                     <div id="modal-danger-{{$conta->id}}" class="modal modal-danger fade">

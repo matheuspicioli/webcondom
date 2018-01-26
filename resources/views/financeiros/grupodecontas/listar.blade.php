@@ -59,9 +59,9 @@
                                 <td>{{ $grupo->alterado_em }}</td>
                                 <td>
                                     <a class="btn btn-warning" href="{{ route('financeiros.grupodecontas.exibir', ['id' => $grupo->id ]) }}">
-                                        <i class="fa fa-pencil"></i> Alterar</a>
+                                        <i class="fa fa-pencil"></i></a>
                                     <button type="button" data-toggle="modal" data-target="#modal-danger-{{$grupo->id}}" href="#" class="btn btn-danger">
-                                        <i class="fa fa-trash"></i> Excluir
+                                        <i class="fa fa-trash"></i>
                                     </button>
                                     <!-- MODAL EXCLUSÃO -->
                                     <div id="modal-danger-{{$grupo->id}}" class="modal modal-danger fade">
