@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    <form method="POST" action="{{ route('entidades.empresas.alterar', ['id' => $empresa->id ]) }}">
+                    <form method="POST" action="{{ route('entidades.empresas.alterar', ['id' => $empresa->id ]) }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <div class="row">
@@ -163,7 +163,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="logo" class="control-label">Logo</label>
-                                    <input type="file" name="logo_imagem" id="logo" class="form-control pula">
+                                    <input type="file" name="logo_imagem" id="logo" class="pula">
                                 </div>
                             </div>
                         </div>

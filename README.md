@@ -16,3 +16,8 @@ Feito isso, temos uma instância do Carbon nessa propriedade (`http://carbon.nes
 com isso, podemos chamar `$objeto->propriedade->format('Y-m-d)`, padrão dos EUA, pois o navegador
 irá interpretar isso, e reconhecer nosso padrão. Temos que reforçar esse formato, pois o laravel
 tenta jogar para o nosso padrão também.
+
+### PROBLEMA COM CARREGAMENTO APÓS O UPLOAD ###
+
+Rodar o comando `php artisan storage:link`. Após voltarmos o HTML puro,
+esqueci de adicionar o enctype no formulário que faz o upload.

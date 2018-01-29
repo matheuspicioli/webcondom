@@ -30,7 +30,7 @@
                     <h3 class="box-title">Cadastrar Empresa</h3>
                 </div>
                 <div class="box-body">
-                    <form action="{{ route('entidades.empresas.salvar') }}" method="POST">
+                    <form action="{{ route('entidades.empresas.salvar') }}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-md-3">
@@ -137,7 +137,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="logo" class="control-label">Logo</label>
-                                    <input type="file" name="logo_imagem" id="logo" class="form-control pula">
+                                    <input type="file" name="logo_imagem" id="logo" class="pula">
                                 </div>
                             </div>
                         </div>
