@@ -41,6 +41,7 @@ class ProprietariosController extends Controller
         $entidade = $proprietario->entidade()->create($request->all());
         $enderecoPrincipal = $entidade->endereco_principal()->create([
             'logradouro'    => $request->input('logradouro_principal'),
+            'complemento'   => $request->input('complemento_principal'),
             'numero'        => $request->input('numero_principal'),
             'cep'           => $request->input('cep_principal'),
             'bairro'        => $request->input('bairro_principal'),
@@ -48,6 +49,7 @@ class ProprietariosController extends Controller
         ]);
         $enderecoCobranca = $entidade->endereco_cobranca()->create([
             'logradouro'    => $request->input('logradouro_cobranca'),
+            'complemento'   => $request->input('complemento_cobranca'),
             'numero'        => $request->input('numero_cobranca'),
             'cep'           => $request->input('cep_cobranca'),
             'bairro'        => $request->input('bairro_cobranca'),
