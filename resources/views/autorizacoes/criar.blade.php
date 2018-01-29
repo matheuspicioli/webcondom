@@ -219,7 +219,8 @@
             </div>
         </div>
     @else
-        <h3>Você não tem permissão para mexer em autorizações</h3>
+        <h3>Você não tem permissão para visualizar esta tela!</h3>
+        {{-- dd(Auth::user()->roles)  --}}
     @endcan
 @stop
 

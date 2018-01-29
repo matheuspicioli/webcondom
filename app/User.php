@@ -50,6 +50,6 @@ class User extends Authenticatable
             }
         }
 
-        return $this->roles->contains('name', $roles);
+        return $this->roles->contains('nome', $roles);
     }
 }

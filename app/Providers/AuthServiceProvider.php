@@ -5,6 +5,7 @@ namespace WebCondom\Providers;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use WebCondom\Models\Autorizacao\Permissao;
+use WebCondom\User;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -34,5 +35,12 @@ class AuthServiceProvider extends ServiceProvider
                 return $user->temPermissao($permissao);
             });
         }
+
+        Gate::before(function($user, $permissao){
+            if($user->temAlgumaRole('ADMINISTRADOR'))
+                return true;
+
+            return false;
+        });
     }
 }
