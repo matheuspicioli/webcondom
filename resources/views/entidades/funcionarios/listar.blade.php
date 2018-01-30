@@ -59,9 +59,9 @@
                                 <td>{{ $funcionario->apelido }}</td>
                                 <td>
                                     <a class="btn btn-warning" href="{{ route('entidades.funcionarios.exibir', ['id' => $funcionario->id ]) }}">
-                                        <i class="fa fa-pencil"></i> Alterar</a>
+                                        <i class="fa fa-pencil"></i></a>
                                     <button type="button" data-toggle="modal" data-target="#modal-danger-{{$funcionario->id}}" href="#" class="btn btn-danger">
-                                        <i class="fa fa-trash"></i> Excluir
+                                        <i class="fa fa-trash"></i>
                                     </button>
                                     <!-- MODAL EXCLUSÃO -->
                                     <div id="modal-danger-{{$funcionario->id}}" class="modal modal-danger fade">
@@ -100,7 +100,11 @@
 @section('js')
     <script>
         $(function () {
-            $('#tabela').DataTable()
+            $('#tabela').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
+                }
+            } )
         });
     </script>
 @stop
