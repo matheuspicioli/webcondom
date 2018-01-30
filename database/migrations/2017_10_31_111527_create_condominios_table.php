@@ -22,6 +22,7 @@ class CreateCondominiosTable extends Migration
             $table->integer('unidades')->unsigned();
             $table->boolean('tem_gas')->default(0);
             $table->decimal('valor_gas', 12, 2)->nullable();
+            $table->string('email', 255)->nullable();
 
             $table->integer('endereco_id')->unsigned()->nullable();
             $table->foreign('endereco_id')

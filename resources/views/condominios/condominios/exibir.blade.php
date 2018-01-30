@@ -112,6 +112,15 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="email" class="control-label">Email</label>
+                                    <input id="email" type="email" class="form-control pula" name="email"
+                                           value="{{ $condominio->email }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="box box-primary box-solid">
                                     <div class="box-header with-border">
                                         <h3 class="box-title">Endereço</h3>

@@ -11,7 +11,7 @@ class Condominio extends Model
     use SoftDeletes, CondominioTrait;
 
     protected $fillable = [
-        "nome", "apelido", "telefone", "celular", "unidades", "tem_gas", "valor_gas", "endereco_id", "sindico_id"
+        "nome", "apelido", "telefone", "celular", "unidades", "tem_gas", "valor_gas", "email", "endereco_id", "sindico_id"
     ];
     protected $dates = [ "deleted_at" ];
 

@@ -86,7 +86,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="SindicoCOD" class="control-label pula">Síndico</label>
+                                    <label for="SindicoCOD" class="control-label">Síndico</label>
                                     <select name="sindico_id" id="SindicoCOD" class="form-control pula select2">
                                         <option disabled selected>----------Selecione----------</option>
                                         @foreach($sindicos as $sindico)
@@ -97,6 +97,14 @@
                                     </select>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+                             <div class="col-md-12">
+                                  <div class="form-group">
+                                      <label for="email" class="control-label">Email</label>
+                                      <input id="email" type="email" class="form-control pula" nam="email">
+                                  </div>
+                             </div>
                         </div>
                         <div class="box box-warning">
                             <div class="box-header with-border">

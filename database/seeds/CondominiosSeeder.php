@@ -21,6 +21,7 @@ class CondominiosSeeder extends Seeder
             'unidades' => '12',
             'tem_gas' => '1',
             'valor_gas' => '8.35',
+            'email' => 'solar@solar.com.br',
             'endereco_id' => '2',
             'sindico_id' => '4']);
 
