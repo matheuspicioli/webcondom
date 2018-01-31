@@ -84,14 +84,14 @@
                                 <div class="form-group">
                                     <label for="valor_locacao" class="control-label">Valor de locação</label>
                                     <input id="valor_locacao" type="text" class="form-control pula" name="valor_locacao"
-                                           placeholder="1000000000,00">
+                                           placeholder="0,00">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="valor_venda" class="control-label">Valor de venda</label>
                                     <input id="valor_venda" type="text" class="form-control pula" name="valor_venda"
-                                           placeholder="1000000000,00">
+                                           placeholder="0,00">
                                 </div>
                             </div>
                         </div>

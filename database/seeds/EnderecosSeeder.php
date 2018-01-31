@@ -17,8 +17,8 @@ class EnderecosSeeder extends Seeder
 
         Endereco::Create([
             'cep'           => '15014140',
-            'logradouro'    => 'AV.ADOLFO LUTZ',
-            'numero'        => '875',
+            'logradouro'    => 'AV.MURCHID HOMSI',
+            'numero'        => '8752',
             'complemento'   => '',
             'bairro'        => 'SANTA CRUZ',
             'cidade_id'     => '1']);

@@ -37,8 +37,8 @@
                         <div class="row">
                             <div class="col-md-10">
                                 <div class="form-group">
-                                    <label for="condominio" class="control-label"></label>
-                                    <select name="condominio_id" id="condominio" class="form-control">
+                                    <label for="condominio" class="control-label" class="control-label">Condomínio</label>
+                                    <select name="condominio_id" id="condominio" class="form-control select2">
                                         @foreach($condominiosDados as $condominio)
                                             <option value="{{ $condominio->id }}" {{ $condominio->id == $conta->dados->condominio_id ? 'selected' : '' }}>
                                                 {{ $condominio->nome }}
@@ -95,7 +95,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="box box-warning">
+                                <div class="box box-info">
                                     <div class="box-header with-border">
                                         <h3 class="box-title">Dados para boleto</h3>
                                     </div>
@@ -165,14 +165,14 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="multa" class="control-label">Multa (%)</label>
-                                                    <input id="multa" type="text" class="form-control pula" name="juros" placeholder="150,00"
+                                                    <input id="multa" type="text" class="form-control pula" name="juros" placeholder="0,00"
                                                            value="{{ $conta->dados->multa ? $conta->dados->multa : '' }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="Juros" class="control-label">Juros (%)</label>
-                                                    <input id="Juros" type="text" class="form-control pula" name="juros" placeholder="150,00"
+                                                    <input id="Juros" type="text" class="form-control pula" name="juros" placeholder="0,00"
                                                            value="{{ $conta->dados->juros ? $conta->dados->juros : '' }}">
                                                 </div>
                                             </div>
@@ -291,7 +291,7 @@
     <script>
         $(document).ready(function () {
             $('.select2').select2();
-            $("#tabela").focus();
+            $("#condominio").focus();
         });
     </script>
 @stop

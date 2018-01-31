@@ -14,7 +14,7 @@ class EmpresasSeeder extends Seeder
     {
         Empresa::Create([
             'creci'         => 'J.5.567-3',
-            'logo'          => 'c:\sistemas\metrop\dados\logo_metrop.jpg',
+            'logo'          => 'logos_empresas/logo_metrop.jpg',
             'email_nfe'     => 'nfe@metropolitanadm.com.br',
             'entidade_id'   => '1']);
     }

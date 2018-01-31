@@ -155,17 +155,17 @@
                                            class="form-control pula" value="{{ $empresa->entidade->site }}">
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <img src="{{ Storage::url($empresa->logo) }}" alt="Não há logo" height="100px">
-                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="logo" class="control-label">Logo</label>
-                                    <input type="file" name="logo_imagem" id="logo" class="pula">
+                                    <input type="file" name="logo_imagem" id="logo" class="pula" value="$empresa->logo">
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="{{ Storage::url($empresa->logo) }}" alt="Não há logo" height="100px">
                         </div>
                         <div class="row">
                             <div class="col-md-12">

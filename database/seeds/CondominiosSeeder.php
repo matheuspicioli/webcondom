@@ -14,14 +14,14 @@ class CondominiosSeeder extends Seeder
     {
         Condominio::Create([
             'id' => '5',
-            'nome' => 'CONDOMINIO EDIFICIO SOLAR MEDITERRANEO',
-            'apelido' => 'SOLAR',
+            'nome' => 'CONDOMINIO EDIFICIO SOL NASCENTE',
+            'apelido' => 'SOL',
             'telefone' => '1733221100',
             'celular' => '17998765432',
             'unidades' => '12',
             'tem_gas' => '1',
             'valor_gas' => '8.35',
-            'email' => 'solar@solar.com.br',
+            'email' => 'sol@solnascente.com.br',
             'endereco_id' => '2',
             'sindico_id' => '4']);
 
