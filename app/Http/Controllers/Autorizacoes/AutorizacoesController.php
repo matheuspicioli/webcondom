@@ -32,16 +32,23 @@ class AutorizacoesController extends Controller
 
     public function salvar_role(Request $request)
     {
-        dd($request->all());
+        Role::create($request->all());
+        return redirect()->route('autorizacoes.listar');
     }
 
     public function salvar_role_permissao_associar(Request $request)
     {
-        dd($request->all());
+        $role = Role::find($request->role_id);
+        $role->permissoes()->attach($request->permissoes);
+        $role->save();
+        return redirect()->route('autorizacoes.listar');
     }
 
     public function salvar_role_usuario_associar(Request $request)
     {
-        dd($request->all());
+        $usuario = User::find($request->user_id);
+        $usuario->roles()->attach($request->perfis);
+        $usuario->save();
+        return redirect()->route('autorizacoes.listar');
     }
 }

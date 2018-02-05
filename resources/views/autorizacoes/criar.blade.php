@@ -93,7 +93,7 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="descricao_perfil" class="control-label">Descricao</label>
-                                        <input type="text" class="form-control" name="descricao_perfil"
+                                        <input type="text" class="form-control" name="descricao"
                                                id="descricao_perfil">
                                     </div>
                                 </div>
@@ -142,8 +142,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="permissao_perfil" class="control-label">Permissões</label>
-                                        <select name="permissao_id" class="form-control select2" id="permissao_perfil">
-                                            <option disabled selected>----------Selecione----------</option>
+                                        <select name="permissoes[]" class="form-control select2" multiple="" id="permissao_perfil">
                                             @foreach($permissoes as $permissao)
                                                 <option value="{{ $permissao->id }}">#{{ $permissao->id }} - {{ $permissao->nome }} - {{ $permissao->descricao }}</option>
                                             @endforeach
@@ -195,8 +194,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="role_usuario" class="control-label">Perfil</label>
-                                        <select name="role_id" class="form-control select2" id="role_usuario">
-                                            <option disabled selected>----------Selecione----------</option>
+                                        <select name="perfis[]" class="form-control select2" id="role_usuario" multiple="">
                                             @foreach($roles as $role)
                                                 <option value="{{ $role->id }}">#{{ $role->id }} - {{ $role->nome }} - {{ $role->descricao }}</option>
                                             @endforeach
@@ -218,9 +216,6 @@
                 </div>
             </div>
         </div>
-    @else
-        <h3>Você não tem permissão para visualizar esta tela!</h3>
-        {{-- dd(Auth::user()->roles)  --}}
     @endcan
 @stop
 
