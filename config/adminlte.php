@@ -186,7 +186,8 @@ return [
                     [
                         'text'  => 'Bancos',
                         'url'   => 'Financeiros/Bancos',
-                        'icon'  => 'bank'
+                        'icon'  => 'bank',
+                        'can'   => 'listar_banco'
                     ],
                     [
                         'text'  => 'Conta Corrente',

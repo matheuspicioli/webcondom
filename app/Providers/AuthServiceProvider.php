@@ -40,7 +40,6 @@ class AuthServiceProvider extends ServiceProvider
             if($user->temAlgumaRole('ADMINISTRADOR'))
                 return true;
 
-            return false;
         });
     }
 }

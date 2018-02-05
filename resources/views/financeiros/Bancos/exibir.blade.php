@@ -265,11 +265,22 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <button class="btn btn-info" type="submit">
-                                        <i class="fa fa-save"></i> Salvar</button>
-                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
-                                        <i class="fa fa-trash"></i> Excluir
-                                    </button>
+                                    @can("editar_banco")
+                                        <button class="btn btn-info" type="submit">
+                                            <i class="fa fa-save"></i> Salvar</button>
+                                    @else
+                                        <button disabled class="btn btn-info" type="submit">
+                                            <i class="fa fa-save"></i> Salvar</button>
+                                    @endcan
+                                    @can("deletar_banco")
+                                        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
+                                            <i class="fa fa-trash"></i> Excluir
+                                        </button>
+                                    @else
+                                            <button disabled class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
+                                                <i class="fa fa-trash"></i> Excluir
+                                            </button>
+                                    @endcan
                                 </div>
                             </div>
                         </div>
@@ -278,7 +289,6 @@
             </div>
         </div>
     </div>
-
     <!-- MODAL EXCLUIR BANCO -->
     <div id="modal-excluir" class="modal modal-danger fade">
         <div class="modal-dialog">
