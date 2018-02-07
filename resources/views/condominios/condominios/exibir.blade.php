@@ -187,11 +187,20 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <button class="btn btn-info" type="submit">
-                                        <i class="fa fa-save"></i> Salvar</button>
-                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
-                                        <i class="fa fa-trash"></i> Excluir
-                                    </button>
+                                    @can("editar_condominio")
+                                        <button class="btn btn-info" type="submit">
+                                            <i class="fa fa-save"></i> Salvar</button>
+                                    @else
+                                        <button disabled class="btn btn-info" type="submit">
+                                            <i class="fa fa-save"></i> Salvar</button>
+                                    @endcan
+                                    @can("deletar_condominio")
+                                        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
+                                            <i class="fa fa-trash"></i> Excluir</button>
+                                    @else
+                                        <button disabled class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
+                                            <i class="fa fa-trash"></i> Excluir</button>
+                                    @endcan
                                 </div>
                             </div>
                         </div>
@@ -226,11 +235,10 @@
                                 <td>{{ $taxa->valor }}</td>
                                 <td>
                                     <a href="{{ route('condominios.condominiostaxas.exibir', ['id' => $taxa->id, 'idCondominio' => $condominio->id]) }}"
-                                       class="btn btn-success">
+                                       class="btn btn-warning">
                                         <i class="fa fa-pencil"></i></a>
                                     <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-danger-{{$taxa->id}}">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
+                                        <i class="fa fa-trash"></i></button>
                                     <!-- MODAL EXCLUIR TAXA GERANDO DINÂMICO -->
                                     <div id="modal-danger-{{$taxa->id}}" class="modal modal-danger fade">
                                         <div class="modal-dialog">

@@ -15,8 +15,13 @@
 @section('content')
     <div class="row">
         <div class="col-md-1">
-            <a href="{{ route('condominios.condominios.criar') }}" class="btn btn-success">
-                <i class="fa fa-plus"></i> Cadastrar</a>
+            @can("incluir_condominio")
+                <a href="{{ route('condominios.condominios.criar') }}" class="btn btn-success">
+                    <i class="fa fa-plus"></i> Cadastrar</a>
+            @else
+                <button disabled type="button" class="btn btn-success">
+                    <i class="fa fa-plus"></i> Cadastrar</button>
+            @endcan
             <hr>
         </div>
     </div>
@@ -26,7 +31,6 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Condomínios</h3>
                 </div>
-
                 <div class="box-body">
                     <table class="table table-striped table-hover dataTable" id="tabela" role="grid">
                         <thead>
@@ -55,11 +59,23 @@
                                 <td>{{ $condominio->apelido }}</td>
                                 <td>{{ $condominio->endereco->endereco_formatado }}</td>
                                 <td>
-                                    <a class="btn btn-warning" href="{{ route('condominios.condominios.exibir', ['id' => $condominio->id ]) }}">
-                                        <i class="fa fa-pencil"></i></a>
-                                    <button type="button" data-toggle="modal" data-target="#modal-danger-{{$condominio->id}}" href="#" class="btn btn-danger">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
+                                    @can("exibir_condominio")
+                                        <a class="btn btn-warning" href="{{ route('condominios.condominios.exibir', ['id' => $condominio->id ]) }}">
+                                            <i class="fa fa-pencil"></i></a>
+                                    @else
+                                        <button disabled type="button" class="btn btn-warning">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+                                    @endcan
+                                    @can("deletar_condominio")
+                                        <button type="button" data-toggle="modal" data-target="#modal-danger-{{$condominio->id}}" href="#" class="btn btn-danger">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    @else
+                                        <button disabled type="button" class="btn btn-danger">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    @endcan
                                     <!-- MODAL EXCLUSÃO -->
                                     <div id="modal-danger-{{$condominio->id}}" class="modal modal-danger fade">
                                         <div class="modal-dialog">
