@@ -17,11 +17,16 @@ class UsuariosSeeder extends Seeder
             'password'  => bcrypt('matheus1998'),
             'name'      => 'Matheus Augusto Picioli'
         ]);
-
         User::create([
             'email'     => 'renan@emporiumdigital.net',
             'password'  => bcrypt('123456'),
             'name'      => 'Renan Sanfelice'
         ]);
+        User::create([
+            'email'     => 'acesso@acesso.com.br',
+            'password'  => bcrypt('123456'),
+            'name'      => 'Teste de Permissoes'
+        ]);
+
     }
 }

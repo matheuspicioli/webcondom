@@ -56,9 +56,9 @@
                                 <td>{{ $sindico->telefone ? $sindico->telefone : 'Vazio' }}</td>
                                 <td>{{ $sindico->celular }}</td>
                                 <td>
-                                    <a class="btn btn-warning" href="{{ route('condominios.sindicos.exibir', ['id' => $sindico->id ]) }}">
+                                    <a class="btn btn-sm btn-warning" href="{{ route('condominios.sindicos.exibir', ['id' => $sindico->id ]) }}">
                                         <i class="fa fa-pencil"></i></a>
-                                    <button type="button" data-toggle="modal" data-target="#modal-danger-{{$sindico->id}}" href="#" class="btn btn-danger">
+                                    <button type="button" data-toggle="modal" data-target="#modal-danger-{{$sindico->id}}" href="#" class="btn btn-sm btn-danger">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                     <!-- MODAL EXCLUSÃO -->

@@ -15,8 +15,10 @@
 @section('content')
     <div class="row">
         <div class="col-md-1">
-            <a href="{{ route('financeiros.bancos.criar') }}" class="btn btn-success">
-                <i class="fa fa-plus"></i> Cadastrar</a>
+            @can("incluir_banco")
+                <a href="{{ route('financeiros.bancos.criar') }}" class="btn btn-success">
+                    <i class="fa fa-plus"></i> Cadastrar</a>
+            @endcan
             <hr>
         </div>
     </div>
@@ -52,11 +54,19 @@
                                 <td>{{ $banco->CNAB }}</td>
                                 <td>{{ $banco->nome_banco }}</td>
                                 <td>
-                                    <a class="btn btn-warning" href="{{ route('financeiros.bancos.exibir', ['id' => $banco->id ]) }}">
-                                        <i class="fa fa-pencil"></i> </a>
-                                    <button type="button" data-toggle="modal" data-target="#modal-danger-{{$banco->id}}" href="#" class="btn btn-danger">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
+                                    @can("exibir_banco")
+                                        <a class="btn btn-warning" href="{{ route('financeiros.bancos.exibir', ['id' => $banco->id ]) }}">
+                                            <i class="fa fa-pencil"></i></a>
+                                    @endcan
+                                    @can("deletar_banco")
+                                        <button type="button" data-toggle="modal" data-target="#modal-danger-{{$banco->id}}" href="#" class="btn btn-danger">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    @else
+                                        <button disabled type="button" data-toggle="modal" data-target="#modal-danger-{{$banco->id}}" href="#" class="btn btn-danger">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    @endcan
                                     <!-- MODAL EXCLUSÃO -->
                                     <div id="modal-danger-{{$banco->id}}" class="modal modal-danger fade">
                                         <div class="modal-dialog">

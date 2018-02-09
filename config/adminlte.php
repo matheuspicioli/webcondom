@@ -19,6 +19,7 @@ return [
 
     'title_postfix' => '',
 
+
     /*
     |--------------------------------------------------------------------------
     | Logo
@@ -58,7 +59,7 @@ return [
     |
     */
 
-    'layout' => null,
+    'layout' => 'fixed',
 
     /*
     |--------------------------------------------------------------------------
@@ -121,17 +122,20 @@ return [
                 [
                 'text'  => 'Condominios',
                 'url'   => 'Condominios/Condominios',
-                'icon'  => 'building-o'
+                'icon'  => 'building-o',
+                'can'   => 'listar_condominio',
                 ],
                 [
                 'text'  => 'Síndicos',
                 'url'   => 'Condominios/Sindicos',
-                'icon'  => 'user'
+                'icon'  => 'user',
+                'can'   => 'listar_sindico',
                 ],
                 [
                 'text'  => 'Imóveis',
                 'url'   => 'Condominios/Imoveis',
-                'icon'  => 'home'
+                'icon'  => 'home',
+                'can'   => 'listar_imovel',
                 ]
             ],
         ],
@@ -143,27 +147,32 @@ return [
                 [
                 'text'  => 'Empresas',
                 'url'   => 'Entidades/Empresas',
-                'icon'  => 'building'
+                'icon'  => 'building',
+                'can'   => 'listar_empresa',
                 ],
                 [
                 'text'  => 'Fornecedores',
                 'url'   => 'Entidades/Fornecedores',
-                'icon'  => 'building'
+                'icon'  => 'building',
+                'can'   => 'listar_fornecedor',
                 ],
                 [
                 'text'  => 'Funcionarios',
                 'url'   => 'Entidades/Funcionarios',
-                'icon'  => 'user'
+                'icon'  => 'user',
+                'can'   => 'listar_funcionario',
                 ],
                 [
                 'text'  => 'Proprietários',
                 'url'   => 'Entidades/Proprietarios',
-                'icon'  => 'user'
+                'icon'  => 'user',
+                'can'   => 'listar_proprietario',
                 ],
                 [
                 'text'  => 'Inquilinos',
                 'url'   => 'Entidades/Inquilinos',
-                'icon'  => 'user'
+                'icon'  => 'user',
+                'can'   => 'listar_inquilino',
                 ]
 
             ]
@@ -176,22 +185,26 @@ return [
                     [
                         'text'  => 'Grupo de Contas',
                         'url'   => 'Financeiros/GrupoDeContas',
-                        'icon'  => 'circle-o'
+                        'icon'  => 'circle-o',
+                        'can'   => 'listar_grupodeconta',
                     ],
                     [
                         'text'  => 'Plano de Contas',
                         'url'   => 'Financeiros/GrupoDeContas',
-                        'icon'  => 'circle-o'
+                        'icon'  => 'circle-o',
+                        'can'   => 'listar_grupodeconta',
                     ],
                     [
                         'text'  => 'Bancos',
                         'url'   => 'Financeiros/Bancos',
-                        'icon'  => 'bank'
+                        'icon'  => 'bank',
+                        'can'   => 'listar_banco'
                     ],
                     [
                         'text'  => 'Conta Corrente',
                         'url'   => 'Financeiros/ContasCorrente',
-                        'icon'  => 'cc'
+                        'icon'  => 'cc',
+                        'can'   => 'listar_contacorrente',
                     ],
 
                 ]
@@ -204,32 +217,38 @@ return [
                     [
                         'text'  => 'Categorias',
                         'url'   => 'Diversos/Categorias',
-                        'icon'  => 'dot-circle-o'
+                        'icon'  => 'dot-circle-o',
+                        'can'   => 'listar_categoria',
                     ],
                     [
                         'text'  => 'Departamentos',
                         'url'   => 'Diversos/Departamentos',
-                        'icon'  => 'dot-circle-o'
+                        'icon'  => 'dot-circle-o',
+                        'can'   => 'listar_departamento',
                     ],
                     [
                         'text'  => 'Estado Civil',
                         'url'   => 'Diversos/EstadoCivil',
-                        'icon'  => 'dot-circle-o'
+                        'icon'  => 'dot-circle-o',
+                        'can'   => 'listar_estadocivil',
                     ],
                     [
                         'text'  => 'Regime de Casamento',
                         'url'   => 'Diversos/RegimesCasamentos',
-                        'icon'  => 'dot-circle-o'
+                        'icon'  => 'dot-circle-o',
+                        'can'   => 'listar_regimecasamento',
                     ],
                     [
                         'text'  => 'Setores',
                         'url'   => 'Diversos/Setores',
-                        'icon'  => 'dot-circle-o'
+                        'icon'  => 'dot-circle-o',
+                        'can'   => 'listar_setor',
                     ],
                     [
                         'text'  => 'Tipos de Imóveis',
                         'url'   => 'Diversos/TiposImoveis',
-                        'icon'  => 'dot-circle-o'
+                        'icon'  => 'dot-circle-o',
+                        'can'   => 'listar_tipoimovel',
                     ],
                 ]
         ]

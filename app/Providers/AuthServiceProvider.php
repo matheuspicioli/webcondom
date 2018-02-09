@@ -27,19 +27,17 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        if (!App::runningInConsole())
-        {
+        if (!App::runningInConsole()) {
             $permissoes = Permissao::with('roles')->get();
 
-            foreach($permissoes as $permissao)
-            {
-                Gate::define($permissao->nome, function($user) use ($permissao){
+            foreach ($permissoes as $permissao) {
+                Gate::define($permissao->nome, function ($user) use ($permissao) {
                     return $user->temPermissao($permissao);
                 });
             }
 
-            Gate::before(function($user, $permissao){
-                if($user->temAlgumaRole('ADMINISTRADOR'))
+            Gate::before(function ($user, $permissao) {
+                if ($user->temAlgumaRole('ADMINISTRADOR'))
                     return true;
 
 //                return false;
