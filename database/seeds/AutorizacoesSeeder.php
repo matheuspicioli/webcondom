@@ -54,8 +54,8 @@ class AutorizacoesSeeder extends Seeder
                 'descricao' => 'Permite incluir registro de condomínio.'
             ]
         ];
-        foreach ($permissao as $values) {
-            Permissao::create($values);
+        foreach ($permissao as $permissoes) {
+            Permissao::create($permissoes);
         };
         $permissao_role = WebCondom\Models\Autorizacao\Permissao::all();
         foreach ($permissao_role as $permissao_roles) {

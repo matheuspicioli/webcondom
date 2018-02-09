@@ -15,8 +15,13 @@
 @section('content')
     <div class="row">
         <div class="col-md-1">
-            <a href="{{ route('condominios.imoveis.criar') }}" class="btn btn-success">
-                <i class="fa fa-plus"></i> Cadastrar</a>
+            @can("incluir_imovel")
+                <a href="{{ route('condominios.imoveis.criar') }}" class="btn btn-success">
+                    <i class="fa fa-plus"></i> Cadastrar</a>
+            @else
+                <button disabled type="button" class="btn btn-success">
+                    <i class="fa fa-plus"></i> Cadastrar</button>
+            @endcan
             <hr>
         </div>
     </div>
@@ -61,11 +66,20 @@
                                 <td>{{ $imovel->condominio->nome }}</td>
                                 <td>{{ $imovel->categoria->descricao }}</td>
                                 <td>
-                                    <a class="btn btn-warning" href="{{ route('condominios.imoveis.exibir', ['id' => $imovel->id ]) }}">
-                                        <i class="fa fa-pencil"></i></a>
-                                    <button type="button" data-toggle="modal" data-target="#modal-danger-{{$imovel->id}}" href="#" class="btn btn-danger">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
+                                    @can("exibir_imovel")
+                                        <a class="btn btn-sm btn-warning" href="{{ route('condominios.imoveis.exibir', ['id' => $imovel->id ]) }}">
+                                            <i class="fa fa-pencil"></i></a>
+                                    @else
+                                        <button disabled type="button" class="btn btn-sm btn-warning">
+                                            <i class="fa fa-pencil"></i></button>
+                                    @endcan
+                                    @can("deletar_imovel")
+                                        <button type="button" data-toggle="modal" data-target="#modal-danger-{{$imovel->id}}" href="#" class="btn btn-sm btn-danger">
+                                            <i class="fa fa-trash"></i></button>
+                                    @else
+                                        <button disabled type="button" class="btn btn-sm btn-danger">
+                                            <i class="fa fa-trash"></i></button>
+                                    @endcan
                                     <!-- MODAL EXCLUSÃO -->
                                     <div id="modal-danger-{{$imovel->id}}" class="modal modal-danger fade">
                                         <div class="modal-dialog">

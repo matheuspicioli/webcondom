@@ -60,21 +60,18 @@
                                 <td>{{ $condominio->endereco->endereco_formatado }}</td>
                                 <td>
                                     @can("exibir_condominio")
-                                        <a class="btn btn-warning" href="{{ route('condominios.condominios.exibir', ['id' => $condominio->id ]) }}">
+                                        <a class="btn btn-sm btn-warning" href="{{ route('condominios.condominios.exibir', ['id' => $condominio->id ]) }}">
                                             <i class="fa fa-pencil"></i></a>
                                     @else
-                                        <button disabled type="button" class="btn btn-warning">
-                                            <i class="fa fa-pencil"></i>
-                                        </button>
+                                        <button disabled type="button" class="btn btn-sm btn-warning">
+                                            <i class="fa fa-pencil"></i></button>
                                     @endcan
                                     @can("deletar_condominio")
-                                        <button type="button" data-toggle="modal" data-target="#modal-danger-{{$condominio->id}}" href="#" class="btn btn-danger">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
+                                        <button type="button" data-toggle="modal" data-target="#modal-danger-{{$condominio->id}}" href="#" class="btn btn-sm btn-danger">
+                                            <i class="fa fa-trash"></i></button>
                                     @else
-                                        <button disabled type="button" class="btn btn-danger">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
+                                        <button disabled type="button" class="btn btn-sm btn-danger">
+                                            <i class="fa fa-trash"></i></button>
                                     @endcan
                                     <!-- MODAL EXCLUSÃO -->
                                     <div id="modal-danger-{{$condominio->id}}" class="modal modal-danger fade">
