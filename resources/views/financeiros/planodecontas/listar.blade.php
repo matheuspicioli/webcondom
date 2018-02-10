@@ -128,6 +128,12 @@
                                     <button type="button" data-toggle="modal" data-target="#modal-danger-{{$plano->id}}" href="#" class="btn btn-xs btn-danger">
                                         <i class="fa fa-trash"></i>
                                     </button>
+                                    <a class="btn btn-xs btn-success" href="{{ route('financeiros.planodecontas.exportar',['id'=>$plano->id,'tipo'=>'xlsx']) }}">
+                                        <i class="fa fa-file-excel-o"></i>
+                                    </a>
+                                    <a class="btn btn-xs btn-success" href="{{ route('financeiros.planodecontas.exportar',['id'=>$plano->id,'tipo'=>'csv']) }}">
+                                        CSV
+                                    </a>
                                     <!-- MODAL EXCLUSÃO -->
                                     <div id="modal-danger-{{$plano->id}}" class="modal modal-danger fade">
                                         <div class="modal-dialog">

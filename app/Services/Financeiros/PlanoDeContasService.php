@@ -21,6 +21,23 @@ class PlanoDeContasService
         $this->repository   = $repository;
     }
 
+    public function Pesquisar($id)
+    {
+        $plano = $this->repository->find($id);
+        if($plano)
+            return (object)[
+                'sucesso'   => true,
+                'dados'     => $plano,
+                'mensagem'  => "Registro encontrado."
+            ];
+
+        return (object)[
+            'sucesso'   => false,
+            'dados'     => null,
+            'mensagem'  => 'Registro não encontrado'
+        ];
+    }
+
     public function Listar()
     {
         $planos = $this->repository->all();

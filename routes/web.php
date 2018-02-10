@@ -70,6 +70,7 @@ Route::prefix('Financeiros')->namespace('Financeiros')->middleware('auth')->grou
         Route::get('{id}/Exibir', 'PlanoDeContasController@exibir')->name('financeiros.planodecontas.exibir');
         Route::put('{id}/Alterar', 'PlanoDeContasController@alterar')->name('financeiros.planodecontas.alterar');
         Route::delete('{id}', 'PlanoDeContasController@excluir')->name('financeiros.planodecontas.excluir');
+        Route::get('{id}/Exportar/{tipo}', 'PlanoDeContasController@exportar')->name('financeiros.planodecontas.exportar');
     });
 
     Route::prefix('Bancos')->group(function(){
