@@ -35,81 +35,51 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    <form method="POST"
-                          action="{{ route('financeiros.planodecontas.alterar', ['id' => $plano->dados->id ]) }}">
-                        {{ csrf_field() }}
-                        {{ method_field('PUT') }}
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="descricao" class="control-label">Descrição</label>
-                                    <input id="descricao" type="text" class="form-control pula" name="descricao"
-                                           value="{{ $plano->dados->descricao }}">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="classificacao" class="control-label">Classificação</label>
-                                    <input id="classificacao" type="text" class="form-control pula" name="classificacao"
-                                           value="{{ $plano->dados->classificacao }}">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="tipo" class="control-label">Tipo</label>
-                                    <select name="tipo" id="tipo" class="form-control select2">
-                                        <option value="Receita" {{ $plano->dados->tipo == 'Receita' ? 'selected' : '' }}>
-                                            Receita
-                                        </option>
-                                        <option value="Despesa" {{ $plano->dados->tipo == 'Despesa' ? 'selected' : '' }}>
-                                            Despesa
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="categoria" class="control-label">Categoria</label>
-                                    <select name="categoria" id="categoria" class="form-control select2">
-                                        <option value="Ativo" {{ $plano->dados->categoria == 'Ativo' ? 'selected' : '' }}>
-                                            Ativo
-                                        </option>
-                                        <option value="Passivo" {{ $plano->dados->categoria == 'Passivo' ? 'selected' : '' }}>
-                                            Passivo
-                                        </option>
-                                    </select>
-                                </div>
+                    {!! Form::model($plano, ['route' => ['financeiros.planodecontas.alterar', $plano->id], 'method' => 'PUT']) !!}
+                    <div class="row">
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                {!! Form::label('tipo', 'Tipo', ['class' => 'control-label']) !!}
+                                {!! Form::select('tipo', [1 => '1', 2 => '2', 3 => '3'], $plano->tipo, ['class' => 'form-control']) !!}
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="grupo" class="control-label">Grupo de conta</label>
-                                    <select name="grupo_contas_id" id="categoria" class="form-control select2">
-                                        @foreach($grupos as $grupo)
-                                        <option value="{{ $grupo->id }}" {{ $plano->dados->grupo_contas_id == $grupo->id ? 'selected' : '' }}>
-                                            {{ $grupo->descricao }}
-                                        </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                {!! Form::label('grupo', 'Grupo', ['class' => 'control-label']) !!}
+                                {!! Form::text('grupo', $plano->grupo, ['class' => 'form-control', 'maxlength' => '3']) !!}
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <button class="btn btn-info" type="submit">
-                                        <i class="fa fa-pencil"></i> Alterar
-                                    </button>
-                                    <button class="btn btn-danger" type="button" data-toggle="modal"
-                                            data-target="#modal-excluir">
-                                        <i class="fa fa-trash"></i> Excluir
-                                    </button>
-                                </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                {!! Form::label('conta', 'Conta', ['class' => 'control-label']) !!}
+                                {!! Form::text('conta', $plano->conta, ['class' => 'form-control', 'maxlength' => '4']) !!}
                             </div>
                         </div>
-                    </form>
+                        <div class="col-md-2">
+                            {!! Form::label('ratear', 'Ratear?', ['class' => 'control-label']) !!}
+                            {!! Form::select('ratear', ['Sim' => 'Sim', 'Nao' => 'Não'], $plano->ratear, ['class' => 'form-control']) !!}
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                {!! Form::label('descricao', 'Descrição', ['class' => 'control-label']) !!}
+                                {!! Form::text('descricao', $plano->descricao, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <button class="btn btn-info" type="submit">
+                                    <i class="fa fa-pencil"></i> Alterar
+                                </button>
+                                <button class="btn btn-danger" type="button" data-toggle="modal"
+                                        data-target="#modal-excluir">
+                                    <i class="fa fa-trash"></i> Excluir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
@@ -126,13 +96,13 @@
                 </div>
 
                 <div class="modal-body">
-                    <h4>Deseja realmente excluir o plano de contas "{{ $plano->dados->descricao }}"?</h4>
+                    <h4>Deseja realmente excluir o plano de contas "{{ $plano->descricao }}"?</h4>
                 </div>
 
                 <div class="modal-footer">
                     <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
                     <form method="POST"
-                          action="{{ route('financeiros.planodecontas.excluir', ['id' => $plano->dados->id]) }}">
+                          action="{{ route('financeiros.planodecontas.excluir', ['id' => $plano->id]) }}">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <button class="btn btn-outline" type="submit">Confirmar exclusão</button>

@@ -22,9 +22,65 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Cadastrar plano de contas</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" type="button" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="box-body">
+                    {!! Form::open(['route' => ['financeiros.planodecontas.salvar'], 'method' => 'POST']) !!}
+                    <div class="row">
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                {!! Form::label('tipo', 'Tipo', ['class' => 'control-label']) !!}
+                                {!! Form::select('tipo', [1 => '1', 2 => '2', 3 => '3'], null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                {!! Form::label('grupo', 'Grupo', ['class' => 'control-label']) !!}
+                                {!! Form::text('grupo', '', ['class' => 'form-control', 'maxlength' => '3']) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                {!! Form::label('conta', 'Conta', ['class' => 'control-label']) !!}
+                                {!! Form::text('conta', '', ['class' => 'form-control', 'maxlength' => '4']) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            {!! Form::label('ratear', 'Ratear?', ['class' => 'control-label']) !!}
+                            {!! Form::select('ratear', ['Sim' => 'Sim', 'Nao' => 'Não'], null, ['class' => 'form-control']) !!}
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                {!! Form::label('descricao', 'Descrição', ['class' => 'control-label']) !!}
+                                {!! Form::text('descricao', '', ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit">Cadastrar</button>
+                            </div>
+                        </div>
+                    </div>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Grupo de contas</h3>
+                    <h3 class="box-title">Planos de contas</h3>
                 </div>
 
                 <div class="box-body">
@@ -33,8 +89,10 @@
                         <tr>
                             <th>#</th>
                             <th>Descrição</th>
-                            <th>Grupo de conta</th>
-                            <th>Classificação</th>
+                            <th>Código</th>
+                            <th>Tipo</th>
+                            <th>Grupo</th>
+                            <th>Conta</th>
                             <th>Criado em</th>
                             <th>Alterado em</th>
                             <th>Ações</th>
@@ -44,26 +102,30 @@
                         <tr>
                             <th>#</th>
                             <th>Descrição</th>
-                            <th>Grupo de conta</th>
-                            <th>Classificação</th>
+                            <th>Código</th>
+                            <th>Tipo</th>
+                            <th>Grupo</th>
+                            <th>Conta</th>
                             <th>Criado em</th>
                             <th>Alterado em</th>
                             <th>Ações</th>
                         </tr>
                         </tfoot>
                         <tbody>
-                        @foreach($planos->dados as $plano)
+                        @foreach($planos as $plano)
                             <tr>
                                 <td>{{ $plano->id }}</td>
                                 <td>{{ $plano->descricao }}</td>
-                                <td>{{ $plano->grupo_contas ? $plano->grupo_contas->descricao : 'Registro pai excluído' }}</td>
-                                <td>{{ $plano->classificacao }}</td>
+                                <td>{{ $plano->codigo }}</td>
+                                <td>{{ $plano->tipo }}</td>
+                                <td>{{ $plano->grupo }}</td>
+                                <td>{{ $plano->conta }}</td>
                                 <td>{{ $plano->criado_em }}</td>
                                 <td>{{ $plano->alterado_em }}</td>
                                 <td>
-                                    <a class="btn btn-warning" href="{{ route('financeiros.planodecontas.exibir', ['id' => $plano->id ]) }}">
+                                    <a class="btn btn-xs btn-warning" href="{{ route('financeiros.planodecontas.exibir', ['id' => $plano->id ]) }}">
                                         <i class="fa fa-pencil"></i></a>
-                                    <button type="button" data-toggle="modal" data-target="#modal-danger-{{$plano->id}}" href="#" class="btn btn-danger">
+                                    <button type="button" data-toggle="modal" data-target="#modal-danger-{{$plano->id}}" href="#" class="btn btn-xs btn-danger">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                     <!-- MODAL EXCLUSÃO -->

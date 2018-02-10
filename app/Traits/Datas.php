@@ -12,7 +12,7 @@ trait Datas
 {
     public function getcriadoEmAttribute()
     {
-        return $this->created_at->format('d/m/Y');
+        return $this->created_at ? $this->created_at->format('d/m/Y') : '';
     }
 
     public function getalteradoEmAttribute()

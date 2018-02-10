@@ -31,49 +31,34 @@
                 </div>
 
                 <div class="box-body">
-                    <form action="{{ route('financeiros.planodecontas.salvar') }}" method="POST">
-                        {{ csrf_field() }}
+                    {!! Form::open(['route' => ['financeiros.planodecontas.salvar'], 'method' => 'POST']) !!}
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-1">
                                 <div class="form-group">
-                                    <label for="descricao" class="control-label">Descrição</label>
-                                    <input id="descricao" type="text" class="form-control pula" name="descricao">
+                                    {!! Form::label('tipo', 'Tipo', ['class' => 'control-label']) !!}
+                                    {!! Form::select('tipo', [1 => '1', 2 => '2', 3 => '3'], null, ['class' => 'form-control']) !!}
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-1">
                                 <div class="form-group">
-                                    <label for="classificacao" class="control-label">Classificação</label>
-                                    <input id="classificacao" type="text" class="form-control pula" name="classificacao">
+                                    {!! Form::label('grupo', 'Grupo', ['class' => 'control-label']) !!}
+                                    {!! Form::text('grupo', '', ['class' => 'form-control', 'maxlength' => '3']) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    {!! Form::label('conta', 'Conta', ['class' => 'control-label']) !!}
+                                    {!! Form::text('conta', '', ['class' => 'form-control', 'maxlength' => '4']) !!}
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="tipo" class="control-label">Tipo</label>
-                                    <select name="tipo" class="form-control select2" id="tipo">
-                                        <option value="Receita">Receita</option>
-                                        <option value="Despesa">Despesa</option>
-                                    </select>
-                                </div>
+                                {!! Form::label('ratear', 'Ratear?', ['class' => 'control-label']) !!}
+                                {!! Form::select('ratear', ['Sim' => 'Sim', 'Nao' => 'Não'], null, ['class' => 'form-control']) !!}
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-7">
                                 <div class="form-group">
-                                    <label for="categoria" class="control-label">Categoria</label>
-                                    <select name="categoria" class="form-control select2" id="categoria">
-                                        <option value="Ativo">Ativo</option>
-                                        <option value="Passivo">Passivo</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="grupo" class="control-label">Grupo de conta</label>
-                                    <select name="grupo_contas_id" class="form-control select2" id="grupo">
-                                        @foreach($grupos as $grupo)
-                                            <option value="{{ $grupo->id }}">{{ $grupo->descricao }}</option>
-                                        @endforeach
-                                    </select>
+                                    {!! Form::label('descricao', 'Descrição', ['class' => 'control-label']) !!}
+                                    {!! Form::text('descricao', '', ['class' => 'form-control']) !!}
                                 </div>
                             </div>
                         </div>
@@ -84,7 +69,7 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>

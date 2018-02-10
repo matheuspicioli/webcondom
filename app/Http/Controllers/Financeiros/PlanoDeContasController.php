@@ -22,16 +22,13 @@ class PlanoDeContasController
 
     public function Listar()
     {
-        $planos = $this->service->Listar();
-
+        $planos = $this->service->Listar()->dados;
         return view('financeiros.planodecontas.listar', compact('planos'));
     }
 
     public function Criar()
     {
-        $dados = $this->service->grupos();
-        $grupos = $dados->dados[0];
-        return view('financeiros.planodecontas.criar', compact('grupos'));
+        return view('financeiros.planodecontas.criar');
     }
 
     public function Salvar(Request $request)
@@ -42,10 +39,8 @@ class PlanoDeContasController
 
     public function Exibir($id)
     {
-        $plano = $this->service->Exibir($id);
-        $dados = $this->service->grupos();
-        $grupos = $dados->dados[0];
-        return view('financeiros.planodecontas.exibir', compact('plano', 'grupos'));
+        $plano = $this->service->Exibir($id)->dados;
+        return view('financeiros.planodecontas.exibir', compact('plano'));
     }
 
     public function Alterar(Request $request, $id)

@@ -4,7 +4,6 @@ namespace WebCondom\Repositories\Financeiros;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use WebCondom\Repositories\Financeiros\PlanoDeContasRepository;
 use WebCondom\Models\Financeiros\PlanoDeConta;
 use WebCondom\Validators\PlanoDeContasValidator;
 

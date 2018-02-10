@@ -15,22 +15,10 @@ use WebCondom\Repositories\Financeiros\PlanoDeContasRepository;
 class PlanoDeContasService
 {
     private $repository;
-    private $grupo;
 
-    public function __construct(PlanoDeContasRepository $repository, GrupoDeContasRepository $grupo)
+    public function __construct(PlanoDeContasRepository $repository)
     {
         $this->repository   = $repository;
-        $this->grupo        = $grupo;
-    }
-
-    public function grupos()
-    {
-        $grupos = $this->grupo->all();
-        return (object)[
-            'sucesso'   => true,
-            'dados'     => [ $grupos ],
-            'mensagem'  => null
-        ];
     }
 
     public function Listar()

@@ -31,7 +31,6 @@ class DatabaseSeeder extends Seeder
         $this->call('FornecedoresSeeder');
         $this->call('FuncionariosSeeder');
         $this->call('BancosSeeder');
-        $this->call('GrupoDeContasSeeder');
         $this->call('ContasCorrentesSeeder');
         $this->call('AutorizacoesSeeder');
     }

@@ -17,17 +17,11 @@ class CreatePlanoDeContasTable extends Migration
 	{
 		Schema::create('plano_de_contas', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('descricao', 100);
-            $table->enum('tipo', ['Receita', 'Despesa']);
-            $table->enum('categoria', ['Ativo', 'Passivo'])->nullable();
-            $table->string('classificacao', 20)->nullable();
-            $table->integer('codigo')->unsigned()->nullable();
-
-            $table->integer('grupo_contas_id')->unsigned();
-            $table->foreign('grupo_contas_id')
-                ->references('id')
-                ->on('grupo_de_contas')
-                ->onDelete('cascade');
+            $table->enum('tipo', [1,2,3]);
+            $table->string('grupo');
+            $table->string('conta');
+            $table->string('descricao',100)->nullable();
+            $table->enum('ratear',['Sim', 'Nao']);
 
             $table->softDeletes();
             $table->timestamps();

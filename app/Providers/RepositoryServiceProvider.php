@@ -28,6 +28,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\WebCondom\Repositories\Financeiros\ContasCorrenteRepository::class, \WebCondom\Repositories\Financeiros\ContasCorrenteRepositoryEloquent::class);
         $this->app->bind(\WebCondom\Repositories\Financeiros\BancosRepository::class, \WebCondom\Repositories\Financeiros\BancosRepositoryEloquent::class);
         $this->app->bind(\WebCondom\Repositories\Condominios\CondominiosRepository::class, \WebCondom\Repositories\Condominios\CondominiosRepositoryEloquent::class);
+        $this->app->bind(\WebCondom\Repositories\GrupoDeContasRepository::class, \WebCondom\Repositories\GrupoDeContasRepositoryEloquent::class);
         //:end-bindings:
     }
 }
