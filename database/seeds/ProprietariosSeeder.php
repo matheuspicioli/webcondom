@@ -17,7 +17,7 @@ class ProprietariosSeeder extends Seeder
             'codigo'        => '2253',
             'entidade_id'   => '2']);
 
-        factory(WebCondom\Models\Entidades\Proprietario::class, 2)
+        factory(WebCondom\Models\Entidades\Proprietario::class, 5)
             ->create()
             ->each(function ($proprietario) use ($entidades) {
                 $entidade = $entidades->random();
