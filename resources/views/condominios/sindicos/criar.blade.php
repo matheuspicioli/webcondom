@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('titulo', 'Sindicos - Cadastrar')
+@section('title', 'Sindicos - Cadastrar')
 @section('content_header')
     <h1>Cadastro <small>de Síndicos</small></h1>
     <ol class="breadcrumb">
@@ -22,48 +22,60 @@
             <hr>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-info">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Cadastrar Síndico</h3>
-                </div>
-                <div class="box-body">
-                    <form action="{{ route('condominios.sindicos.salvar') }}" method="POST">
-                        {{ csrf_field() }}
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="Nome" class="control-label">Nome</label>
-                                    <input id="Nome" type="text" class="form-control pula" name="nome">
+    @can("incluir_sindico")
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Cadastrar Síndico</h3>
+                    </div>
+                    <div class="box-body">
+                        <form action="{{ route('condominios.sindicos.salvar') }}" method="POST">
+                            {{ csrf_field() }}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Nome" class="control-label">Nome</label>
+                                        <input id="Nome" type="text" class="form-control pula" name="nome">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Telefone" class="control-label">Telefone</label>
+                                        <input type="text" id="Telefone" name="telefone" class="form-control pula">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Celular" class="control-label">Celular</label>
+                                        <input type="text" id="Celular" name="celular" class="form-control pula">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="Telefone" class="control-label">Telefone</label>
-                                    <input type="text" id="Telefone" name="telefone" class="form-control pula">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit">
+                                            <i class="fa fa-save"></i> Cadastrar</button>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="Celular" class="control-label">Celular</label>
-                                    <input type="text" id="Celular" name="celular" class="form-control pula">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <button class="btn btn-primary" type="submit">
-                                        <i class="fa fa-save"></i> Cadastrar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @else
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Você não possui acesso a este recurso. entre em contato com o administrador!</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endcan
 @stop
 @section('js')
     <script>

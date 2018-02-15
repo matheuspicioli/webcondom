@@ -227,9 +227,9 @@
     @else
         <div class="row">
             <div class="col-md-12">
-                <div class="box box-info">
+                <div class="box box-warning">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Você não possui acesso a este recurso. entre em contato com o administrador!</h3>
+                        <h3 class="box-title">{{mensagem_permissao()}}</h3>
                     </div>
                 </div>
             </div>
