@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('titulo', 'Sindicos - Editar')
+@section('title', 'Sindicos - Editar')
 @section('content_header')
     <h1>Síndicos - <small>edição</small></h1>
     <ol class="breadcrumb">
@@ -22,59 +22,80 @@
             <hr>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-info">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Editar Síndico</h3>
-                    <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" type="button" data-widget="collapse">
-                            <i class="fa fa-minus"></i></button>
+    @can("exibir_sindico")
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Editar Síndico</h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-box-tool" type="button" data-widget="collapse">
+                                <i class="fa fa-minus"></i></button>
+                        </div>
                     </div>
-                </div>
-                <div class="box-body">
-                    <form method="POST" action="{{ route('condominios.sindicos.alterar', ['id' => $sindico->id ]) }}">
-                        {{ csrf_field() }}
-                        {{ method_field('PUT') }}
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="Nome" class="control-label">Nome</label>
-                                    <input id="Nome" type="text" class="form-control pula" name="nome"
-                                           value="{{ $sindico->nome }}">
+                    <div class="box-body">
+                        <form method="POST" action="{{ route('condominios.sindicos.alterar', ['id' => $sindico->id ]) }}">
+                            {{ csrf_field() }}
+                            {{ method_field('PUT') }}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Nome" class="control-label">Nome</label>
+                                        <input id="Nome" type="text" class="form-control pula" name="nome"
+                                               value="{{ $sindico->nome }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Telefone" class="control-label">Telefone</label>
+                                        <input type="text" id="Telefone" name="telefone" class="form-control pula"
+                                               value="{{ $sindico->telefone ? $sindico->telefone : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Celular" class="control-label">Celular</label>
+                                        <input type="text" id="Celular" name="celular" class="form-control pula"
+                                               value="{{ $sindico->celular }}">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="Telefone" class="control-label">Telefone</label>
-                                    <input type="text" id="Telefone" name="telefone" class="form-control pula"
-                                           value="{{ $sindico->telefone ? $sindico->telefone : '' }}">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        @can("editar_sindico")
+                                            <button class="btn btn-info" type="submit">
+                                                <i class="fa fa-save"></i> Salvar</button>
+                                        @else
+                                            <button disabled class="btn btn-info" type="submit">
+                                                <i class="fa fa-save"></i> Salvar</button>
+                                        @endcan
+                                        @can("deletar_sindico")
+                                            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
+                                                <i class="fa fa-trash"></i> Excluir</button>
+                                        @else
+                                            <button disabled class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
+                                                <i class="fa fa-trash"></i> Excluir</button>
+                                        @endcan
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="Celular" class="control-label">Celular</label>
-                                    <input type="text" id="Celular" name="celular" class="form-control pula"
-                                           value="{{ $sindico->celular }}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <button class="btn btn-info" type="submit">
-                                        <i class="fa fa-save"></i> Salvar</button>
-                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
-                                        <i class="fa fa-trash"></i> Excluir
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @else
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Você não possui acesso a este recurso. entre em contato com o administrador!</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endcan
     <!-- MODAL EXCLUIR CONDOMÍNIO -->
     <div id="modal-excluir" class="modal modal-danger fade">
         <div class="modal-dialog">

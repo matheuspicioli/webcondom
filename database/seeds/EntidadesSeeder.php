@@ -20,7 +20,6 @@ class EntidadesSeeder extends Seeder
             'endereco_principal_id' => '2',
             'ramo_atividade'        => 'ADM.CONDOMINIOS',
             'data_abertura'         => '1994-05-28',
-            'endereco_principal_id' => 1,
             'telefone_principal'    => '1732112500',
             'telefone_comercial'    => '17 32112500',
             'celular_1'             => '17987654321',

@@ -178,38 +178,6 @@ return [
             ]
         ],
         [
-            'text'    => 'Financeiro',
-            'icon'    => 'dollar',
-            'submenu' =>
-                [
-                    [
-                        'text'  => 'Grupo de Contas',
-                        'url'   => 'Financeiros/GrupoDeContas',
-                        'icon'  => 'circle-o',
-                        'can'   => 'listar_grupodeconta',
-                    ],
-                    [
-                        'text'  => 'Plano de Contas',
-                        'url'   => 'Financeiros/GrupoDeContas',
-                        'icon'  => 'circle-o',
-                        'can'   => 'listar_grupodeconta',
-                    ],
-                    [
-                        'text'  => 'Bancos',
-                        'url'   => 'Financeiros/Bancos',
-                        'icon'  => 'bank',
-                        'can'   => 'listar_banco'
-                    ],
-                    [
-                        'text'  => 'Conta Corrente',
-                        'url'   => 'Financeiros/ContasCorrente',
-                        'icon'  => 'cc',
-                        'can'   => 'listar_contacorrente',
-                    ],
-
-                ]
-        ],
-        [
             'text'    => 'Diversos',
             'icon'    => 'object-ungroup',
             'submenu' =>
@@ -251,10 +219,37 @@ return [
                         'can'   => 'listar_tipoimovel',
                     ],
                 ]
-        ]
-        ]
-    ]
+        ],
+        ],
     ],
+    [
+    'text'    => 'Financeiro',
+    'icon'    => 'dollar',
+    'submenu' =>
+        [
+            [
+                'text'  => 'Plano de Contas',
+                'url'   => 'Financeiros/PlanoDeContas',
+                'icon'  => 'circle-o',
+                'can'   => 'listar_planodeconta',
+            ],
+            [
+                'text'  => 'Bancos',
+                'url'   => 'Financeiros/Bancos',
+                'icon'  => 'bank',
+                'can'   => 'listar_banco'
+            ],
+            [
+                'text'  => 'Conta Corrente',
+                'url'   => 'Financeiros/ContasCorrente',
+                'icon'  => 'cc',
+                'can'   => 'listar_contacorrente',
+            ],
+
+        ]
+    ],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Menu Filters
