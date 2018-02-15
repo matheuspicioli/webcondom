@@ -8,8 +8,7 @@
 
 namespace WebCondom\Services\Financeiros;
 
-
-use WebCondom\Repositories\Financeiros\GrupoDeContasRepository;
+use Illuminate\Support\Facades\Response;
 use WebCondom\Repositories\Financeiros\PlanoDeContasRepository;
 
 class PlanoDeContasService
@@ -18,24 +17,26 @@ class PlanoDeContasService
 
     public function __construct(PlanoDeContasRepository $repository)
     {
-        $this->repository   = $repository;
+        $this->repository = $repository;
     }
 
-    public function Pesquisar($id)
+    public function ProximoCodigo()
     {
-        $plano = $this->repository->find($id);
-        if($plano)
-            return (object)[
-                'sucesso'   => true,
-                'dados'     => $plano,
-                'mensagem'  => "Registro encontrado."
-            ];
+        $grupo = $this->repository
+            ->orderBy('grupo', 'desc')
+            ->first();
+        $numeroProximoGrupo = (int)$grupo['grupo']+1;
 
-        return (object)[
-            'sucesso'   => false,
-            'dados'     => null,
-            'mensagem'  => 'Registro não encontrado'
-        ];
+        $conta = $this->repository
+            ->where()
+            ->orderBy('conta', 'desc')
+            ->first();
+        $numeroProximoConta = (int)$conta['conta']+1;
+
+        return Response::json([
+            'proxima-conta' => $numeroProximoConta,
+            'proximo-grupo' => $numeroProximoGrupo
+        ],200);
     }
 
     public function Listar()
@@ -43,16 +44,16 @@ class PlanoDeContasService
         $planos = $this->repository->all();
         if ($planos) {
             return (object)[
-                'sucesso'   => true,
-                'dados'     => $planos,
-                'mensagem'  => null
+                'sucesso' => true,
+                'dados' => $planos,
+                'mensagem' => null
             ];
         }
 
         return (object)[
-            'sucesso'   => false,
-            'dados'     => null,
-            'mensagem'  => 'Não foi possível trazer os dados'
+            'sucesso' => false,
+            'dados' => null,
+            'mensagem' => 'Não foi possível trazer os dados'
         ];
     }
 
@@ -60,18 +61,18 @@ class PlanoDeContasService
     {
         $plano = $this->repository->create($dados);
 
-        if($plano){
+        if ($plano) {
             return (object)[
-                'sucesso'   => true,
-                'dados'     => $plano,
-                'mensagem'  => 'Inclusão de registro efetuado com sucesso!'
+                'sucesso' => true,
+                'dados' => $plano,
+                'mensagem' => 'Inclusão de registro efetuado com sucesso!'
             ];
         }
 
         return (object)[
-            'sucesso'   => false,
-            'dados'     => null,
-            'mensagem'  => "Ocorreu um erro ao incluir registro!"
+            'sucesso' => false,
+            'dados' => null,
+            'mensagem' => "Ocorreu um erro ao incluir registro!"
         ];
     }
 
@@ -81,15 +82,15 @@ class PlanoDeContasService
 
         if ($plano)
             return (object)[
-                'sucesso'   => true,
-                'dados'     => $plano,
-                'mensagem'  => "Registro encontrado."
+                'sucesso' => true,
+                'dados' => $plano,
+                'mensagem' => "Registro encontrado."
             ];
 
         return (object)[
-            'sucesso'   => false,
-            'dados'     => null,
-            'mensagem'  => "Ocorreu um erro ao encontrar o registro."
+            'sucesso' => false,
+            'dados' => null,
+            'mensagem' => "Ocorreu um erro ao encontrar o registro."
         ];
     }
 
@@ -99,23 +100,23 @@ class PlanoDeContasService
         if ($plano) {
             if ($alterar = $plano->update($request->all())) {
                 return (object)[
-                    'sucesso'   => true,
-                    'dados'     => $plano,
-                    'mensagem'  => "Registro alterado com sucesso!"
+                    'sucesso' => true,
+                    'dados' => $plano,
+                    'mensagem' => "Registro alterado com sucesso!"
                 ];
             } else {
                 return (object)[
-                    'sucesso'   => false,
-                    'dados'     => null,
-                    'mensagem'  => "Ocorreu um erro ao encontrar o registro para alteração!"
+                    'sucesso' => false,
+                    'dados' => null,
+                    'mensagem' => "Ocorreu um erro ao encontrar o registro para alteração!"
                 ];
             }
         }
 
         return (object)[
-            'sucesso'   => false,
-            'dados'     => null,
-            'mensagem'  => "Ocorreu um erro ao encontrar o registro para alteração!"
+            'sucesso' => false,
+            'dados' => null,
+            'mensagem' => "Ocorreu um erro ao encontrar o registro para alteração!"
         ];
     }
 
@@ -126,23 +127,23 @@ class PlanoDeContasService
         if ($plano) {
             if ($deletar = $plano->delete()) {
                 return (object)[
-                    'sucesso'   => true,
-                    'dados'     => null,
-                    'mensagem'  => "Registro excluído com sucesso!"
+                    'sucesso' => true,
+                    'dados' => null,
+                    'mensagem' => "Registro excluído com sucesso!"
                 ];
             } else {
                 return (object)[
-                    'sucesso'   => false,
-                    'dados'     => null,
-                    'mensagem'  => "Ocorreu um erro ao deletar o registro solicitado!"
+                    'sucesso' => false,
+                    'dados' => null,
+                    'mensagem' => "Ocorreu um erro ao deletar o registro solicitado!"
                 ];
             }
         }
 
         return (object)[
-            'sucesso'   => false,
-            'dados'     => null,
-            'mensagem'  => "Ocorreu um erro ao encontrar o registro para exclusão!"
+            'sucesso' => false,
+            'dados' => null,
+            'mensagem' => "Ocorreu um erro ao encontrar o registro para exclusão!"
         ];
     }
 }

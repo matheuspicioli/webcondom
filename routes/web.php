@@ -54,15 +54,6 @@ Route::prefix('Condominios')->namespace('Condominios')->middleware('auth')->grou
 });
 
 Route::prefix('Financeiros')->namespace('Financeiros')->middleware('auth')->group(function(){
-    Route::prefix('GrupoDeContas')->group(function(){
-        Route::get('/', 'GrupoDeContasController@listar')->name('financeiros.grupodecontas.listar');
-        Route::get('Criar', 'GrupoDeContasController@criar')->name('financeiros.grupodecontas.criar');
-        Route::post('/', 'GrupoDeContasController@salvar')->name('financeiros.grupodecontas.salvar');
-        Route::get('{id}/Exibir', 'GrupoDeContasController@exibir')->name('financeiros.grupodecontas.exibir');
-        Route::put('{id}/Alterar', 'GrupoDeContasController@alterar')->name('financeiros.grupodecontas.alterar');
-        Route::delete('{id}', 'GrupoDeContasController@excluir')->name('financeiros.grupodecontas.excluir');
-    });
-
     Route::prefix('PlanoDeContas')->group(function(){
         Route::get('/', 'PlanoDeContasController@listar')->name('financeiros.planodecontas.listar');
         Route::get('Criar', 'PlanoDeContasController@criar')->name('financeiros.planodecontas.criar');
@@ -70,7 +61,8 @@ Route::prefix('Financeiros')->namespace('Financeiros')->middleware('auth')->grou
         Route::get('{id}/Exibir', 'PlanoDeContasController@exibir')->name('financeiros.planodecontas.exibir');
         Route::put('{id}/Alterar', 'PlanoDeContasController@alterar')->name('financeiros.planodecontas.alterar');
         Route::delete('{id}', 'PlanoDeContasController@excluir')->name('financeiros.planodecontas.excluir');
-        Route::get('{id}/Exportar/{tipo}', 'PlanoDeContasController@exportar')->name('financeiros.planodecontas.exportar');
+        Route::get('Exportar/{tipo}', 'PlanoDeContasController@exportar')->name('financeiros.planodecontas.exportar');
+        Route::get('ConsultarProximoCodigo', 'PlanoDeContasController@ProximoCodigo')->name('financeiros.planodecontas.proximocodigo');
     });
 
     Route::prefix('Bancos')->group(function(){

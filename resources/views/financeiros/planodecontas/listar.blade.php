@@ -13,6 +13,7 @@
 @stop
 
 @section('content')
+    <!--<div class="fa fa-spinner fa-spin" id="carregando"></div>-->
     <div class="row">
         <div class="col-md-1">
             <a href="{{ route('financeiros.planodecontas.criar') }}" class="btn btn-success">
@@ -35,10 +36,10 @@
                 <div class="box-body">
                     {!! Form::open(['route' => ['financeiros.planodecontas.salvar'], 'method' => 'POST']) !!}
                     <div class="row">
-                        <div class="col-md-1">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 {!! Form::label('tipo', 'Tipo', ['class' => 'control-label']) !!}
-                                {!! Form::select('tipo', [1 => '1', 2 => '2', 3 => '3'], null, ['class' => 'form-control']) !!}
+                                {!! Form::select('tipo', [1 => '1 - RECEITAS', 2 => '2 - DESPESAS', 3 => '3 - TRANSFERÊNCIAS'], null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="col-md-1">
@@ -57,7 +58,7 @@
                             {!! Form::label('ratear', 'Ratear?', ['class' => 'control-label']) !!}
                             {!! Form::select('ratear', ['Sim' => 'Sim', 'Nao' => 'Não'], null, ['class' => 'form-control']) !!}
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 {!! Form::label('descricao', 'Descrição', ['class' => 'control-label']) !!}
                                 {!! Form::text('descricao', '', ['class' => 'form-control']) !!}
@@ -81,6 +82,14 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Planos de contas</h3>
+                    <div class="pull-right">
+                        <a class="btn btn-xs btn-success" href="{{ route('financeiros.planodecontas.exportar', ['tipo' => 'xlsx']) }}">
+                            <i class="fa fa-file-excel-o"></i>
+                        </a>
+                        <a class="btn btn-xs btn-success" href="{{ route('financeiros.planodecontas.exportar', ['tipo' => 'csv']) }}">
+                            CSV
+                        </a>
+                    </div>
                 </div>
 
                 <div class="box-body">
@@ -128,12 +137,6 @@
                                     <button type="button" data-toggle="modal" data-target="#modal-danger-{{$plano->id}}" href="#" class="btn btn-xs btn-danger">
                                         <i class="fa fa-trash"></i>
                                     </button>
-                                    <a class="btn btn-xs btn-success" href="{{ route('financeiros.planodecontas.exportar',['id'=>$plano->id,'tipo'=>'xlsx']) }}">
-                                        <i class="fa fa-file-excel-o"></i>
-                                    </a>
-                                    <a class="btn btn-xs btn-success" href="{{ route('financeiros.planodecontas.exportar',['id'=>$plano->id,'tipo'=>'csv']) }}">
-                                        CSV
-                                    </a>
                                     <!-- MODAL EXCLUSÃO -->
                                     <div id="modal-danger-{{$plano->id}}" class="modal modal-danger fade">
                                         <div class="modal-dialog">
@@ -179,4 +182,5 @@
             } )
         });
     </script>
+    <script src="{{ asset('js/ajax/financeiros/planodecontas/consulta.js') }}"></script>
 @stop
