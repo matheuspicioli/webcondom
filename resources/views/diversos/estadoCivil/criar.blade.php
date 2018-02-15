@@ -22,46 +22,58 @@
             <hr>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-info">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Cadastrar estado civil</h3>
-                </div>
-                <div class="box-body">
-                    <form action="{{ route('diversos.estadoCivil.salvar') }}" method="POST">
-                        {{ csrf_field() }}
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="Descricao" class="control-label">Descrição</label>
-                                    <input id="Descricao" type="text" class="form-control pula" name="descricao">
+    @can("incluir_estadocivil")
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Cadastrar estado civil</h3>
+                    </div>
+                    <div class="box-body">
+                        <form action="{{ route('diversos.estadoCivil.salvar') }}" method="POST">
+                            {{ csrf_field() }}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Descricao" class="control-label">Descrição</label>
+                                        <input id="Descricao" type="text" class="form-control pula" name="descricao">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="ExigeConjuge" class="control-label">Exige Conjuge?</label>
+                                        <select name="exige_conjuge" id="ExigeConjuge" class="form-control pula">
+                                            <option disabled selected>Selecione</option>
+                                            <option value="1">Sim</option>
+                                            <option value="0">Não</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="ExigeConjuge" class="control-label">Exige Conjuge?</label>
-                                    <select name="exige_conjuge" id="ExigeConjuge" class="form-control pula">
-                                        <option disabled selected>Selecione</option>
-                                        <option value="1">Sim</option>
-                                        <option value="0">Não</option>
-                                    </select>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit">
+                                            <i class="fa fa-save"></i> Cadastrar</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <button class="btn btn-primary" type="submit">
-                                        <i class="fa fa-save"></i> Cadastrar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @else
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">{{mensagem_permissao()}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endcan
 @endsection
 @section('js')
     <script>

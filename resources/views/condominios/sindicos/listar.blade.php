@@ -72,9 +72,9 @@
                                         @can("deletar_sindico")
                                             <button type="button" data-toggle="modal" data-target="#modal-danger-{{$sindico->id}}" href="#" class="btn btn-sm btn-danger">
                                                 <i class="fa fa-trash"></i></button>
-                                            @else
-                                                <button disabled type="button" class="btn btn-sm btn-danger">
-                                                    <i class="fa fa-trash"></i></button>
+                                        @else
+                                            <button disabled type="button" class="btn btn-sm btn-danger">
+                                                <i class="fa fa-trash"></i></button>
                                         @endcan
                                         <!-- MODAL EXCLUSÃO -->
                                         <div id="modal-danger-{{$sindico->id}}" class="modal modal-danger fade">

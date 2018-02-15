@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('titulo', 'Departamentos - Criar')
+@section('title', 'Departamentos - Criar')
 @section('content_header')
     <h1>Cadastro <small>de Departamentos</small></h1>
     <ol class="breadcrumb">
@@ -22,33 +22,45 @@
             <hr>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-info">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Cadastrar departamento</h3>
-                </div>
-                <div class="box-body">
-                    <form action="{{ route('diversos.departamento.salvar') }}" method="POST">
-                        {{ csrf_field() }}
+    @can("incluir_departamento")
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Cadastrar departamento</h3>
+                    </div>
+                    <div class="box-body">
+                        <form action="{{ route('diversos.departamento.salvar') }}" method="POST">
+                            {{ csrf_field() }}
 
-                            <div class="form-group">
-                                <label for="Descricao" class="control-label">Descrição</label>
-                                <input id="Descricao" type="text" class="form-control" name="descricao">
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <button class="btn btn-primary" type="submit">
-                                            <i class="fa fa-save"></i> Cadastrar</button>
+                                <div class="form-group">
+                                    <label for="Descricao" class="control-label">Descrição</label>
+                                    <input id="Descricao" type="text" class="form-control" name="descricao">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <button class="btn btn-primary" type="submit">
+                                                <i class="fa fa-save"></i> Cadastrar</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @else
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">{{mensagem_permissao()}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endcan
 @endsection
 @section('js')
     <script>
