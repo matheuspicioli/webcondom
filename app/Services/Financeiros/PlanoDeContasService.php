@@ -9,6 +9,9 @@
 namespace WebCondom\Services\Financeiros;
 
 use Illuminate\Support\Facades\Response;
+use WebCondom\Models\Financeiros\Conta;
+use WebCondom\Models\Financeiros\Grupo;
+use WebCondom\Models\Financeiros\PlanoDeConta;
 use WebCondom\Repositories\Financeiros\PlanoDeContasRepository;
 
 class PlanoDeContasService
@@ -20,23 +23,34 @@ class PlanoDeContasService
         $this->repository = $repository;
     }
 
-    public function ProximoCodigo()
+    public function ProximaConta($grupo)
     {
-        $grupo = $this->repository
-            ->orderBy('grupo', 'desc')
-            ->first();
-        $numeroProximoGrupo = (int)$grupo['grupo']+1;
-
-        $conta = $this->repository
-            ->where()
-            ->orderBy('conta', 'desc')
-            ->first();
-        $numeroProximoConta = (int)$conta['conta']+1;
-
-        return Response::json([
-            'proxima-conta' => $numeroProximoConta,
-            'proximo-grupo' => $numeroProximoGrupo
-        ],200);
+        $grupo = Grupo::where('grupo', $grupo)->first();
+        if($grupo){
+            $ultima_conta_grupo = $grupo->contas()
+                ->orderBy('conta', 'DESC')
+                ->toSql();
+            return $ultima_conta_grupo;
+            if($ultima_conta_grupo){
+                return (int)$ultima_conta_grupo->conta;
+                $proxima_conta = (int)$ultima_conta_grupo->conta+1;
+                return Response::json([
+                    'sucesso'       => true,
+                    'proxima-conta' => $proxima_conta,
+                    'mensagem'      => 'Consulta realizada com sucesso'
+                ],200);
+            } else {
+                return Response::json([
+                    'sucesso'       => false,
+                    'mensagem'      => 'Nenhuma conta cadastrada nesse grupo'
+                ],200);
+            }
+        } else {
+            return Response::json([
+                'sucesso'       => false,
+                'mensagem'      => 'Nenhum grupo correspondente'
+            ],200);
+        }
     }
 
     public function Listar()
@@ -57,16 +71,26 @@ class PlanoDeContasService
         ];
     }
 
-    public function Salvar($dados)
+    public function Salvar($request)
     {
-        $plano = $this->repository->create($dados);
+        $plano = $this->repository->create($request->all());
 
         if ($plano) {
-            return (object)[
-                'sucesso' => true,
-                'dados' => $plano,
-                'mensagem' => 'Inclusão de registro efetuado com sucesso!'
-            ];
+            $grupo = Grupo::create([
+                'grupo'                 => $request->grupo,
+                'plano_de_conta_id'     => $plano->id
+            ]);
+            if($grupo){
+                $conta = Conta::create([
+                    'conta'     => is_null($request->conta) ? '0000' : $request->conta,
+                    'grupo_id'  => $grupo->id
+                ]);
+                return (object)[
+                    'sucesso' => true,
+                    'dados' => (object)[$plano, $conta, $grupo],
+                    'mensagem' => 'Inclusão de registro efetuado com sucesso!'
+                ];
+            }
         }
 
         return (object)[
@@ -98,10 +122,17 @@ class PlanoDeContasService
     {
         $plano = $this->repository->find($id);
         if ($plano) {
-            if ($alterar = $plano->update($request->all())) {
+            $alterar = $this->repository->update($request->all());
+            $grupo = Conta::update([
+                'grupo'       => $request->grupo
+            ]);
+            $conta = Conta::update([
+                'conta'     => is_null($request->conta) ? '0000' : $request->conta
+            ]);
+            if ($alterar && $conta && $grupo) {
                 return (object)[
                     'sucesso' => true,
-                    'dados' => $plano,
+                    'dados' => (object)[$plano, $conta, $grupo],
                     'mensagem' => "Registro alterado com sucesso!"
                 ];
             } else {

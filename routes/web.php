@@ -62,7 +62,7 @@ Route::prefix('Financeiros')->namespace('Financeiros')->middleware('auth')->grou
         Route::put('{id}/Alterar', 'PlanoDeContasController@alterar')->name('financeiros.planodecontas.alterar');
         Route::delete('{id}', 'PlanoDeContasController@excluir')->name('financeiros.planodecontas.excluir');
         Route::get('Exportar/{tipo}', 'PlanoDeContasController@exportar')->name('financeiros.planodecontas.exportar');
-        Route::get('ConsultarProximoCodigo', 'PlanoDeContasController@ProximoCodigo')->name('financeiros.planodecontas.proximocodigo');
+        Route::get('ConsultarProximaConta/{grupo?}', 'PlanoDeContasController@ProximaConta')->name('financeiros.planodecontas.proximaconta');
     });
 
     Route::prefix('Bancos')->group(function(){

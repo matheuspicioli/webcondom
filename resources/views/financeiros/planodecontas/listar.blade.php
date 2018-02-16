@@ -122,50 +122,73 @@
                         </tfoot>
                         <tbody>
                         @foreach($planos as $plano)
-                            <tr>
-                                <td>{{ $plano->id }}</td>
-                                <td>{{ $plano->descricao }}</td>
-                                <td>{{ $plano->codigo }}</td>
-                                <td>{{ $plano->tipo }}</td>
-                                <td>{{ $plano->grupo }}</td>
-                                <td>{{ $plano->conta }}</td>
-                                <td>{{ $plano->criado_em }}</td>
-                                <td>{{ $plano->alterado_em }}</td>
-                                <td>
-                                    <a class="btn btn-xs btn-warning" href="{{ route('financeiros.planodecontas.exibir', ['id' => $plano->id ]) }}">
-                                        <i class="fa fa-pencil"></i></a>
-                                    <button type="button" data-toggle="modal" data-target="#modal-danger-{{$plano->id}}" href="#" class="btn btn-xs btn-danger">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                    <!-- MODAL EXCLUSÃO -->
-                                    <div id="modal-danger-{{$plano->id}}" class="modal modal-danger fade">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
-                                                       </button>
-                                                    <h3 class="modal-title">Confirmar exclusão</h3>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <h4>Deseja realmente excluir o plano de contas "{{ $plano->descricao }}"?</h4>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
-                                                    <form method="POST" action="{{ route('financeiros.planodecontas.excluir', ['id' => $plano->id]) }}">
-                                                        {{ csrf_field() }}
-                                                        {{ method_field('DELETE') }}
-                                                        <button class="btn btn-outline" type="submit">Confirmar exclusão</button>
-                                                    </form>
+                            @foreach($plano->grupos as $grupo)
+                                @foreach($grupo->contas as $conta)
+                                    <tr>
+                                        <td>{{ $plano->id }}</td>
+                                        <td>{{ $plano->descricao }}</td>
+                                        <td>#</td>
+                                        <td>{{ $plano->tipo }}</td>
+                                        <td>{{ $grupo->grupo }}</td>
+                                        <td>{{ $conta->conta }}</td>
+                                        <td>{{ $plano->criado_em }}</td>
+                                        <td>{{ $plano->alterado_em }}</td>
+                                        <td>
+                                            <a class="btn btn-xs btn-warning" href="{{ route('financeiros.planodecontas.exibir', ['id' => $plano->id ]) }}">
+                                                <i class="fa fa-pencil"></i></a>
+                                            <button type="button" data-toggle="modal" data-target="#modal-danger-{{$plano->id}}" href="#" class="btn btn-xs btn-danger">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                            <!-- MODAL EXCLUSÃO -->
+                                            <div id="modal-danger-{{$plano->id}}" class="modal modal-danger fade">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                            <h3 class="modal-title">Confirmar exclusão</h3>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <h4>Deseja realmente excluir o plano de contas "{{ $plano->descricao }}"?</h4>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
+                                                            <form method="POST" action="{{ route('financeiros.planodecontas.excluir', ['id' => $plano->id]) }}">
+                                                                {{ csrf_field() }}
+                                                                {{ method_field('DELETE') }}
+                                                                <button class="btn btn-outline" type="submit">Confirmar exclusão</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endforeach
                         @endforeach
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-erro" class="modal modal-danger fade" data-toggle="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h3 class="modal-title">Erro ao consultar grupo</h3>
+                </div>
+                <div class="modal-body">
+                    <h4 id="mensagem-erro"></h4>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline pull-left" type="button" id="botao-fechar-modal-erro" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>

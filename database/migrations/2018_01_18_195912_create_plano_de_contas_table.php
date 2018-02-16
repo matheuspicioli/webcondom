@@ -18,8 +18,6 @@ class CreatePlanoDeContasTable extends Migration
 		Schema::create('plano_de_contas', function(Blueprint $table) {
             $table->increments('id');
             $table->enum('tipo', [1,2,3]);
-            $table->string('grupo', 3);
-            $table->string('conta', 4)->nullable()->default('0000');
             $table->string('descricao',100)->nullable();
             $table->enum('ratear',['Sim', 'Nao']);
 

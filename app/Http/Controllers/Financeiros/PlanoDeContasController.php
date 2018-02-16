@@ -21,9 +21,9 @@ class PlanoDeContasController
         $this->service  = $service;
     }
 
-    public function ProximoCodigo()
+    public function ProximaConta($grupo)
     {
-        return $this->service->ProximoCodigo();
+        return $this->service->ProximaConta($grupo);
     }
 
     public function Exportar($tipo = 'xlsx')
@@ -81,7 +81,7 @@ class PlanoDeContasController
 
     public function Salvar(Request $request)
     {
-        $plano = $this->service->Salvar($request->all());
+        $plano = $this->service->Salvar($request);
         return redirect()->route('financeiros.planodecontas.listar');
     }
 
