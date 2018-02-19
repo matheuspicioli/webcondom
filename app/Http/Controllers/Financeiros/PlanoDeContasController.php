@@ -85,15 +85,15 @@ class PlanoDeContasController
         return redirect()->route('financeiros.planodecontas.listar');
     }
 
-    public function Exibir($id)
+    public function Exibir($plano, $grupo, $conta)
     {
-        $plano = $this->service->Exibir($id)->dados;
-        return view('financeiros.planodecontas.exibir', compact('plano'));
+        $dados = $this->service->Exibir($plano, $grupo, $conta)->dados;
+        return view('financeiros.planodecontas.exibir', compact('dados'));
     }
 
-    public function Alterar(Request $request, $id)
+    public function Alterar(Request $request, $plano, $grupo, $conta)
     {
-        $plano = $this->service->Alterar($request, $id);
+        $plano = $this->service->Alterar($request, $plano, $grupo, $conta);
         return redirect()->route('financeiros.planodecontas.listar');
     }
 

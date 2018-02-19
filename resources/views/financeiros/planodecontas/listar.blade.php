@@ -96,7 +96,6 @@
                     <table class="table table-striped table-hover dataTable" id="tabela" role="grid">
                         <thead>
                         <tr>
-                            <th>#</th>
                             <th>Descrição</th>
                             <th>Código</th>
                             <th>Tipo</th>
@@ -109,7 +108,6 @@
                         </thead>
                         <tfoot>
                         <tr>
-                            <th>#</th>
                             <th>Descrição</th>
                             <th>Código</th>
                             <th>Tipo</th>
@@ -125,16 +123,17 @@
                             @foreach($plano->grupos as $grupo)
                                 @foreach($grupo->contas as $conta)
                                     <tr>
-                                        <td>{{ $plano->id }}</td>
-                                        <td>{{ $plano->descricao }}</td>
-                                        <td>#</td>
+                                        <td>{{ $conta->descricao }}</td>
+                                        <td>{{ "$plano->tipo.$grupo->grupo.$conta->conta" }}</td>
                                         <td>{{ $plano->tipo }}</td>
                                         <td>{{ $grupo->grupo }}</td>
                                         <td>{{ $conta->conta }}</td>
-                                        <td>{{ $plano->criado_em }}</td>
-                                        <td>{{ $plano->alterado_em }}</td>
+                                        <td>{{ $conta->criado_em }}</td>
+                                        <td>{{ $conta->alterado_em }}</td>
                                         <td>
-                                            <a class="btn btn-xs btn-warning" href="{{ route('financeiros.planodecontas.exibir', ['id' => $plano->id ]) }}">
+                                            <a class="btn btn-xs btn-warning" href="
+                                        {{ route('financeiros.planodecontas.exibir',['plano' => $plano->id,'grupo' => $grupo->id, 'conta' => $conta->id]) }}
+                                                    ">
                                                 <i class="fa fa-pencil"></i></a>
                                             <button type="button" data-toggle="modal" data-target="#modal-danger-{{$plano->id}}" href="#" class="btn btn-xs btn-danger">
                                                 <i class="fa fa-trash"></i>

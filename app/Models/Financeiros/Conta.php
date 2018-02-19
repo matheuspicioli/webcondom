@@ -11,7 +11,7 @@ class Conta extends Model
     use Datas, SoftDeletes;
 
     protected $table = 'contas';
-    protected $fillable = ['conta', 'grupo_id'];
+    protected $fillable = ['conta', 'descricao', 'grupo_id'];
 
     public function grupo()
     {

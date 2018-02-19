@@ -26,30 +26,28 @@ class PlanoDeContasService
     public function ProximaConta($grupo)
     {
         $grupo = Grupo::where('grupo', $grupo)->first();
-        if($grupo){
+        if ($grupo) {
             $ultima_conta_grupo = $grupo->contas()
                 ->orderBy('conta', 'DESC')
-                ->toSql();
-            return $ultima_conta_grupo;
-            if($ultima_conta_grupo){
-                return (int)$ultima_conta_grupo->conta;
-                $proxima_conta = (int)$ultima_conta_grupo->conta+1;
+                ->first();
+            if ($ultima_conta_grupo) {
+                $proxima_conta = (int)$ultima_conta_grupo->conta + 1;
                 return Response::json([
-                    'sucesso'       => true,
+                    'sucesso' => true,
                     'proxima-conta' => $proxima_conta,
-                    'mensagem'      => 'Consulta realizada com sucesso'
-                ],200);
+                    'mensagem' => 'Consulta realizada com sucesso'
+                ], 200);
             } else {
                 return Response::json([
-                    'sucesso'       => false,
-                    'mensagem'      => 'Nenhuma conta cadastrada nesse grupo'
-                ],200);
+                    'sucesso' => false,
+                    'mensagem' => 'Nenhuma conta cadastrada nesse grupo'
+                ], 200);
             }
         } else {
             return Response::json([
-                'sucesso'       => false,
-                'mensagem'      => 'Nenhum grupo correspondente'
-            ],200);
+                'sucesso' => false,
+                'mensagem' => 'Nenhum grupo correspondente'
+            ], 200);
         }
     }
 
@@ -73,41 +71,46 @@ class PlanoDeContasService
 
     public function Salvar($request)
     {
-        $plano = $this->repository->create($request->all());
-
-        if ($plano) {
-            $grupo = Grupo::create([
-                'grupo'                 => $request->grupo,
-                'plano_de_conta_id'     => $plano->id
+        if ($request->conta) {
+            $grupo = Grupo::where('grupo', $request->grupo)->first();
+            $conta = Conta::create([
+                'conta'         => is_null($request->conta) ? '0000' : $request->conta,
+                'descricao'     => $request->descricao ? $request->descricao : null,
+                'grupo_id'      => $grupo->id
             ]);
-            if($grupo){
-                $conta = Conta::create([
-                    'conta'     => is_null($request->conta) ? '0000' : $request->conta,
-                    'grupo_id'  => $grupo->id
-                ]);
-                return (object)[
-                    'sucesso' => true,
-                    'dados' => (object)[$plano, $conta, $grupo],
-                    'mensagem' => 'Inclusão de registro efetuado com sucesso!'
-                ];
-            }
-        }
-
-        return (object)[
-            'sucesso' => false,
-            'dados' => null,
-            'mensagem' => "Ocorreu um erro ao incluir registro!"
-        ];
-    }
-
-    public function Exibir($id)
-    {
-        $plano = $this->repository->find($id);
-
-        if ($plano)
             return (object)[
                 'sucesso' => true,
-                'dados' => $plano,
+                'dados' => (object)[$conta, $grupo],
+                'mensagem' => 'Inclusão de conta registrado com sucesso, sem o cadastro de grupo!'
+            ];
+        } else {
+            $plano = $this->repository->create($request->all());
+            $grupo = Grupo::create([
+                'grupo' => $request->grupo,
+                'plano_de_conta_id' => $plano->id
+            ]);
+            return (object)[
+                'sucesso' => true,
+                'dados' => (object)[$plano, $grupo],
+                'mensagem' => 'Inclusão de grupo criado com sucesso!'
+            ];
+        }
+    }
+
+    public function Exibir($plano, $grupo, $conta)
+    {
+        $plano = $this->repository->find($plano);
+        $grupo = Grupo::find($grupo);
+        $conta = Conta::find($conta);
+
+        if ($plano && $grupo && $conta)
+            return (object)[
+                'sucesso' => true,
+                'dados' => (object)[
+                    'plano' => $plano,
+                    'grupo' => $grupo,
+                    'conta' => $conta
+                ],
                 'mensagem' => "Registro encontrado."
             ];
 
@@ -118,28 +121,32 @@ class PlanoDeContasService
         ];
     }
 
-    public function Alterar($request, $id)
+    public function Alterar($request, $plano, $grupo, $conta)
     {
-        $plano = $this->repository->find($id);
+        $plano = $this->repository->find($plano);
         if ($plano) {
-            $alterar = $this->repository->update($request->all());
-            $grupo = Conta::update([
-                'grupo'       => $request->grupo
-            ]);
-            $conta = Conta::update([
-                'conta'     => is_null($request->conta) ? '0000' : $request->conta
-            ]);
-            if ($alterar && $conta && $grupo) {
+            if ($request->conta) {
+                $grupo = Grupo::where('grupo', $request->grupo)->where('id', $grupo)->first();
+                $conta = Conta::find($conta)->update([
+                    'conta'         => is_null($request->conta) ? '0000' : $request->conta,
+                    'descricao'     => $request->descricao ? $request->descricao : null,
+                    'grupo_id'      => $grupo->id
+                ]);
                 return (object)[
                     'sucesso' => true,
-                    'dados' => (object)[$plano, $conta, $grupo],
-                    'mensagem' => "Registro alterado com sucesso!"
+                    'dados' => (object)[$conta, $grupo],
+                    'mensagem' => 'Alteração de conta feita com sucesso, sem o cadastro de grupo!'
                 ];
             } else {
+                $plano_alterado = $plano->update($request->all());
+                $grupo = Grupo::find($grupo)->update([
+                    'grupo' => $request->grupo,
+                    'plano_de_conta_id' => $plano->id
+                ]);
                 return (object)[
-                    'sucesso' => false,
-                    'dados' => null,
-                    'mensagem' => "Ocorreu um erro ao encontrar o registro para alteração!"
+                    'sucesso' => true,
+                    'dados' => (object)[$plano_alterado, $grupo],
+                    'mensagem' => 'Alteração de grupo feita com sucesso!'
                 ];
             }
         }

@@ -35,51 +35,53 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    {!! Form::model($plano, ['route' => ['financeiros.planodecontas.alterar', $plano->id], 'method' => 'PUT']) !!}
-                    <div class="row">
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                {!! Form::label('tipo', 'Tipo', ['class' => 'control-label']) !!}
-                                {!! Form::select('tipo', [1 => '1', 2 => '2', 3 => '3'], $plano->tipo, ['class' => 'form-control']) !!}
+                    <form action="{{ route('financeiros.planodecontas.alterar', ['plano' => $dados->plano->id, 'grupo' => $dados->grupo->id, 'conta' => $dados->conta->id]) }}" method="POST">
+                        {{ csrf_field() }}
+                        {{ method_field('PUT') }}
+                        <div class="row">
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    {!! Form::label('tipo', 'Tipo', ['class' => 'control-label']) !!}
+                                    {!! Form::select('tipo', [1 => '1', 2 => '2', 3 => '3'], $dados->plano->tipo, ['class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    {!! Form::label('grupo', 'Grupo', ['class' => 'control-label']) !!}
+                                    {!! Form::text('grupo', $dados->grupo->grupo, ['class' => 'form-control', 'maxlength' => '3']) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    {!! Form::label('conta', 'Conta', ['class' => 'control-label']) !!}
+                                    {!! Form::text('conta', $dados->conta->conta, ['class' => 'form-control', 'maxlength' => '4']) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                {!! Form::label('ratear', 'Ratear?', ['class' => 'control-label']) !!}
+                                {!! Form::select('ratear', ['Sim' => 'Sim', 'Nao' => 'Não'], $dados->plano->ratear, ['class' => 'form-control']) !!}
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    {!! Form::label('descricao', 'Descrição', ['class' => 'control-label']) !!}
+                                    {!! Form::text('descricao', $dados->conta->descricao, ['class' => 'form-control']) !!}
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                {!! Form::label('grupo', 'Grupo', ['class' => 'control-label']) !!}
-                                {!! Form::text('grupo', $plano->grupo, ['class' => 'form-control', 'maxlength' => '3']) !!}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <button class="btn btn-info" type="submit">
+                                        <i class="fa fa-pencil"></i> Alterar
+                                    </button>
+                                    <button class="btn btn-danger" type="button" data-toggle="modal"
+                                            data-target="#modal-excluir">
+                                        <i class="fa fa-trash"></i> Excluir
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                {!! Form::label('conta', 'Conta', ['class' => 'control-label']) !!}
-                                {!! Form::text('conta', $plano->conta, ['class' => 'form-control', 'maxlength' => '4']) !!}
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            {!! Form::label('ratear', 'Ratear?', ['class' => 'control-label']) !!}
-                            {!! Form::select('ratear', ['Sim' => 'Sim', 'Nao' => 'Não'], $plano->ratear, ['class' => 'form-control']) !!}
-                        </div>
-                        <div class="col-md-7">
-                            <div class="form-group">
-                                {!! Form::label('descricao', 'Descrição', ['class' => 'control-label']) !!}
-                                {!! Form::text('descricao', $plano->descricao, ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <button class="btn btn-info" type="submit">
-                                    <i class="fa fa-pencil"></i> Alterar
-                                </button>
-                                <button class="btn btn-danger" type="button" data-toggle="modal"
-                                        data-target="#modal-excluir">
-                                    <i class="fa fa-trash"></i> Excluir
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    {!! Form::close() !!}
+                    </form>
                 </div>
             </div>
         </div>
@@ -96,17 +98,36 @@
                 </div>
 
                 <div class="modal-body">
-                    <h4>Deseja realmente excluir o plano de contas "{{ $plano->descricao }}"?</h4>
+                    <h4>Deseja realmente excluir o plano de contas "{{ $dados->plano->descricao }}"?</h4>
                 </div>
 
                 <div class="modal-footer">
                     <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
                     <form method="POST"
-                          action="{{ route('financeiros.planodecontas.excluir', ['id' => $plano->id]) }}">
+                          action="{{ route('financeiros.planodecontas.excluir', ['id' => $dados->plano->id]) }}">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <button class="btn btn-outline" type="submit">Confirmar exclusão</button>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-erro" class="modal modal-danger fade" data-toggle="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h3 class="modal-title">Erro ao consultar grupo</h3>
+                </div>
+                <div class="modal-body">
+                    <h4 id="mensagem-erro"></h4>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline pull-left" type="button" id="botao-fechar-modal-erro" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
@@ -119,4 +140,5 @@
             $('#descricao').focus();
         });
     </script>
+    <script src="{{ asset('js/ajax/financeiros/planodecontas/consulta.js') }}"></script>
 @endsection

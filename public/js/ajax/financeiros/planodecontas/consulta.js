@@ -2,7 +2,8 @@ $(document).ready(function(){
     $('#grupo').blur(function(){
         var grupo = $('#grupo').val();
         $.ajax({
-            url: "PlanoDeContas/ConsultarProximaConta/"+grupo,
+            //ALTERAR CONFORME SUA URL
+            url: "http://localhost:8000/Financeiros/PlanoDeContas/ConsultarProximaConta/"+grupo,
             type: "GET",
             beforeSend: function(){
             }
@@ -28,8 +29,6 @@ $(document).ready(function(){
                 $('#mensagem-erro').text('Erro ao consultar o serviço, não cadastre nenhuma conta.');
                 $('#botao-fechar-modal-erro').focus();
             }
-            $('#grupo').val('001');
-            $('#conta').val('0001');
         });
     });
 });

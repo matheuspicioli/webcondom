@@ -13,9 +13,9 @@ class Grupo extends Model
     protected $table = 'grupos';
     protected $fillable = ['grupo', 'plano_de_conta_id'];
 
-    public function planos_conta()
+    public function plano_conta()
     {
-        return $this->belongsTo('PlanoDeConta', 'plano_conta_id');
+        return $this->belongsTo(PlanoDeConta::class, 'plano_conta_id');
     }
 
     public function contas()

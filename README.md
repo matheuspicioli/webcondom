@@ -21,3 +21,11 @@ tenta jogar para o nosso padrão também.
 
 Rodar o comando `php artisan storage:link`. Após voltarmos o HTML puro,
 esqueci de adicionar o enctype no formulário que faz o upload.
+
+### CONSULTAR PRÓXIMA CONTA DO GRUPO ###
+
+Alterar a linha `6` do arquivo `consulta.js` localizado em 
+`public\js\ajax\financeiros\plano de contas` para a sua url em questão.
+
+Exemplo: `webcondom.dev/Financeiros/PlanoDeContas/ConsultarProximaConta`.
+Exemplo 2: `localhost:8000//Financeiros/PlanoDeContas/ConsultarProximaConta`.
