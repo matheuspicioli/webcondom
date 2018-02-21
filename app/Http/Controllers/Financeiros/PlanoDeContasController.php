@@ -1,77 +1,34 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: matheus
- * Date: 18/01/18
- * Time: 20:11
- */
 
 namespace WebCondom\Http\Controllers\Financeiros;
 
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
-use WebCondom\Services\Financeiros\PlanoDeContasService;
+use WebCondom\Http\Controllers\Controller;
+use WebCondom\Models\Financeiros\Conta;
+use WebCondom\Models\Financeiros\Grupo;
+use WebCondom\Models\Financeiros\PlanoDeConta;
+use WebCondom\Models\Financeiros\Tipo;
 
-class PlanoDeContasController
+class PlanoDeContasController extends Controller
 {
-    private $service;
+    private $plano;
+    private $tipo;
+    private $grupo;
+    private $conta;
 
-    public function __construct(PlanoDeContasService $service)
+    public function __construct(PlanoDeConta $plano, Tipo $tipo, Grupo $grupo, Conta $conta)
     {
-        $this->service  = $service;
-    }
-
-    public function ProximaConta($grupo)
-    {
-        return $this->service->ProximaConta($grupo);
-    }
-
-    public function Exportar($tipo = 'xlsx')
-    {
-        $resultado = $this->service->Listar()->dados;
-        $sucesso = $this->service->Listar()->sucesso;
-        if($sucesso){
-            Excel::create("Plano de contas", function($excel) use($resultado) {
-                //$excel->setTitle($resultado->dados->descricao);
-                $excel->setCreator('WebCondom')
-                    ->setCompany('Emporium Digital');
-                $excel->setDescription("Lista de plano de contas");
-
-                $excel->sheet('Teste nome sheet', function($sheet) use($resultado) {
-                    $sheet->cell('A1', function ($cell) {
-                        $cell->setValue('Código');
-                    });
-                    $sheet->cell('B1', function ($cell) {
-                        $cell->setValue('Ratear?');
-                    });
-                    $sheet->cell('C1', function ($cell) {
-                        $cell->setValue('Descrição');
-                    });
-                    $contador = 1;
-                    foreach($resultado as $dado)
-                    {
-                        $contador++;
-                        $sheet->cell("A$contador", function ($cell) use ($dado) {
-                            $cell->setValue($dado->codigo);
-                        });
-                        $sheet->cell("B$contador", function ($cell) use ($dado) {
-                            $cell->setValue($dado->ratear);
-                        });
-                        $sheet->cell("C$contador", function ($cell) use ($dado) {
-                            $cell->setValue($dado->descricao);
-                        });
-                    }
-                });
-                //XLSX, CVS
-            })->download($tipo);
-            return redirect()->route('financeiros.planodecontas.listar');
-        }
+        $this->plano = $plano;
+        $this->tipo = $tipo;
+        $this->grupo = $grupo;
+        $this->conta = $conta;
     }
 
     public function Listar()
     {
-        $planos = $this->service->Listar()->dados;
-        return view('financeiros.planodecontas.listar', compact('planos'));
+        $planos = $this->plano->all();
+        $tipos = $this->tipo->all();
+        return view('financeiros.planodecontas.listar', compact('planos', 'tipos'));
     }
 
     public function Criar()
@@ -81,25 +38,52 @@ class PlanoDeContasController
 
     public function Salvar(Request $request)
     {
-        $plano = $this->service->Salvar($request);
+        $grupo = $this->grupo->where('grupo', $request->grupo)->first();
+        if ($grupo) {
+            if($request->conta){
+                $conta = $this->conta->create([
+                    'conta'     => $request->conta,
+                    'grupo_id'  => $grupo->id
+                ]);
+            }
+        } else {
+            $grupo = $this->grupo->create([
+                'grupo'     => $request->grupo,
+                'tipo_id'   => $request->tipo_id
+            ]);
+            $conta = $this->conta->create([
+                'conta'     => $request->conta,
+                'grupo_id'  => $grupo->id
+            ]);
+        }
         return redirect()->route('financeiros.planodecontas.listar');
     }
 
-    public function Exibir($plano, $grupo, $conta)
+    public function Exibir($id)
     {
-        $dados = $this->service->Exibir($plano, $grupo, $conta)->dados;
-        return view('financeiros.planodecontas.exibir', compact('dados'));
+        $plano = $this->plano->find($id);
+        if ($plano)
+            return view('financeiros.planodecontas.exibir', compact('plano'));
+
+        return view('financeiros.planodecontas.listar');
     }
 
-    public function Alterar(Request $request, $plano, $grupo, $conta)
+    public function Alterar(Request $request, $id)
     {
-        $plano = $this->service->Alterar($request, $plano, $grupo, $conta);
-        return redirect()->route('financeiros.planodecontas.listar');
+        $plano = $this->plano->find($id);
+        if ($plano) {
+            $novo_plano = $plano->update($request);
+            return redirect()->route('financeiros.planodecontas.listar');
+        }
     }
 
     public function Excluir($id)
     {
-        $plano = $this->service->Excluir($id);
-        return redirect()->route('financeiros.planodecontas.listar');
+        $plano = $this->plano->find($id);
+        if ($plano) {
+            $plano->delete();
+            return redirect()->route('financeiros.planodecontas.listar');
+        }
     }
+
 }

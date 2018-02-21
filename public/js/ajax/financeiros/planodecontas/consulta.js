@@ -1,4 +1,16 @@
 $(document).ready(function(){
+    $('#tipo').blur(function(){
+        var tipo = $('#tipo').val();
+        $.ajax({
+            //ALTERAR CONFORME SUA URL
+            url: "http://localhost:8000/Financeiros/PlanoDeContas/ConsultarProximoGrupo/"+tipo,
+            type: "GET",
+            beforeSend: function(){
+            }
+        }).done(function(retorno){
+            console.log(retorno);
+        });
+    });
     $('#grupo').blur(function(){
         var grupo = $('#grupo').val();
         $.ajax({
@@ -9,13 +21,6 @@ $(document).ready(function(){
             }
         }).done(function(retorno){
             console.log(retorno);
-            if(retorno['proxima-conta'] < 10){
-                retorno['proxima-conta'] = '000'+retorno['proxima-conta'];
-            } else if(retorno['proxima-conta'] < 100){
-                retorno['proxima-conta'] = '00'+retorno['proxima-conta'];
-            } else if(retorno['proxima-conta'] < 1000){
-                retorno['proxima-conta'] = '0'+retorno['proxima-conta'];
-            }
             $('#conta').val(retorno['proxima-conta']);
 
             if(!retorno['sucesso']){

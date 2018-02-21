@@ -10,12 +10,11 @@ class Grupo extends Model
 {
     use Datas, SoftDeletes;
 
-    protected $table = 'grupos';
-    protected $fillable = ['grupo', 'plano_de_conta_id'];
+    protected $fillable = ['grupo','descricao','tipo_id'];
 
-    public function plano_conta()
+    public function tipo()
     {
-        return $this->belongsTo(PlanoDeConta::class, 'plano_conta_id');
+        return $this->belongsTo(Tipo::class, 'tipo_id');
     }
 
     public function contas()

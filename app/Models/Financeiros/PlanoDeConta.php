@@ -19,10 +19,11 @@ class PlanoDeConta extends Model
      *
      * @var array
      */
-    protected $fillable = ['tipo','ratear','descricao'];
+    protected $table = 'plano_contas';
+    protected $fillable = ['ratear','descricao'];
 
-    public function grupos()
+    public function tipos()
     {
-        return $this->hasMany(Grupo::class);
+        return $this->hasMany(Tipo::class, 'plano_conta_id');
     }
 }

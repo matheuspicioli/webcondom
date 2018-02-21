@@ -34,12 +34,16 @@
                 </div>
 
                 <div class="box-body">
-                    {!! Form::open(['route' => ['financeiros.planodecontas.salvar'], 'method' => 'POST']) !!}
+                    {!! Form::open(['route' => ['financeiros.planodecontas.salvar'], 'method' => 'POST', 'id' => 'form-plano-contas']) !!}
                     <div class="row">
                         <div class="col-md-2">
                             <div class="form-group">
                                 {!! Form::label('tipo', 'Tipo', ['class' => 'control-label']) !!}
-                                {!! Form::select('tipo', [1 => '1 - RECEITAS', 2 => '2 - DESPESAS', 3 => '3 - TRANSFERÊNCIAS'], null, ['class' => 'form-control']) !!}
+                                <select name="tipo_id" id="tipo" class="form-control">
+                                    @foreach($tipos as $tipo)
+                                        <value value="{{ $tipo->id }}">{{ $tipo->tipo }}</value>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-1">
@@ -68,7 +72,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <button class="btn btn-primary" type="submit">Cadastrar</button>
+                                <button class="btn btn-primary" id="enviar-plano-contas" type="button">Cadastrar</button>
                             </div>
                         </div>
                     </div>
@@ -119,54 +123,6 @@
                         </tr>
                         </tfoot>
                         <tbody>
-                        @foreach($planos as $plano)
-                            @foreach($plano->grupos as $grupo)
-                                @foreach($grupo->contas as $conta)
-                                    <tr>
-                                        <td>{{ $conta->descricao }}</td>
-                                        <td>{{ "$plano->tipo.$grupo->grupo.$conta->conta" }}</td>
-                                        <td>{{ $plano->tipo }}</td>
-                                        <td>{{ $grupo->grupo }}</td>
-                                        <td>{{ $conta->conta }}</td>
-                                        <td>{{ $conta->criado_em }}</td>
-                                        <td>{{ $conta->alterado_em }}</td>
-                                        <td>
-                                            <a class="btn btn-xs btn-warning" href="
-                                        {{ route('financeiros.planodecontas.exibir',['plano' => $plano->id,'grupo' => $grupo->id, 'conta' => $conta->id]) }}
-                                                    ">
-                                                <i class="fa fa-pencil"></i></a>
-                                            <button type="button" data-toggle="modal" data-target="#modal-danger-{{$plano->id}}" href="#" class="btn btn-xs btn-danger">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                            <!-- MODAL EXCLUSÃO -->
-                                            <div id="modal-danger-{{$plano->id}}" class="modal modal-danger fade">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">×</span>
-                                                            </button>
-                                                            <h3 class="modal-title">Confirmar exclusão</h3>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <h4>Deseja realmente excluir o plano de contas "{{ $plano->descricao }}"?</h4>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
-                                                            <form method="POST" action="{{ route('financeiros.planodecontas.excluir', ['id' => $plano->id]) }}">
-                                                                {{ csrf_field() }}
-                                                                {{ method_field('DELETE') }}
-                                                                <button class="btn btn-outline" type="submit">Confirmar exclusão</button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @endforeach
-                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -181,7 +137,7 @@
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
-                    <h3 class="modal-title">Erro ao consultar grupo</h3>
+                    <h3 class="modal-title">Erro</h3>
                 </div>
                 <div class="modal-body">
                     <h4 id="mensagem-erro"></h4>
@@ -197,11 +153,24 @@
 @section('js')
     <script>
         $(function () {
+            $('#tipo').focus();
             $('#tabela').DataTable({
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
                 }
-            } )
+            });
+
+            $('#enviar-plano-contas').click(function(){
+                if($('#grupo').val() == ''){
+                    $('#modal-erro').modal('show');
+                    $('#mensagem-erro').text('O campo grupo não foi informado');
+                } else if($('#conta').val() == '') {
+                    $('#modal-erro').modal('show');
+                    $('#mensagem-erro').text('O campo conta não foi informado');
+                }
+                else
+                    $('#form-plano-contas').submit();
+            });
         });
     </script>
     <script src="{{ asset('js/ajax/financeiros/planodecontas/consulta.js') }}"></script>

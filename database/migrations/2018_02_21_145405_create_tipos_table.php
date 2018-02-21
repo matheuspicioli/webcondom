@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGruposTable extends Migration
+class CreateTiposTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateGruposTable extends Migration
      */
     public function up()
     {
-        Schema::create('grupos', function (Blueprint $table) {
+        Schema::create('tipos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('grupo', 3);
-            $table->integer('plano_de_conta_id')->unsigned();
-            $table->foreign('plano_de_conta_id')
+            $table->integer('tipo')->unsigned();
+            $table->integer('plano_conta_id')->unsigned();
+            $table->foreign('plano_conta_id')
                 ->references('id')
-                ->on('plano_de_contas')
+                ->on('plano_contas')
                 ->onDelete('cascade');
 
             $table->softDeletes();
@@ -34,8 +34,6 @@ class CreateGruposTable extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('grupos');
-        Schema::enableForeignKeyConstraints();
+        Schema::dropIfExists('tipos');
     }
 }

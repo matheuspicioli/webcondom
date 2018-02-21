@@ -10,11 +10,10 @@ class Conta extends Model
 {
     use Datas, SoftDeletes;
 
-    protected $table = 'contas';
-    protected $fillable = ['conta', 'descricao', 'grupo_id'];
+    protected $fillable = ['conta','descricao','grupo_id'];
 
     public function grupo()
     {
-        return $this->belongsTo('Grupo');
+        return $this->belongsTo(Grupo::class);
     }
 }
