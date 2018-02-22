@@ -17,6 +17,7 @@ class CreateGruposTable extends Migration
             $table->increments('id');
             $table->string('grupo',3)->default('000');
             $table->string('descricao',50)->nullable();
+            $table->enum('ratear',['Sim', 'Não']);
             $table->integer('tipo_id')->unsigned();
             $table->foreign('tipo_id')
                 ->references('id')

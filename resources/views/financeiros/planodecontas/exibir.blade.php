@@ -28,43 +28,57 @@
         <div class="col-md-12">
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Editar Plano de contas</h3>
+                    <h3 class="box-title">Editar plano de contas</h3>
                     <div class="box-tools pull-right">
                         <button class="btn btn-box-tool" type="button" data-widget="collapse">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
                 <div class="box-body">
-                    <form action="{{ route('financeiros.planodecontas.alterar', ['plano' => $dados->plano->id, 'grupo' => $dados->grupo->id, 'conta' => $dados->conta->id]) }}" method="POST">
+                    <form action="{{ route('financeiros.planodecontas.alterar', ['tipo' => $tipo->id, 'grupo' => $grupo->id, 'conta' => $conta->id]) }}" method="POST">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <div class="row">
-                            <div class="col-md-1">
-                                <div class="form-group">
-                                    {!! Form::label('tipo', 'Tipo', ['class' => 'control-label']) !!}
-                                    {!! Form::select('tipo', [1 => '1', 2 => '2', 3 => '3'], $dados->plano->tipo, ['class' => 'form-control']) !!}
+                            <div class="col-md-12 col-md-offset-2">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        {!! Form::label('tipo', 'Tipo', ['class' => 'control-label']) !!}
+                                        <select name="tipo_id" id="tipo" class="form-control">
+                                            @foreach($tipos as $tipoF)
+                                                <option {{$tipoF->id == $tipo->id ? 'selected' : '' }} value="{{ $tipoF->id }}">{{ $tipoF->tipo }} - {{ $tipoF->descricao }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        {!! Form::label('grupo', 'Grupo', ['class' => 'control-label']) !!}
+                                        {!! Form::text('grupo', $grupo->grupo, ['class' => 'form-control', 'maxlength' => '3']) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        {!! Form::label('conta', 'Conta', ['class' => 'control-label']) !!}
+                                        {!! Form::text('conta', $conta->conta, ['class' => 'form-control', 'maxlength' => '4']) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    {!! Form::label('ratear', 'Ratear?', ['class' => 'control-label']) !!}
+                                    {!! Form::select('ratear', ['Sim' => 'Sim', 'Nao' => 'Não'], $grupo->ratear, ['class' => 'form-control']) !!}
                                 </div>
                             </div>
-                            <div class="col-md-1">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    {!! Form::label('grupo', 'Grupo', ['class' => 'control-label']) !!}
-                                    {!! Form::text('grupo', $dados->grupo->grupo, ['class' => 'form-control', 'maxlength' => '3']) !!}
+                                    {!! Form::label('descricao', 'Descrição grupo', ['class' => 'control-label']) !!}
+                                    {!! Form::text('descricao', $grupo->descricao, ['class' => 'form-control']) !!}
                                 </div>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    {!! Form::label('conta', 'Conta', ['class' => 'control-label']) !!}
-                                    {!! Form::text('conta', $dados->conta->conta, ['class' => 'form-control', 'maxlength' => '4']) !!}
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                {!! Form::label('ratear', 'Ratear?', ['class' => 'control-label']) !!}
-                                {!! Form::select('ratear', ['Sim' => 'Sim', 'Nao' => 'Não'], $dados->plano->ratear, ['class' => 'form-control']) !!}
-                            </div>
-                            <div class="col-md-7">
-                                <div class="form-group">
-                                    {!! Form::label('descricao', 'Descrição', ['class' => 'control-label']) !!}
-                                    {!! Form::text('descricao', $dados->conta->descricao, ['class' => 'form-control']) !!}
+                                    {!! Form::label('descricao', 'Descrição conta', ['class' => 'control-label']) !!}
+                                    {!! Form::text('descricao', $conta->descricao, ['class' => 'form-control']) !!}
                                 </div>
                             </div>
                         </div>
@@ -74,10 +88,18 @@
                                     <button class="btn btn-info" type="submit">
                                         <i class="fa fa-pencil"></i> Alterar
                                     </button>
-                                    <button class="btn btn-danger" type="button" data-toggle="modal"
-                                            data-target="#modal-excluir">
-                                        <i class="fa fa-trash"></i> Excluir
-                                    </button>
+                                    @if($conta)
+                                        <button class="btn btn-danger" type="button" data-toggle="modal"
+                                                data-target="#modal-excluir-conta">
+                                            <i class="fa fa-trash"></i> Excluir conta
+                                        </button>
+                                    @endif
+                                    <div class="pull-right">
+                                        <button class="btn btn-danger" type="button" data-toggle="modal"
+                                                data-target="#modal-excluir-grupo">
+                                            <i class="fa fa-trash"></i> Excluir grupo
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -86,8 +108,8 @@
             </div>
         </div>
     </div>
-    <!-- MODAL EXCLUIR -->
-    <div id="modal-excluir" class="modal modal-danger fade">
+    <!-- MODAL EXCLUIR GRUPO -->
+    <div id="modal-excluir-grupo" class="modal modal-danger fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -96,15 +118,39 @@
                     </button>
                     <h3 class="modal-title">Confirmar exclusão</h3>
                 </div>
-
                 <div class="modal-body">
-                    <h4>Deseja realmente excluir o plano de contas "{{ $dados->plano->descricao }}"?</h4>
+                    <h4>Deseja realmente excluir o grupo? Todas as contas cadastradas nele também serão excluídas.</h4>
                 </div>
-
                 <div class="modal-footer">
                     <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
                     <form method="POST"
-                          action="{{ route('financeiros.planodecontas.excluir', ['id' => $dados->plano->id]) }}">
+                          action="{{ route('financeiros.planodecontas.excluirgrupo', ['id' => $grupo->id]) }}">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <button class="btn btn-outline" type="submit">Confirmar exclusão</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL EXCLUIR CONTA -->
+    <div id="modal-excluir-conta" class="modal modal-danger fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h3 class="modal-title">Confirmar exclusão</h3>
+                </div>
+                <div class="modal-body">
+                    <h4>Deseja realmente excluir a conta "{{$conta->descricao}}"?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
+                    <form method="POST"
+                          action="{{ route('financeiros.planodecontas.excluirconta', ['id' => $conta->id]) }}">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <button class="btn btn-outline" type="submit">Confirmar exclusão</button>
@@ -137,8 +183,22 @@
     <script>
         $(document).ready(function () {
             $('.select2').select2();
-            $('#descricao').focus();
+            $('#tipo').focus();
+            $('#grupo').blur(function(){
+                tipo    = $('#tipo').val();
+                grupo   = $('#grupo').val();
+                $.ajax({
+                    url: "http://localhost:8000/Financeiros/PlanoDeContas/ConsultarProximaConta/"+tipo+'/'+grupo,
+                    type: "GET"
+                }).done(function(retorno){
+                    $('#conta').val(retorno);
+                    if($('#conta').val() == ''){
+                        $('#conta').val('0001');
+                    }
+                }).fail(function(xhr, status, retorno){
+                    console.log("Erro ao consultar próxima conta (blur grupo). "+retorno);
+                });
+            });
         });
     </script>
-    <script src="{{ asset('js/ajax/financeiros/planodecontas/consulta.js') }}"></script>
 @endsection

@@ -36,36 +36,46 @@
                 <div class="box-body">
                     {!! Form::open(['route' => ['financeiros.planodecontas.salvar'], 'method' => 'POST', 'id' => 'form-plano-contas']) !!}
                     <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                {!! Form::label('tipo', 'Tipo', ['class' => 'control-label']) !!}
-                                <select name="tipo_id" id="tipo" class="form-control">
-                                    @foreach($tipos as $tipo)
-                                        <value value="{{ $tipo->id }}">{{ $tipo->tipo }}</value>
-                                    @endforeach
-                                </select>
+                        <div class="col-md-12 col-md-offset-2">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    {!! Form::label('tipo', 'Tipo', ['class' => 'control-label']) !!}
+                                    <select name="tipo_id" id="tipo" class="form-control">
+                                        @foreach($tipos as $tipo)
+                                            <option value="{{ $tipo->id }}">{{ $tipo->tipo }} - {{ $tipo->descricao }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    {!! Form::label('grupo', 'Grupo', ['class' => 'control-label']) !!}
+                                    {!! Form::text('grupo', '', ['class' => 'form-control', 'maxlength' => '3']) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    {!! Form::label('conta', 'Conta', ['class' => 'control-label']) !!}
+                                    {!! Form::text('conta', '', ['class' => 'form-control', 'maxlength' => '4']) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                {!! Form::label('ratear', 'Ratear?', ['class' => 'control-label']) !!}
+                                {!! Form::select('ratear', ['Sim' => 'Sim', 'Nao' => 'Não'], null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
-                        <div class="col-md-1">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                {!! Form::label('grupo', 'Grupo', ['class' => 'control-label']) !!}
-                                {!! Form::text('grupo', '', ['class' => 'form-control', 'maxlength' => '3']) !!}
+                                {!! Form::label('descricao_grupo', 'Descrição grupo', ['class' => 'control-label']) !!}
+                                {!! Form::text('descricao_grupo', '', ['class' => 'form-control']) !!}
                             </div>
-                        </div>
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                {!! Form::label('conta', 'Conta', ['class' => 'control-label']) !!}
-                                {!! Form::text('conta', '', ['class' => 'form-control', 'maxlength' => '4']) !!}
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            {!! Form::label('ratear', 'Ratear?', ['class' => 'control-label']) !!}
-                            {!! Form::select('ratear', ['Sim' => 'Sim', 'Nao' => 'Não'], null, ['class' => 'form-control']) !!}
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                {!! Form::label('descricao', 'Descrição', ['class' => 'control-label']) !!}
-                                {!! Form::text('descricao', '', ['class' => 'form-control']) !!}
+                                {!! Form::label('descricao_conta', 'Descrição conta', ['class' => 'control-label']) !!}
+                                {!! Form::text('descricao_conta', '', ['class' => 'form-control']) !!}
                             </div>
                         </div>
                     </div>
@@ -85,7 +95,7 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Planos de contas</h3>
+                    <h3 class="box-title">Listagem plano de contas</h3>
                     <div class="pull-right">
                         <a class="btn btn-xs btn-success" href="{{ route('financeiros.planodecontas.exportar', ['tipo' => 'xlsx']) }}">
                             <i class="fa fa-file-excel-o"></i>
@@ -93,6 +103,9 @@
                         <a class="btn btn-xs btn-success" href="{{ route('financeiros.planodecontas.exportar', ['tipo' => 'csv']) }}">
                             CSV
                         </a>
+                        <button class="btn btn-box-tool" type="button" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
                     </div>
                 </div>
 
@@ -100,7 +113,8 @@
                     <table class="table table-striped table-hover dataTable" id="tabela" role="grid">
                         <thead>
                         <tr>
-                            <th>Descrição</th>
+                            <th>Descrição grupo</th>
+                            <th>Descrição conta</th>
                             <th>Código</th>
                             <th>Tipo</th>
                             <th>Grupo</th>
@@ -112,7 +126,8 @@
                         </thead>
                         <tfoot>
                         <tr>
-                            <th>Descrição</th>
+                            <th>Descrição grupo</th>
+                            <th>Descrição conta</th>
                             <th>Código</th>
                             <th>Tipo</th>
                             <th>Grupo</th>
@@ -123,6 +138,28 @@
                         </tr>
                         </tfoot>
                         <tbody>
+                        @foreach($tipos as $tipo)
+                            @foreach($tipo->grupos as $grupo)
+                                @foreach($grupo->contas as $conta)
+                                    <tr>
+                                        <td>{{ $grupo->descricao }}</td>
+                                        <td>{{ $conta->descricao }}</td>
+                                        <td>{{ "$tipo->tipo.$grupo->grupo.$conta->conta" }}</td>
+                                        <td>{{ $tipo->tipo }}</td>
+                                        <td>{{ $grupo->grupo }}</td>
+                                        <td>{{ $conta->conta }}</td>
+                                        <td>{{ $grupo->criado_em }}</td>
+                                        <td>{{ $grupo->alterado_em }}</td>
+                                        <td>
+                                            <a href="{{ route('financeiros.planodecontas.exibir', ['tipo' => $tipo->id, 'grupo' => $grupo->id, 'conta' => $conta->id]) }}"
+                                               class="btn btn-xs btn-warning">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endforeach
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -161,12 +198,9 @@
             });
 
             $('#enviar-plano-contas').click(function(){
-                if($('#grupo').val() == ''){
+                if($('#grupo').val() == '') {
                     $('#modal-erro').modal('show');
                     $('#mensagem-erro').text('O campo grupo não foi informado');
-                } else if($('#conta').val() == '') {
-                    $('#modal-erro').modal('show');
-                    $('#mensagem-erro').text('O campo conta não foi informado');
                 }
                 else
                     $('#form-plano-contas').submit();

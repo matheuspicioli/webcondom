@@ -16,6 +16,7 @@ class CreateTiposTable extends Migration
         Schema::create('tipos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('tipo')->unsigned();
+            $table->string('descricao', 25);
             $table->integer('plano_conta_id')->unsigned();
             $table->foreign('plano_conta_id')
                 ->references('id')

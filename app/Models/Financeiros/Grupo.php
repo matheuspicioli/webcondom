@@ -10,7 +10,7 @@ class Grupo extends Model
 {
     use Datas, SoftDeletes;
 
-    protected $fillable = ['grupo','descricao','tipo_id'];
+    protected $fillable = ['grupo','ratear','descricao','tipo_id'];
 
     public function tipo()
     {

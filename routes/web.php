@@ -58,12 +58,13 @@ Route::prefix('Financeiros')->namespace('Financeiros')->middleware('auth')->grou
         Route::get('/', 'PlanoDeContasController@listar')->name('financeiros.planodecontas.listar');
         Route::get('Criar', 'PlanoDeContasController@criar')->name('financeiros.planodecontas.criar');
         Route::post('/', 'PlanoDeContasController@salvar')->name('financeiros.planodecontas.salvar');
-        Route::get('{plano}/{grupo}/{conta}/Exibir', 'PlanoDeContasController@exibir')->name('financeiros.planodecontas.exibir');
-        Route::put('{plano}/{grupo}/{conta}/Alterar', 'PlanoDeContasController@alterar')->name('financeiros.planodecontas.alterar');
-        Route::delete('{id}', 'PlanoDeContasController@excluir')->name('financeiros.planodecontas.excluir');
+        Route::get('{tipo}/{grupo}/{conta}/Exibir', 'PlanoDeContasController@exibir')->name('financeiros.planodecontas.exibir');
+        Route::put('{tipo}/{grupo}/{conta}/Alterar', 'PlanoDeContasController@alterar')->name('financeiros.planodecontas.alterar');
+        Route::delete('{id}/ExcluirGrupo', 'PlanoDeContasController@excluirGrupo')->name('financeiros.planodecontas.excluirgrupo');
+        Route::delete('{id}/ExcluirConta', 'PlanoDeContasController@excluirConta')->name('financeiros.planodecontas.excluirconta');
         Route::get('Exportar/{tipo}', 'PlanoDeContasController@exportar')->name('financeiros.planodecontas.exportar');
-        Route::get('ConsultarProximaConta/{grupo?}', 'PlanoDeContasController@ProximaConta')->name('financeiros.planodecontas.proximaconta');
         Route::get('ConsultarProximoGrupo/{tipo?}', 'PlanoDeContasController@ProximoGrupo')->name('financeiros.planodecontas.proximogrupo');
+        Route::get('ConsultarProximaConta/{tipo?}/{grupo?}', 'PlanoDeContasController@ProximaConta')->name('financeiros.planodecontas.proximaconta');
     });
 
     Route::prefix('Bancos')->group(function(){
