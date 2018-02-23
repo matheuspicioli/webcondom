@@ -67,9 +67,6 @@ class PlanoDeContasController extends Controller
 
     public function Salvar(Request $request)
     {
-        //SE EXISTIR UM GRUPO IDENTICO
-        //AO QUE O USUARIO DIGITOU
-        //ELE NÃO VAI CRIAR OUTRO GRUPO
         $tipo = $this->tipo->find($request->tipo_id);
         $grupo_tipo = $tipo->grupos()->where('grupo', $request->grupo)->first();
         //dd($request->conta);
@@ -112,13 +109,37 @@ class PlanoDeContasController extends Controller
         return view('financeiros.planodecontas.listar');
     }
 
-    public function Alterar(Request $request, $id)
+    public function Alterar(Request $request, $tipo, $grupo, $conta)
     {
-        $plano = $this->plano->find($id);
-        if ($plano) {
-            $novo_plano = $plano->update($request);
-            return redirect()->route('financeiros.planodecontas.listar');
+        if($request->exists('tipo')){
+            $tipo_objeto = $this->tipo->find($tipo);
+            $tipo_objeto->update($request->all());
         }
+        if($request->exists('grupo')){
+            $grupo_objeto = $this->grupo->find($grupo);
+            if($request->tipo_id){
+                $grupo_objeto->update([
+                    'grupo'     => $request->grupo,
+                    'ratear'    => $request->ratear,
+                    'descricao' => $request->descricao_grupo,
+                    'tipo_id'   => $request->tipo_id
+                ]);
+            } else {
+                $grupo_objeto->update([
+                    'grupo'     => $request->grupo,
+                    'ratear'    => $request->ratear,
+                    'descricao' => $request->descricao_grupo
+                ]);
+            }
+        }
+        if($request->exists('conta')){
+            $conta_objeto = $this->conta->find($conta);
+            $conta_objeto->update([
+                'conta'     => $request->conta,
+                'descricao' => $request->descricao_conta
+            ]);
+        }
+        return redirect()->route('financeiros.planodecontas.listar');
     }
 
     public function ExcluirGrupo($id)

@@ -15,13 +15,6 @@
 @section('content')
     <!--<div class="fa fa-spinner fa-spin" id="carregando"></div>-->
     <div class="row">
-        <div class="col-md-1">
-            <a href="{{ route('financeiros.planodecontas.criar') }}" class="btn btn-success">
-                <i class="fa fa-plus"></i> Cadastrar</a>
-            <hr>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-md-12">
             <div class="box box-info">
                 <div class="box-header with-border">
@@ -142,14 +135,18 @@
                             @foreach($tipo->grupos as $grupo)
                                 @foreach($grupo->contas as $conta)
                                     <tr>
-                                        <td>{{ $grupo->descricao }}</td>
+                                        @if(!$conta->descricao)
+                                            <td><b>{{ $grupo->descricao }}</b></td>
+                                        @else
+                                            <td>{{ $grupo->descricao }}</td>
+                                        @endif
                                         <td>{{ $conta->descricao }}</td>
                                         <td>{{ "$tipo->tipo.$grupo->grupo.$conta->conta" }}</td>
                                         <td>{{ $tipo->tipo }}</td>
                                         <td>{{ $grupo->grupo }}</td>
                                         <td>{{ $conta->conta }}</td>
-                                        <td>{{ $grupo->criado_em }}</td>
-                                        <td>{{ $grupo->alterado_em }}</td>
+                                        <td>{{ $conta->descricao ? $conta->criado_em : $grupo->criado_em }}</td>
+                                        <td>{{ $conta->descricao ? $conta->alterado_em : $grupo->alterado_em }}</td>
                                         <td>
                                             <a href="{{ route('financeiros.planodecontas.exibir', ['tipo' => $tipo->id, 'grupo' => $grupo->id, 'conta' => $conta->id]) }}"
                                                class="btn btn-xs btn-warning">
@@ -189,13 +186,37 @@
 
 @section('js')
     <script>
-        $(function () {
-            $('#tipo').focus();
+        $(document).ready(function () {
+            $('#conta').attr('readonly', true);
+            $('#descricao_grupo').attr('readonly', true);
+            $('#descricao_conta').attr('readonly', true);
+            $('#ratear').attr('readonly', true);
             $('#tabela').DataTable({
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
                 }
             });
+
+            $('#tipo').change(function(){
+                $('#conta').attr('readonly', true);
+                $('#grupo').attr('readonly', true);
+                $('#descricao_conta').attr('readonly', true);
+                $('#descricao_grupo').attr('readonly', false);
+                $('#descricao_grupo').focus();
+            });
+
+            $('#conta').blur(function(){
+                $('#descricao_grupo').attr('readonly', true);
+                $('#descricao_conta').attr('readonly', false);
+                $('#descricao_conta').focus();
+            });
+
+            // $('#grupo').blur(function(){
+            //     if($('#grupo').val() != ''){
+            //         $('#descricao_conta').attr('readonly', false);
+            //         $('#descricao_conta').focus();
+            //     }
+            // });
 
             $('#enviar-plano-contas').click(function(){
                 if($('#grupo').val() == '') {

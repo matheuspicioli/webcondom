@@ -35,7 +35,8 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    <form action="{{ route('financeiros.planodecontas.alterar', ['tipo' => $tipo->id, 'grupo' => $grupo->id, 'conta' => $conta->id]) }}" method="POST">
+                    <form action="{{ route('financeiros.planodecontas.alterar', ['tipo' => $tipo->id, 'grupo' => $grupo->id, 'conta' => $conta->id]) }}"
+                          method="POST">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <div class="row">
@@ -43,42 +44,86 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         {!! Form::label('tipo', 'Tipo', ['class' => 'control-label']) !!}
-                                        <select name="tipo_id" id="tipo" class="form-control">
-                                            @foreach($tipos as $tipoF)
-                                                <option {{$tipoF->id == $tipo->id ? 'selected' : '' }} value="{{ $tipoF->id }}">{{ $tipoF->tipo }} - {{ $tipoF->descricao }}</option>
-                                            @endforeach
-                                        </select>
+                                        @if(!$conta->conta && !$conta->descricao)
+                                            <select name="tipo_id" id="tipo" class="form-control">
+                                                @foreach($tipos as $tipoF)
+                                                    <option {{$tipoF->id == $tipo->id ? 'selected' : '' }} value="{{ $tipoF->id }}">{{ $tipoF->tipo }}
+                                                        - {{ $tipoF->descricao }}</option>
+                                                @endforeach
+                                            </select>
+                                        @else
+                                            <select name="tipo_id" id="tipo" class="form-control" disabled="disabled">
+                                                @foreach($tipos as $tipoF)
+                                                    <option {{$tipoF->id == $tipo->id ? 'selected' : '' }} value="{{ $tipoF->id }}">{{ $tipoF->tipo }}
+                                                        - {{ $tipoF->descricao }}</option>
+                                                @endforeach
+                                            </select>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-1">
                                     <div class="form-group">
                                         {!! Form::label('grupo', 'Grupo', ['class' => 'control-label']) !!}
-                                        {!! Form::text('grupo', $grupo->grupo, ['class' => 'form-control', 'maxlength' => '3']) !!}
+                                        @if(!$conta->conta && !$conta->descricao)
+                                            {!! Form::text('grupo', $grupo->grupo, ['class' => 'form-control', 'maxlength' => '3']) !!}
+                                        @else
+                                            {!! Form::text('grupo', $grupo->grupo, ['class' => 'form-control', 'maxlength' => '3', 'disabled']) !!}
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-1">
                                     <div class="form-group">
                                         {!! Form::label('conta', 'Conta', ['class' => 'control-label']) !!}
-                                        {!! Form::text('conta', $conta->conta, ['class' => 'form-control', 'maxlength' => '4']) !!}
+                                        @if($conta->conta && $conta->descricao)
+                                            {!! Form::text('conta', $conta->conta, ['class' => 'form-control', 'maxlength' => '4']) !!}
+                                        @else
+                                            {!! Form::text('conta', $conta->conta, ['class' => 'form-control', 'maxlength' => '4', 'disabled']) !!}
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     {!! Form::label('ratear', 'Ratear?', ['class' => 'control-label']) !!}
-                                    {!! Form::select('ratear', ['Sim' => 'Sim', 'Nao' => 'Não'], $grupo->ratear, ['class' => 'form-control']) !!}
+                                    @if(!$conta->conta && !$conta->descricao)
+                                        <select name="ratear" id="ratear" class="form-control" >
+                                            <option {{$grupo->ratear == 'Sim' ? 'selected' : '' }} value="Sim">
+                                                Sim
+                                            </option>
+                                            <option {{$grupo->ratear == 'Não' ? 'selected' : '' }} value="Não">
+                                                Não
+                                            </option>
+                                        </select>
+                                    @else
+                                        <select name="ratear" id="ratear" class="form-control" disabled="disabled">
+                                            <option {{$grupo->ratear == 'Sim' ? 'selected' : '' }} value="Sim">
+                                                Sim
+                                            </option>
+                                            <option {{$grupo->ratear == 'Não' ? 'selected' : '' }} value="Não">
+                                                Não
+                                            </option>
+                                        </select>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {!! Form::label('descricao', 'Descrição grupo', ['class' => 'control-label']) !!}
-                                    {!! Form::text('descricao', $grupo->descricao, ['class' => 'form-control']) !!}
+                                    {!! Form::label('descricao_grupo', 'Descrição grupo', ['class' => 'control-label']) !!}
+                                    @if(!$conta->conta && !$conta->descricao)
+                                        {!! Form::text('descricao_grupo', $grupo->descricao, ['class' => 'form-control']) !!}
+                                    @else
+                                        {!! Form::text('descricao_grupo', $grupo->descricao, ['class' => 'form-control','disabled']) !!}
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {!! Form::label('descricao', 'Descrição conta', ['class' => 'control-label']) !!}
-                                    {!! Form::text('descricao', $conta->descricao, ['class' => 'form-control']) !!}
+                                    {!! Form::label('descricao_conta', 'Descrição conta', ['class' => 'control-label']) !!}
+                                    @if(!$conta->conta && !$conta->descricao)
+                                        {!! Form::text('descricao_conta', $conta->descricao, ['class' => 'form-control','disabled']) !!}
+                                    @else
+                                        {!! Form::text('descricao_conta', $conta->descricao, ['class' => 'form-control']) !!}
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -88,18 +133,10 @@
                                     <button class="btn btn-info" type="submit">
                                         <i class="fa fa-pencil"></i> Alterar
                                     </button>
-                                    @if($conta)
-                                        <button class="btn btn-danger" type="button" data-toggle="modal"
-                                                data-target="#modal-excluir-conta">
-                                            <i class="fa fa-trash"></i> Excluir conta
-                                        </button>
-                                    @endif
-                                    <div class="pull-right">
-                                        <button class="btn btn-danger" type="button" data-toggle="modal"
-                                                data-target="#modal-excluir-grupo">
-                                            <i class="fa fa-trash"></i> Excluir grupo
-                                        </button>
-                                    </div>
+                                    <button class="btn btn-danger" type="button" data-toggle="modal"
+                                            data-target="#modal-excluir-conta">
+                                        <i class="fa fa-trash"></i> Excluir conta
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -173,7 +210,9 @@
                     <h4 id="mensagem-erro"></h4>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-outline pull-left" type="button" id="botao-fechar-modal-erro" data-dismiss="modal">Fechar</button>
+                    <button class="btn btn-outline pull-left" type="button" id="botao-fechar-modal-erro"
+                            data-dismiss="modal">Fechar
+                    </button>
                 </div>
             </div>
         </div>
@@ -184,19 +223,19 @@
         $(document).ready(function () {
             $('.select2').select2();
             $('#tipo').focus();
-            $('#grupo').blur(function(){
-                tipo    = $('#tipo').val();
-                grupo   = $('#grupo').val();
+            $('#grupo').blur(function () {
+                tipo = $('#tipo').val();
+                grupo = $('#grupo').val();
                 $.ajax({
-                    url: "http://localhost:8000/Financeiros/PlanoDeContas/ConsultarProximaConta/"+tipo+'/'+grupo,
+                    url: "http://localhost:8000/Financeiros/PlanoDeContas/ConsultarProximaConta/" + tipo + '/' + grupo,
                     type: "GET"
-                }).done(function(retorno){
+                }).done(function (retorno) {
                     $('#conta').val(retorno);
-                    if($('#conta').val() == ''){
+                    if ($('#conta').val() == '') {
                         $('#conta').val('0001');
                     }
-                }).fail(function(xhr, status, retorno){
-                    console.log("Erro ao consultar próxima conta (blur grupo). "+retorno);
+                }).fail(function (xhr, status, retorno) {
+                    console.log("Erro ao consultar próxima conta (blur grupo). " + retorno);
                 });
             });
         });
