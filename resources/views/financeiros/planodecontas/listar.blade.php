@@ -34,6 +34,7 @@
                                 <div class="form-group">
                                     {!! Form::label('tipo', 'Tipo', ['class' => 'control-label']) !!}
                                     <select name="tipo_id" id="tipo" class="form-control">
+                                        <option disabled selected>---------------SELECIONE---------------</option>
                                         @foreach($tipos as $tipo)
                                             <option value="{{ $tipo->id }}">{{ $tipo->tipo }} - {{ $tipo->descricao }}</option>
                                         @endforeach
@@ -187,22 +188,21 @@
 @section('js')
     <script>
         $(document).ready(function () {
-            $('#conta').attr('readonly', true);
-            $('#descricao_grupo').attr('readonly', true);
-            $('#descricao_conta').attr('readonly', true);
-            $('#ratear').attr('readonly', true);
             $('#tabela').DataTable({
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
                 }
             });
+            $('#conta').attr('readonly', true);
+            $('#grupo').attr('readonly', true);
+            $('#descricao_grupo').attr('readonly', true);
+            $('#descricao_conta').attr('readonly', true);
+            $('#ratear').attr('readonly', true);
 
             $('#tipo').change(function(){
-                $('#conta').attr('readonly', true);
-                $('#grupo').attr('readonly', true);
+                $('#grupo').attr('readonly', false);
+                $('#grupo').focus();
                 $('#descricao_conta').attr('readonly', true);
-                $('#descricao_grupo').attr('readonly', false);
-                $('#descricao_grupo').focus();
             });
 
             $('#conta').blur(function(){
@@ -211,12 +211,18 @@
                 $('#descricao_conta').focus();
             });
 
-            // $('#grupo').blur(function(){
-            //     if($('#grupo').val() != ''){
-            //         $('#descricao_conta').attr('readonly', false);
-            //         $('#descricao_conta').focus();
-            //     }
-            // });
+            $('#grupo').blur(function(){
+                if($('#grupo').val() != ''){
+                    $('#descricao_grupo').attr('readonly', true);
+                    $('#descricao_conta').attr('readonly', false);
+                    $('#conta').attr('readonly', false);
+                    $('#conta').focus();
+                } else {
+                    $('#ratear').attr('readonly', false);
+                    $('#descricao_grupo').attr('readonly', false);
+                    $('#ratear').focus();
+                }
+            });
 
             $('#enviar-plano-contas').click(function(){
                 if($('#grupo').val() == '') {
