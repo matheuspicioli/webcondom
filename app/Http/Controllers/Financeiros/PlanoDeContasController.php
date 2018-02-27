@@ -92,9 +92,9 @@ class PlanoDeContasController extends Controller
             $tipo           = $this->tipo->find($request->tipo_id);
             $grupo_tipo     = $tipo->grupos()->where('grupo', $request->grupo)->first();
             if($grupo_tipo){
-                $ultima_conta   = (int)$grupo_tipo->contas()->orderBy('conta', 'DESC')->first();
+                $ultima_conta   = $grupo_tipo->contas()->orderBy('conta', 'DESC')->first();
                 if($ultima_conta){
-                    $ultima_conta   = $ultima_conta->conta;
+                    $ultima_conta   = (int)$ultima_conta->conta;
                     $proxima_conta  = $this->FormatarProximaConta($ultima_conta);
                     $this->conta->create([
                         'conta'     => $proxima_conta,
@@ -116,7 +116,7 @@ class PlanoDeContasController extends Controller
             $tipo           = $this->tipo->find($request->tipo_id);
             $ultimo_grupo     = $tipo->grupos()->orderBy('grupo', 'DESC')->first();
             if($ultimo_grupo){
-                $ultimo_grupo = $ultimo_grupo->grupo;
+                $ultimo_grupo   = (int)$ultimo_grupo->grupo;
                 $proximo_grupo  = $this->FormatarProximoGrupo($ultimo_grupo);
                 $grupo = $this->grupo->create([
                     'grupo'     => $proximo_grupo,
