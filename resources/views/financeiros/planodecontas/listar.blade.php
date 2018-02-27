@@ -76,7 +76,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <button class="btn btn-primary" id="enviar-plano-contas" type="button">Cadastrar</button>
+                                <button class="btn btn-primary" id="enviar-plano-contas" type="submit">
+                                    <i class="fa fa-save"></i> Cadastrar</button>
                             </div>
                         </div>
                     </div>
@@ -193,44 +194,40 @@
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
                 }
             });
-            $('#conta').attr('readonly', true);
-            $('#grupo').attr('readonly', true);
-            $('#descricao_grupo').attr('readonly', true);
-            $('#descricao_conta').attr('readonly', true);
-            $('#ratear').attr('readonly', true);
+            $('#conta').attr('disabled', true);
+            $('#grupo').attr('disabled', true);
+            $('#descricao_grupo').attr('disabled', true);
+            $('#descricao_conta').attr('disabled', true);
+            $('#ratear').attr('disabled', true);
 
             $('#tipo').change(function(){
-                $('#grupo').attr('readonly', false);
+                $('#grupo').attr('disabled', false);
                 $('#grupo').focus();
-                $('#descricao_conta').attr('readonly', true);
+                $('#descricao_conta').attr('disabled', true);
             });
 
             $('#conta').blur(function(){
-                $('#descricao_grupo').attr('readonly', true);
-                $('#descricao_conta').attr('readonly', false);
-                $('#descricao_conta').focus();
+                if($('#conta').val() == ''){
+                    $('#conta').attr('disabled', true);
+                    $('#descricao_grupo').attr('disabled', true);
+                    $('#descricao_conta').attr('disabled', false);
+                    $('#descricao_conta').focus();
+                }
             });
 
             $('#grupo').blur(function(){
+                if($('#conta').val() == '') {
+                    $('#conta').attr('disabled', true);
+                }
                 if($('#grupo').val() != ''){
-                    $('#descricao_grupo').attr('readonly', true);
-                    $('#descricao_conta').attr('readonly', false);
-                    $('#conta').attr('readonly', false);
-                    $('#conta').focus();
+                    $('#descricao_grupo').attr('disabled', true);
+                    $('#descricao_conta').attr('disabled', false);
+                    $('#descricao_conta').focus();
                 } else {
-                    $('#ratear').attr('readonly', false);
-                    $('#descricao_grupo').attr('readonly', false);
+                    $('#ratear').attr('disabled', false);
+                    $('#descricao_grupo').attr('disabled', false);
                     $('#ratear').focus();
                 }
-            });
-
-            $('#enviar-plano-contas').click(function(){
-                if($('#grupo').val() == '') {
-                    $('#modal-erro').modal('show');
-                    $('#mensagem-erro').text('O campo grupo não foi informado');
-                }
-                else
-                    $('#form-plano-contas').submit();
             });
         });
     </script>

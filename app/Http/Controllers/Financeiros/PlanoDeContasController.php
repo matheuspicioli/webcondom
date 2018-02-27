@@ -65,33 +65,76 @@ class PlanoDeContasController extends Controller
         return view('financeiros.planodecontas.criar');
     }
 
+    public function FormatarProximaConta($conta)
+    {
+        if($conta < 10)
+            return '000'.($conta+1);
+        else if($conta < 100)
+            return '00'.($conta+1);
+        else if($conta < 1000)
+            return '0'.($conta+1);
+        else
+            return $conta+1;
+    }
+
+    public function FormatarProximoGrupo($grupo){
+        if($grupo < 10)
+            return '00'.($grupo+1);
+        else if($grupo < 100)
+            return '0'.($grupo+1);
+        else
+            return $grupo+1;
+    }
+
     public function Salvar(Request $request)
     {
-        $tipo = $this->tipo->find($request->tipo_id);
-        $grupo_tipo = $tipo->grupos()->where('grupo', $request->grupo)->first();
-        //dd($request->conta);
-        if ($grupo_tipo) {
-            if ($request->conta) {
-                $conta = $this->conta->create([
-                    'conta' => $request->conta,
-                    'descricao' => $request->descricao_conta,
-                    'grupo_id' => $grupo_tipo->id
+        if($request->grupo != null && $request->conta == null){
+            $tipo           = $this->tipo->find($request->tipo_id);
+            $grupo_tipo     = $tipo->grupos()->where('grupo', $request->grupo)->first();
+            if($grupo_tipo){
+                $ultima_conta   = (int)$grupo_tipo->contas()->orderBy('conta', 'DESC')->first();
+                if($ultima_conta){
+                    $ultima_conta   = $ultima_conta->conta;
+                    $proxima_conta  = $this->FormatarProximaConta($ultima_conta);
+                    $this->conta->create([
+                        'conta'     => $proxima_conta,
+                        'descricao' => $request->descricao_conta,
+                        'grupo_id'  => $grupo_tipo->id
+                    ]);
+                }
+                //SÓ VAI ENTRAR SE
+                //FOR A PRIMEIRA CONTA
+                else {
+                    $this->conta->create([
+                        'conta'     => '0001',
+                        'descricao' => $request->descricao_conta,
+                        'grupo_id'  => $grupo_tipo->id
+                    ]);
+                }
+            }
+        } else if($request->grupo == null && $request->exists('tipo_id')) {
+            $tipo           = $this->tipo->find($request->tipo_id);
+            $ultimo_grupo     = $tipo->grupos()->orderBy('grupo', 'DESC')->first();
+            if($ultimo_grupo){
+                $ultimo_grupo = $ultimo_grupo->grupo;
+                $proximo_grupo  = $this->FormatarProximoGrupo($ultimo_grupo);
+                $grupo = $this->grupo->create([
+                    'grupo'     => $proximo_grupo,
+                    'ratear'    => $request->ratear,
+                    'descricao' => $request->descricao_grupo,
+                    'tipo_id'   => $tipo->id
                 ]);
             }
-        } else {
-            $grupo = $this->grupo->create([
-                'grupo' => $request->grupo,
-                'ratear' => $request->ratear,
-                'descricao' => $request->descricao_grupo,
-                'tipo_id' => $request->tipo_id
-            ]);
-            //if($request->conta) {
-            $conta = $this->conta->create([
-                'conta' => $request->conta,
-                'descricao' => $request->descricao_conta,
-                'grupo_id' => $grupo->id
-            ]);
-            //}
+            //SÓ VAI ENTRAR SE
+            //FOR O PRIMEIRO GRUPO
+            else {
+                $grupo = $this->grupo->create([
+                    'grupo'     => '001',
+                    'ratear'    => $request->ratear,
+                    'descricao' => $request->descricao_grupo,
+                    'tipo_id'   => $tipo->id
+                ]);
+            }
         }
         return redirect()->route('financeiros.planodecontas.listar');
     }

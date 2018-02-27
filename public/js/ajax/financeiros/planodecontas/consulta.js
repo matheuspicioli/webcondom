@@ -42,18 +42,18 @@ $(document).ready(function () {
     //     });
     // });
 
-    $('#grupo').blur(function () {
-        if ($('#grupo').val() == '') {
-            tipo = $('#tipo').val();
-            console.log(tipo);
-            $.ajax({
-                url: "http://localhost:8000/Financeiros/PlanoDeContas/ConsultarProximoGrupo/" + tipo,
-                type: "GET"
-            }).done(function (retorno) {
-                $('#grupo').val(retorno);
-            }).fail(function (xhr, status, retorno) {
-                console.log("Erro ao consultar próximo grupo (blur grupo). " + retorno);
-            });
-        }
-    });
+    // $('#grupo').blur(function () {
+    //     if ($('#grupo').val() == '') {
+    //         tipo = $('#tipo').val();
+    //         console.log(tipo);
+    //         $.ajax({
+    //             url: "http://webcondom.dev/Financeiros/PlanoDeContas/ConsultarProximoGrupo/" + tipo,
+    //             type: "GET"
+    //         }).done(function (retorno) {
+    //             $('#grupo').val(retorno);
+    //         }).fail(function (xhr, status, retorno) {
+    //             console.log("Erro ao consultar próximo grupo (blur grupo). " + retorno);
+    //         });
+    //     }
+    // });
 });
