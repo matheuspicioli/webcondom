@@ -1,7 +1,9 @@
 @extends('adminlte::page')
 @section('title', 'Plano de contas - Listar')
 @section('content_header')
-    <h1>Plano de contas - <small>listagem</small></h1>
+    <h1>Plano de contas -
+        <small>listagem</small>
+    </h1>
     <ol class="breadcrumb">
         <li>
             <a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a>
@@ -36,7 +38,8 @@
                                     <select name="tipo_id" id="tipo" class="form-control">
                                         <option disabled selected>---------------SELECIONE---------------</option>
                                         @foreach($tipos as $tipo)
-                                            <option value="{{ $tipo->id }}">{{ $tipo->tipo }} - {{ $tipo->descricao }}</option>
+                                            <option value="{{ $tipo->id }}">{{ $tipo->tipo }}
+                                                - {{ $tipo->descricao }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -77,7 +80,8 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <button class="btn btn-primary" id="enviar-plano-contas" type="submit">
-                                    <i class="fa fa-save"></i> Cadastrar</button>
+                                    <i class="fa fa-save"></i> Cadastrar
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -92,10 +96,12 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Listagem plano de contas</h3>
                     <div class="pull-right">
-                        <a class="btn btn-xs btn-success" href="{{ route('financeiros.planodecontas.exportar', ['tipo' => 'xlsx']) }}">
+                        <a class="btn btn-xs btn-success"
+                           href="{{ route('financeiros.planodecontas.exportar', ['tipo' => 'xlsx']) }}">
                             <i class="fa fa-file-excel-o"></i>
                         </a>
-                        <a class="btn btn-xs btn-success" href="{{ route('financeiros.planodecontas.exportar', ['tipo' => 'csv']) }}">
+                        <a class="btn btn-xs btn-success"
+                           href="{{ route('financeiros.planodecontas.exportar', ['tipo' => 'csv']) }}">
                             CSV
                         </a>
                         <button class="btn btn-box-tool" type="button" data-widget="collapse">
@@ -135,13 +141,29 @@
                         <tbody>
                         @foreach($tipos as $tipo)
                             @foreach($tipo->grupos as $grupo)
+                                <tr>
+                                    <td><b>{{ $grupo->descricao }}</b></td>
+                                    <td></td>
+                                    <td><b>{{ "$tipo->tipo.$grupo->grupo" }}</b></td>
+                                    <td><b>{{ $tipo->tipo }}</b></td>
+                                    <td><b>{{ $grupo->grupo }}</b></td>
+                                    <td></td>
+                                    <td><b>{{ $grupo->criado_em }}</b></td>
+                                    <td><b>{{ $grupo->alterado_em }}</b></td>
+                                    <td>
+                                        <a href="{{ route('financeiros.planodecontas.exibirgrupo', ['tipo' => $tipo->id, 'grupo' => $grupo->id]) }}"
+                                           class="btn btn-xs btn-warning">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endforeach
+                        @foreach($tipos as $tipo)
+                            @foreach($tipo->grupos as $grupo)
                                 @foreach($grupo->contas as $conta)
                                     <tr>
-                                        @if(!$conta->descricao)
-                                            <td><b>{{ $grupo->descricao }}</b></td>
-                                        @else
-                                            <td>{{ $grupo->descricao }}</td>
-                                        @endif
+                                        <td>{{ $grupo->descricao }}</td>
                                         <td>{{ $conta->descricao }}</td>
                                         <td>{{ "$tipo->tipo.$grupo->grupo.$conta->conta" }}</td>
                                         <td>{{ $tipo->tipo }}</td>
@@ -179,7 +201,9 @@
                     <h4 id="mensagem-erro"></h4>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-outline pull-left" type="button" id="botao-fechar-modal-erro" data-dismiss="modal">Fechar</button>
+                    <button class="btn btn-outline pull-left" type="button" id="botao-fechar-modal-erro"
+                            data-dismiss="modal">Fechar
+                    </button>
                 </div>
             </div>
         </div>
@@ -200,14 +224,14 @@
             $('#descricao_conta').attr('disabled', true);
             $('#ratear').attr('disabled', true);
 
-            $('#tipo').change(function(){
+            $('#tipo').change(function () {
                 $('#grupo').attr('disabled', false);
                 $('#grupo').focus();
                 $('#descricao_conta').attr('disabled', true);
             });
 
-            $('#conta').blur(function(){
-                if($('#conta').val() == ''){
+            $('#conta').blur(function () {
+                if ($('#conta').val() == '') {
                     $('#conta').attr('disabled', true);
                     $('#descricao_grupo').attr('disabled', true);
                     $('#descricao_conta').attr('disabled', false);
@@ -215,11 +239,11 @@
                 }
             });
 
-            $('#grupo').blur(function(){
-                if($('#conta').val() == '') {
+            $('#grupo').blur(function () {
+                if ($('#conta').val() == '') {
                     $('#conta').attr('disabled', true);
                 }
-                if($('#grupo').val() != ''){
+                if ($('#grupo').val() != '') {
                     $('#descricao_grupo').attr('disabled', true);
                     $('#descricao_conta').attr('disabled', false);
                     $('#descricao_conta').focus();

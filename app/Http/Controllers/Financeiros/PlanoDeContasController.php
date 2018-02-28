@@ -55,9 +55,10 @@ class PlanoDeContasController extends Controller
 
     public function Listar()
     {
-        $planos = $this->plano->all();
-        $tipos = $this->tipo->all();
-        return view('financeiros.planodecontas.listar', compact('planos', 'tipos'));
+        $grupos = $this->grupo->all();
+        $tipos  = $this->tipo->all();
+        $contas = $this->conta->all();
+        return view('financeiros.planodecontas.listar', compact('grupos', 'tipos', 'contas'));
     }
 
     public function Criar()
@@ -152,7 +153,19 @@ class PlanoDeContasController extends Controller
         return view('financeiros.planodecontas.listar');
     }
 
-    public function Alterar(Request $request, $tipo, $grupo, $conta)
+    public function ExibirGrupo($tipo, $grupo)
+    {
+        $tipo = $this->tipo->find($tipo);
+        $tipos = $this->tipo->all();
+        $grupo = $this->grupo->find($grupo);
+
+        if ($tipo && $grupo)
+            return view('financeiros.planodecontas.exibirgrupo', compact('tipo', 'grupo', 'tipos'));
+
+        return view('financeiros.planodecontas.listar');
+    }
+
+    public function Alterar(Request $request, $tipo, $grupo, $conta = null)
     {
         if($request->exists('tipo')){
             $tipo_objeto = $this->tipo->find($tipo);
@@ -175,7 +188,7 @@ class PlanoDeContasController extends Controller
                 ]);
             }
         }
-        if($request->exists('conta')){
+        if($request->get('conta') != null){
             $conta_objeto = $this->conta->find($conta);
             $conta_objeto->update([
                 'conta'     => $request->conta,

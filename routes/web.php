@@ -59,7 +59,8 @@ Route::prefix('Financeiros')->namespace('Financeiros')->middleware('auth')->grou
         Route::get('Criar', 'PlanoDeContasController@criar')->name('financeiros.planodecontas.criar');
         Route::post('/', 'PlanoDeContasController@salvar')->name('financeiros.planodecontas.salvar');
         Route::get('{tipo}/{grupo}/{conta}/Exibir', 'PlanoDeContasController@exibir')->name('financeiros.planodecontas.exibir');
-        Route::put('{tipo}/{grupo}/{conta}/Alterar', 'PlanoDeContasController@alterar')->name('financeiros.planodecontas.alterar');
+        Route::get('{tipo}/{grupo}/ExibirGrupo', 'PlanoDeContasController@exibirGrupo')->name('financeiros.planodecontas.exibirgrupo');
+        Route::put('{tipo}/{grupo}/{conta?}', 'PlanoDeContasController@alterar')->name('financeiros.planodecontas.alterar');
         Route::delete('{id}/ExcluirGrupo', 'PlanoDeContasController@excluirGrupo')->name('financeiros.planodecontas.excluirgrupo');
         Route::delete('{id}/ExcluirConta', 'PlanoDeContasController@excluirConta')->name('financeiros.planodecontas.excluirconta');
         Route::get('Exportar/{tipo}', 'PlanoDeContasController@exportar')->name('financeiros.planodecontas.exportar');
