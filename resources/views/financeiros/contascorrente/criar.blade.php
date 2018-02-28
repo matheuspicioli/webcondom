@@ -23,15 +23,15 @@
             <hr>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-info">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Cadastrar conta corrente</h3>
-                </div>
+    @can("incluir_contacorrente")
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Cadastrar conta corrente</h3>
+                    </div>
 
-                <div class="box-body">
-                    @can('cadastrar')
+                    <div class="box-body">
                         <form action="{{ route('financeiros.contascorrente.salvar') }}" method="POST">
                         {{ csrf_field() }}
                         <div class="row">
@@ -231,13 +231,21 @@
                             </div>
                         </div>
                     </form>
-                    @else
-                        <h3 class="box-title">Você não tem permissão para cadastrar nesse módulo</h3>
-                    @endcan
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @else
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">{{mensagem_permissao()}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endcan
 @stop
 
 @section('js')
