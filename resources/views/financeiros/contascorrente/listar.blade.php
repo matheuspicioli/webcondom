@@ -73,12 +73,16 @@
                                         @can("exibir_contacorrente")
                                             <a class="btn btn-sm btn-warning" href="{{ route('financeiros.contascorrente.exibir', ['id' => $conta->id ]) }}">
                                                 <i class="fa fa-pencil"></i></a>
-                                            <a class="btn btn-sm btn-success" href="{{ route('financeiros.contascorrente.exibir', ['id' => $conta->id ]) }}" title="Lançamentos">
-                                                <i class="fa fa-th-list"></i></a>
-
                                         @else
                                             <button disabled type="button" class="btn btn-sm btn-warning">
                                                 <i class="fa fa-pencil"></i></button>
+                                        @endcan
+                                        @can("exibir_contacorrentelancamento")
+                                            <a href="{{ route('financeiros.lancamentos.listar',['conta_id'=>$conta->id]) }}" class="btn btn-success" title="Lançamentos">
+                                                <i class="fa fa-th-list"></i></a>
+                                        @else
+                                                <button disabled type="button" class="btn btn-sm btn-success">
+                                                    <i class="fa fa-th-list"></i></button>
                                         @endcan
                                         @can("deletar_contacorrente")
                                             <button type="button" data-toggle="modal" data-target="#modal-danger-{{$conta->id}}" href="#" class="btn btn-sm btn-danger">

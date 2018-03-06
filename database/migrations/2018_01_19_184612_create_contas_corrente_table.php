@@ -22,7 +22,7 @@ class CreateContasCorrenteTable extends Migration
             $table->integer('banco_id')->unsigned();
             $table->string('agencia', 30);
             $table->string('conta',30);
-            $table->dateTime('inicio');
+            $table->date('inicio');
             $table->boolean('principal')->default(false);
 
             //DADOS PARA BOLETO
