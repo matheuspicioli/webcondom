@@ -55,7 +55,7 @@
                                 <div class="col-md-1">
                                     <div class="form-group">
                                         {!! Form::label('grupo', 'Grupo', ['class' => 'control-label']) !!}
-                                            {!! Form::text('grupo', $grupo->grupo, ['class' => 'form-control', 'maxlength' => '3']) !!}
+                                            {!! Form::text('grupo', $grupo->grupo, ['class' => 'form-control', 'maxlength' => '3', 'disabled']) !!}
                                     </div>
                                 </div>
                                 <div class="col-md-1">
