@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
         $this->call('BancosSeeder');
         $this->call('ContasCorrentesSeeder');
         $this->call('AutorizacoesSeeder');
-        $this->call('PlanoContasSeeder');
         $this->call('TiposSeeder');
+        $this->call('PlanoContasSeeder');
     }
 }
