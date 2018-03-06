@@ -68,6 +68,15 @@ Route::prefix('Financeiros')->namespace('Financeiros')->middleware('auth')->grou
         Route::get('ConsultarProximaConta/{tipo?}/{grupo?}', 'PlanoDeContasController@ProximaConta')->name('financeiros.planodecontas.proximaconta');
     });
 
+    Route::prefix('Lancamentos')->group(function(){
+        Route::get('/{conta_id?}/{dias?}', 'ContaCorrenteLancamentosController@listar')->name('financeiros.lancamentos.listar');
+        Route::get('Criar', 'ContaCorrenteLancamentosController@criar')->name('financeiros.lancamentos.criar');
+        Route::post('/', 'ContaCorrenteLancamentosController@salvar')->name('financeiros.lancamentos.salvar');
+        Route::get('{id}/Exibir', 'ContaCorrenteLancamentosController@exibir')->name('financeiros.lancamentos.exibir');
+        Route::put('{id}/Alterar', 'ContaCorrenteLancamentosController@alterar')->name('financeiros.lancamentos.alterar');
+        Route::delete('{id}', 'ContaCorrenteLancamentosController@excluir')->name('financeiros.lancamentos.excluir');
+    });
+
     Route::prefix('Bancos')->group(function(){
         Route::get('/', 'BancosController@listar')->name('financeiros.bancos.listar');
         Route::get('Criar', 'BancosController@criar')->name('financeiros.bancos.criar');

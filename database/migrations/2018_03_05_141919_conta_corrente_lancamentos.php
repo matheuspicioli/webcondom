@@ -13,7 +13,7 @@ class ContaCorrenteLancamentos extends Migration
      */
     public function up()
     {
-        Schema::create('ContaCorrenteLancamentos', function (Blueprint $table) {
+        Schema::create('conta_corrente_lancamentos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nota_fiscal',10)->nullable();
             $table->string('parcela',3)->nullable();
@@ -46,6 +46,7 @@ class ContaCorrenteLancamentos extends Migration
                 ->onDelete('cascade');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -56,6 +57,8 @@ class ContaCorrenteLancamentos extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ContaCorrenteLancamentos');
+        Schema::disableForeignKeyConstraints();
+        Schema::dropIfExists('conta_corrente_lancamentos');
+        Schema::enableForeignKeyConstraints();
     }
 }

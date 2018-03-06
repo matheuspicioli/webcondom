@@ -3,10 +3,13 @@
 namespace WebCondom\Models\Financeiros;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use WebCondom\Models\Entidades\Fornecedor;
 
 class ContaCorrenteLancamento extends Model
 {
+    use SoftDeletes;
+
     protected $table = "conta_corrente_lancamentos";
     protected $fillable = [
         'nota_fiscal', 'parcela', 'documento', 'tipo', 'valor', 'compensado',

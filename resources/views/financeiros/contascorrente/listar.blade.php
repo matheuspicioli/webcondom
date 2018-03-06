@@ -67,6 +67,9 @@
                                     <td>
                                         <a class="btn btn-warning" href="{{ route('financeiros.contascorrente.exibir', ['id' => $conta->id ]) }}">
                                             <i class="fa fa-pencil"></i></a>
+                                        <a href="{{ route('financeiros.lancamentos.listar',['conta_id'=>$conta->id]) }}" class="btn btn-success">
+                                            <i class="fa fa-align-justify"></i>
+                                        </a>
                                         <button type="button" data-toggle="modal" data-target="#modal-danger-{{$conta->id}}" href="#" class="btn btn-danger">
                                             <i class="fa fa-trash"></i>
                                         </button>
