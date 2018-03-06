@@ -77,7 +77,8 @@
                         <div class="col-md-2">
                             <div class="checkbox">
                                 <label for="principal">
-                                    <input type="checkbox" disabled="disabled" name="principal" id="principal" {{ $conta->principal ? "checked" : '' }}> Principal?
+                                    <input type="checkbox" disabled="disabled" name="principal" id="principal"
+                                            class="" {{ $conta->principal ? "checked" : '' }}> Principal?
                                 </label>
                             </div>
                         </div>
@@ -135,7 +136,7 @@
                                             <div class="col-md-2">
                                                 <div class="checkbox">
                                                     <label for="compensado">
-                                                        <input type="checkbox" name="compensado" id="compensado"> Compensado?
+                                                        <input type="checkbox" class="flat-red" name="compensado" id="compensado"> Compensado?
                                                     </label>
                                                 </div>
                                             </div>
