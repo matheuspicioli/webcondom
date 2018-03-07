@@ -15,205 +15,221 @@
 @stop
 
 @section('content')
-    <!--<div class="fa fa-spinner fa-spin" id="carregando"></div>-->
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-info">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Cadastrar plano de contas</h3>
-                    <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" type="button" data-widget="collapse">
-                            <i class="fa fa-minus"></i>
-                        </button>
+    @can("listar_planodeconta")
+        <!--<div class="fa fa-spinner fa-spin" id="carregando"></div>-->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Cadastrar plano de contas</h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-box-tool" type="button" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
 
-                <div class="box-body">
-                    {!! Form::open(['route' => ['financeiros.planodecontas.salvar'], 'method' => 'POST', 'id' => 'form-plano-contas']) !!}
-                    <div class="row">
-                        <div class="col-md-12 col-md-offset-2">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    {!! Form::label('tipo', 'Tipo', ['class' => 'control-label']) !!}
-                                    <select name="tipo_id" id="tipo" class="form-control">
-                                        <option disabled selected>---------------SELECIONE---------------</option>
-                                        @foreach($tipos as $tipo)
-                                            <option value="{{ $tipo->id }}">{{ $tipo->tipo }}
-                                                - {{ $tipo->descricao }}</option>
-                                        @endforeach
-                                    </select>
+                    <div class="box-body">
+                        {!! Form::open(['route' => ['financeiros.planodecontas.salvar'], 'method' => 'POST', 'id' => 'form-plano-contas']) !!}
+                        <div class="row">
+                            <div class="col-md-12 col-md-offset-2">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        {!! Form::label('tipo', 'Tipo', ['class' => 'control-label']) !!}
+                                        <select name="tipo_id" id="tipo" class="form-control">
+                                            <option disabled selected>---------------SELECIONE---------------</option>
+                                            @foreach($tipos as $tipo)
+                                                <option value="{{ $tipo->id }}">{{ $tipo->tipo }}
+                                                    - {{ $tipo->descricao }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        {!! Form::label('grupo', 'Grupo', ['class' => 'control-label']) !!}
+                                        {!! Form::text('grupo', '', ['class' => 'form-control', 'maxlength' => '3']) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        {!! Form::label('conta', 'Conta', ['class' => 'control-label']) !!}
+                                        {!! Form::text('conta', '', ['class' => 'form-control', 'maxlength' => '4']) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    {!! Form::label('ratear', 'Ratear?', ['class' => 'control-label']) !!}
+                                    {!! Form::select('ratear', ['Sim' => 'Sim', 'Nao' => 'Não'], null, ['class' => 'form-control']) !!}
                                 </div>
                             </div>
-                            <div class="col-md-1">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    {!! Form::label('grupo', 'Grupo', ['class' => 'control-label']) !!}
-                                    {!! Form::text('grupo', '', ['class' => 'form-control', 'maxlength' => '3']) !!}
+                                    {!! Form::label('descricao_grupo', 'Descrição grupo', ['class' => 'control-label']) !!}
+                                    {!! Form::text('descricao_grupo', '', ['class' => 'form-control']) !!}
                                 </div>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    {!! Form::label('conta', 'Conta', ['class' => 'control-label']) !!}
-                                    {!! Form::text('conta', '', ['class' => 'form-control', 'maxlength' => '4']) !!}
+                                    {!! Form::label('descricao_conta', 'Descrição conta', ['class' => 'control-label']) !!}
+                                    {!! Form::text('descricao_conta', '', ['class' => 'form-control']) !!}
                                 </div>
                             </div>
-                            <div class="col-md-2">
-                                {!! Form::label('ratear', 'Ratear?', ['class' => 'control-label']) !!}
-                                {!! Form::select('ratear', ['Sim' => 'Sim', 'Nao' => 'Não'], null, ['class' => 'form-control']) !!}
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <button class="btn btn-primary" id="enviar-plano-contas" type="submit">
+                                        <i class="fa fa-save"></i> Cadastrar
+                                    </button>
+                                </div>
                             </div>
                         </div>
+                        {!! Form::close() !!}
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {!! Form::label('descricao_grupo', 'Descrição grupo', ['class' => 'control-label']) !!}
-                                {!! Form::text('descricao_grupo', '', ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {!! Form::label('descricao_conta', 'Descrição conta', ['class' => 'control-label']) !!}
-                                {!! Form::text('descricao_conta', '', ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <button class="btn btn-primary" id="enviar-plano-contas" type="submit">
-                                    <i class="fa fa-save"></i> Cadastrar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Listagem plano de contas</h3>
-                    <div class="pull-right">
-                        <a class="btn btn-xs btn-success"
-                           href="{{ route('financeiros.planodecontas.exportar', ['tipo' => 'xlsx']) }}">
-                            <i class="fa fa-file-excel-o"></i>
-                        </a>
-                        <a class="btn btn-xs btn-success"
-                           href="{{ route('financeiros.planodecontas.exportar', ['tipo' => 'csv']) }}">
-                            CSV
-                        </a>
-                        <button class="btn btn-box-tool" type="button" data-widget="collapse">
-                            <i class="fa fa-minus"></i>
-                        </button>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Listagem plano de contas</h3>
+                        <div class="pull-right">
+                            <a class="btn btn-xs btn-success"
+                               href="{{ route('financeiros.planodecontas.exportar', ['tipo' => 'xlsx']) }}">
+                                <i class="fa fa-file-excel-o"></i>
+                            </a>
+                            <a class="btn btn-xs btn-success"
+                               href="{{ route('financeiros.planodecontas.exportar', ['tipo' => 'csv']) }}">
+                                CSV
+                            </a>
+                            <button class="btn btn-box-tool" type="button" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
 
-                <div class="box-body">
-                    <table class="table table-striped table-hover dataTable" id="tabela" role="grid">
-                        <thead>
-                        <tr>
-                            <th>Descrição grupo</th>
-                            <th>Descrição conta</th>
-                            <th>Código</th>
-                            <th>Tipo</th>
-                            <th>Grupo</th>
-                            <th>Conta</th>
-                            <th>Criado em</th>
-                            <th>Alterado em</th>
-                            <th>Ações</th>
-                        </tr>
-                        </thead>
-                        <tfoot>
-                        <tr>
-                            <th>Descrição grupo</th>
-                            <th>Descrição conta</th>
-                            <th>Código</th>
-                            <th>Tipo</th>
-                            <th>Grupo</th>
-                            <th>Conta</th>
-                            <th>Criado em</th>
-                            <th>Alterado em</th>
-                            <th>Ações</th>
-                        </tr>
-                        </tfoot>
-                        <tbody>
-                        @foreach($tipos as $tipo)
-                            @foreach($tipo->grupos as $grupo)
-                                <tr>
-                                    <td><b>{{ $grupo->descricao }}</b></td>
-                                    <td></td>
-                                    <td><b>{{ "$tipo->tipo.$grupo->grupo" }}</b></td>
-                                    <td><b>{{ $tipo->tipo }}</b></td>
-                                    <td><b>{{ $grupo->grupo }}</b></td>
-                                    <td></td>
-                                    <td><b>{{ $grupo->criado_em }}</b></td>
-                                    <td><b>{{ $grupo->alterado_em }}</b></td>
-                                    <td>
-                                        <a href="{{ route('financeiros.planodecontas.exibirgrupo', ['tipo' => $tipo->id, 'grupo' => $grupo->id]) }}"
-                                           class="btn btn-xs btn-warning">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @endforeach
-                        @foreach($tipos as $tipo)
-                            @foreach($tipo->grupos as $grupo)
-                                @foreach($grupo->contas as $conta)
+                    <div class="box-body">
+                        <table class="table table-striped table-hover dataTable" id="tabela" role="grid">
+                            <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Descrição</th>
+                                <th>Tipo</th>
+                                <th>Grupo</th>
+                                <th>Conta</th>
+                                <th>Ratear</th>
+                                <th>Ações</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>Código</th>
+                                <th>Descrição</th>
+                                <th>Tipo</th>
+                                <th>Grupo</th>
+                                <th>Conta</th>
+                                <th>Ratear</th>
+                                <th>Ações</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            @foreach($tipos as $tipo)
+                                @foreach($tipo->grupos as $grupo)
                                     <tr>
-                                        <td>{{ $grupo->descricao }}</td>
-                                        <td>{{ $conta->descricao }}</td>
-                                        <td>{{ "$tipo->tipo.$grupo->grupo.$conta->conta" }}</td>
-                                        <td>{{ $tipo->tipo }}</td>
-                                        <td>{{ $grupo->grupo }}</td>
-                                        <td>{{ $conta->conta }}</td>
-                                        <td>{{ $conta->descricao ? $conta->criado_em : $grupo->criado_em }}</td>
-                                        <td>{{ $conta->descricao ? $conta->alterado_em : $grupo->alterado_em }}</td>
+                                        <td><b>{{ "$tipo->tipo.$grupo->grupo" }}</b></td>
+                                        <td><b>{{ $grupo->descricao }}</b></td>
+                                        <td><b>{{ $tipo->tipo}} - {{$tipo->descricao }}</b></td>
+                                        <td><b>{{ $grupo->grupo }}</b></td>
+                                        <td></td>
+                                        <td><b>{{ $grupo->ratear}}</b></td>
                                         <td>
-                                            <a href="{{ route('financeiros.planodecontas.exibir', ['tipo' => $tipo->id, 'grupo' => $grupo->id, 'conta' => $conta->id]) }}"
-                                               class="btn btn-xs btn-warning">
-                                                <i class="fa fa-pencil"></i>
-                                            </a>
+                                            @can("exibir_planodeconta")
+                                                <a href="{{ route('financeiros.planodecontas.exibirgrupo', ['tipo' => $tipo->id, 'grupo' => $grupo->id]) }}"
+                                                   class="btn btn-xs btn-warning">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                            @else
+                                                <button disabled type="button" class="btn btn-xs btn-warning">
+                                                    <i class="fa fa-pencil"></i></button>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach
                             @endforeach
-                        @endforeach
-                        </tbody>
-                    </table>
+                            @foreach($tipos as $tipo)
+                                @foreach($tipo->grupos as $grupo)
+                                    @foreach($grupo->contas as $conta)
+                                        <tr>
+                                            <td>{{ "$tipo->tipo.$grupo->grupo.$conta->conta" }}</td>
+                                            <td><li>{{ $conta->descricao }}</li></td>
+                                            <td>{{ $tipo->tipo}} - {{$tipo->descricao }}</td>
+                                            <td>{{ $grupo->grupo }}</td>
+                                            <td>{{ $conta->conta }}</td>
+                                            <td></td>
+                                            <td>
+                                                @can("exibir_planodeconta")
+                                                    <a href="{{ route('financeiros.planodecontas.exibir', ['tipo' => $tipo->id, 'grupo' => $grupo->id, 'conta' => $conta->id]) }}"
+                                                       class="btn btn-xs btn-warning">
+                                                        <i class="fa fa-pencil"></i>
+                                                    </a>
+                                                @else
+                                                    <button disabled type="button" class="btn btn-xs btn-warning">
+                                                        <i class="fa fa-pencil"></i></button>
+                                                @endcan
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endforeach
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div id="modal-erro" class="modal modal-danger fade" data-toggle="modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                    <h3 class="modal-title">Erro</h3>
-                </div>
-                <div class="modal-body">
-                    <h4 id="mensagem-erro"></h4>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-outline pull-left" type="button" id="botao-fechar-modal-erro"
-                            data-dismiss="modal">Fechar
-                    </button>
+        <div id="modal-erro" class="modal modal-danger fade" data-toggle="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h3 class="modal-title">Erro</h3>
+                    </div>
+                    <div class="modal-body">
+                        <h4 id="mensagem-erro"></h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline pull-left" type="button" id="botao-fechar-modal-erro"
+                                data-dismiss="modal">Fechar
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @else
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">{{mensagem_permissao()}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endcan
 @stop
 
 @section('js')
     <script>
         $(document).ready(function () {
             $('#tabela').DataTable({
+                "order": [[2,"asc"],[3,"asc"],[4,"asc"]],
+                "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
                 }

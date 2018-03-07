@@ -23,268 +23,289 @@
             <hr>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-info">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Alterar conta corrente</h3>
-                </div>
+    @can("exibir_contacorrente")
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Alterar conta corrente</h3>
+                    </div>
 
-                <div class="box-body">
-                    <form action="{{ route('financeiros.contascorrente.alterar', ['id' => $conta->dados->id]) }}" method="POST">
-                        {{ csrf_field() }}
-                        {{ method_field('PUT') }}
-                        <div class="row">
-                            <div class="col-md-10">
-                                <div class="form-group">
-                                    <label for="condominio" class="control-label" class="control-label">Condomínio</label>
-                                    <select name="condominio_id" id="condominio" class="form-control select2">
-                                        @foreach($condominiosDados as $condominio)
-                                            <option value="{{ $condominio->id }}" {{ $condominio->id == $conta->dados->condominio_id ? 'selected' : '' }}>
-                                                {{ $condominio->nome }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="codigo" class="control-label">Código</label>
-                                    <input id="codigo" type="text" class="form-control pula" name="codigo" value="{{ $conta->dados->codigo }}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="banco" class="control-label">Banco</label>
-                                    <select name="banco_id" class="form-control select2" id="banco">
-                                        @foreach($bancosDados as $banco)
-                                            <option value="{{ $banco->id }}" {{ $banco->id == $conta->dados->banco_id ? 'selected' : '' }}>
-                                                {{ $banco->nome_banco }} - {{ $banco->CNAB}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="agencia" class="control-label">Agência</label>
-                                    <input id="agencia" type="text" class="form-control pula" name="agencia" value="{{ $conta->dados->agencia }}">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="conta" class="control-label">Conta</label>
-                                    <input id="conta" type="text" class="form-control pula" name="conta" value="{{ $conta->dados->conta }}">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="inicio" class="control-label">Inicio</label>
-                                    <input id="inicio" type="date" class="form-control pula" name="inicio" value="{{ $conta->dados->inicio->format('Y-m-d') }}">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="checkbox">
-                                    <label for="principal">
-                                        <input type="checkbox" name="principal" id="principal" {{ $conta->dados->principal ? "checked" : '' }}> Principal?
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="box box-info">
-                                    <div class="box-header with-border">
-                                        <h3 class="box-title">Dados para boleto</h3>
+                    <div class="box-body">
+                        <form action="{{ route('financeiros.contascorrente.alterar', ['id' => $conta->dados->id]) }}" method="POST">
+                            {{ csrf_field() }}
+                            {{ method_field('PUT') }}
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label for="condominio" class="control-label" class="control-label">Condomínio</label>
+                                        <select name="condominio_id" id="condominio" class="form-control select2">
+                                            @foreach($condominiosDados as $condominio)
+                                                <option value="{{ $condominio->id }}" {{ $condominio->id == $conta->dados->condominio_id ? 'selected' : '' }}>
+                                                    {{ $condominio->nome }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
-
-                                    <div class="box-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="nome" class="control-label">Nome</label>
-                                                    <input id="nome" type="text" class="form-control pula" name="nome" value="{{ $conta->dados->nome }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="boleto_agencia" class="control-label">Agência</label>
-                                                    <input id="boleto_agencia" type="text" class="form-control pula" name="boleto_agencia"
-                                                        value="{{ $conta->dados->boleto_agencia }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="boleto_conta" class="control-label">Conta</label>
-                                                    <input id="boleto_conta" type="text" class="form-control pula" name="boleto_conta"
-                                                        value="{{ $conta->dados->boleto_conta }}">
-                                                </div>
-                                            </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="codigo" class="control-label">Código</label>
+                                        <input id="codigo" type="text" class="form-control pula" name="codigo" value="{{ $conta->dados->codigo }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="banco" class="control-label">Banco</label>
+                                        <select name="banco_id" class="form-control select2" id="banco">
+                                            @foreach($bancosDados as $banco)
+                                                <option value="{{ $banco->id }}" {{ $banco->id == $conta->dados->banco_id ? 'selected' : '' }}>
+                                                    {{ $banco->nome_banco }} - {{ $banco->CNAB}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="agencia" class="control-label">Agência</label>
+                                        <input id="agencia" type="text" class="form-control pula" name="agencia" value="{{ $conta->dados->agencia }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="conta" class="control-label">Conta</label>
+                                        <input id="conta" type="text" class="form-control pula" name="conta" value="{{ $conta->dados->conta }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="inicio" class="control-label">Inicio</label>
+                                        <input id="inicio" type="date" class="form-control pula" name="inicio" value="{{ $conta->dados->inicio->format('Y-m-d') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="checkbox">
+                                        <label for="principal">
+                                            <input type="checkbox" name="principal" id="principal" {{ $conta->dados->principal ? "checked" : '' }}> Principal?
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-info">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">Dados para boleto</h3>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="cedente" class="control-label">Cedente</label>
-                                                    <input id="cedente" type="text" class="form-control pula" name="cedente"
-                                                        value="{{ $conta->dados->cedente }}">
+
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="nome" class="control-label">Nome</label>
+                                                        <input id="nome" type="text" class="form-control pula" name="nome" value="{{ $conta->dados->nome }}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label for="boleto_agencia" class="control-label">Agência</label>
+                                                        <input id="boleto_agencia" type="text" class="form-control pula" name="boleto_agencia"
+                                                            value="{{ $conta->dados->boleto_agencia }}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label for="boleto_conta" class="control-label">Conta</label>
+                                                        <input id="boleto_conta" type="text" class="form-control pula" name="boleto_conta"
+                                                            value="{{ $conta->dados->boleto_conta }}">
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-2">
-                                                <div class="form-group">
-                                                    <label for="carteira" class="control-label">Carteira</label>
-                                                    <input id="carteira" type="text" class="form-control pula" name="carteira"
-                                                        value="{{ $conta->dados->carteira }}">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label for="cedente" class="control-label">Cedente</label>
+                                                        <input id="cedente" type="text" class="form-control pula" name="cedente"
+                                                            value="{{ $conta->dados->cedente }}">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="nosso_numero" class="control-label">Nosso número</label>
-                                                    <input id="nosso_numero" type="text" class="form-control pula" name="nosso_numero"
-                                                        value="{{ $conta->dados->nosso_numero }}">
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label for="carteira" class="control-label">Carteira</label>
+                                                        <input id="carteira" type="text" class="form-control pula" name="carteira"
+                                                            value="{{ $conta->dados->carteira }}">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="form-group">
-                                                    <label for="prazo_baixa" class="control-label">Prazo para baixa</label>
-                                                    <input id="prazo_baixa" type="number" class="form-control pula" name="prazo_baixa"
-                                                        value="{{ $conta->dados->prazo_baixa }}">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label for="nosso_numero" class="control-label">Nosso número</label>
+                                                        <input id="nosso_numero" type="text" class="form-control pula" name="nosso_numero"
+                                                            value="{{ $conta->dados->nosso_numero }}">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <label for="aceite" class="control-label">Aceite (S/N) </label>
-                                                <select name="aceite" id="aceite" class="form-control pula">
-                                                    <option disabled selected>----------Selecione----------</option>
-                                                    <option value="1" {{ $conta->dados->aceite == 1 ? 'selected' : '' }}>Sim
-                                                    </option>
-                                                    <option value="0" {{ $conta->dados->aceite == 0 ? 'selected' : '' }}>Não
-                                                    </option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="multa" class="control-label">Multa (%)</label>
-                                                    <input id="multa" type="text" class="form-control pula" name="juros" placeholder="0,00"
-                                                           value="{{ $conta->dados->multa ? $conta->dados->multa : '' }}">
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label for="prazo_baixa" class="control-label">Prazo para baixa</label>
+                                                        <input id="prazo_baixa" type="number" class="form-control pula" name="prazo_baixa"
+                                                            value="{{ $conta->dados->prazo_baixa }}">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="Juros" class="control-label">Juros (%)</label>
-                                                    <input id="Juros" type="text" class="form-control pula" name="juros" placeholder="0,00"
-                                                           value="{{ $conta->dados->juros ? $conta->dados->juros : '' }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="tipo_Juros" class="control-label">Tipo de juros</label>
-                                                    <select name="tipo_juros" id="tipo_juros" class="form-control pula">
+                                                <div class="col-md-2">
+                                                    <label for="aceite" class="control-label">Aceite (S/N) </label>
+                                                    <select name="aceite" id="aceite" class="form-control pula">
                                                         <option disabled selected>----------Selecione----------</option>
-                                                        <option value="AD" {{ $conta->dados->tipo_juros == 'AD' ? 'selected' : '' }}>Ao Dia
+                                                        <option value="1" {{ $conta->dados->aceite == 1 ? 'selected' : '' }}>Sim
                                                         </option>
-                                                        <option value="AM" {{ $conta->dados->tipo_juros == 'AM' ? 'selected' : '' }}>Ao Mês
+                                                        <option value="0" {{ $conta->dados->aceite == 0 ? 'selected' : '' }}>Não
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label for="multa" class="control-label">Multa (%)</label>
+                                                        <input id="multa" type="text" class="form-control pula" name="juros" placeholder="0,00"
+                                                               value="{{ $conta->dados->multa ? $conta->dados->multa : '' }}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label for="Juros" class="control-label">Juros (%)</label>
+                                                        <input id="Juros" type="text" class="form-control pula" name="juros" placeholder="0,00"
+                                                               value="{{ $conta->dados->juros ? $conta->dados->juros : '' }}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label for="tipo_Juros" class="control-label">Tipo de juros</label>
+                                                        <select name="tipo_juros" id="tipo_juros" class="form-control pula">
+                                                            <option disabled selected>----------Selecione----------</option>
+                                                            <option value="AD" {{ $conta->dados->tipo_juros == 'AD' ? 'selected' : '' }}>Ao Dia
+                                                            </option>
+                                                            <option value="AM" {{ $conta->dados->tipo_juros == 'AM' ? 'selected' : '' }}>Ao Mês
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="protestar" class="control-label">Protestar (S/N) </label>
+                                                    <select name="protestar" id="protestar" class="form-control pula">
+                                                        <option disabled selected>----------Selecione----------</option>
+                                                        <option value="1" {{ $conta->dados->protestar == 1 ? 'selected' : '' }}>Sim
+                                                        </option>
+                                                        <option value="0" {{ $conta->dados->protestar == 0 ? 'selected' : '' }}>Não
                                                         </option>
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
-                                                <label for="protestar" class="control-label">Protestar (S/N) </label>
-                                                <select name="protestar" id="protestar" class="form-control pula">
-                                                    <option disabled selected>----------Selecione----------</option>
-                                                    <option value="1" {{ $conta->dados->protestar == 1 ? 'selected' : '' }}>Sim
-                                                    </option>
-                                                    <option value="0" {{ $conta->dados->protestar == 0 ? 'selected' : '' }}>Não
-                                                    </option>
-                                                </select>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="box box-warning">
-                                    <div class="box-header with-border">
-                                        <h3 class="box-title">Mensagens do Boleto</h3>
-                                    </div>
-                                    <div class="box-body">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="mensagem1" class="control-label">Mensagem</label>
-                                                    <input id="mensagem1" type="text" class="form-control pula" name="mensagem1"
-                                                           value="{{ $conta->dados->mensagem1 }}">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-warning">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">Mensagens do Boleto</h3>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="mensagem1" class="control-label">Mensagem</label>
+                                                        <input id="mensagem1" type="text" class="form-control pula" name="mensagem1"
+                                                               value="{{ $conta->dados->mensagem1 }}">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <input id="mensagem2" type="text" class="form-control pula" name="mensagem2"
-                                                           value="{{ $conta->dados->mensagem2 }}">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <input id="mensagem2" type="text" class="form-control pula" name="mensagem2"
+                                                               value="{{ $conta->dados->mensagem2 }}">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <input id="mensagem3" type="text" class="form-control pula" name="mensagem3"
-                                                           value="{{ $conta->dados->mensagem3 }}">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <input id="mensagem3" type="text" class="form-control pula" name="mensagem3"
+                                                               value="{{ $conta->dados->mensagem3 }}">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <input id="mensagem4" type="text" class="form-control pula" name="mensagem4"
-                                                           value="{{ $conta->dados->mensagem4 }}">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <input id="mensagem4" type="text" class="form-control pula" name="mensagem4"
+                                                               value="{{ $conta->dados->mensagem4 }}">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <button class="btn btn-info" type="submit">
-                                        <i class="fa fa-save"></i> Salvar</button>
-                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
-                                        <i class="fa fa-trash"></i> Excluir
-                                    </button>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        @can("editar_contacorrente")
+                                            <button class="btn btn-info" type="submit">
+                                                <i class="fa fa-save"></i> Salvar</button>
+                                        @else
+                                            <button disabled class="btn btn-info" type="submit">
+                                                <i class="fa fa-save"></i> Salvar</button>
+                                        @endcan
+                                        @can("deletar_contacorrente")
+                                            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
+                                                <i class="fa fa-trash"></i> Excluir</button>
+                                        @else
+                                            <button disabled class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
+                                                <i class="fa fa-trash"></i> Excluir</button>
+                                        @endcan
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- MODAL EXCLUIR BANCO -->
-    <div id="modal-excluir" class="modal modal-danger fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                    <h3 class="modal-title">Confirmar exclusão</h3>
-                </div>
-                <div class="modal-body">
-                    <h3>Dados da exclusão: </h3>
-                    <p>Conta:   {{ $conta->dados->conta }}</p>
-                    <p>Agência: {{ $conta->dados->agencia }}</p>
-                    <p>Banco:   {{ $conta->dados->banco ? $conta->dados->banco->nome_banco : 'Registro pai foi excluído.' }}</p>
-                    <p>Nome : {{ $conta->dados->nome }}</p>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
-                    <form method="POST" action="{{ route('financeiros.contascorrente.excluir', ['id' => $conta->dados->id]) }}">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-                        <button class="btn btn-outline" type="submit">Confirmar exclusão</button>
-                    </form>
+        <!-- MODAL EXCLUIR BANCO -->
+        <div id="modal-excluir" class="modal modal-danger fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h3 class="modal-title">Confirmar exclusão</h3>
+                    </div>
+                    <div class="modal-body">
+                        <h3>Dados da exclusão: </h3>
+                        <p>Conta:   {{ $conta->dados->conta }}</p>
+                        <p>Agência: {{ $conta->dados->agencia }}</p>
+                        <p>Banco:   {{ $conta->dados->banco ? $conta->dados->banco->nome_banco : 'Registro pai foi excluído.' }}</p>
+                        <p>Nome : {{ $conta->dados->nome }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
+                        <form method="POST" action="{{ route('financeiros.contascorrente.excluir', ['id' => $conta->dados->id]) }}">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                            <button class="btn btn-outline" type="submit">Confirmar exclusão</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @else
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">{{mensagem_permissao()}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endcan
 @stop
 
 @section('js')

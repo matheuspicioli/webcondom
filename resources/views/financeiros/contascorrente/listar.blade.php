@@ -13,22 +13,27 @@
 @stop
 
 @section('content')
-    <div class="row">
-        <div class="col-md-1">
-            <a href="{{ route('financeiros.contascorrente.criar') }}" class="btn btn-success">
-                <i class="fa fa-plus"></i> Cadastrar</a>
-            <hr>
+    @can("listar_contacorrente")
+        <div class="row">
+            <div class="col-md-1">
+                @can("incluir_contacorrente")
+                    <a href="{{ route('financeiros.contascorrente.criar') }}" class="btn btn-success">
+                        <i class="fa fa-plus"></i> Cadastrar</a>
+                @else
+                    <button disabled type="button" class="btn btn-success">
+                        <i class="fa fa-plus"></i> Cadastrar</button>
+                @endcan
+                <hr>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Conta Corrente</h3>
-                </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Conta Corrente</h3>
+                    </div>
 
-                <div class="box-body">
-                    @can('visualizar')
+                    <div class="box-body">
                         <table class="table table-striped table-hover dataTable" id="tabela" role="grid">
                             <thead>
                             <tr>
@@ -65,14 +70,27 @@
                                     <td>{{ $conta->conta }}</td>
                                     <td>{{ $conta->banco ? $conta->banco->nome_banco : 'O registro pai foi excluído' }}</td>
                                     <td>
-                                        <a class="btn btn-warning" href="{{ route('financeiros.contascorrente.exibir', ['id' => $conta->id ]) }}">
-                                            <i class="fa fa-pencil"></i></a>
-                                        <a href="{{ route('financeiros.lancamentos.listar',['conta_id'=>$conta->id]) }}" class="btn btn-success">
-                                            <i class="fa fa-align-justify"></i>
-                                        </a>
-                                        <button type="button" data-toggle="modal" data-target="#modal-danger-{{$conta->id}}" href="#" class="btn btn-danger">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
+                                        @can("exibir_contacorrente")
+                                            <a class="btn btn-sm btn-warning" href="{{ route('financeiros.contascorrente.exibir', ['id' => $conta->id ]) }}">
+                                                <i class="fa fa-pencil"></i></a>
+                                        @else
+                                            <button disabled type="button" class="btn btn-sm btn-warning">
+                                                <i class="fa fa-pencil"></i></button>
+                                        @endcan
+                                        @can("exibir_contacorrentelancamento")
+                                            <a href="{{ route('financeiros.lancamentos.listar',['conta_id'=>$conta->id]) }}" class="btn btn-success" title="Lançamentos">
+                                                <i class="fa fa-th-list"></i></a>
+                                        @else
+                                                <button disabled type="button" class="btn btn-sm btn-success">
+                                                    <i class="fa fa-th-list"></i></button>
+                                        @endcan
+                                        @can("deletar_contacorrente")
+                                            <button type="button" data-toggle="modal" data-target="#modal-danger-{{$conta->id}}" href="#" class="btn btn-sm btn-danger">
+                                                <i class="fa fa-trash"></i></button>
+                                        @else
+                                            <button disabled type="button" class="btn btn-sm btn-danger">
+                                                <i class="fa fa-trash"></i></button>
+                                        @endcan
                                         <!-- MODAL EXCLUSÃO -->
                                         <div id="modal-danger-{{$conta->id}}" class="modal modal-danger fade">
                                             <div class="modal-dialog">
@@ -106,21 +124,28 @@
                             @endforeach
                             </tbody>
                         </table>
-                    @else
-                        <h3 class="box-title">
-                            Não tem permissão pra visualizar esse conteúdo, contato o administrador do sistema
-                        </h3>
-                    @endcan
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @else
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">{{mensagem_permissao()}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endcan
 @stop
 
 @section('js')
     <script>
         $(function () {
             $('#tabela').DataTable({
+                "order": [[1,"asc"],[2,"asc"]]
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
                 }

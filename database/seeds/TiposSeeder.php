@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use WebCondom\Models\Financeiros\PlanoDeConta;
 use WebCondom\Models\Financeiros\Tipo;
 
 class TiposSeeder extends Seeder
@@ -12,6 +13,21 @@ class TiposSeeder extends Seeder
      */
     public function run()
     {
+        PlanoDeConta::create([
+            'descricao'     => 'PRIMEIRO PLANO DE CONTAS',
+            'ratear'        => 'Sim'
+        ]);
+
+        PlanoDeConta::create([
+            'descricao'     => 'SEGUNDO PLANO DE CONTAS',
+            'ratear'        => 'Sim'
+        ]);
+
+        PlanoDeConta::create([
+            'descricao'     => 'TERCEIRO PLANO DE CONTAS',
+            'ratear'        => 'Sim'
+        ]);
+
         Tipo::create([
             'tipo'              => 1,
             'descricao'         => 'RECEITA',
