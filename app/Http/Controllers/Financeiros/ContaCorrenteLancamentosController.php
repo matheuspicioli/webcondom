@@ -7,22 +7,31 @@ use Illuminate\Http\Request;
 use WebCondom\Http\Controllers\Controller;
 use WebCondom\Models\Entidades\Fornecedor;
 use WebCondom\Models\Financeiros\Banco;
+use WebCondom\Models\Financeiros\Conta;
+use WebCondom\Models\Financeiros\Grupo;
 use WebCondom\Models\Financeiros\Tipo;
 use WebCondom\Models\Financeiros\ContaCorrente;
 use WebCondom\Models\Financeiros\ContaCorrenteLancamento;
 use WebCondom\Models\Condominios\Condominio;
+use WebCondom\Traits\Financeiros\PlanoDeContas;
 
 class ContaCorrenteLancamentosController extends Controller
 {
+    use PlanoDeContas;
+
     private $lancamento;
     private $conta;
     private $condominio;
     private $banco;
     private $fornecedor;
     private $tipo;
+    private $grupo;
+    private $contaPlano;
 
     public function __construct(ContaCorrenteLancamento $lancamento, ContaCorrente $conta,
-                                Condominio $condominio, Banco $banco, Fornecedor $fornecedor, Tipo $tipo)
+                                Condominio $condominio, Banco $banco, Fornecedor $fornecedor, Tipo $tipo,
+                                Grupo $grupo, Conta $contaPlano
+                                )
     {
         $this->lancamento   = $lancamento;
         $this->conta        = $conta;
@@ -30,6 +39,20 @@ class ContaCorrenteLancamentosController extends Controller
         $this->banco        = $banco;
         $this->fornecedor   = $fornecedor;
         $this->tipo         = $tipo;
+        $this->grupo        = $grupo;
+        $this->contaPlano   = $contaPlano;
+    }
+
+    public function SepararPlanoContas($plano, $atributo)
+    {
+        $plano = explode('.', $plano);
+        if( $atributo == 'tipo' ){
+            return $plano[0];
+        } else if ( $atributo == 'grupo' ){
+            return $plano[1];
+        } else {
+            return $plano[2];
+        }
     }
 
     public function Listar($conta_id = null, $dias = null)
@@ -46,17 +69,17 @@ class ContaCorrenteLancamentosController extends Controller
             $dataAtual          = Carbon::now();
             $dataSeteDiasAtras  = $dataAtual->subDay(7);
             $dataFormatada      = $dataSeteDiasAtras->year."-".$dataSeteDiasAtras->month."-".$dataSeteDiasAtras->day;
-            $lancamentos        = $this->lancamento->where('created_at', $dataFormatada)->get();
+            $lancamentos        = $this->lancamento->where('data_lancamento', $dataFormatada)->get();
         } else if($dias && $dias == 15) {
             $dataAtual          = Carbon::now();
             $dataSeteDiasAtras  = $dataAtual->subDay(15);
             $dataFormatada      = $dataSeteDiasAtras->year."-".$dataSeteDiasAtras->month."-".$dataSeteDiasAtras->day;
-            $lancamentos        = $this->lancamento->where('created_at', $dataFormatada)->get();
+            $lancamentos        = $this->lancamento->where('data_lancamento', $dataFormatada)->get();
         } else if($dias && $dias == 30) {
             $dataAtual          = Carbon::now();
             $dataSeteDiasAtras  = $dataAtual->subDay(30);
             $dataFormatada      = $dataSeteDiasAtras->year."-".$dataSeteDiasAtras->month."-".$dataSeteDiasAtras->day;
-            $lancamentos        = $this->lancamento->where('created_at', $dataFormatada)->get();
+            $lancamentos        = $this->lancamento->where('data_lancamento', $dataFormatada)->get();
         }
 
         if($conta)
@@ -68,9 +91,21 @@ class ContaCorrenteLancamentosController extends Controller
     public function Salvar(Request $request)
     {
         $dados = $request->all();
-        $dados['compensado']    = $dados['compensado']  == "on" ? 'Sim' : 'Nao';
-        $dados['cheque']        = $dados['cheque']      == "on" ? 'Sim' : 'Nao';
-        $dados['assinado']      = $dados['assinado']    == "on" ? 'Sim' : 'Nao';
+
+        if ($request->exists('plano_conta')) {
+            $dados['plano_conta_id']    = $this->SepararPlanoContas($request->plano_conta, 'conta');
+            $dados['plano_grupo_id']    = $this->SepararPlanoContas($request->plano_conta, 'grupo');
+            $dados['plano_tipo_id']     = $this->SepararPlanoContas($request->plano_conta, 'tipo');
+        }
+        if ( $request->exists('cheque') ) {
+            $dados['cheque'] = $dados['cheque'] == "on" ? 'Sim' : 'Nao';
+        }
+        if ( $request->exists('compensado') ) {
+            $dados['compensado'] = $dados['compensado'] == "on" ? 'Sim' : 'Nao';
+        }
+        if ( $request->exists('assinado') ) {
+            $dados['assinado'] = $dados['assinado'] == "on" ? 'Sim' : 'Nao';
+        }
         $this->lancamento->create($dados);
         return redirect()->back();
     }

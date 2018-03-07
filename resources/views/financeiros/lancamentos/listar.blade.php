@@ -30,12 +30,23 @@
 
                 <div class="box-body">
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="condominio" class="control-label">Condomínio</label>
                                 <input id="condominio" type="text" class="form-control pula" name="condominio"
                                        disabled="disabled" value="{{ $condominio->nome }}">
                             </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="conta_corrente" class="control-label">Conta corrente</label>
+                            <select name="conta_corrente_id" id="conta_corrente" class="form-control select2" disabled="disabled">
+                                <option selected disabled>===============SELECIONE===============</option>
+                                @foreach($contas as $contaSelect)
+                                    <option value="{{ $contaSelect->id }}" {{ $contaSelect->id == $conta->id ? 'selected' : '' }}>
+                                        {{ $contaSelect->agencia }} - {{ $contaSelect->conta }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
@@ -96,23 +107,48 @@
                                 <div class="box-body">
                                     <form action="{{ route('financeiros.lancamentos.salvar') }}" method="POST">
                                         {{ csrf_field() }}
+                                        <input type="hidden" name="conta_corrente_id" value="{{ $conta->id }}">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="nota" class="control-label">Nota fiscal</label>
-                                                    <input id="nota" type="text" class="form-control pula" name="nota_fiscal">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="form-group">
-                                                    <label for="parcela" class="control-label">Parcela</label>
-                                                    <input id="parcela" type="text" class="form-control pula" name="parcela">
+                                                    <label for="data" class="control-label">Data</label>
+                                                    <input id="data" type="date" class="form-control pula" name="data_lancamento">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="documento" class="control-label">Documento</label>
                                                     <input id="documento" type="text" class="form-control pula" name="documento">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="tipo_conta" class="control-label">Plano de contas</label>
+                                                <select name="plano_conta" id="tipo_conta" class="form-control select2">
+                                                    <option selected disabled>SELECIONE</option>
+                                                    @foreach($tipos as $tipo)
+                                                        @foreach($tipo->grupos as $grupo)
+                                                            @foreach($grupo->contas as $conta)
+                                                                <option value="{{ "$tipo->id.$grupo->id.$conta->id" }}">
+                                                                    {{ "$tipo->tipo.$grupo->grupo.$conta->conta" }} - <b>{{ $grupo->descricao }}</b>
+                                                                </option>
+                                                            @endforeach
+                                                        @endforeach
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- 2ª linha -->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="historico" class="control-label">Histórico</label>
+                                                    <input id="historico" type="text" class="form-control pula" name="historico">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="valor" class="control-label">Valor</label>
+                                                    <input id="valor" type="number" class="form-control pula" name="valor">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
@@ -125,50 +161,17 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col-md-2">
-                                                <div class="form-group">
-                                                    <label for="valor" class="control-label">Valor</label>
-                                                    <input id="valor" type="number" class="form-control pula" name="valor">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="checkbox">
+                                                <div class="checkbox" id="compensado-div">
                                                     <label for="compensado">
                                                         <input type="checkbox" class="flat-red" name="compensado" id="compensado"> Compensado?
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="col-md-2">
-                                                <div class="checkbox">
-                                                    <label for="cheque">
-                                                        <input type="checkbox" name="cheque" id="cheque"> Cheque?
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="enviado_em" class="control-label">Enviado em</label>
-                                                    <input type="date" name="enviado_em" id="enviado_em" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="retorno_em" class="control-label">Retorno em</label>
-                                                    <input type="date" name="retorno_em" id="retorno_em" class="form-control">
-                                                </div>
-                                            </div>
                                         </div>
+                                        <!-- 3ª linha -->
                                         <div class="row">
-                                            <div class="col-md-2">
-                                                <div class="checkbox">
-                                                    <label for="assinado">
-                                                        <input type="checkbox" name="assinado" id="assinado"> Assinado?
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-5">
                                                 <label for="fornecedor" class="control-label">Fornecedor</label>
                                                 <select name="fornecedor_id" id="fornecedor" class="form-control select2">
                                                     <option selected disabled>===============SELECIONE===============</option>
@@ -178,26 +181,49 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="conta_corrente" class="control-label">Conta corrente</label>
-                                                <select name="conta_corrente_id" id="conta_corrente" class="form-control select2">
-                                                    <option selected disabled>===============SELECIONE===============</option>
-                                                    @foreach($contas as $contaSelect)
-                                                        <option value="{{ $contaSelect->id }}" {{ $contaSelect->id == $conta->id ? 'selected' : '' }}>
-                                                            {{ $contaSelect->agencia }} - {{ $contaSelect->conta }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
+                                                <div class="form-group">
+                                                    <label for="nota" class="control-label">Nota fiscal</label>
+                                                    <input id="nota" type="text" class="form-control pula" name="nota_fiscal">
+                                                </div>
                                             </div>
-                                            <div class="col-md-2">
-                                                <label for="tipo_conta" class="control-label">Tipo conta</label>
-                                                <select name="tipo_conta_id" id="tipo_conta" class="form-control select2">
-                                                    <option selected disabled>SELECIONE</option>
-                                                    @foreach($tipos as $tipo)
-                                                        <option value="{{ $tipo->id }}">
-                                                            {{ $tipo->descricao }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="parcela" class="control-label">Parcela</label>
+                                                    <input id="parcela" type="text" class="form-control pula" name="parcela">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- 4ª LINHA -->
+                                        <div class="row">
+                                            <div class="col-md-offset-1">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <div class="checkbox">
+                                                            <label for="cheque">
+                                                                <input type="checkbox" name="cheque" id="cheque"> Cheque?
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="enviado_em" class="control-label">Enviado em</label>
+                                                            <input type="date" name="enviado_em" id="enviado_em" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="retorno_em" class="control-label">Retorno em</label>
+                                                            <input type="date" name="retorno_em" id="retorno_em" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="checkbox">
+                                                            <label for="assinado">
+                                                                <input type="checkbox" name="assinado" id="assinado"> Assinado?
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -234,11 +260,11 @@
                             Últimos 30 dias
                         </a>
                         <a class="btn btn-xs btn-success"
-                           href="{{ route('financeiros.planodecontas.exportar', ['tipo' => 'xlsx']) }}">
+                           href="">
                             <i class="fa fa-file-excel-o"></i>
                         </a>
                         <a class="btn btn-xs btn-success"
-                           href="{{ route('financeiros.planodecontas.exportar', ['tipo' => 'csv']) }}">
+                           href="">
                             CSV
                         </a>
                         <button class="btn btn-box-tool" type="button" data-widget="collapse">
@@ -251,12 +277,10 @@
                     <table class="table table-striped table-hover dataTable" id="tabela" role="grid">
                         <thead>
                         <tr>
-                            <th>Descrição grupo</th>
-                            <th>Descrição conta</th>
-                            <th>Código</th>
-                            <th>Tipo</th>
-                            <th>Grupo</th>
-                            <th>Conta</th>
+                            <th>Valor</th>
+                            <th>Documento</th>
+                            <th>Data lançamento</th>
+                            <th>Plano de contas</th>
                             <th>Criado em</th>
                             <th>Alterado em</th>
                             <th>Ações</th>
@@ -264,19 +288,33 @@
                         </thead>
                         <tfoot>
                         <tr>
-                            <th>Descrição grupo</th>
-                            <th>Descrição conta</th>
-                            <th>Código</th>
-                            <th>Tipo</th>
-                            <th>Grupo</th>
-                            <th>Conta</th>
+                            <th>Valor</th>
+                            <th>Documento</th>
+                            <th>Data lançamento</th>
+                            <th>Plano de contas</th>
                             <th>Criado em</th>
                             <th>Alterado em</th>
                             <th>Ações</th>
                         </tr>
                         </tfoot>
                         <tbody>
-
+                            @foreach($lancamentos as $lancamento)
+                                <tr>
+                                    <td>R$ {{ number_format($lancamento->valor, 2,',','.') }}</td>
+                                    <td>{{ $lancamento->documento }}</td>
+                                    <td>{{ $lancamento->data_lancamento->format('d/m/Y') }}</td>
+                                    <td>
+                                        {{ $lancamento->plano_tipo->tipo }}.{{ $lancamento->plano_grupo->grupo }}.{{ $lancamento->plano_conta->conta }}
+                                    </td>
+                                    <td>{{ $lancamento->criado_em }}</td>
+                                    <td>{{ $lancamento->alterado_em }}</td>
+                                    <td>
+                                        <a href="" class="btn btn-warning btn-xs">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

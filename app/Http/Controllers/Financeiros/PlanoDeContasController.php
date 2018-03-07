@@ -8,9 +8,12 @@ use WebCondom\Models\Financeiros\Conta;
 use WebCondom\Models\Financeiros\Grupo;
 use WebCondom\Models\Financeiros\PlanoDeConta;
 use WebCondom\Models\Financeiros\Tipo;
+use WebCondom\Traits\Financeiros\PlanoDeContas;
 
 class PlanoDeContasController extends Controller
 {
+    use PlanoDeContas;
+
     private $plano;
     private $tipo;
     private $grupo;
@@ -64,27 +67,6 @@ class PlanoDeContasController extends Controller
     public function Criar()
     {
         return view('financeiros.planodecontas.criar');
-    }
-
-    public function FormatarProximaConta($conta)
-    {
-        if($conta < 10)
-            return '000'.($conta+1);
-        else if($conta < 100)
-            return '00'.($conta+1);
-        else if($conta < 1000)
-            return '0'.($conta+1);
-        else
-            return $conta+1;
-    }
-
-    public function FormatarProximoGrupo($grupo){
-        if($grupo < 10)
-            return '00'.($grupo+1);
-        else if($grupo < 100)
-            return '0'.($grupo+1);
-        else
-            return $grupo+1;
     }
 
     public function Salvar(Request $request)

@@ -17,8 +17,10 @@ class ContaCorrenteLancamentos extends Migration
             $table->increments('id');
             $table->string('nota_fiscal',10)->nullable();
             $table->string('parcela',3)->nullable();
-            $table->string('documento',10);
+            $table->date('data_lancamento');
+            $table->string('documento',50);
             $table->enum('tipo', ['Debito', 'Credito']);
+            $table->string('historico',100);
             $table->decimal('valor',12,2);
             $table->enum('compensado', ['Sim', 'Nao'])->default('Nao');
 
@@ -31,10 +33,20 @@ class ContaCorrenteLancamentos extends Migration
 
             $table->integer('fornecedor_id')->unsigned()->nullable();
             $table->integer('conta_corrente_id')->unsigned();
-            $table->integer('tipo_conta_id')->unsigned();
-            $table->foreign('tipo_conta_id')
+            $table->integer('plano_tipo_id')->unsigned();
+            $table->integer('plano_grupo_id')->unsigned();
+            $table->integer('plano_conta_id')->unsigned();
+            $table->foreign('plano_tipo_id')
                 ->references('id')
                 ->on('tipos')
+                ->onDelete('cascade');
+            $table->foreign('plano_grupo_id')
+                ->references('id')
+                ->on('grupos')
+                ->onDelete('cascade');
+            $table->foreign('plano_conta_id')
+                ->references('id')
+                ->on('contas')
                 ->onDelete('cascade');
             $table->foreign('fornecedor_id')
                 ->references('id')

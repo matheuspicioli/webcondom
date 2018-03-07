@@ -53,7 +53,7 @@ class PlanoContasSeeder extends Seeder
         ]
         ];
         foreach ($grupos as $grupo) {
-            grupo::create($grupo);
+            Grupo::create($grupo);
         };
 
         $contas = [
@@ -139,7 +139,7 @@ class PlanoContasSeeder extends Seeder
             ],
         ];
         foreach ($contas as $conta) {
-            conta::create($conta);
+            Conta::create($conta);
         };
 
     }
