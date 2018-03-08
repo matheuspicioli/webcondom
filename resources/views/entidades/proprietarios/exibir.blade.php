@@ -117,7 +117,7 @@
                                     <div class="form-group">
                                         <label for="data_abertura" class="control-label cnpj">Data abertura</label>
                                         <input type="date" name="data_abertura" id="data_abertura"
-                                               class="form-control cnpj pula" value="{{ $proprietario->entidade->data_abertura }}">
+                                               class="form-control cnpj pula" value="{{ $proprietario->entidade->data_abertura ? $proprietario->entidade->data_abertura->format('Y-m-d') : '' }}">
                                     </div>
                                 </div>
                             </div>
@@ -167,7 +167,7 @@
                                     <div class="form-group">
                                         <label for="data_nascimento" class="control-label cpf">Data de nascimento</label>
                                         <input type="date" name="data_nascimento" id="data_nascimento"
-                                               class="form-control cpf pula" value="{{ $proprietario->entidade->data_nascimento }}">
+                                               class="form-control cpf pula" value="{{ $proprietario->entidade->data_nascimento ? $proprietario->entidade->data_nascimento->format('Y-m-d') : '' }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">

@@ -18,10 +18,10 @@ class CreateGruposTable extends Migration
             $table->string('grupo',3)->default('000');
             $table->string('descricao',50)->nullable();
             $table->enum('ratear',['Sim', 'Não']);
-            $table->integer('tipo_id')->unsigned();
-            $table->foreign('tipo_id')
+            $table->integer('plano_de_conta_id')->unsigned();
+            $table->foreign('plano_de_conta_id')
                 ->references('id')
-                ->on('tipos')
+                ->on('plano_de_contas')
                 ->onDelete('cascade');
 
             $table->softDeletes();

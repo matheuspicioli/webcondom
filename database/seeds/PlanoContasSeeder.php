@@ -16,40 +16,40 @@ class PlanoContasSeeder extends Seeder
     {
         $grupos = [
         [
-            'grupo'         =>'001',
-            'descricao'     => 'RECEBIMENTO DE CONDOMINIOS',
-            'ratear'        => 1,
-            'tipo_id'       => 1
+            'grupo'             =>'001',
+            'descricao'         => 'RECEBIMENTO DE CONDOMINIOS',
+            'ratear'            => 1,
+            'plano_de_conta_id'    => 1
         ],
         [
-            'grupo'         =>'002',
-            'descricao'     => 'RECEBIMENTO DE SALAO DE FESTAS',
-            'ratear'        => 1,
-            'tipo_id'       => 1
+            'grupo'             =>'002',
+            'descricao'         => 'RECEBIMENTO DE SALAO DE FESTAS',
+            'ratear'            => 1,
+            'plano_de_conta_id'    => 1
         ],
         [
-            'grupo'         =>'001',
-            'descricao'     => 'DEPARTAMENTO PESSOAL',
-            'ratear'        => 1,
-            'tipo_id'       => 2
+            'grupo'             =>'001',
+            'descricao'         => 'DEPARTAMENTO PESSOAL',
+            'ratear'            => 1,
+            'plano_de_conta_id'    => 2
         ],
         [
-            'grupo'         =>'002',
-            'descricao'     => 'TAXAS E CONSUMO',
-            'ratear'        => 1,
-            'tipo_id'       => 2
+            'grupo'             =>'002',
+            'descricao'         => 'TAXAS E CONSUMO',
+            'ratear'            => 1,
+            'plano_de_conta_id'    => 2
         ],
         [
-            'grupo'         =>'003',
-            'descricao'     => 'MANUTENCAO E CONSERVACAO',
-            'ratear'        => 1,
-            'tipo_id'       => 2
+            'grupo'             =>'003',
+            'descricao'         => 'MANUTENCAO E CONSERVACAO',
+            'ratear'            => 1,
+            'plano_de_conta_id'    => 2
         ],
         [
-            'grupo'         =>'001',
-            'descricao'     => 'TRANSFERENCIA ENTRE CONTAS',
-            'ratear'        => 1,
-            'tipo_id'       => 3
+            'grupo'             =>'001',
+            'descricao'         => 'TRANSFERENCIA ENTRE CONTAS',
+            'ratear'            => 1,
+            'plano_de_conta_id'    => 3
         ]
         ];
         foreach ($grupos as $grupo) {

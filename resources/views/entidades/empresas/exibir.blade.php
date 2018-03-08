@@ -96,7 +96,7 @@
                                     <div class="form-group">
                                         <label for="data_abertura" class="control-label cnpj">Data abertura</label>
                                         <input type="date" name="data_abertura" id="data_abertura"
-                                               class="form-control cnpj pula" value="{{ $empresa->entidade->data_abertura }}">
+                                               class="form-control cnpj pula" value="{{ $empresa->entidade->data_abertura ? $empresa->entidade->data_abertura->format('Y-m-d') : ''  }}">
                                     </div>
                                 </div>
                             </div>

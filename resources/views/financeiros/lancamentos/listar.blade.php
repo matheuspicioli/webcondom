@@ -42,7 +42,7 @@
                             <select name="conta_corrente_id" id="conta_corrente" class="form-control select2" disabled="disabled">
                                 <option selected disabled>===============SELECIONE===============</option>
                                 @foreach($contas as $contaSelect)
-                                    <option value="{{ $contaSelect->id }}" {{ $contaSelect->id == $conta->id ? 'selected' : '' }}>
+                                    <option value="{{ $contaSelect->id }}" {{ $contaSelect->id == $contaL->id ? 'selected' : '' }}>
                                         {{ $contaSelect->agencia }} - {{ $contaSelect->conta }}
                                     </option>
                                 @endforeach
@@ -52,7 +52,7 @@
                             <div class="form-group">
                                 <label for="codigo" class="control-label">Código</label>
                                 <input id="codigo" type="text" class="form-control pula" name="codigo"
-                                       disabled="disabled" value="{{ $conta->codigo }}">
+                                       disabled="disabled" value="{{ $contaL->codigo }}">
                             </div>
                         </div>
                     </div>
@@ -61,35 +61,35 @@
                             <div class="form-group">
                                 <label for="banco" class="control-label">Banco</label>
                                 <input id="banco" type="text" class="form-control pula" name="banco"
-                                       disabled="disabled" value="{{ $conta->banco->nome_banco }}">
+                                       disabled="disabled" value="{{ $contaL->banco->nome_banco }}">
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="agencia" class="control-label">Agência</label>
                                 <input id="agencia" type="text" class="form-control pula" name="agencia"
-                                       disabled="disabled" value="{{ $conta->agencia }}">
+                                       disabled="disabled" value="{{ $contaL->agencia }}">
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="conta" class="control-label">Conta</label>
                                 <input id="conta" type="text" class="form-control pula" name="conta"
-                                       disabled="disabled" value="{{ $conta->conta }}">
+                                       disabled="disabled" value="{{ $contaL->conta }}">
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="inicio" class="control-label">Início</label>
                                 <input id="inicio" type="date" class="form-control pula" name="inicio"
-                                       disabled="disabled" value="{{ $conta->inicio->format('Y-m-d') }}">
+                                       disabled="disabled" value="{{ $contaL->inicio->format('Y-m-d') }}">
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="checkbox">
                                 <label for="principal">
                                     <input type="checkbox" disabled="disabled" name="principal" id="principal"
-                                            class="" {{ $conta->principal ? "checked" : '' }}> Principal?
+                                            class="" {{ $contaL->principal ? "checked" : '' }}> Principal?
                                 </label>
                             </div>
                         </div>
@@ -107,7 +107,7 @@
                                 <div class="box-body">
                                     <form action="{{ route('financeiros.lancamentos.salvar') }}" method="POST">
                                         {{ csrf_field() }}
-                                        <input type="hidden" name="conta_corrente_id" value="{{ $conta->id }}">
+                                        <input type="hidden" name="conta_corrente_id" value="{{ $contaL->id }}">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
@@ -128,7 +128,7 @@
                                                     @foreach($tipos as $tipo)
                                                         @foreach($tipo->grupos as $grupo)
                                                             @foreach($grupo->contas as $conta)
-                                                                <option value="{{ "$tipo->id.$grupo->id.$conta->id" }}">
+                                                                <option value="{{ $conta->id }}">
                                                                     {{ "$tipo->tipo.$grupo->grupo.$conta->conta" }} - <b>{{ $grupo->descricao }}</b>
                                                                 </option>
                                                             @endforeach
@@ -250,13 +250,13 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Listagem lançamentos conta corrente</h3>
                     <div class="pull-right">
-                        <a href="{{ route('financeiros.lancamentos.listar',['conta_id' => $conta->id, 'dias' => 7]) }}" class="btn btn-primary btn-xs">
+                        <a href="{{ route('financeiros.lancamentos.listar',['conta_id' => $contaL->id, 'dias' => 7]) }}" class="btn btn-primary btn-xs">
                             Últimos 7 dias
                         </a>
-                        <a href="{{ route('financeiros.lancamentos.listar',['conta_id' => $conta->id, 'dias' => 15]) }}" class="btn btn-primary btn-xs">
+                        <a href="{{ route('financeiros.lancamentos.listar',['conta_id' => $contaL->id, 'dias' => 15]) }}" class="btn btn-primary btn-xs">
                             Últimos 15 dias
                         </a>
-                        <a href="{{ route('financeiros.lancamentos.listar',['conta_id' => $conta->id, 'dias' => 30]) }}" class="btn btn-primary btn-xs">
+                        <a href="{{ route('financeiros.lancamentos.listar',['conta_id' => $contaL->id, 'dias' => 30]) }}" class="btn btn-primary btn-xs">
                             Últimos 30 dias
                         </a>
                         <a class="btn btn-xs btn-success"
@@ -298,13 +298,15 @@
                         </tr>
                         </tfoot>
                         <tbody>
+                            {{ dd($lancamentos) }}
                             @foreach($lancamentos as $lancamento)
+                                {{ dd($lancamento) }}
                                 <tr>
                                     <td>R$ {{ number_format($lancamento->valor, 2,',','.') }}</td>
                                     <td>{{ $lancamento->documento }}</td>
                                     <td>{{ $lancamento->data_lancamento->format('d/m/Y') }}</td>
                                     <td>
-                                        {{ $lancamento->plano_tipo->tipo }}.{{ $lancamento->plano_grupo->grupo }}.{{ $lancamento->plano_conta->conta }}
+                                        {{ $lancamento->plano_conta->grupo->plano_de_conta->tipo }}.{{ $lancamento->plano_conta->grupo->grupo }}.{{ $lancamento->plano_conta->conta }}
                                     </td>
                                     <td>{{ $lancamento->criado_em }}</td>
                                     <td>{{ $lancamento->alterado_em }}</td>

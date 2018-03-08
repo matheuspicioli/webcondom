@@ -57,7 +57,7 @@
                                 <tr>
                                     <td>{{ $condominio->id }}</td>
                                     <td>{{ $condominio->nome }}</td>
-                                    <td>{{ $condominio->apelido }}</td>0
+                                    <td>{{ $condominio->apelido }}</td>
                                     <td>{{ $condominio->endereco->endereco_formatado }}</td>
                                     <td>
                                         @can("exibir_condominio")
@@ -128,7 +128,7 @@
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
                 }
-            } )
+            })
         });
     </script>
 @stop

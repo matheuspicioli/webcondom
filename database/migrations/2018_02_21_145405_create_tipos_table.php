@@ -13,15 +13,10 @@ class CreateTiposTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipos', function (Blueprint $table) {
+        Schema::create('plano_de_contas', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('tipo')->unsigned();
             $table->string('descricao', 25);
-            $table->integer('plano_conta_id')->unsigned();
-            $table->foreign('plano_conta_id')
-                ->references('id')
-                ->on('plano_contas')
-                ->onDelete('cascade');
 
             $table->softDeletes();
             $table->timestamps();
@@ -36,7 +31,7 @@ class CreateTiposTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('tipos');
+        Schema::dropIfExists('plano_de_contas');
         Schema::enableForeignKeyConstraints();
     }
 }

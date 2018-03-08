@@ -33,17 +33,7 @@ class ContaCorrenteLancamentos extends Migration
 
             $table->integer('fornecedor_id')->unsigned()->nullable();
             $table->integer('conta_corrente_id')->unsigned();
-            $table->integer('plano_tipo_id')->unsigned();
-            $table->integer('plano_grupo_id')->unsigned();
             $table->integer('plano_conta_id')->unsigned();
-            $table->foreign('plano_tipo_id')
-                ->references('id')
-                ->on('tipos')
-                ->onDelete('cascade');
-            $table->foreign('plano_grupo_id')
-                ->references('id')
-                ->on('grupos')
-                ->onDelete('cascade');
             $table->foreign('plano_conta_id')
                 ->references('id')
                 ->on('contas')

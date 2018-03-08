@@ -15,8 +15,7 @@ class ContaCorrenteLancamento extends Model
     protected $fillable = [
         'nota_fiscal', 'parcela', 'documento', 'tipo', 'valor', 'compensado',
         'data_lancamento', 'cheque', 'enviado_em', 'retorno_em', 'assinado',
-        'historico', 'fornecedor_id', 'conta_corrente_id',
-        'plano_tipo_id', 'plano_grupo_id', 'plano_conta_id'
+        'historico', 'fornecedor_id', 'conta_corrente_id', 'plano_conta_id'
     ];
     protected $dates = [ 'data_lancamento' ];
 
@@ -28,16 +27,6 @@ class ContaCorrenteLancamento extends Model
     public function conta_corrente()
     {
         return $this->belongsTo(ContaCorrente::class, 'conta_corrente_id');
-    }
-
-    public function plano_tipo()
-    {
-        return $this->belongsTo(Tipo::class, 'plano_tipo_id');
-    }
-
-    public function plano_grupo()
-    {
-        return $this->belongsTo(Grupo::class, 'plano_grupo_id');
     }
 
     public function plano_conta()

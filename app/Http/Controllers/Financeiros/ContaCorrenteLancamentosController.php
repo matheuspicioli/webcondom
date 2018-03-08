@@ -9,7 +9,7 @@ use WebCondom\Models\Entidades\Fornecedor;
 use WebCondom\Models\Financeiros\Banco;
 use WebCondom\Models\Financeiros\Conta;
 use WebCondom\Models\Financeiros\Grupo;
-use WebCondom\Models\Financeiros\Tipo;
+use WebCondom\Models\Financeiros\PlanoDeConta;
 use WebCondom\Models\Financeiros\ContaCorrente;
 use WebCondom\Models\Financeiros\ContaCorrenteLancamento;
 use WebCondom\Models\Condominios\Condominio;
@@ -24,12 +24,12 @@ class ContaCorrenteLancamentosController extends Controller
     private $condominio;
     private $banco;
     private $fornecedor;
-    private $tipo;
+    private $plano_conta;
     private $grupo;
     private $contaPlano;
 
     public function __construct(ContaCorrenteLancamento $lancamento, ContaCorrente $conta,
-                                Condominio $condominio, Banco $banco, Fornecedor $fornecedor, Tipo $tipo,
+                                Condominio $condominio, Banco $banco, Fornecedor $fornecedor, PlanoDeConta $plano_conta,
                                 Grupo $grupo, Conta $contaPlano
                                 )
     {
@@ -38,7 +38,7 @@ class ContaCorrenteLancamentosController extends Controller
         $this->condominio   = $condominio;
         $this->banco        = $banco;
         $this->fornecedor   = $fornecedor;
-        $this->tipo         = $tipo;
+        $this->plano_conta  = $plano_conta;
         $this->grupo        = $grupo;
         $this->contaPlano   = $contaPlano;
     }
@@ -55,15 +55,15 @@ class ContaCorrenteLancamentosController extends Controller
         }
     }
 
-    public function Listar($conta_id = null, $dias = null)
+    public function Listar($conta_id, $dias = null)
     {
-        $conta          = $conta_id ? $this->conta->find($conta_id) : '';
-        $condominio     = $this->condominio->where('id', $conta->condominio_id)->first();
-        $banco          = $this->banco->where('id', $conta->banco_id)->first();
-        $lancamentos    = $this->lancamento->all();
-        $fornecedores   = $this->fornecedor->all();
-        $contas         = $this->conta->all();
-        $tipos          = $this->tipo->all();
+        $contaL             = ! is_null($conta_id) ? $this->conta->find($conta_id) : null;
+        $condominio         = $this->condominio->where('id', $contaL->condominio_id)->first();
+        $banco              = $this->banco->where('id', $contaL->banco_id)->first();
+        $lancamentos        = $this->lancamento->all();
+        $fornecedores       = $this->fornecedor->all();
+        $contas             = $this->conta->all();
+        $tipos              = $this->plano_conta->all();
 
         if($dias && $dias == 7){
             $dataAtual          = Carbon::now();
@@ -82,8 +82,8 @@ class ContaCorrenteLancamentosController extends Controller
             $lancamentos        = $this->lancamento->where('data_lancamento', $dataFormatada)->get();
         }
 
-        if($conta)
-            return view('financeiros.lancamentos.listar', compact('conta','lancamentos','fornecedores','condominio','banco','contas','tipos'));
+        if($contaL)
+            return view('financeiros.lancamentos.listar', compact('contaL','lancamentos','fornecedores','condominio','banco','contas','tipos'));
 
         return view('financeiros.lancamentos.listar', compact('lancamentos','fornecedores','contas','tipos'));
     }
@@ -93,9 +93,7 @@ class ContaCorrenteLancamentosController extends Controller
         $dados = $request->all();
 
         if ($request->exists('plano_conta')) {
-            $dados['plano_conta_id']    = $this->SepararPlanoContas($request->plano_conta, 'conta');
-            $dados['plano_grupo_id']    = $this->SepararPlanoContas($request->plano_conta, 'grupo');
-            $dados['plano_tipo_id']     = $this->SepararPlanoContas($request->plano_conta, 'tipo');
+            $dados['plano_conta_id']    = $request->plano_conta;
         }
         if ( $request->exists('cheque') ) {
             $dados['cheque'] = $dados['cheque'] == "on" ? 'Sim' : 'Nao';
@@ -108,5 +106,6 @@ class ContaCorrenteLancamentosController extends Controller
         }
         $this->lancamento->create($dados);
         return redirect()->back();
+        //return redirect()->route('financeiros.lancamentos.listar', ['conta_id' => $request->conta_id]);
     }
 }
