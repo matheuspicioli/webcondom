@@ -11,7 +11,6 @@
         </li>
     </ol>
 @stop
-
 @section('content')
     @can("listar_contacorrente")
         <div class="row">
