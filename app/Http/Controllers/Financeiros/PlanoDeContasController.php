@@ -15,22 +15,20 @@ class PlanoDeContasController extends Controller
     use PlanoDeContas;
 
     private $plano;
-    private $tipo;
     private $grupo;
     private $conta;
 
-    public function __construct(PlanoDeConta $plano, Tipo $tipo, Grupo $grupo, Conta $conta)
+    public function __construct(PlanoDeConta $plano, Grupo $grupo, Conta $conta)
     {
         $this->plano = $plano;
-        $this->tipo = $tipo;
         $this->grupo = $grupo;
         $this->conta = $conta;
     }
 
-    public function ProximaConta($tipo, $grupo)
+    public function ProximaConta($plano, $grupo)
     {
-        $tipo = $this->tipo->find($tipo);
-        $grupo_tipo = $tipo->grupos()->where('grupo', $grupo)->first();
+        $plano = $this->plano->find($plano);
+        $grupo_tipo = $plano->grupos()->where('grupo', $grupo)->first();
         if ($grupo_tipo) {
             $ultima_conta = $grupo_tipo->contas()->orderBy('conta', 'DESC')->first();
             if ($ultima_conta) {
@@ -44,10 +42,10 @@ class PlanoDeContasController extends Controller
         }
     }
 
-    public function ProximoGrupo($tipo)
+    public function ProximoGrupo($plano)
     {
-        $tipo = $this->tipo->find($tipo);
-        $ultimo_grupo = $tipo->grupos()->orderBy('grupo', 'DESC')->first();
+        $plano = $this->plano->find($plano);
+        $ultimo_grupo = $plano->grupos()->orderBy('grupo', 'DESC')->first();
         if ($ultimo_grupo) {
             $proximo_grupo = (int)$ultimo_grupo->grupo + 1;
             if ($proximo_grupo < 10) $proximo_grupo = '00' . $proximo_grupo;
@@ -59,9 +57,9 @@ class PlanoDeContasController extends Controller
     public function Listar()
     {
         $grupos = $this->grupo->all();
-        $tipos  = $this->tipo->all();
+        $planos = $this->plano->all();
         $contas = $this->conta->all();
-        return view('financeiros.planodecontas.listar', compact('grupos', 'tipos', 'contas'));
+        return view('financeiros.planodecontas.listar', compact('grupos', 'planos', 'contas'));
     }
 
     public function Criar()
@@ -72,8 +70,8 @@ class PlanoDeContasController extends Controller
     public function Salvar(Request $request)
     {
         if($request->grupo != null && $request->conta == null){
-            $tipo           = $this->tipo->find($request->tipo_id);
-            $grupo_tipo     = $tipo->grupos()->where('grupo', $request->grupo)->first();
+            $plano          = $this->plano->find($request->plano_id);
+            $grupo_tipo     = $plano->grupos()->where('grupo', $request->grupo)->first();
             if($grupo_tipo){
                 $ultima_conta   = $grupo_tipo->contas()->orderBy('conta', 'DESC')->first();
                 if($ultima_conta){
@@ -95,9 +93,9 @@ class PlanoDeContasController extends Controller
                     ]);
                 }
             }
-        } else if($request->grupo == null && $request->exists('tipo_id')) {
-            $tipo           = $this->tipo->find($request->tipo_id);
-            $ultimo_grupo     = $tipo->grupos()->orderBy('grupo', 'DESC')->first();
+        } else if($request->grupo == null && $request->exists('plano_id')) {
+            $plano            = $this->plano->find($request->plano_id);
+            $ultimo_grupo     = $plano->grupos()->orderBy('grupo', 'DESC')->first();
             if($ultimo_grupo){
                 $ultimo_grupo   = (int)$ultimo_grupo->grupo;
                 $proximo_grupo  = $this->FormatarProximoGrupo($ultimo_grupo);
@@ -105,7 +103,7 @@ class PlanoDeContasController extends Controller
                     'grupo'     => $proximo_grupo,
                     'ratear'    => $request->ratear,
                     'descricao' => $request->descricao_grupo,
-                    'tipo_id'   => $tipo->id
+                    'plano_id'  => $plano->id
                 ]);
             }
             //SÓ VAI ENTRAR SE
@@ -115,52 +113,52 @@ class PlanoDeContasController extends Controller
                     'grupo'     => '001',
                     'ratear'    => $request->ratear,
                     'descricao' => $request->descricao_grupo,
-                    'tipo_id'   => $tipo->id
+                    'plano_id'  => $plano->id
                 ]);
             }
         }
         return redirect()->route('financeiros.planodecontas.listar');
     }
 
-    public function Exibir($tipo, $grupo, $conta)
+    public function Exibir($plano, $grupo, $conta)
     {
-        $tipo = $this->tipo->find($tipo);
-        $tipos = $this->tipo->all();
-        $grupo = $this->grupo->find($grupo);
-        $conta = $this->conta->find($conta);
+        $plano  = $this->plano->find($plano);
+        $planos = $this->plano->all();
+        $grupo  = $this->grupo->find($grupo);
+        $conta  = $this->conta->find($conta);
 
-        if ($tipo && $grupo && $conta)
-            return view('financeiros.planodecontas.exibir', compact('tipo', 'grupo', 'conta', 'tipos'));
+        if ($plano && $grupo && $conta)
+            return view('financeiros.planodecontas.exibir', compact('plano', 'grupo', 'conta', 'planos'));
 
         return view('financeiros.planodecontas.listar');
     }
 
-    public function ExibirGrupo($tipo, $grupo)
+    public function ExibirGrupo($plano, $grupo)
     {
-        $tipo = $this->tipo->find($tipo);
-        $tipos = $this->tipo->all();
-        $grupo = $this->grupo->find($grupo);
+        $plano  = $this->plano->find($plano);
+        $planos = $this->plano->all();
+        $grupo  = $this->grupo->find($grupo);
 
-        if ($tipo && $grupo)
-            return view('financeiros.planodecontas.exibirgrupo', compact('tipo', 'grupo', 'tipos'));
+        if ($plano && $grupo)
+            return view('financeiros.planodecontas.exibirgrupo', compact('plano', 'grupo', 'planos'));
 
         return view('financeiros.planodecontas.listar');
     }
 
-    public function Alterar(Request $request, $tipo, $grupo, $conta = null)
+    public function Alterar(Request $request, $plano, $grupo, $conta = null)
     {
-        if($request->exists('tipo')){
-            $tipo_objeto = $this->tipo->find($tipo);
-            $tipo_objeto->update($request->all());
+        if($request->exists('plano')){
+            $plano_objeto = $this->plano->find($plano);
+            $plano_objeto->update($request->all());
         }
         if($request->exists('grupo')){
             $grupo_objeto = $this->grupo->find($grupo);
-            if($request->tipo_id){
+            if($request->plano_id){
                 $grupo_objeto->update([
                     'grupo'     => $request->grupo,
                     'ratear'    => $request->ratear,
                     'descricao' => $request->descricao_grupo,
-                    'tipo_id'   => $request->tipo_id
+                    'plano_id'  => $request->plano_id
                 ]);
             } else {
                 $grupo_objeto->update([

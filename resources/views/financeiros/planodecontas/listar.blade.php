@@ -38,9 +38,9 @@
                                         {!! Form::label('tipo', 'Tipo', ['class' => 'control-label']) !!}
                                         <select name="tipo_id" id="tipo" class="form-control">
                                             <option disabled selected>---------------SELECIONE---------------</option>
-                                            @foreach($tipos as $tipo)
-                                                <option value="{{ $tipo->id }}">{{ $tipo->tipo }}
-                                                    - {{ $tipo->descricao }}</option>
+                                            @foreach($planos as $plano)
+                                                <option value="{{ $plano->id }}">{{ $plano->tipo }}
+                                                    - {{ $plano->descricao }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -136,18 +136,18 @@
                             </tr>
                             </tfoot>
                             <tbody>
-                            @foreach($tipos as $tipo)
-                                @foreach($tipo->grupos as $grupo)
+                            @foreach($planos as $plano)
+                                @foreach($plano->grupos as $grupo)
                                     <tr>
-                                        <td><b>{{ "$tipo->tipo.$grupo->grupo" }}</b></td>
+                                        <td><b>{{ "$plano->tipo.$grupo->grupo" }}</b></td>
                                         <td><b>{{ $grupo->descricao }}</b></td>
-                                        <td><b>{{ $tipo->tipo}} - {{$tipo->descricao }}</b></td>
+                                        <td><b>{{ $plano->tipo}} - {{$plano->descricao }}</b></td>
                                         <td><b>{{ $grupo->grupo }}</b></td>
                                         <td></td>
                                         <td><b>{{ $grupo->ratear}}</b></td>
                                         <td>
                                             @can("exibir_planodeconta")
-                                                <a href="{{ route('financeiros.planodecontas.exibirgrupo', ['tipo' => $tipo->id, 'grupo' => $grupo->id]) }}"
+                                                <a href="{{ route('financeiros.planodecontas.exibirgrupo', ['plano' => $plano->id, 'grupo' => $grupo->id]) }}"
                                                    class="btn btn-xs btn-warning">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>
@@ -159,19 +159,19 @@
                                     </tr>
                                 @endforeach
                             @endforeach
-                            @foreach($tipos as $tipo)
-                                @foreach($tipo->grupos as $grupo)
+                            @foreach($planos as $plano)
+                                @foreach($plano->grupos as $grupo)
                                     @foreach($grupo->contas as $conta)
                                         <tr>
-                                            <td>{{ "$tipo->tipo.$grupo->grupo.$conta->conta" }}</td>
+                                            <td>{{ "$plano->tipo.$grupo->grupo.$conta->conta" }}</td>
                                             <td><li>{{ $conta->descricao }}</li></td>
-                                            <td>{{ $tipo->tipo}} - {{$tipo->descricao }}</td>
+                                            <td>{{ $plano->tipo}} - {{$plano->descricao }}</td>
                                             <td>{{ $grupo->grupo }}</td>
                                             <td>{{ $conta->conta }}</td>
                                             <td></td>
                                             <td>
                                                 @can("exibir_planodeconta")
-                                                    <a href="{{ route('financeiros.planodecontas.exibir', ['tipo' => $tipo->id, 'grupo' => $grupo->id, 'conta' => $conta->id]) }}"
+                                                    <a href="{{ route('financeiros.planodecontas.exibir', ['plano' => $plano->id, 'grupo' => $grupo->id, 'conta' => $conta->id]) }}"
                                                        class="btn btn-xs btn-warning">
                                                         <i class="fa fa-pencil"></i>
                                                     </a>

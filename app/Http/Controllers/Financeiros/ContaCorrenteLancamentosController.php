@@ -55,31 +55,32 @@ class ContaCorrenteLancamentosController extends Controller
         }
     }
 
+    public function LancamentosAnteriores($dias_anteriores)
+    {
+        $data_atual             = Carbon::now();
+        $data_sete_dias_atras   = $data_atual->subDay($dias_anteriores);
+        $data_formatada         = $data_sete_dias_atras->format('Y-m-d');
+        $data_atual_formatada   = Carbon::now()->toDateString();
+        return $this->lancamento->whereBetween('data_lancamento',[ $data_formatada,$data_atual_formatada ])->get();
+    }
+
+    /**
+     * @param $conta_id
+     * @param null $dias
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function Listar($conta_id, $dias = null)
     {
         $contaL             = ! is_null($conta_id) ? $this->conta->find($conta_id) : null;
         $condominio         = $this->condominio->where('id', $contaL->condominio_id)->first();
         $banco              = $this->banco->where('id', $contaL->banco_id)->first();
-        $lancamentos        = $this->lancamento->all();
         $fornecedores       = $this->fornecedor->all();
         $contas             = $this->conta->all();
         $tipos              = $this->plano_conta->all();
 
-        if($dias && $dias == 7){
-            $dataAtual          = Carbon::now();
-            $dataSeteDiasAtras  = $dataAtual->subDay(7);
-            $dataFormatada      = $dataSeteDiasAtras->year."-".$dataSeteDiasAtras->month."-".$dataSeteDiasAtras->day;
-            $lancamentos        = $this->lancamento->where('data_lancamento', $dataFormatada)->get();
-        } else if($dias && $dias == 15) {
-            $dataAtual          = Carbon::now();
-            $dataSeteDiasAtras  = $dataAtual->subDay(15);
-            $dataFormatada      = $dataSeteDiasAtras->year."-".$dataSeteDiasAtras->month."-".$dataSeteDiasAtras->day;
-            $lancamentos        = $this->lancamento->where('data_lancamento', $dataFormatada)->get();
-        } else if($dias && $dias == 30) {
-            $dataAtual          = Carbon::now();
-            $dataSeteDiasAtras  = $dataAtual->subDay(30);
-            $dataFormatada      = $dataSeteDiasAtras->year."-".$dataSeteDiasAtras->month."-".$dataSeteDiasAtras->day;
-            $lancamentos        = $this->lancamento->where('data_lancamento', $dataFormatada)->get();
+        if($dias) {
+            $lancamentos = $this->LancamentosAnteriores($dias);
+            //dd($lancamentos);
         }
 
         if($contaL)

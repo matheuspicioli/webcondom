@@ -298,9 +298,7 @@
                         </tr>
                         </tfoot>
                         <tbody>
-                            {{ dd($lancamentos) }}
                             @foreach($lancamentos as $lancamento)
-                                {{ dd($lancamento) }}
                                 <tr>
                                     <td>R$ {{ number_format($lancamento->valor, 2,',','.') }}</td>
                                     <td>{{ $lancamento->documento }}</td>

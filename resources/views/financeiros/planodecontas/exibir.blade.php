@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <form action="{{ route('financeiros.planodecontas.alterar', ['tipo' => $tipo->id, 'grupo' => $grupo->id, 'conta' => $conta->id]) }}"
+                        <form action="{{ route('financeiros.planodecontas.alterar', ['plano' => $plano->id, 'grupo' => $grupo->id, 'conta' => $conta->id]) }}"
                               method="POST">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
@@ -44,19 +44,19 @@
                                 <div class="col-md-12 col-md-offset-2">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            {!! Form::label('tipo', 'Tipo', ['class' => 'control-label']) !!}
+                                            {!! Form::label('plano', 'Tipo', ['class' => 'control-label']) !!}
                                             @if(!$conta->conta && !$conta->descricao)
-                                                <select name="tipo_id" id="tipo" class="form-control">
-                                                    @foreach($tipos as $tipoF)
-                                                        <option {{$tipoF->id == $tipo->id ? 'selected' : '' }} value="{{ $tipoF->id }}">{{ $tipoF->tipo }}
-                                                            - {{ $tipoF->descricao }}</option>
+                                                <select name="tipo_id" id="plano" class="form-control">
+                                                    @foreach($planos as $planoF)
+                                                        <option {{$planoF->id == $plano->id ? 'selected' : '' }} value="{{ $planoF->id }}">{{ $planoF->tipo }}
+                                                            - {{ $planoF->descricao }}</option>
                                                     @endforeach
                                                 </select>
                                             @else
-                                                <select name="tipo_id" id="tipo" class="form-control" disabled="disabled">
-                                                    @foreach($tipos as $tipoF)
-                                                        <option {{$tipoF->id == $tipo->id ? 'selected' : '' }} value="{{ $tipoF->id }}">{{ $tipoF->tipo }}
-                                                            - {{ $tipoF->descricao }}</option>
+                                                <select name="plano_id" id="plano" class="form-control" disabled="disabled">
+                                                    @foreach($planos as $planoF)
+                                                        <option {{$planoF->id == $plano->id ? 'selected' : '' }} value="{{ $planoF->id }}">{{ $planoF->tipo }}
+                                                            - {{ $planoF->descricao }}</option>
                                                     @endforeach
                                                 </select>
                                             @endif
@@ -242,12 +242,12 @@
     <script>
         $(document).ready(function () {
             $('.select2').select2();
-            $('#tipo').focus();
+            $('#plano').focus();
             $('#grupo').blur(function () {
-                tipo = $('#tipo').val();
+                plano = $('#plano').val();
                 grupo = $('#grupo').val();
                 $.ajax({
-                    url: "http://localhost:8000/Financeiros/PlanoDeContas/ConsultarProximaConta/" + tipo + '/' + grupo,
+                    url: "http://localhost:8000/Financeiros/PlanoDeContas/ConsultarProximaConta/" + plano + '/' + grupo,
                     type: "GET"
                 }).done(function (retorno) {
                     $('#conta').val(retorno);

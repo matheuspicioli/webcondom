@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    <form action="{{ route('financeiros.planodecontas.alterar', ['tipo' => $tipo->id, 'grupo' => $grupo->id]) }}"
+                    <form action="{{ route('financeiros.planodecontas.alterar', ['plano' => $plano->id, 'grupo' => $grupo->id]) }}"
                           method="POST">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
@@ -43,11 +43,11 @@
                             <div class="col-md-12 col-md-offset-2">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        {!! Form::label('tipo', 'Tipo', ['class' => 'control-label']) !!}
-                                            <select name="tipo_id" id="tipo" class="form-control">
-                                                @foreach($tipos as $tipoF)
-                                                    <option {{$tipoF->id == $tipo->id ? 'selected' : '' }} value="{{ $tipoF->id }}">{{ $tipoF->tipo }}
-                                                        - {{ $tipoF->descricao }}</option>
+                                        {!! Form::label('plano', 'Tipo', ['class' => 'control-label']) !!}
+                                            <select name="plano_id" id="plano" class="form-control">
+                                                @foreach($planos as $planosF)
+                                                    <option {{$planosF->id == $plano->id ? 'selected' : '' }} value="{{ $planosF->id }}">{{ $planosF->tipo }}
+                                                        - {{ $planosF->descricao }}</option>
                                                 @endforeach
                                             </select>
                                     </div>
@@ -132,8 +132,8 @@
     <script>
         $(document).ready(function () {
             $('.select2').select2();
-            $('#tipo').focus();
-            $('#tipo').attr('disabled', true);
+            $('#plano').focus();
+            $('#plano').attr('disabled', true);
             // $('#grupo').blur(function () {
             //     tipo = $('#tipo').val();
             //     grupo = $('#grupo').val();
