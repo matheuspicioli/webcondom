@@ -250,6 +250,9 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Listagem lançamentos conta corrente</h3>
                     <div class="pull-right">
+                        <a href="{{ route('financeiros.lancamentos.listar',['conta_id' => $contaL->id]) }}" class="btn btn-primary btn-xs">
+                            Todos
+                        </a>
                         <a href="{{ route('financeiros.lancamentos.listar',['conta_id' => $contaL->id, 'dias' => 7]) }}" class="btn btn-primary btn-xs">
                             Últimos 7 dias
                         </a>
