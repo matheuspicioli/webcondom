@@ -36,7 +36,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         {!! Form::label('tipo', 'Tipo', ['class' => 'control-label']) !!}
-                                        <select name="tipo_id" id="tipo" class="form-control">
+                                        <select name="plano_id" id="tipo" class="form-control">
                                             <option disabled selected>---------------SELECIONE---------------</option>
                                             @foreach($planos as $plano)
                                                 <option value="{{ $plano->id }}">{{ $plano->tipo }}

@@ -77,7 +77,7 @@ class ContaCorrenteLancamentosController extends Controller
         $fornecedores       = $this->fornecedor->all();
         $contas             = $this->conta->all();
         $tipos              = $this->plano_conta->all();
-
+        $lancamentos        = $this->lancamento->all();
         if($dias) {
             $lancamentos = $this->LancamentosAnteriores($dias);
             //dd($lancamentos);

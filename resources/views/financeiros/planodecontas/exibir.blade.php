@@ -76,9 +76,9 @@
                                         <div class="form-group">
                                             {!! Form::label('conta', 'Conta', ['class' => 'control-label']) !!}
                                             @if($conta->conta && $conta->descricao)
-                                                {!! Form::text('conta', $conta->conta, ['class' => 'form-control', 'maxlength' => '4', 'disabled']) !!}
+                                                {!! Form::text('conta', $conta->conta, ['class' => 'form-control', 'maxlength' => '4', 'readonly']) !!}
                                             @else
-                                                {!! Form::text('conta', $conta->conta, ['class' => 'form-control', 'maxlength' => '4', 'disabled']) !!}
+                                                {!! Form::text('conta', $conta->conta, ['class' => 'form-control', 'maxlength' => '4', 'readonly']) !!}
                                             @endif
                                         </div>
                                     </div>

@@ -69,6 +69,7 @@ class PlanoDeContasController extends Controller
 
     public function Salvar(Request $request)
     {
+        //dd($request->all());
         if($request->grupo != null && $request->conta == null){
             $plano          = $this->plano->find($request->plano_id);
             $grupo_tipo     = $plano->grupos()->where('grupo', $request->grupo)->first();
@@ -100,20 +101,20 @@ class PlanoDeContasController extends Controller
                 $ultimo_grupo   = (int)$ultimo_grupo->grupo;
                 $proximo_grupo  = $this->FormatarProximoGrupo($ultimo_grupo);
                 $grupo = $this->grupo->create([
-                    'grupo'     => $proximo_grupo,
-                    'ratear'    => $request->ratear,
-                    'descricao' => $request->descricao_grupo,
-                    'plano_id'  => $plano->id
+                    'grupo'             => $proximo_grupo,
+                    'ratear'            => $request->ratear,
+                    'descricao'         => $request->descricao_grupo,
+                    'plano_de_conta_id' => $plano->id
                 ]);
             }
             //SÓ VAI ENTRAR SE
             //FOR O PRIMEIRO GRUPO
             else {
                 $grupo = $this->grupo->create([
-                    'grupo'     => '001',
-                    'ratear'    => $request->ratear,
-                    'descricao' => $request->descricao_grupo,
-                    'plano_id'  => $plano->id
+                    'grupo'                 => '001',
+                    'ratear'                => $request->ratear,
+                    'descricao'             => $request->descricao_grupo,
+                    'plano_de_conta_id'     => $plano->id
                 ]);
             }
         }
@@ -147,6 +148,7 @@ class PlanoDeContasController extends Controller
 
     public function Alterar(Request $request, $plano, $grupo, $conta = null)
     {
+        //dd($request->all());
         if($request->exists('plano')){
             $plano_objeto = $this->plano->find($plano);
             $plano_objeto->update($request->all());
@@ -155,10 +157,10 @@ class PlanoDeContasController extends Controller
             $grupo_objeto = $this->grupo->find($grupo);
             if($request->plano_id){
                 $grupo_objeto->update([
-                    'grupo'     => $request->grupo,
-                    'ratear'    => $request->ratear,
-                    'descricao' => $request->descricao_grupo,
-                    'plano_id'  => $request->plano_id
+                    'grupo'             => $request->grupo,
+                    'ratear'            => $request->ratear,
+                    'descricao'         => $request->descricao_grupo,
+                    'plano_de_conta_id' => $request->plano_id
                 ]);
             } else {
                 $grupo_objeto->update([
