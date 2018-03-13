@@ -64,11 +64,33 @@ class ContaCorrenteLancamentosController extends Controller
         return $this->lancamento->whereBetween('data_lancamento',[ $data_formatada,$data_atual_formatada ])->get();
     }
 
-    /**
-     * @param $conta_id
-     * @param null $dias
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
+    public function LancamentosEntre($data_incial, $data_final)
+    {
+        return $this->lancamento->whereBetween('data_lancamento',[ $data_incial, $data_final ])->get();
+    }
+
+    public function ListarDatas(Request $request)
+    {
+        $data_inicial_array = explode('-', $request->data_inicial);
+        $data_final_array   = explode('-', $request->data_final);
+
+        $data_inicial   = Carbon::create($data_inicial_array[0], $data_inicial_array[1], $data_inicial_array[2]);
+        $data_final     = Carbon::create($data_final_array[0], $data_final_array[1], $data_final_array[2]);
+        //dd($data_inicial, $data_final);
+        $lancamentos    = $this->LancamentosEntre($data_inicial, $data_final);
+        $contaL         = ! is_null($request->conta_id) ? $this->conta->find($request->conta_id) : null;
+        $condominio     = $this->condominio->where('id', $contaL->condominio_id)->first();
+        $banco          = $this->banco->where('id', $contaL->banco_id)->first();
+        $fornecedores   = $this->fornecedor->all();
+        $contas         = $this->conta->all();
+        $tipos          = $this->plano_conta->all();
+
+        if($contaL)
+            return view('financeiros.lancamentos.listar', compact('data_final','data_inicial','contaL','lancamentos','fornecedores','condominio','banco','contas','tipos'));
+
+        return view('financeiros.lancamentos.listar', compact('data_final','data_inicial','lancamentos','fornecedores','contas','tipos'));
+    }
+
     public function Listar($conta_id, $dias = null)
     {
         $contaL             = ! is_null($conta_id) ? $this->conta->find($conta_id) : null;
@@ -79,14 +101,15 @@ class ContaCorrenteLancamentosController extends Controller
         $tipos              = $this->plano_conta->all();
         $lancamentos        = $this->lancamento->all();
         if($dias) {
-            $lancamentos = $this->LancamentosAnteriores($dias);
-            //dd($lancamentos);
+            $lancamentos    = $this->LancamentosAnteriores($dias);
         }
 
-        if($contaL)
-            return view('financeiros.lancamentos.listar', compact('contaL','lancamentos','fornecedores','condominio','banco','contas','tipos'));
+        $saldo_anterior = $lancamentos->sum('valor');
 
-        return view('financeiros.lancamentos.listar', compact('lancamentos','fornecedores','contas','tipos'));
+        if($contaL)
+            return view('financeiros.lancamentos.listar', compact('saldo_anterior','contaL','lancamentos','fornecedores','condominio','banco','contas','tipos'));
+
+        return view('financeiros.lancamentos.listar', compact('saldo_anterior','lancamentos','fornecedores','contas','tipos'));
     }
 
     public function Salvar(Request $request)

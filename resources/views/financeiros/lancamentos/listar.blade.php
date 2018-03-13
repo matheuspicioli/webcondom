@@ -18,12 +18,12 @@
     <!--<div class="fa fa-spinner fa-spin" id="carregando"></div>-->
     <div class="row">
         <div class="col-md-12">
-            <div class="box box-info">
+            <div class="box box-info collapsed-box">
                 <div class="box-header with-border">
                     <h3 class="box-title">Dados da conta corrente</h3>
                     <div class="box-tools pull-right">
                         <button class="btn btn-box-tool" type="button" data-widget="collapse">
-                            <i class="fa fa-minus"></i>
+                            <i class="fa fa-plus"></i>
                         </button>
                     </div>
                 </div>
@@ -148,7 +148,7 @@
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label for="valor" class="control-label">Valor</label>
-                                                    <input id="valor" type="number" class="form-control pula" name="valor">
+                                                    <input id="valor" type="text" class="form-control pula" name="valor">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
@@ -276,6 +276,39 @@
                     </div>
                 </div>
 
+                <div class="box-header">
+                    <h3 class="box-title">
+                        Período
+                    </h3>
+                    <div class="row">
+                        <form action="{{ route('financeiros.lancamentos.listardatas') }}" method="POST">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="conta_id" value="{{ $contaL->id }}">
+                            <div class="form-group-sm">
+                                <div class="col-md-2">
+                                    <input type="date" id="inicial" name="data_inicial" class="form-control form"
+                                           required="required" value="{{ isset($data_inicial) ? $data_inicial->format('Y-m-d') : '' }}">
+                                </div>
+                            </div>
+                            <div class="form-group-sm">
+                                <div class="col-md-2">
+                                    <input type="date" id="final" name="data_final" class="form-control"
+                                           required="required" value="{{ isset($data_final) ? $data_final->format('Y-m-d') : '' }}">
+                                </div>
+                            </div>
+                            <div class="form-group-sm">
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-sm btn-success">Filtar</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="pull-right">
+                            <h3>Saldo anterior: R$ {{ number_format($saldo_anterior, 2,',','.') }}</h3>
+                        </div>
+                    </div>
+                </div>
+                <hr>
                 <div class="box-body">
                     <table class="table table-striped table-hover dataTable" id="tabela" role="grid">
                         <thead>
