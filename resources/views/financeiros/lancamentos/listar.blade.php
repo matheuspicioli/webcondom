@@ -318,8 +318,8 @@
                                         {{ $lancamento->plano_conta->grupo->plano_de_conta->tipo }}.{{ $lancamento->plano_conta->grupo->grupo }}.{{ $lancamento->plano_conta->conta }}
                                     </td>
                                     <td>{{ substr($lancamento->tipo,0,1) }}</td>
-                                    <td align=right>{{ number_format($lancamento->valor, 2,',','.') }}</td>
-                                    <td align=right>{{ number_format($lancamento->valor, 2,',','.') }}</td>
+                                    <td align=right>R$ {{ number_format($lancamento->valor, 2,',','.') }}</td>
+                                    <td align=right>R$ {{ number_format($lancamento->valor, 2,',','.') }}</td>
                                     <td>{{ $lancamento->compensado }}</td>
                                     <td>{{ $lancamento->nota_fiscal }}</td>
                                     <td>{{ $lancamento->parcela }}</td>
