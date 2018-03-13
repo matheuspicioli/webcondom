@@ -129,7 +129,7 @@
                                                         @foreach($tipo->grupos as $grupo)
                                                             @foreach($grupo->contas as $conta)
                                                                 <option value="{{ $conta->id }}">
-                                                                    {{ "$tipo->tipo.$grupo->grupo.$conta->conta" }} - <b>{{ $grupo->descricao }}</b>
+                                                                    {{ "$tipo->tipo.$grupo->grupo.$conta->conta" }} - <b>{{ $conta->descricao }}</b>
                                                                 </option>
                                                             @endforeach
                                                         @endforeach
@@ -280,41 +280,56 @@
                     <table class="table table-striped table-hover dataTable" id="tabela" role="grid">
                         <thead>
                         <tr>
-                            <th>Valor</th>
+                            <th>Data</th>
                             <th>Documento</th>
-                            <th>Data lançamento</th>
-                            <th>Plano de contas</th>
-                            <th>Criado em</th>
-                            <th>Alterado em</th>
+                            <th>Histórico</th>
+                            <th>Plano contas</th>
+                            <th>Tipo</th>
+                            <th>Valor</th>
+                            <th>Saldo</th>
+                            <th>Comp</th>
+                            <th>Nota Fiscal</th>
+                            <th>Parc</th>
                             <th>Ações</th>
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
-                            <th>Valor</th>
+                            <th>Data</th>
                             <th>Documento</th>
-                            <th>Data lançamento</th>
-                            <th>Plano de contas</th>
-                            <th>Criado em</th>
-                            <th>Alterado em</th>
+                            <th>Histórico</th>
+                            <th>Plano contas</th>
+                            <th>Tipo</th>
+                            <th>Valor</th>
+                            <th>Saldo</th>
+                            <th>Comp</th>
+                            <th>Nota Fiscal</th>
+                            <th>Parc</th>
                             <th>Ações</th>
                         </tr>
                         </tfoot>
                         <tbody>
                             @foreach($lancamentos as $lancamento)
                                 <tr>
-                                    <td>R$ {{ number_format($lancamento->valor, 2,',','.') }}</td>
-                                    <td>{{ $lancamento->documento }}</td>
                                     <td>{{ $lancamento->data_lancamento->format('d/m/Y') }}</td>
+                                    <td>{{ $lancamento->documento }}</td>
+                                    <td>{{ $lancamento->historico }}</td>
                                     <td>
                                         {{ $lancamento->plano_conta->grupo->plano_de_conta->tipo }}.{{ $lancamento->plano_conta->grupo->grupo }}.{{ $lancamento->plano_conta->conta }}
                                     </td>
-                                    <td>{{ $lancamento->criado_em }}</td>
-                                    <td>{{ $lancamento->alterado_em }}</td>
+                                    <td>{{ substr($lancamento->tipo,0,1) }}</td>
+                                    <td align=right>{{ number_format($lancamento->valor, 2,',','.') }}</td>
+                                    <td align=right>{{ number_format($lancamento->valor, 2,',','.') }}</td>
+                                    <td>{{ $lancamento->compensado }}</td>
+                                    <td>{{ $lancamento->nota_fiscal }}</td>
+                                    <td>{{ $lancamento->parcela }}</td>
                                     <td>
-                                        <a href="" class="btn btn-warning btn-xs">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
+                                        <a href="" class="btn btn-warning btn-xs" title="Editar">
+                                            <i class="fa fa-pencil"></i></a>
+                                        <button type="button" data-toggle="modal" data-target="#modal-danger-{{$lancamento->id}}" href="#" class="btn btn-xs btn-danger" title="Excluir">
+                                            <i class="fa fa-trash"></i></button>
+                                        <a href="" class="btn btn-success btn-xs" title="Compensar Cheque">
+                                            <i class="fa fa-cc"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -351,6 +366,8 @@
     <script>
         $(document).ready(function () {
             $('#tabela').DataTable({
+                "order": [[0, "asc"]],
+                "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
                 }
