@@ -428,4 +428,4 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                     ContaCorrenteLancamento::create($dado);
                 };
      }
-}            
+}

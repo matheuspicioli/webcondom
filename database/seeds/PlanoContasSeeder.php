@@ -103,6 +103,11 @@ class PlanoContasSeeder extends Seeder
                 'grupo_id'  => 4
             ],
             [
+                'conta'     => '0099',
+                'descricao' => 'DIVERSOS',
+                'grupo_id'  => 4
+            ],
+            [
                 'conta'     => '0001',
                 'descricao' => 'MANUTENCAO DE ELEVADORES',
                 'grupo_id'  => 5
@@ -125,6 +130,11 @@ class PlanoContasSeeder extends Seeder
             [
                 'conta'     => '0006',
                 'descricao' => 'TX.MANUTENCAO SISTEMA CONDOM',
+                'grupo_id'  => 5
+            ],
+            [
+                'conta'     => '0018',
+                'descricao' => 'DIVERSOS',
                 'grupo_id'  => 5
             ],
             [
