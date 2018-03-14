@@ -4,6 +4,8 @@ namespace WebCondom\Http\Controllers\Financeiros;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use function PHPSTORM_META\type;
 use WebCondom\Http\Controllers\Controller;
 use WebCondom\Models\Entidades\Fornecedor;
 use WebCondom\Models\Financeiros\Banco;
@@ -103,13 +105,43 @@ class ContaCorrenteLancamentosController extends Controller
         if($dias) {
             $lancamentos    = $this->LancamentosAnteriores($dias);
         }
+        if(!$lancamentos->isEmpty()){
+            $collection_compensado = $lancamentos->map(function($lancamento){
+                if($lancamento->compensado == 'Sim')
+                    return $lancamento->valor;
+            });
+            $saldo_compensado       = $collection_compensado->sum();
+            $lancamento_ordenado    = $this->lancamento->orderBy('data_lancamento', 'ASC');
 
-        $saldo_anterior = $lancamentos->sum('valor');
+            if($lancamento_ordenado){
+                $primeiro_lancamento    = $lancamento_ordenado->first();
+                if($primeiro_lancamento){
+                    //Último lançamento até um dia anterior
+                    $ultimo_lancamento_dia_anterior = $lancamentos->sortBy('data_lancamento')->last()->data_lancamento->subDay(1);
+                    //Último lançamento
+                    $ultimo_lancamento                      = $lancamentos->sortBy('data_lancamento')->last()->data_lancamento;
+                    $lancamentos_primeiro_ultimo            = $this->lancamento->whereBetween('data_lancamento', [$primeiro_lancamento->data_lancamento, $ultimo_lancamento->toDateString()])->get();
+                    $lancamentos_primeiro_ultimo_anterior   = $this->lancamento->whereBetween('data_lancamento', [$primeiro_lancamento->data_lancamento, $ultimo_lancamento_dia_anterior->toDateString()])->get();
+                    $lancamentos_map                = $lancamentos_primeiro_ultimo_anterior->map(function($lancamento){
+                        if($lancamento->tipo == 'Debito')
+                            return ($lancamento->valor - $lancamento->valor);
+                        else
+                            return $lancamento->valor = $lancamento->valor;
+                    });
+                    $saldo_anterior = $lancamentos_map->sum();
+                    $lancamentos_primeiro_map = $lancamentos_primeiro_ultimo->map(function($lancamento){
+                        return $lancamento->valor;
+                    });
+                    $saldo_lancamento = $lancamentos_primeiro_map->sum();
+                }
+            }
+            return view('financeiros.lancamentos.listar', compact('saldo_lancamento','saldo_anterior','saldo_compensado','contaL','lancamentos','fornecedores','condominio','banco','contas','tipos'));
+        }
 
         if($contaL)
-            return view('financeiros.lancamentos.listar', compact('saldo_anterior','contaL','lancamentos','fornecedores','condominio','banco','contas','tipos'));
+            return view('financeiros.lancamentos.listar', compact('contaL','lancamentos','fornecedores','condominio','banco','contas','tipos'));
 
-        return view('financeiros.lancamentos.listar', compact('saldo_anterior','lancamentos','fornecedores','contas','tipos'));
+        return view('financeiros.lancamentos.listar', compact('lancamentos','fornecedores','contas','tipos'));
     }
 
     public function Salvar(Request $request)
