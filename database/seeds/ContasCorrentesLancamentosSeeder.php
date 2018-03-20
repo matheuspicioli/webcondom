@@ -11,7 +11,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
             [
                 'nota_fiscal' => '',
                 'parcela' => '',
-                'data_lancamento' => '2017-31-01',
+                'data_lancamento' => '2017-12-31',
                 'documento' => '',
                 'tipo' => '1',
                 'historico' => 'SALDO INICIAL',
@@ -38,7 +38,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
             [
                 'nota_fiscal' => '',
                 'parcela' => '',
-                'data_lancamento' => '2018-01-05',
+                'data_lancamento' => '2018-02-08',
                 'documento' => '',
                 'tipo' => '1',
                 'historico' => 'COMPRA DE MATERIAL LIMPEZA',
@@ -51,7 +51,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
             [
                 'nota_fiscal' => '000000555',
                 'parcela' => '01',
-                'data_lancamento' => '2018-01-10',
+                'data_lancamento' => '2018-02-10',
                 'documento' => '100212',
                 'tipo' => '1',
                 'historico' => 'ELEVADORES ATLAS',
@@ -63,7 +63,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'fornecedor_id' => '1'
             ],
             [
-                'data_lancamento' => '2018-01-11',
+                'data_lancamento' => '2018-02-11',
                 'documento' => '002',
                 'tipo' => '2',
                 'historico' => 'LIQ.DE COBRANCA',
@@ -74,7 +74,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'conta_corrente_id' => '11'
             ],
             [
-                'data_lancamento' => '2018-01-11',
+                'data_lancamento' => '2018-02-11',
                 'documento' => '',
                 'tipo' => '1',
                 'historico' => 'TAXA DE ADM.',
@@ -87,7 +87,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
             [
                 'nota_fiscal' => '000001999',
                 'parcela' => '02',
-                'data_lancamento' => '2018-01-20',
+                'data_lancamento' => '2018-02-20',
                 'documento' => '100215',
                 'tipo' => '1',
                 'historico' => 'PRODUTOS DE LIMPEZA',
@@ -99,7 +99,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'fornecedor_id' => '1'
             ],
             [
-                'data_lancamento' => '2018-01-20',
+                'data_lancamento' => '2018-02-20',
                 'documento' => '999888',
                 'tipo' => '1',
                 'historico' => 'CONTA DE LUZ',
@@ -110,7 +110,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'conta_corrente_id' => '11'
             ],
             [
-                'data_lancamento' => '2018-01-30',
+                'data_lancamento' => '2018-02-12',
                 'documento' => '002',
                 'tipo' => '2',
                 'historico' => 'LIQ.DE COBRANCA',
@@ -123,7 +123,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
             [
                 'nota_fiscal' => '000002321',
                 'parcela' => '01',
-                'data_lancamento' => '2018-01-30',
+                'data_lancamento' => '2018-02-12',
                 'documento' => '100215',
                 'tipo' => '1',
                 'historico' => 'EXTINTELE S.A.',
@@ -137,7 +137,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
             [
                 'nota_fiscal' => '000002000',
                 'parcela' => '01',
-                'data_lancamento' => '2018-01-30',
+                'data_lancamento' => '2018-02-10',
                 'documento' => '100217',
                 'tipo' => '1',
                 'historico' => 'PRODUTOS DE LIMPEZA',
@@ -149,7 +149,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'fornecedor_id' => '1'
             ],
             [
-                'data_lancamento' => '2018-02-01',
+                'data_lancamento' => '2018-02-10',
                 'documento' => '002',
                 'tipo' => '2',
                 'historico' => 'LIQ.DE COBRANCA',
@@ -160,7 +160,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'conta_corrente_id' => '11'
             ],
             [
-                'data_lancamento' => '2018-02-01',
+                'data_lancamento' => '2018-02-08',
                 'documento' => '',
                 'tipo' => '1',
                 'historico' => 'TAXA DE ADM.',
@@ -173,7 +173,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
             [
                 'nota_fiscal' => '000202020',
                 'parcela' => '01',
-                'data_lancamento' => '2018-02-10',
+                'data_lancamento' => '2018-02-25',
                 'documento' => '100218',
                 'tipo' => '1',
                 'historico' => 'PRODUTOS DE LIMPEZA',
@@ -196,7 +196,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'conta_corrente_id' => '11'
             ],
             [
-                'data_lancamento' => '2018-02-11',
+                'data_lancamento' => '2018-02-28',
                 'documento' => '002',
                 'tipo' => '2',
                 'historico' => 'LIQ.DE COBRANCA',
@@ -221,7 +221,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'fornecedor_id' => '1'
             ],
             [
-                'data_lancamento' => '2018-02-20',
+                'data_lancamento' => '2018-02-25',
                 'documento' => '',
                 'tipo' => '1',
                 'historico' => 'SALARIO FUNCIONARIOS',
@@ -234,7 +234,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
             [
                 'nota_fiscal' => '000000500',
                 'parcela' => '01',
-                'data_lancamento' => '2018-02-20',
+                'data_lancamento' => '2018-02-23',
                 'documento' => '100220',
                 'tipo' => '1',
                 'historico' => 'MANUTENCAO SISTEMA CONDOM',
@@ -246,7 +246,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'fornecedor_id' => '3'
             ],
             [
-                'data_lancamento' => '2018-02-20',
+                'data_lancamento' => '2018-02-28',
                 'documento' => '',
                 'tipo' => '1',
                 'historico' => 'FERIAS E 13.SALARIO',
@@ -257,7 +257,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'conta_corrente_id' => '11'
             ],
             [
-                'data_lancamento' => '2018-02-20',
+                'data_lancamento' => '2018-02-23',
                 'documento' => '100222',
                 'tipo' => '1',
                 'historico' => 'TX DE ADM.',
@@ -268,7 +268,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'conta_corrente_id' => '11'
             ],
             [
-                'data_lancamento' => '2018-02-20',
+                'data_lancamento' => '2018-02-23',
                 'documento' => '002',
                 'tipo' => '2',
                 'historico' => 'LIQ.DE COBRANCA',
@@ -279,7 +279,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'conta_corrente_id' => '11'
             ],
             [
-                'data_lancamento' => '2018-02-22',
+                'data_lancamento' => '2018-02-25',
                 'documento' => '',
                 'tipo' => '1',
                 'historico' => 'TAXA DE ADM ',
@@ -290,7 +290,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'conta_corrente_id' => '11',
             ],
             [
-                'data_lancamento' => '2018-03-03',
+                'data_lancamento' => '2018-03-05',
                 'documento' => '',
                 'tipo' => '1',
                 'historico' => 'SALARIO FUNCIONARIOS',
@@ -339,7 +339,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
             [
                 'nota_fiscal' => '000012000',
                 'parcela' => '01',
-                'data_lancamento' => '2018-03-03',
+                'data_lancamento' => '2018-03-10',
                 'documento' => '100225',
                 'tipo' => '1',
                 'historico' => 'MATERIAL DE LIMPEZA',
@@ -364,7 +364,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
             [
                 'nota_fiscal' => '000055445',
                 'parcela' => '01',
-                'data_lancamento' => '2018-01-03',
+                'data_lancamento' => '2018-02-10',
                 'documento' => '1001',
                 'tipo' => '1',
                 'historico' => 'RECARGA EXTINTOR.',
@@ -378,7 +378,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
             [
                 'nota_fiscal' => '000012009',
                 'parcela' => '01',
-                'data_lancamento' => '2018-03-03',
+                'data_lancamento' => '2018-03-08',
                 'documento' => '100229',
                 'tipo' => '1',
                 'historico' => 'MATERIAL DE ESCRITORIO',
@@ -390,7 +390,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'fornecedor_id' => '1'
             ],
             [
-                'data_lancamento' => '2018-01-03',
+                'data_lancamento' => '2018-02-08',
                 'documento' => '002',
                 'tipo' => '2',
                 'historico' => 'LIQ.DE COBRANCA',
@@ -406,7 +406,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'tipo' => '2',
                 'historico' => 'LIQ.DE COBRANCA',
                 'valor' => '3000',
-                'compensado' => '0',
+                'compensado' => '2',
                 'cheque' => '0',
                 'plano_conta_id' => '1',
                 'conta_corrente_id' => '11'
@@ -417,7 +417,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'tipo' => '1',
                 'historico' => 'TAXA DE ADM ',
                 'valor' => '1000',
-                'compensado' => '0',
+                'compensado' => '2',
                 'cheque' => '0',
                 'plano_conta_id' => '9',
                 'conta_corrente_id' => '11',

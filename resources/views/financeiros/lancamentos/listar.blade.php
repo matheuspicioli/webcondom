@@ -330,18 +330,25 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            &nbsp;
+                            <div class="form-group">
+                                <div class="box-tools pull-right">
+                                    <h3 class="text-green"><b>Saldo compensado: {{ isset($saldo_compensado) ? 'R$: '.number_format($saldo_compensado, 2,',','.') : 'Nenhum lançamento encontrado nesse período' }}</b></h3>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">
-                            <p class="text-red">Saldo compensado: {{ isset($saldo_compensado) ? 'R$: '.number_format($saldo_compensado, 2,',','.') : 'Nenhum lançamento encontrado nesse período' }}</p>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <h3 class="text-muted"><b>Saldo anterior: {{ isset($saldo_anterior) ? 'R$: '.number_format($saldo_anterior, 2,',','.') : 'Nenhum lançamento encontrado nesse período' }}</b></h3>
+                            </div>
                         </div>
-                        <div class="col-md-3">
-                            <p class="text-light-blue">Saldo lançamento: {{ isset($saldo_lancamento) ? 'R$: '.number_format($saldo_lancamento, 2,',','.') : 'Nenhum lançamento encontrado nesse período' }}</p>
-                        </div>
-                        <div class="col-md-3">
-                            <p class="text-muted">Saldo anterior: {{ isset($saldo_anterior) ? 'R$: '.number_format($saldo_anterior, 2,',','.') : 'Nenhum lançamento encontrado nesse período' }}</p>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="box-tools pull-right">
+                                    <h3 class="text-blue"><b>Saldo lançamento: {{ isset($saldo_lancamento) ? 'R$: '.number_format($saldo_lancamento, 2,',','.') : 'Nenhum lançamento encontrado nesse período' }}</b></h3>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -389,8 +396,8 @@
                                     .{{ $lancamento->plano_conta->grupo->grupo }}.{{ $lancamento->plano_conta->conta }}
                                 </td>
                                 <td>{{ substr($lancamento->tipo,0,1) }}</td>
-                                <td align=right>R$ {{ number_format($lancamento->valor, 2,',','.') }}</td>
-                                <td align=right>R$ {{ number_format($lancamento->valor, 2,',','.') }}</td>
+                                <td align=right>{{ number_format($lancamento->valor, 2,',','.') }}</td>
+                                <td align=right>{{ number_format($lancamento->valor, 2,',','.') }}</td>
                                 <td>{{ $lancamento->compensado }}</td>
                                 <td>{{ $lancamento->nota_fiscal }}</td>
                                 <td>{{ $lancamento->parcela }}</td>
@@ -439,7 +446,7 @@
     <script>
         $(document).ready(function () {
             $('#tabela').DataTable({
-                "order": [[0, "asc"]],
+                "order": [[0,"asc"]],
                 "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
