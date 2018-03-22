@@ -59,7 +59,6 @@ class ContaCorrenteLancamentosController extends Controller
 
     public function LancamentosPeriodo($dias)
     {
-        //$data_atual             = Carbon::now();
         $data_atual             = ContaCorrenteLancamento::orderBy('data_lancamento', 'DESC')->first()->data_lancamento;
         $data_atual_formatada   = ContaCorrenteLancamento::orderBy('data_lancamento', 'DESC')->first()->data_lancamento->toDateString();
         $data_inicio_periodo    = $data_atual->subDay($dias);
@@ -122,13 +121,10 @@ class ContaCorrenteLancamentosController extends Controller
     public function SaldoAnterior ($lancamentosAnteriores)
     {
         $lancamentos_anteriores_map = $lancamentosAnteriores->map(function ($lancamentoAnterior) {
-            //coloquei uma condicao pra testar a soma
-            if (1 == 1) {
-                if ($lancamentoAnterior->tipo == 'Debito') {
-                    return $lancamentoAnterior->valor * -1;
-                } else {
-                    return $lancamentoAnterior->valor;
-                }
+            if ($lancamentoAnterior->tipo == 'Debito') {
+                return $lancamentoAnterior->valor * -1;
+            } else {
+                return $lancamentoAnterior->valor;
             }
         });
         if ($lancamentos_anteriores_map) {
