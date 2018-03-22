@@ -38,16 +38,18 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <label for="conta_corrente" class="control-label">Conta corrente</label>
-                            <select name="conta_corrente_id" id="conta_corrente" class="form-control select2"
-                                    disabled="disabled">
-                                <option selected disabled>===============SELECIONE===============</option>
-                                @foreach($contas as $contaSelect)
-                                    <option value="{{ $contaSelect->id }}" {{ $contaSelect->id == $contaL->id ? 'selected' : '' }}>
-                                        {{ $contaSelect->agencia }} - {{ $contaSelect->conta }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            <div class="form-group">
+								<label for="conta_corrente" class="control-label">Conta corrente</label>
+								<select name="conta_corrente_id" id="conta_corrente" class="form-control"
+										disabled="disabled">
+									<option selected disabled>===============SELECIONE===============</option>
+									@foreach($contas as $contaSelect)
+										<option value="{{ $contaSelect->id }}" {{ $contaSelect->id == $contaL->id ? 'selected' : '' }}>
+											{{ $contaSelect->agencia }} - {{ $contaSelect->conta }}
+										</option>
+									@endforeach
+								</select>
+                            </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
@@ -448,7 +450,6 @@
     <script>
         $(document).ready(function () {
             $('#tabela').DataTable({
-                "order": [[0,"asc"]],
                 "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"

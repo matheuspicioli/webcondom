@@ -57,29 +57,29 @@ class ContaCorrenteLancamentosController extends Controller
         }
     }
 
-    public function LancamentosPeriodo($dias)
+    public function LancamentosPeriodo($dias, $conta_id)
     {
-        $data_atual             = ContaCorrenteLancamento::orderBy('data_lancamento', 'DESC')->first()->data_lancamento;
-        $data_atual_formatada   = ContaCorrenteLancamento::orderBy('data_lancamento', 'DESC')->first()->data_lancamento->toDateString();
+        $data_atual             = $this->lancamento->where('conta_corrente_id', $conta_id)->orderBy('data_lancamento', 'ASC')->first()->data_lancamento;
+        $data_atual_formatada   = $this->lancamento->where('conta_corrente_id', $conta_id)->orderBy('data_lancamento', 'ASC')->first()->data_lancamento->toDateString();
         $data_inicio_periodo    = $data_atual->subDay($dias);
         $data_inicio_formatada  = $data_inicio_periodo->format('Y-m-d');
 
-        return $this->lancamento->whereBetween('data_lancamento',[ $data_inicio_formatada,$data_atual_formatada ])->get();
+        return $this->lancamento->whereBetween('data_lancamento',[ $data_inicio_formatada,$data_atual_formatada ])->orderBy('data_lancamento', 'DESC')->get();
     }
 
-    public function LancamentosAnteriores($dia_anterior)
+    public function LancamentosAnteriores($dia_anterior, $conta_id)
     {
-        $data_inicial             = ContaCorrenteLancamento::orderBy('data_lancamento', 'ASC')->first()->data_lancamento;
-        $data_inicial_formatada   = ContaCorrenteLancamento::orderBy('data_lancamento', 'ASC')->first()->data_lancamento->toDateString();
+        $data_inicial             = $this->lancamento->where('conta_corrente_id', $conta_id)->orderBy('data_lancamento', 'ASC')->first()->data_lancamento;
+        $data_inicial_formatada   = $this->lancamento->where('conta_corrente_id', $conta_id)->orderBy('data_lancamento', 'ASC')->first()->data_lancamento->toDateString();
         $data_ultimo_dia_anterior = $dia_anterior;
         $data_ultimo_formatada    = $data_ultimo_dia_anterior->format('Y-m-d');
 
         return $this->lancamento->whereBetween('data_lancamento',[ $data_inicial_formatada,$data_ultimo_formatada ])->get();
     }
 
-    public function LancamentosEntre($data_incial, $data_final)
+    public function LancamentosEntre($data_incial, $data_final, $conta_id)
     {
-        return $this->lancamento->whereBetween('data_lancamento',[ $data_incial, $data_final ])->get();
+        return $this->lancamento->where('conta_corrente_id', $conta_id)->whereBetween('data_lancamento',[ $data_incial, $data_final ])->orderBy('data_lancamento','DESC')->get();
     }
 
     public function SaldoCompensadoAnterior($lancamentosAnteriores)
@@ -157,16 +157,16 @@ class ContaCorrenteLancamentosController extends Controller
 
         $data_inicial   = Carbon::create($data_inicial_array[0], $data_inicial_array[1], $data_inicial_array[2]);
         $data_final     = Carbon::create($data_final_array[0], $data_final_array[1], $data_final_array[2]);
-        $lancamentos    = $this->LancamentosEntre($data_inicial, $data_final);
+        $lancamentos    = $this->LancamentosEntre($data_inicial, $data_final, $request->conta_id);
         $contaL         = ! is_null($request->conta_id) ? $this->conta->find($request->conta_id) : null;
         $condominio     = $this->condominio->where('id', $contaL->condominio_id)->first();
         $banco          = $this->banco->where('id', $contaL->banco_id)->first();
         $fornecedores   = $this->fornecedor->all();
         $contas         = $this->conta->all();
         $tipos          = $this->plano_conta->all();
-        $lancamentosAnteriores = $this->LancamentosAnteriores($data_inicial->subDay(1));
+        $lancamentosAnteriores = $this->LancamentosAnteriores($data_inicial->subDay(1),$request->conta_id);
 
-        $saldo_compensado_anterior = $this->SaldoCompensadoAnterior($lancamentosAnteriores);
+        $saldo_compensado_anterior = $this->SaldoCompensadoAnterior($lancamentosAnteriores,$request->conta_id);
         $saldo_compensado = $saldo_compensado_anterior + $this->SaldoCompensado($lancamentos);
         $saldo_anterior = $this->SaldoAnterior($lancamentosAnteriores);
         $saldo_lancamento = $saldo_anterior + $this->SaldoLancamento($lancamentos);
@@ -185,21 +185,21 @@ class ContaCorrenteLancamentosController extends Controller
         $fornecedores       = $this->fornecedor->all();
         $contas             = $this->conta->all();
         $tipos              = $this->plano_conta->all();
-        $lancamentos        = $this->lancamento->all();
+        $lancamentos        = $this->lancamento->where('conta_corrente_id', $conta_id)->orderBy('data_lancamento', 'ASC')->get();
         if($dias) {
-            $lancamentos            = $this->LancamentosPeriodo($dias);
+            $lancamentos            = $this->LancamentosPeriodo($dias,$conta_id);
         }
         if(!$lancamentos->isEmpty()) {
-            $lancamento_ordenado = $this->lancamento->orderBy('data_lancamento', 'ASC');
+            $lancamento_ordenado = $this->lancamento->orderBy('data_lancamento', 'ASC')->get();
 
             if ($lancamento_ordenado) {
                 $primeiro_lancamento = $lancamento_ordenado->first();
                 if ($primeiro_lancamento) {
                     $ultimo_lancamento = $lancamentos->sortBy('data_lancamento')->last()->data_lancamento;
                     $ultimo_lancamento_dia_anterior = $lancamentos->sortBy('data_lancamento')->first()->data_lancamento->subDay(1);
-                    $lancamentosAnteriores = $this->LancamentosAnteriores($ultimo_lancamento_dia_anterior);
+                    $lancamentosAnteriores = $this->LancamentosAnteriores($ultimo_lancamento_dia_anterior,$conta_id);
 
-                    $saldo_compensado_anterior = $this->SaldoCompensadoAnterior($lancamentosAnteriores);
+                    $saldo_compensado_anterior = $this->SaldoCompensadoAnterior($lancamentosAnteriores,$conta_id);
                     $saldo_compensado = $saldo_compensado_anterior + $this->SaldoCompensado($lancamentos);
                     $saldo_anterior = $this->SaldoAnterior($lancamentosAnteriores);
                     $saldo_lancamento = $saldo_anterior + $this->SaldoLancamento($lancamentos);
