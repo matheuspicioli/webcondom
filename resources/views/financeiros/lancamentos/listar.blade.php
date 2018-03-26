@@ -38,16 +38,18 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <label for="conta_corrente" class="control-label">Conta corrente</label>
-                            <select name="conta_corrente_id" id="conta_corrente" class="form-control select2"
-                                    disabled="disabled">
-                                <option selected disabled>===============SELECIONE===============</option>
-                                @foreach($contas as $contaSelect)
-                                    <option value="{{ $contaSelect->id }}" {{ $contaSelect->id == $contaL->id ? 'selected' : '' }}>
-                                        {{ $contaSelect->agencia }} - {{ $contaSelect->conta }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            <div class="form-group">
+								<label for="conta_corrente" class="control-label">Conta corrente</label>
+								<select name="conta_corrente_id" id="conta_corrente" class="form-control"
+										disabled="disabled">
+									<option selected disabled>===============SELECIONE===============</option>
+									@foreach($contas as $contaSelect)
+										<option value="{{ $contaSelect->id }}" {{ $contaSelect->id == $contaL->id ? 'selected' : '' }}>
+											{{ $contaSelect->agencia }} - {{ $contaSelect->conta }}
+										</option>
+									@endforeach
+								</select>
+                            </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
@@ -361,8 +363,8 @@
                             <th>Documento</th>
                             <th>Histórico</th>
                             <th>Plano contas</th>
-                            <th>Tipo</th>
-                            <th>Valor</th>
+                            <th>Crédito</th>
+                            <th>Débito</th>
                             <th>Saldo</th>
                             <th>Comp</th>
                             <th>Nota Fiscal</th>
@@ -376,8 +378,8 @@
                             <th>Documento</th>
                             <th>Histórico</th>
                             <th>Plano contas</th>
-                            <th>Tipo</th>
-                            <th>Valor</th>
+                            <th>Crédito</th>
+                            <th>Débito</th>
                             <th>Saldo</th>
                             <th>Comp</th>
                             <th>Nota Fiscal</th>
@@ -386,7 +388,9 @@
                         </tr>
                         </tfoot>
                         <tbody>
+                        @php $saldo_linha = isset($saldo_anterior) ? $saldo_anterior : 0; @endphp
                         @foreach($lancamentos as $lancamento)
+                            @php $saldo_linha +=  ($lancamento->tipo == 'Credito') ? $lancamento->valor : $lancamento->valor*-1; @endphp
                             <tr>
                                 <td>{{ $lancamento->data_lancamento->format('d/m/Y') }}</td>
                                 <td>{{ $lancamento->documento }}</td>
@@ -395,9 +399,9 @@
                                     {{ $lancamento->plano_conta->grupo->plano_de_conta->tipo }}
                                     .{{ $lancamento->plano_conta->grupo->grupo }}.{{ $lancamento->plano_conta->conta }}
                                 </td>
-                                <td>{{ substr($lancamento->tipo,0,1) }}</td>
-                                <td align=right>{{ number_format($lancamento->valor, 2,',','.') }}</td>
-                                <td align=right>{{ number_format($lancamento->valor, 2,',','.') }}</td>
+                                <td align=right>{{ $lancamento->tipo == 'Credito' ?  number_format($lancamento->valor, 2,',','.') : '' }}</td>
+                                <td align=right>{{ $lancamento->tipo == 'Debito' ?  number_format($lancamento->valor, 2,',','.') : '' }}</td>
+                                <td align=right>{{ number_format($saldo_linha, 2,',','.') }}</td>
                                 <td>{{ $lancamento->compensado }}</td>
                                 <td>{{ $lancamento->nota_fiscal }}</td>
                                 <td>{{ $lancamento->parcela }}</td>
@@ -446,7 +450,6 @@
     <script>
         $(document).ready(function () {
             $('#tabela').DataTable({
-                "order": [[0,"asc"]],
                 "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
