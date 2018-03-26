@@ -447,9 +447,13 @@
 @stop
 
 @section('js')
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+	<script src="https://cdn.datatables.net/plug-ins/1.10.10/sorting/datetime-moment.js"></script>
     <script>
         $(document).ready(function () {
+			$.fn.dataTable.moment('DD/MM/YYYY');
             $('#tabela').DataTable({
+				"order": [[ 0, "asc" ]],
                 "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"

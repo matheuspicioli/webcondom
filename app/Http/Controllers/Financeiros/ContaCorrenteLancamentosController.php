@@ -79,7 +79,7 @@ class ContaCorrenteLancamentosController extends Controller
 
     public function LancamentosEntre($data_incial, $data_final, $conta_id)
     {
-        return $this->lancamento->where('conta_corrente_id', $conta_id)->whereBetween('data_lancamento',[ $data_incial, $data_final ])->orderBy('data_lancamento','DESC')->get();
+        return $this->lancamento->where('conta_corrente_id', $conta_id)->whereBetween('data_lancamento',[ $data_incial, $data_final ])->orderBy('data_lancamento','ASC')->get();
     }
 
     public function SaldoCompensadoAnterior($lancamentosAnteriores)
@@ -182,6 +182,10 @@ class ContaCorrenteLancamentosController extends Controller
         $contas             = $this->conta->all();
         $tipos              = $this->plano_conta->all();
         $lancamentos        = $this->lancamento->where('conta_corrente_id', $conta_id)->orderBy('data_lancamento', 'ASC')->get();
+//        foreach($lancamentos as $lancamento){
+//        	dump($lancamento);
+//		}
+//		dd("FIM DEBUG");
         if($dias) {
             $lancamentos            = $this->LancamentosPeriodo($dias,$conta_id);
         }
