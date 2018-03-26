@@ -60,8 +60,8 @@ class ContaCorrenteLancamentosController extends Controller
     public function LancamentosPeriodo($dias)
     {
         //$data_atual             = Carbon::now();
-        $data_atual             = ContaCorrenteLancamento::orderBy('data_lancamento', 'DESC')->first()->data_lancamento;
-        $data_atual_formatada   = ContaCorrenteLancamento::orderBy('data_lancamento', 'DESC')->first()->data_lancamento->toDateString();
+        $data_atual             = ContaCorrenteLancamento::orderBy('data_lancamento', 'ASC')->first()->data_lancamento;
+        $data_atual_formatada   = ContaCorrenteLancamento::orderBy('data_lancamento', 'ASC')->first()->data_lancamento->toDateString();
         $data_inicio_periodo    = $data_atual->subDay($dias);
         $data_inicio_formatada  = $data_inicio_periodo->format('Y-m-d');
 
@@ -70,8 +70,8 @@ class ContaCorrenteLancamentosController extends Controller
 
     public function LancamentosAnteriores($dia_anterior)
     {
-        $data_inicial             = ContaCorrenteLancamento::orderBy('data_lancamento', 'ASC')->first()->data_lancamento;
-        $data_inicial_formatada   = ContaCorrenteLancamento::orderBy('data_lancamento', 'ASC')->first()->data_lancamento->toDateString();
+        $data_inicial             = $this->lancamento::orderBy('data_lancamento', 'ASC')->first()->data_lancamento;
+        $data_inicial_formatada   = $this->lancamento::orderBy('data_lancamento', 'ASC')->first()->data_lancamento->toDateString();
         $data_ultimo_dia_anterior = $dia_anterior;
         $data_ultimo_formatada    = $data_ultimo_dia_anterior->format('Y-m-d');
 
@@ -94,22 +94,20 @@ class ContaCorrenteLancamentosController extends Controller
                 }
             }
         });
-        if ($collection_compensado_anterior) {
+        if ($collection_compensado_anterior)
             return $collection_compensado_anterior->sum();
-        } else {
+        else
             return 0.00;
-        };
     }
 
     public function SaldoCompensado($lancamentos)
     {
         $collection_compensado = $lancamentos->map(function ($compensado) {
             if ($compensado->compensado == 'Sim') {
-                if ($compensado->tipo == 'Debito') {
+                if ($compensado->tipo == 'Debito')
                     return $compensado->valor * -1;
-                } else {
+                else
                     return $compensado->valor;
-                }
             }
         });
         if ($collection_compensado) {
@@ -131,11 +129,10 @@ class ContaCorrenteLancamentosController extends Controller
                 }
             }
         });
-        if ($lancamentos_anteriores_map) {
+        if ($lancamentos_anteriores_map)
             return $lancamentos_anteriores_map->sum();
-        } else {
+        else
             return 0.00;
-        }
     }
 
     public function SaldoLancamento ($lancamentos)
@@ -147,11 +144,10 @@ class ContaCorrenteLancamentosController extends Controller
                 return ($lancamentoPeriodo->valor);
             }
         });
-        if ($lancamentos_map) {
+        if ($lancamentos_map)
             return $lancamentos_map->sum();
-        } else {
+        else
             return 0.00;
-        }
     }
 
     public function ListarDatas(Request $request)
