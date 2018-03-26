@@ -60,9 +60,9 @@ class ContaCorrenteLancamentosController extends Controller
     public function LancamentosPeriodo($dias, $conta_id)
     {
         $data_atual             = $this->lancamento->where('conta_corrente_id', $conta_id)->orderBy('data_lancamento', 'ASC')->first()->data_lancamento;
-        $data_atual_formatada   = $this->lancamento->where('conta_corrente_id', $conta_id)->orderBy('data_lancamento', 'ASC')->first()->data_lancamento->toDateString();
+        $data_atual_formatada   = $this->lancamento->where('conta_corrente_id', $conta_id)->orderBy('data_lancamento', 'ASC')->first()->data_lancamento->subDay(1)->toDateString();
         $data_inicio_periodo    = $data_atual->subDay($dias);
-        $data_inicio_formatada  = $data_inicio_periodo->format('Y-m-d');
+        $data_inicio_formatada  = $data_inicio_periodo->addDay(1)->format('Y-m-d');
 
         return $this->lancamento->whereBetween('data_lancamento',[ $data_inicio_formatada,$data_atual_formatada ])->orderBy('data_lancamento', 'ASC')->get();
     }
@@ -70,9 +70,9 @@ class ContaCorrenteLancamentosController extends Controller
     public function LancamentosAnteriores($dia_anterior, $conta_id)
     {
         $data_inicial             = $this->lancamento->where('conta_corrente_id', $conta_id)->orderBy('data_lancamento', 'ASC')->first()->data_lancamento;
-        $data_inicial_formatada   = $this->lancamento->where('conta_corrente_id', $conta_id)->orderBy('data_lancamento', 'ASC')->first()->data_lancamento->toDateString();
+        $data_inicial_formatada   = $this->lancamento->where('conta_corrente_id', $conta_id)->orderBy('data_lancamento', 'ASC')->first()->data_lancamento->subDay(1)->toDateString();
         $data_ultimo_dia_anterior = $dia_anterior;
-        $data_ultimo_formatada    = $data_ultimo_dia_anterior->format('Y-m-d');
+        $data_ultimo_formatada    = $data_ultimo_dia_anterior->addDay(1)->format('Y-m-d');
 
         return $this->lancamento->whereBetween('data_lancamento',[ $data_inicial_formatada,$data_ultimo_formatada ])->get();
     }
