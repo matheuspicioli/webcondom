@@ -77,7 +77,7 @@
                                                 <i class="fa fa-pencil"></i></button>
                                         @endcan
                                         @can("exibir_contacorrentelancamento")
-                                            <a href="{{ route('financeiros.lancamentos.listar',['conta_id'=>$conta->id]) }}" class="btn btn-sm btn-success" title="Lançamentos">
+                                            <a href="{{ route('financeiros.lancamentos.listar',['conta_id'=>$conta->id, 'dias' => 7]) }}" class="btn btn-sm btn-success" title="Lançamentos">
                                                 <i class="fa fa-th-list"></i></a>
                                         @else
                                                 <button disabled type="button" class="btn btn-sm btn-success">

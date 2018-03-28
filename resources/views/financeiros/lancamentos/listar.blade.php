@@ -127,20 +127,22 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="tipo_conta" class="control-label">Plano de contas</label>
-                                                <select name="plano_conta" id="tipo_conta" class="form-control select2">
-                                                    <option selected disabled>SELECIONE</option>
-                                                    @foreach($tipos as $tipo)
-                                                        @foreach($tipo->grupos as $grupo)
-                                                            @foreach($grupo->contas as $conta)
-                                                                <option value="{{ $conta->id }}">
-                                                                    {{ "$tipo->tipo.$grupo->grupo.$conta->conta" }} -
-                                                                    <b>{{ $conta->descricao }}</b>
-                                                                </option>
+                                                <div class="form-group">
+                                                    <label for="tipo_conta" class="control-label">Plano de contas</label>
+                                                    <select name="plano_conta" id="tipo_conta" class="form-control">
+                                                        <option selected disabled>SELECIONE</option>
+                                                        @foreach($tipos as $tipo)
+                                                            @foreach($tipo->grupos as $grupo)
+                                                                @foreach($grupo->contas as $conta)
+                                                                    <option value="{{ $conta->id }}">
+                                                                        {{ "$tipo->tipo.$grupo->grupo.$conta->conta" }} -
+                                                                        <b>{{ $conta->descricao }}</b>
+                                                                    </option>
+                                                                @endforeach
                                                             @endforeach
                                                         @endforeach
-                                                    @endforeach
-                                                </select>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
                                         <!-- 2ª linha -->
@@ -183,15 +185,17 @@
                                         <!-- 3ª linha -->
                                         <div class="row">
                                             <div class="col-md-5">
-                                                <label for="fornecedor" class="control-label">Fornecedor</label>
-                                                <select name="fornecedor_id" id="fornecedor"
-                                                        class="form-control select2">
-                                                    <option selected disabled>===============SELECIONE===============
-                                                    </option>
-                                                    @foreach($fornecedores as $fornecedor)
-                                                        <option value="{{ $fornecedor->id }}">{{ $fornecedor->entidade->nome }}</option>
-                                                    @endforeach
-                                                </select>
+                                                <div class="form-group">
+                                                    <label for="fornecedor" class="control-label">Fornecedor</label>
+                                                    <select name="fornecedor_id" id="fornecedor"
+                                                            class="form-control">
+                                                        <option selected disabled>===============SELECIONE===============
+                                                        </option>
+                                                        @foreach($fornecedores as $fornecedor)
+                                                            <option value="{{ $fornecedor->id }}">{{ $fornecedor->entidade->nome }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
@@ -328,27 +332,18 @@
                                     </div>
                                 </div>
                             </form>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="box-tools pull-right">
-                                    <h3 class="text-green"><b>Saldo compensado: {{ isset($saldo_compensado) ? 'R$: '.number_format($saldo_compensado, 2,',','.') : 'Nenhum lançamento encontrado nesse período' }}</b></h3>
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <div class="box-tools pull-right">
+                                        <h3 class="text-green"><b>Saldo compensado: {{ isset($saldo_compensado) ? 'R$: '.number_format($saldo_compensado, 2,',','.') : 'Saldo não encontrado nesse período' }}</b></h3>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <h3 class="text-muted"><b>Saldo anterior: {{ isset($saldo_anterior) ? 'R$: '.number_format($saldo_anterior, 2,',','.') : 'Nenhum lançamento encontrado nesse período' }}</b></h3>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <div class="box-tools pull-right">
-                                    <h3 class="text-blue"><b>Saldo lançamento: {{ isset($saldo_lancamento) ? 'R$: '.number_format($saldo_lancamento, 2,',','.') : 'Nenhum lançamento encontrado nesse período' }}</b></h3>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="box-tools pull-right">
+                                        <h3 class="text-blue"><b>Saldo lançamento: {{ isset($saldo_lancamento) ? 'R$: '.number_format($saldo_lancamento, 2,',','.') : 'Saldo não encontrado nesse período' }}</b></h3>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -363,9 +358,9 @@
                             <th>Documento</th>
                             <th>Histórico</th>
                             <th>Plano contas</th>
-                            <th>Crédito</th>
-                            <th>Débito</th>
-                            <th>Saldo</th>
+                            <td align=right><b>Crédito</b></td>
+                            <td align=right><b>Débito</b></td>
+                            <td align=right><b>Saldo</b></td>
                             <th>Comp</th>
                             <th>Nota Fiscal</th>
                             <th>Parc</th>
@@ -378,9 +373,9 @@
                             <th>Documento</th>
                             <th>Histórico</th>
                             <th>Plano contas</th>
-                            <th>Crédito</th>
-                            <th>Débito</th>
-                            <th>Saldo</th>
+                            <td align=right><b>{{ isset($credito_periodo) ? number_format($credito_periodo, 2,',','.') : number_format(0, 2,',','.') }}</b></td>
+                            <td align=right><b>{{ isset($debito_periodo) ? number_format($debito_periodo, 2,',','.') : number_format(0, 2,',','.') }}</b></td>
+                            <th></th>
                             <th>Comp</th>
                             <th>Nota Fiscal</th>
                             <th>Parc</th>
@@ -388,6 +383,20 @@
                         </tr>
                         </tfoot>
                         <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><b>Saldo Inicial</b></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td align=right><b>{{ isset($saldo_anterior) ? number_format($saldo_anterior, 2,',','.') : number_format(0, 2,',','.') }}</b></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
                         @php $saldo_linha = isset($saldo_anterior) ? $saldo_anterior : 0; @endphp
                         @foreach($lancamentos as $lancamento)
                             @php $saldo_linha +=  ($lancamento->tipo == 'Credito') ? $lancamento->valor : $lancamento->valor*-1; @endphp

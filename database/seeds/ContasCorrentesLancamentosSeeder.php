@@ -11,6 +11,19 @@ class ContasCorrentesLancamentosSeeder extends Seeder
             [
                 'nota_fiscal' => '',
                 'parcela' => '',
+                'data_lancamento' => '2015-12-31',
+                'documento' => '',
+                'tipo' => '2',
+                'historico' => 'SALDO INICIAL',
+                'valor' => '58000.00',
+                'compensado' => '1',
+                'cheque' => '0',
+                'plano_conta_id' => '16',
+                'conta_corrente_id' => '12'
+            ],
+            [
+                'nota_fiscal' => '',
+                'parcela' => '',
                 'data_lancamento' => '2017-12-31',
                 'documento' => '',
                 'tipo' => '1',
@@ -372,7 +385,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'compensado' => '1',
                 'cheque' => '1',
                 'plano_conta_id' => '10',
-                'conta_corrente_id' => '12',
+                'conta_corrente_id' => '11',
                 'fornecedor_id' => '2'
             ],
             [
@@ -398,7 +411,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'compensado' => '1',
                 'cheque' => '0',
                 'plano_conta_id' => '1',
-                'conta_corrente_id' => '12'
+                'conta_corrente_id' => '11'
             ],
             [
                 'data_lancamento' => '2018-01-31',
