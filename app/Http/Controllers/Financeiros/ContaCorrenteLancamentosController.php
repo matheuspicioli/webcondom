@@ -267,4 +267,17 @@ class ContaCorrenteLancamentosController extends Controller
         return redirect()->back();
         //return redirect()->route('financeiros.lancamentos.listar', ['conta_id' => $request->conta_id]);
     }
+
+    public function Excluir($id, $conta_id, $dias = null)
+    {
+        $lancamento = ContaCorrenteLancamento::find($id);
+        if($lancamento){
+            $lancamento->delete();
+            if($dias) {
+                return redirect()->route('financeiros.lancamentos.listar', ['conta_id' => $conta_id, 'dias' => $dias]);
+            } else {
+                return redirect()->route('financeiros.lancamentos.listar', ['conta_id' => $conta_id]);
+            }
+        }
+    }
 }

@@ -431,6 +431,35 @@
                                         <i class="fa fa-trash"></i></button>
                                     <a href="" class="btn btn-success btn-xs" title="Compensar Cheque">
                                         <i class="fa fa-cc"></i></a>
+                                    <!-- MODAL EXCLUSÃO -->
+                                    <div id="modal-danger-{{$lancamento->id}}" class="modal modal-danger fade">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                    <h3 class="modal-title">Confirmar exclusão</h3>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h3>Dados da exclusão: </h3>
+                                                    <p>Data:   {{ $lancamento->data_lancamento->format('d/m/Y') }}</p>
+                                                    <p>Documento: {{ $lancamento->documento }}</p>
+                                                    <p>Histórico:   {{ $lancamento->historico }}</p>
+                                                    <p>Valor:   {{ number_format($lancamento->valor, 2,',','.') }}</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
+                                                    <form method="POST" action="{{ route('financeiros.lancamentos.excluir', ['id' => $lancamento->id, 'conta_id' => $contaL->id ]) }}">
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('DELETE') }}
+                                                        <button class="btn btn-outline" type="submit">Confirmar exclusão</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </td>
                             </tr>
                         @endforeach
