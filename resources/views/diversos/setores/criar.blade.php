@@ -33,8 +33,10 @@
                         <form action="{{ route('diversos.setores.salvar') }}" method="POST">
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <label for="Descricao" class="control-label">Descrição</label>
-                                <input id="Descricao" type="text" class="form-control" name="descricao">
+								<span class="error" v-show="true"></span>
+								<label for="Descricao" class="control-label">Descrição</label>
+                                <input v-validate="'required|email'" id="Descricao" type="text" class="form-control" name="descricao">
+								<span v-show="errors.has('descricao')">@{{ errors.first('descricao') }}</span>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -62,8 +64,14 @@
         </div>
     @endcan
 @endsection
+
 @section('js')
-    <script>
+	<script src="{{ asset('js/app.js') }}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vee-validate@latest/dist/vee-validate.js"></script>
+	<script>
+		Vue.use(VeeValidate);
+
         $(document).ready(function () {
             $('#Descricao').focus();
         });

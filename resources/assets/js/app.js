@@ -6,24 +6,18 @@
  */
 
 require('./bootstrap');
-
 window.Vue = require('vue');
 
-//let VueMaterial = require('vue-material');
-//Vue.use(VueMaterial);
+import VeeValidate from 'vee-validate';
+import Mask from 'jquery-mask-plugin';
+
+Vue.use(VeeValidate);
+Vue.use(Mask);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
-Vue.component('pagina', require('./components/Pagina.vue'));
-Vue.component('painel', require('./components/Painel.vue'));
-Vue.component('formulario', require('./components/Formulario.vue'));
-Vue.component('modal', require('./components/modal/Modal.vue'));
-Vue.component('modal-link', require('./components/modal/ModalLink.vue'));
-Vue.component('migalha', require('./components/Migalhas.vue'));
-Vue.component('md-table', require('./components/MdTable.vue'));
 
 const app = new Vue({
     el: '#app'
