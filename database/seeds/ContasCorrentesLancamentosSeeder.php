@@ -17,7 +17,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'historico' => 'SALDO INICIAL',
                 'valor' => '58000.00',
                 'compensado' => '1',
-                'cheque' => '0',
+                'cheque' => '2',
                 'plano_conta_id' => '16',
                 'conta_corrente_id' => '12'
             ],
@@ -30,7 +30,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'historico' => 'SALDO INICIAL',
                 'valor' => '2000.00',
                 'compensado' => '1',
-                'cheque' => '0',
+                'cheque' => '2',
                 'plano_conta_id' => '16',
                 'conta_corrente_id' => '11'
             ],
@@ -57,7 +57,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'historico' => 'COMPRA DE MATERIAL LIMPEZA',
                 'valor' => '90',
                 'compensado' => '1',
-                'cheque' => '0',
+                'cheque' => '2',
                 'plano_conta_id' => '12',
                 'conta_corrente_id' => '11'
             ],
@@ -82,7 +82,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'historico' => 'LIQ.DE COBRANCA',
                 'valor' => '3169',
                 'compensado' => '1',
-                'cheque' => '0',
+                'cheque' => '2',
                 'plano_conta_id' => '1',
                 'conta_corrente_id' => '11'
             ],
@@ -93,7 +93,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'historico' => 'TAXA DE ADM.',
                 'valor' => '937',
                 'compensado' => '1',
-                'cheque' => '0',
+                'cheque' => '2',
                 'plano_conta_id' => '9',
                 'conta_corrente_id' => '11',
             ],
@@ -118,7 +118,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'historico' => 'CONTA DE LUZ',
                 'valor' => '868.27',
                 'compensado' => '1',
-                'cheque' => '0',
+                'cheque' => '2',
                 'plano_conta_id' => '7',
                 'conta_corrente_id' => '11'
             ],
@@ -129,7 +129,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'historico' => 'LIQ.DE COBRANCA',
                 'valor' => '2680',
                 'compensado' => '1',
-                'cheque' => '0',
+                'cheque' => '2',
                 'plano_conta_id' => '1',
                 'conta_corrente_id' => '11'
             ],
@@ -168,7 +168,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'historico' => 'LIQ.DE COBRANCA',
                 'valor' => '3000',
                 'compensado' => '1',
-                'cheque' => '0',
+                'cheque' => '2',
                 'plano_conta_id' => '1',
                 'conta_corrente_id' => '11'
             ],
@@ -179,7 +179,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'historico' => 'TAXA DE ADM.',
                 'valor' => '937',
                 'compensado' => '1',
-                'cheque' => '0',
+                'cheque' => '2',
                 'plano_conta_id' => '9',
                 'conta_corrente_id' => '11',
             ],
@@ -204,7 +204,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'historico' => 'CONTA DE AGUA E ESGOTO',
                 'valor' => '133',
                 'compensado' => '1',
-                'cheque' => '0',
+                'cheque' => '2',
                 'plano_conta_id' => '8',
                 'conta_corrente_id' => '11'
             ],
@@ -215,7 +215,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'historico' => 'LIQ.DE COBRANCA',
                 'valor' => '1000',
                 'compensado' => '1',
-                'cheque' => '0',
+                'cheque' => '2',
                 'plano_conta_id' => '1',
                 'conta_corrente_id' => '11'
             ],
@@ -240,7 +240,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'historico' => 'SALARIO FUNCIONARIOS',
                 'valor' => '5322.90',
                 'compensado' => '1',
-                'cheque' => '0',
+                'cheque' => '2',
                 'plano_conta_id' => '4',
                 'conta_corrente_id' => '11'
             ],
@@ -265,7 +265,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'historico' => 'FERIAS E 13.SALARIO',
                 'valor' => '1200.00',
                 'compensado' => '1',
-                'cheque' => '0',
+                'cheque' => '2',
                 'plano_conta_id' => '6',
                 'conta_corrente_id' => '11'
             ],
@@ -287,7 +287,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'historico' => 'LIQ.DE COBRANCA',
                 'valor' => '5069',
                 'compensado' => '1',
-                'cheque' => '0',
+                'cheque' => '2',
                 'plano_conta_id' => '1',
                 'conta_corrente_id' => '11'
             ],
@@ -298,7 +298,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'historico' => 'TAXA DE ADM ',
                 'valor' => '937',
                 'compensado' => '1',
-                'cheque' => '0',
+                'cheque' => '2',
                 'plano_conta_id' => '9',
                 'conta_corrente_id' => '11',
             ],
@@ -309,7 +309,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'historico' => 'SALARIO FUNCIONARIOS',
                 'valor' => '4500.90',
                 'compensado' => '1',
-                'cheque' => '0',
+                'cheque' => '2',
                 'plano_conta_id' => '4',
                 'conta_corrente_id' => '11'
             ],
@@ -320,7 +320,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'historico' => 'CONTA DE LUZ - CPFL',
                 'valor' => '763.77',
                 'compensado' => '1',
-                'cheque' => '0',
+                'cheque' => '2',
                 'plano_conta_id' => '7',
                 'conta_corrente_id' => '11'
             ],
@@ -331,7 +331,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'historico' => 'LIQ.DE COBRANCA',
                 'valor' => '2555',
                 'compensado' => '1',
-                'cheque' => '0',
+                'cheque' => '2',
                 'plano_conta_id' => '1',
                 'conta_corrente_id' => '11'
             ],
@@ -370,7 +370,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'historico' => 'FERIAS E 13.SALARIO',
                 'valor' => '1750.00',
                 'compensado' => '1',
-                'cheque' => '0',
+                'cheque' => '2',
                 'plano_conta_id' => '6',
                 'conta_corrente_id' => '11'
             ],
@@ -409,7 +409,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'historico' => 'LIQ.DE COBRANCA',
                 'valor' => '8000',
                 'compensado' => '1',
-                'cheque' => '0',
+                'cheque' => '2',
                 'plano_conta_id' => '1',
                 'conta_corrente_id' => '11'
             ],
@@ -420,7 +420,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'historico' => 'LIQ.DE COBRANCA',
                 'valor' => '3000',
                 'compensado' => '2',
-                'cheque' => '0',
+                'cheque' => '2',
                 'plano_conta_id' => '1',
                 'conta_corrente_id' => '11'
             ],
@@ -431,7 +431,7 @@ class ContasCorrentesLancamentosSeeder extends Seeder
                 'historico' => 'TAXA DE ADM ',
                 'valor' => '1000',
                 'compensado' => '2',
-                'cheque' => '0',
+                'cheque' => '2',
                 'plano_conta_id' => '9',
                 'conta_corrente_id' => '11',
             ],

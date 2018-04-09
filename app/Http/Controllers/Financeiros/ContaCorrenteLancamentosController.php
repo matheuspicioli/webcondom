@@ -193,6 +193,7 @@ class ContaCorrenteLancamentosController extends Controller
         $fornecedores   = $this->fornecedor->all();
         $contas         = $this->conta->all();
         $tipos          = $this->plano_conta->all();
+        $dias           = null;
         $lancamentosAnteriores = $this->LancamentosAnteriores($data_inicial_anterior->subDay(1),$request->conta_id);
 
         $saldo_compensado_anterior = $this->SaldoCompensadoAnterior($lancamentosAnteriores,$request->conta_id);
@@ -203,9 +204,9 @@ class ContaCorrenteLancamentosController extends Controller
         $credito_periodo  = $this->CreditoPeriodo($lancamentos);
 
         if($contaL)
-            return view('financeiros.lancamentos.listar', compact('credito_periodo','debito_periodo','saldo_compensado','saldo_lancamento','saldo_anterior','data_final','data_inicial','contaL','lancamentos','fornecedores','condominio','banco','contas','tipos'));
+            return view('financeiros.lancamentos.listar', compact('credito_periodo','debito_periodo','saldo_compensado','saldo_lancamento','saldo_anterior','data_final','data_inicial','contaL','lancamentos','fornecedores','condominio','banco','contas','tipos','dias'));
 
-        return view('financeiros.lancamentos.listar', compact('credito_periodo','debito_periodo','saldo_compensado','saldo_lancamento','saldo_anterior','data_final','data_inicial','lancamentos','fornecedores','contas','tipos'));
+        return view('financeiros.lancamentos.listar', compact('credito_periodo','debito_periodo','saldo_compensado','saldo_lancamento','saldo_anterior','data_final','data_inicial','lancamentos','fornecedores','contas','tipos','dias'));
     }
 
     public function Listar($conta_id, $dias = null)
@@ -238,13 +239,13 @@ class ContaCorrenteLancamentosController extends Controller
                     $debito_periodo   = $this->DebitoPeriodo($lancamentos);
                     $credito_periodo  = $this->CreditoPeriodo($lancamentos);
                 }
-                return view('financeiros.lancamentos.listar', compact('credito_periodo','debito_periodo','saldo_lancamento', 'saldo_anterior', 'saldo_compensado', 'contaL', 'lancamentos', 'fornecedores', 'condominio', 'banco', 'contas', 'tipos'));
+                return view('financeiros.lancamentos.listar', compact('credito_periodo','debito_periodo','saldo_lancamento', 'saldo_anterior', 'saldo_compensado', 'contaL', 'lancamentos', 'fornecedores', 'condominio', 'banco', 'contas', 'tipos', 'dias'));
             }
         }
         if($contaL)
-            return view('financeiros.lancamentos.listar', compact('credito_periodo','debito_periodo','saldo_lancamento', 'saldo_anterior','saldo_compensado','contaL','lancamentos','fornecedores','condominio','banco','contas','tipos'));
+            return view('financeiros.lancamentos.listar', compact('credito_periodo','debito_periodo','saldo_lancamento', 'saldo_anterior','saldo_compensado','contaL','lancamentos','fornecedores','condominio','banco','contas','tipos','dias'));
 
-        return view('financeiros.lancamentos.listar', compact('credito_periodo','debito_periodo','saldo_lancamento', 'saldo_anterior','saldo_compensado','lancamentos','fornecedores','contas','tipos'));
+        return view('financeiros.lancamentos.listar', compact('credito_periodo','debito_periodo','saldo_lancamento', 'saldo_anterior','saldo_compensado','lancamentos','fornecedores','contas','tipos','dias'));
     }
 
     public function Salvar(Request $request)
@@ -265,7 +266,6 @@ class ContaCorrenteLancamentosController extends Controller
         }
         $this->lancamento->create($dados);
         return redirect()->back();
-        //return redirect()->route('financeiros.lancamentos.listar', ['conta_id' => $request->conta_id]);
     }
 
     public function Excluir($id, $conta_id, $dias = null)
@@ -276,8 +276,53 @@ class ContaCorrenteLancamentosController extends Controller
             if($dias) {
                 return redirect()->route('financeiros.lancamentos.listar', ['conta_id' => $conta_id, 'dias' => $dias]);
             } else {
-                return redirect()->route('financeiros.lancamentos.listar', ['conta_id' => $conta_id]);
+                return redirect()->route('financeiros.lancamentos.listar', ['conta_id' => $conta_id, 'dias' => null]);
             }
         }
     }
+    public function Exibir($id, $conta_id, $dias = null)
+    {
+        $contaL             = ! is_null($conta_id) ? $this->conta->find($conta_id) : null;
+        $condominio         = $this->condominio->where('id', $contaL->condominio_id)->first();
+        $banco              = $this->banco->where('id', $contaL->banco_id)->first();
+        $fornecedores       = $this->fornecedor->all();
+        $contas             = $this->conta->all();
+        $tipos              = $this->plano_conta->all();
+        $lancamento         = ContaCorrenteLancamento::find($id) ? ContaCorrenteLancamento::find($id) : null;
+        if ($lancamento) {
+            return view('financeiros.lancamentos.exibir', compact('lancamento','contaL','condominio','banco','fornecedores','tipos','contas','dias'));
+        }
+    }
+
+    public function Alterar(Request $request, $id, $conta_id, $dias = null)
+    {
+        $dados = $request->all();
+
+        if ($request->exists('plano_conta')) {
+            $dados['plano_conta_id']    = $request->plano_conta;
+        }
+        if ( $request->exists('cheque') ) {
+            $dados['cheque'] = $dados['cheque'] == "on" ? 'Sim' : 'Nao';
+        }
+        if ( $request->exists('compensado') ) {
+            $dados['compensado'] = $dados['compensado'] == "on" ? 'Sim' : 'Nao';
+        }
+        if ( $request->exists('assinado') ) {
+            $dados['assinado'] = $dados['assinado'] == "on" ? 'Sim' : 'Nao';
+        }
+        $lancamento = ContaCorrenteLancamento::find($id);
+        if($lancamento){
+            $lancamento->update($dados);
+            //return redirect()->route('financeiros.lancamentos.listar',['conta_id' => $conta_id]);
+            if($dias) {
+                return redirect()->route('financeiros.lancamentos.listar', ['conta_id' => $conta_id, 'dias' => $dias]);
+            } else {
+                return redirect()->route('financeiros.lancamentos.listar', ['conta_id' => $conta_id, 'dias' => $dias]);
+            }
+
+        }
+        return redirect()->route('financeiros.lancamentos.listar',['conta_id' => $conta_id, 'dias' => $dias]);
+    }
+
+
 }

@@ -423,14 +423,16 @@
                                 <td>{{ $lancamento->nota_fiscal }}</td>
                                 <td>{{ $lancamento->parcela }}</td>
                                 <td>
-                                    <a href="" class="btn btn-warning btn-xs" title="Editar">
+                                        <a class="btn btn-xs btn-warning" href="{{ route('financeiros.lancamentos.exibir', ['id' => $lancamento->id, 'conta_id' => $contaL->id, 'dias' => $dias ]) }}" title="Editar">
                                         <i class="fa fa-pencil"></i></a>
                                     <button type="button" data-toggle="modal"
                                             data-target="#modal-danger-{{$lancamento->id}}" href="#"
                                             class="btn btn-xs btn-danger" title="Excluir">
                                         <i class="fa fa-trash"></i></button>
-                                    <a href="" class="btn btn-success btn-xs" title="Compensar Cheque">
-                                        <i class="fa fa-cc"></i></a>
+                                    <button type="button" data-toggle="modal"
+                                            data-target="#modal-primary-{{$lancamento->id}}" href="#"
+                                            class="btn btn-xs btn-primary" title="Compensar Cheque">
+                                        <i class="fa fa-cc"></i></button>
                                     <!-- MODAL EXCLUSÃO -->
                                     <div id="modal-danger-{{$lancamento->id}}" class="modal modal-danger fade">
                                         <div class="modal-dialog">
@@ -450,7 +452,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
-                                                    <form method="POST" action="{{ route('financeiros.lancamentos.excluir', ['id' => $lancamento->id, 'conta_id' => $contaL->id ]) }}">
+                                                    <form method="POST" action="{{ route('financeiros.lancamentos.excluir', ['id' => $lancamento->id, 'conta_id' => $contaL->id, 'dias' => $dias ]) }}">
                                                         {{ csrf_field() }}
                                                         {{ method_field('DELETE') }}
                                                         <button class="btn btn-outline" type="submit">Confirmar exclusão</button>
@@ -459,7 +461,37 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- MODAL COMPENSAR CHEQUE  -->
+                                    <div id="modal-primary-{{$lancamento->id}}" class="modal modal-primary fade">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                    <h3 class="modal-title">Compensar Lançamento</h3>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h3>Dados do Lançamento: </h3>
+                                                    <p>Data:   {{ $lancamento->data_lancamento->format('d/m/Y') }}</p>
+                                                    <p>Documento: {{ $lancamento->documento }}</p>
+                                                    <p>Histórico:   {{ $lancamento->historico }}</p>
+                                                    <p>Valor:   {{ number_format($lancamento->valor, 2,',','.') }}</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
+                                                    <form method="POST" action="{{ route('financeiros.lancamentos.alterar', ['id' => $lancamento->id, 'conta_id' => $contaL->id, 'dias' => $dias]) }}">
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('PUT') }}
 
+                                                        <input type="hidden" name="compensado" id="compensado-cc" value="{{ $lancamento->compensado = '1' }}">
+
+                                                        <button class="btn btn-outline" type="submit">Compensar</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
