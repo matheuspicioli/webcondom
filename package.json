@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "jquery-mask-plugin": "^1.14.15",
+    "jquery-validation": "^1.17.0",
     "vee-validate": "^2.0.6",
     "vue-material": "^0.8.1"
   }

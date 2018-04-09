@@ -30,24 +30,30 @@
                         <h3 class="box-title">Cadastrar setor</h3>
                     </div>
                     <div class="box-body">
-                        <form action="{{ route('diversos.setores.salvar') }}" method="POST">
+						@if ($errors->any())
+							<div class="alert alert-danger">
+								<ul>
+									@foreach ($errors->all() as $error)
+										<li>{{ $error }}</li>
+									@endforeach
+								</ul>
+							</div>
+						@endif
+                        <form action="{{ route('diversos.setores.salvar') }}" method="POST" id="form">
                             {{ csrf_field() }}
                             <div class="form-group">
-								<span class="error" v-show="true"></span>
 								<label for="Descricao" class="control-label">Descrição</label>
-                                <input v-validate="'required|email'" id="Descricao" type="text" class="form-control" name="descricao">
-								<span v-show="errors.has('descricao')">@{{ errors.first('descricao') }}</span>
+                                <input id="Descricao" type="text" class="form-control" name="descricao" value="{{ old('descricao') }}">
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <button class="btn btn-primary" type="submit">
+                                        <button class="btn btn-primary" type="submit" id="cadastrar">
                                             <i class="fa fa-save"></i> Cadastrar</button>
                                     </div>
                                 </div>
                             </div>
                         </form>
-                        </div:
                     </div>
                 </div>
             </div>
@@ -64,16 +70,33 @@
         </div>
     @endcan
 @endsection
-
+@section('css')
+	<style>
+		.error{
+			#color: #f56954;
+		}
+	</style>
+@endsection
 @section('js')
 	<script src="{{ asset('js/app.js') }}"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/vee-validate@latest/dist/vee-validate.js"></script>
 	<script>
-		Vue.use(VeeValidate);
-
         $(document).ready(function () {
             $('#Descricao').focus();
-        });
+
+			// $("#form").validate({
+			// 	rules : {
+			// 		descricao:{
+			// 			required: true,
+			// 			minlength: 3
+			// 		}
+			// 	},
+			// 	messages:{
+			// 		descricao:{
+			// 			required: "Por favor, informe a descrição do setor.",
+			// 			minlength: $.validator.format("A descrição do setor deve ter pelo menos, {0} caracteres.")
+			// 		}
+			// 	}
+			// });
+		});
     </script>
 @stop
