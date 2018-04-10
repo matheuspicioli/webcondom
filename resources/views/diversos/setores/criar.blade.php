@@ -30,20 +30,18 @@
                         <h3 class="box-title">Cadastrar setor</h3>
                     </div>
                     <div class="box-body">
-						@if ($errors->any())
-							<div class="alert alert-danger">
-								<ul>
-									@foreach ($errors->all() as $error)
-										<li>{{ $error }}</li>
-									@endforeach
-								</ul>
-							</div>
-						@endif
                         <form action="{{ route('diversos.setores.salvar') }}" method="POST" id="form">
                             {{ csrf_field() }}
-                            <div class="form-group">
-								<label for="Descricao" class="control-label">Descrição</label>
-                                <input id="Descricao" type="text" class="form-control" name="descricao" value="{{ old('descricao') }}">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="Descricao" class="control-label" @if($errors->has('descricao')) style="color: #f56954" @endif>Descrição</label>
+                                        <input id="Descricao" type="text" class="form-control" @if($errors->has('descricao')) style="border: 1px solid #f56954" @endif name="descricao" value="{{ old('descricao') }}">
+                                        @if( $errors->has('descricao') )
+                                            <span style="color: #f56954">{{ $errors->get('descricao')[0] }}</span>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -70,33 +68,12 @@
         </div>
     @endcan
 @endsection
-@section('css')
-	<style>
-		.error{
-			#color: #f56954;
-		}
-	</style>
-@endsection
 @section('js')
 	<script src="{{ asset('js/app.js') }}"></script>
 	<script>
         $(document).ready(function () {
             $('#Descricao').focus();
 
-			// $("#form").validate({
-			// 	rules : {
-			// 		descricao:{
-			// 			required: true,
-			// 			minlength: 3
-			// 		}
-			// 	},
-			// 	messages:{
-			// 		descricao:{
-			// 			required: "Por favor, informe a descrição do setor.",
-			// 			minlength: $.validator.format("A descrição do setor deve ter pelo menos, {0} caracteres.")
-			// 		}
-			// 	}
-			// });
 		});
     </script>
 @stop

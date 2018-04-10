@@ -1,6 +1,6 @@
 <?php
 
-namespace WebCondom\Http\Requests;
+namespace WebCondom\Http\Requests\Diversos;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +24,7 @@ class SetorRequest extends FormRequest
     public function rules()
     {
         return [
-			'descricao' => 'required|min:5'
+			'descricao' => 'required|min:5|max:100'
         ];
     }
 }

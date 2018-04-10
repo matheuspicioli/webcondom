@@ -4,7 +4,7 @@ namespace WebCondom\Http\Controllers\Diversos;
 
 use Illuminate\Http\Request;
 use WebCondom\Http\Controllers\Controller;
-use WebCondom\Http\Requests\SetorRequest;
+use WebCondom\Http\Requests\Diversos\SetorRequest;
 use WebCondom\Models\Diversos\Setor;
 
 class SetoresController extends Controller
