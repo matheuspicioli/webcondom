@@ -25,8 +25,7 @@ class TaxaRequest extends FormRequest
     {
         return [
         	'descricao' 	=> 'required|max:100',
-			'valor'			=> 'required|max:100',
-			'condominio_id'	=> 'required'
+			'valor'			=> 'required|max:100'
         ];
     }
 }

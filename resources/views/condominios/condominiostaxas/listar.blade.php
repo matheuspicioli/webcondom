@@ -15,7 +15,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-1">
-            <a href="{{ route('condominios.condominiostaxas.criar') }}" class="btn btn-success">
+            <a href="{{ route('condominios.condominiostaxas.criar',['idCondominio' => $idCondominio]) }}" class="btn btn-success">
                 <i class="fa fa-plus"></i> Cadastrar</a>
             <hr>
         </div>
@@ -51,7 +51,7 @@
                                 <td>{{ $taxa->descricao }}</td>
                                 <td>{{ $taxa->valor }}</td>
                                 <td>
-                                    <a href="{{ route('condominios.condominiostaxas.exibir', ['id' => $taxa->id, 'idCondominio' => $condominio->id]) }}"
+                                    <a href="{{ route('condominios.condominiostaxas.exibir', ['id' => $taxa->id, 'idCondominio' => $idCondominio]) }}"
                                        class="btn btn-success">
                                         <i class="fa fa-pencil"></i></a>
                                     <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-danger-{{$taxa->id}}">
@@ -72,7 +72,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
-                                                    <form method="POST" action="{{ route('condominios.condominiostaxas.excluir', ['id' => $taxa->id, 'idCondominio' => $condominio->id]) }}">
+                                                    <form method="POST" action="{{ route('condominios.condominiostaxas.excluir', ['id' => $taxa->id, 'idCondominio' => $idCondominio]) }}">
                                                         {{ csrf_field() }}
                                                         {{ method_field('DELETE') }}
                                                         <button class="btn btn-outline" type="submit">Confirmar exclusão</button>

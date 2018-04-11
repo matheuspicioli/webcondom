@@ -35,4 +35,18 @@ class Imovel extends Model
     {
         return $this->belongsTo('WebCondom\Models\Condominios\Condominio');
     }
+
+	public function setValorLocacaoAttribute($valor)
+	{
+		$valor = str_replace('.', '', $valor);
+		$valor = str_replace(',', '.', $valor);
+		$this->attributes['valor_locacao'] = $valor;
+	}
+
+	public function setValorVendaAttribute($valor)
+	{
+		$valor = str_replace('.', '', $valor);
+		$valor = str_replace(',', '.', $valor);
+		$this->attributes['valor_venda'] = $valor;
+	}
 }
