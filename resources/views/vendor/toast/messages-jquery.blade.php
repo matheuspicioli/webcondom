@@ -8,7 +8,7 @@
 		toastr.options = {
 			"closeButton": true,
 			"newestOnTop": true,
-			"positionClass": "toast-top-right"
+			"positionClass": "toast-top-center"
 		};
 
 		@foreach(Session::get('toasts') as $toast)

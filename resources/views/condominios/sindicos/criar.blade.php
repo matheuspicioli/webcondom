@@ -30,7 +30,7 @@
                         <h3 class="box-title">Cadastrar Síndico</h3>
                     </div>
                     <div class="box-body">
-                        <form action="{{ route('condominios.sindicos.salvar') }}" method="POST">
+                        <form action="{{ route('condominios.sindicos.salvar') }}" method="POST" id="form">
                             {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-md-6">
@@ -55,7 +55,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <button class="btn btn-primary" type="submit">
+                                        <button class="btn btn-primary" type="submit" id="salvar">
                                             <i class="fa fa-save"></i> Cadastrar</button>
                                     </div>
                                 </div>
@@ -81,6 +81,15 @@
     <script>
         $(document).ready(function () {
             $('#Nome').focus();
+            $('#Celular').mask('(00) 00000-0000');
+            $('#Telefone').mask('(00) 0000-0000');
         });
+        $('#salvar').on('click', function(e){
+            e.preventDefault();
+            $('#Celular').unmask();
+            $('#Telefone').unmask();
+            $('#form').submit();
+        });
+
     </script>
 @stop
