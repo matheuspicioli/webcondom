@@ -15,33 +15,28 @@ class CondominiosController extends Controller
 {
 	private $condominio;
 	private $endereco;
+	private $sindico;
+	private $cidade;
 
-	public function __construct(Condominio $condominio, Endereco $endereco)
+	public function __construct(Condominio $condominio, Endereco $endereco, Sindico $sindico, Cidade $cidade)
 	{
-		$this->condominio = $condominio;
-		$this->endereco = $endereco;
+		$this->condominio 	= $condominio;
+		$this->endereco 	= $endereco;
+		$this->sindico 		= $sindico;
+		$this->cidade 		= $cidade;
 	}
 
 	public function Listar()
     {
-        $condominios = Condominio::all();
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Condominios', 'url' => '']
-        ]);
-        return view('condominios.condominios.listar', compact('condominios', 'migalhas'));
+        $condominios = $this->condominio->all();
+        return view('condominios.condominios.listar', compact('condominios'));
     }
 
     public function Criar()
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Condominios', 'url' => route('condominios.condominios.listar')],
-            ['titulo' => 'Cadastrar condomínio', 'url' => '']
-        ]);
-        $sindicos = Sindico::all();
-        $cidades = Cidade::all();
-        return view('condominios.condominios.criar', compact('sindicos', 'cidades', 'migalhas'));
+        $sindicos = $this->sindico->all();
+        $cidades = $this->cidade->all();
+        return view('condominios.condominios.criar', compact('sindicos', 'cidades'));
     }
 
     public function Salvar(CondominioRequest $request)
@@ -57,15 +52,15 @@ class CondominiosController extends Controller
 
     public function Exibir($id)
     {
-        $condominio = Condominio::find($id) ? Condominio::find($id) : null;
+        $condominio = $this->condominio->find($id) ? $this->condominio->find($id) : null;
 
         if ($condominio) {
-            $taxas = $condominio->taxas;
-            $sindicos = Sindico::all();
-            $cidades = Cidade::all();
-            return view('condominios.condominios.exibir', compact('condominio', 'sindicos', 'cidades', 'taxas', 'migalhas'));
+            $taxas 		= $condominio->taxas;
+            $sindicos 	= $this->sindico->all();
+            $cidades 	= $this->cidade->all();
+            return view('condominios.condominios.exibir', compact('condominio', 'sindicos', 'cidades', 'taxas'));
         } else
-            return redirect()->route('condominios.condominios.criar', 'migalhas');
+            return redirect()->route('condominios.condominios.criar');
     }
 
     public function Alterar(CondominioRequest $request, $id)
@@ -77,8 +72,8 @@ class CondominiosController extends Controller
 		$condominio->endereco()->update($request->all());
         //SALVA O RELACIONAMENTO TAMBÉM
         $condominio->push();
-        $request->session()->flash('info', 'Condomínio alterado com sucesso!');
-        return redirect()->route('condominios.condominios.listar');
+        return redirect()->route('condominios.condominios.listar')
+			->with('success', 'Condominio alterado com sucesso!');
     }
 
     public function Excluir(Request $request, $id)
