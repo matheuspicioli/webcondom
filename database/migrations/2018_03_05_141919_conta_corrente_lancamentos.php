@@ -18,14 +18,14 @@ class ContaCorrenteLancamentos extends Migration
             $table->string('nota_fiscal',10)->nullable();
             $table->string('parcela',3)->nullable();
             $table->date('data_lancamento');
-            $table->string('documento',50);
+            $table->string('documento',50)->nullable();
             $table->enum('tipo', ['Debito', 'Credito']);
             $table->string('historico',100);
             $table->decimal('valor',12,2);
             $table->enum('compensado', ['Sim', 'Nao'])->default('Nao');
 
             ##########CAMPOS PARA O CHEQUE##########
-            $table->enum('cheque', ['Sim', 'Nao']);
+            $table->enum('cheque', ['Sim', 'Nao'])->default('Nao');
             $table->date('enviado_em')->nullable();
             $table->date('retorno_em')->nullable();
             $table->enum('assinado', ['Sim', 'Nao']);
