@@ -4,11 +4,19 @@ namespace WebCondom\Http\Controllers\Diversos;
 
 use Illuminate\Http\Request;
 use WebCondom\Http\Controllers\Controller;
+use WebCondom\Http\Requests\Diversos\SetorRequest;
 use WebCondom\Models\Diversos\Setor;
 
 class SetoresController extends Controller
 {
-    public function Listar()
+	private $setor;
+
+	public function __construct(Setor $setor)
+	{
+		$this->setor = $setor;
+	}
+
+	public function Listar()
     {
         $migalhas = json_encode([
             ['titulo' => 'Home', 'url' => route('home')],
@@ -20,18 +28,12 @@ class SetoresController extends Controller
 
     public function Criar()
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Setores', 'url' => route('diversos.setores.listar')],
-            ['titulo' => 'Cadastrar setor', 'url' => '']
-        ]);
         return view('diversos.setores.criar', compact('migalhas'));
     }
 
-    public function Salvar(Request $request)
+    public function Salvar(SetorRequest $request)
     {
-        //dd($request->except('_token'));
-        Setor::create($request->all());
+        $this->setor->create($request->all());
         return redirect()->route('diversos.setores.listar');
     }
 

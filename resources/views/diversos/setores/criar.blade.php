@@ -30,22 +30,28 @@
                         <h3 class="box-title">Cadastrar setor</h3>
                     </div>
                     <div class="box-body">
-                        <form action="{{ route('diversos.setores.salvar') }}" method="POST">
+                        <form action="{{ route('diversos.setores.salvar') }}" method="POST" id="form">
                             {{ csrf_field() }}
-                            <div class="form-group">
-                                <label for="Descricao" class="control-label">Descrição</label>
-                                <input id="Descricao" type="text" class="form-control" name="descricao">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="Descricao" class="control-label" @if($errors->has('descricao')) style="color: #f56954" @endif>Descrição</label>
+                                        <input id="Descricao" type="text" class="form-control" @if($errors->has('descricao')) style="border: 1px solid #f56954" @endif name="descricao" value="{{ old('descricao') }}">
+                                        @if( $errors->has('descricao') )
+                                            <span style="color: #f56954">{{ $errors->get('descricao')[0] }}</span>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <button class="btn btn-primary" type="submit">
+                                        <button class="btn btn-primary" type="submit" id="cadastrar">
                                             <i class="fa fa-save"></i> Cadastrar</button>
                                     </div>
                                 </div>
                             </div>
                         </form>
-                        </div:
                     </div>
                 </div>
             </div>
@@ -63,9 +69,11 @@
     @endcan
 @endsection
 @section('js')
-    <script>
+	<script src="{{ asset('js/app.js') }}"></script>
+	<script>
         $(document).ready(function () {
             $('#Descricao').focus();
-        });
+
+		});
     </script>
 @stop

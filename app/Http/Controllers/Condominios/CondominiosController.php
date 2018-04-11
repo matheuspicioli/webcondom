@@ -4,6 +4,7 @@ namespace WebCondom\Http\Controllers\Condominios;
 
 use Illuminate\Http\Request;
 use WebCondom\Http\Controllers\Controller;
+use WebCondom\Http\Requests\Condominios\CondominioRequest;
 use WebCondom\Models\Condominios\Condominio;
 use WebCondom\Models\Condominios\CondominioTaxa;
 use WebCondom\Models\Condominios\Sindico;
@@ -12,7 +13,16 @@ use WebCondom\Models\Enderecos\Endereco;
 
 class CondominiosController extends Controller
 {
-    public function Listar()
+	private $condominio;
+	private $endereco;
+
+	public function __construct(Condominio $condominio, Endereco $endereco)
+	{
+		$this->condominio = $condominio;
+		$this->endereco = $endereco;
+	}
+
+	public function Listar()
     {
         $condominios = Condominio::all();
         $migalhas = json_encode([
@@ -34,15 +44,11 @@ class CondominiosController extends Controller
         return view('condominios.condominios.criar', compact('sindicos', 'cidades', 'migalhas'));
     }
 
-    public function Salvar(Request $request)
+    public function Salvar(CondominioRequest $request)
     {
         //----ENDEREÇO DO CONDOMINIO---//
-        $endereco = new Endereco($request->only(
-            'logradouro', 'numero','cep','bairro','cidade_id'
-        ));
-        $endereco->save();
-
-        $condominio = Condominio::create($request->all());
+        $endereco 	= $this->endereco->create($request->all());
+        $condominio = $this->condominio->create($request->all());
         $condominio->endereco()->associate($endereco);
         $condominio->save();
         $request->session()->flash('sucesso', 'Condomínio criado com sucesso!');
@@ -51,11 +57,6 @@ class CondominiosController extends Controller
 
     public function Exibir($id)
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Condominios', 'url' => route('condominios.condominios.listar')],
-            ['titulo' => 'Alterar condomínio', 'url' => '']
-        ]);
         $condominio = Condominio::find($id) ? Condominio::find($id) : null;
 
         if ($condominio) {
@@ -67,14 +68,14 @@ class CondominiosController extends Controller
             return redirect()->route('condominios.condominios.criar', 'migalhas');
     }
 
-    public function Alterar(Request $request, $id)
+    public function Alterar(CondominioRequest $request, $id)
     {
         //----CONDOMINIO----//
-        $condominio = Condominio::find($id);
+        $condominio 		= $this->condominio->find($id);
         $condominio->update($request->all());
         //----ENDEREÇO DO CONDOMINIO---//
-          $condominio->endereco()->update($request->all());
-        //SALVA E SALVA O RELACIONAMENTO TAMBÉM
+		$condominio->endereco()->update($request->all());
+        //SALVA O RELACIONAMENTO TAMBÉM
         $condominio->push();
         $request->session()->flash('info', 'Condomínio alterado com sucesso!');
         return redirect()->route('condominios.condominios.listar');
@@ -82,7 +83,7 @@ class CondominiosController extends Controller
 
     public function Excluir(Request $request, $id)
     {
-        Condominio::find($id)->delete();
+        $this->condominio->find($id)->delete();
         $request->session()->flash('warning', 'Condomínio deletado com sucesso!');
         return redirect()->route('condominios.condominios.listar');
     }
