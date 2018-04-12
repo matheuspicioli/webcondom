@@ -53,7 +53,7 @@ class FuncionariosController extends Controller
         $entidade->save();
         $funcionario->save();
 
-        $request->session()->flash('sucesso', 'Funcionário criado com sucesso!');
+		Toast::success('Funcionário incluído com sucesso!','Inclusão!');
         return redirect()->route('entidades.funcionarios.listar');
     }
 
@@ -92,14 +92,14 @@ class FuncionariosController extends Controller
         //SALVA E SALVA OS RELACIONAMENTOS TAMBÉM
         $funcionario->push();
 
-        $request->session()->flash('info', 'Funcionário alterado com sucesso!');
+		Toast::success('Funcionário alterado com sucesso!','Alteração!');
         return redirect()->route('entidades.funcionarios.listar');
     }
 
     public function Excluir(Request $request, $id)
     {
         Funcionario::find($id)->delete();
-        $request->session()->flash('warning', 'Funcionário deletado com sucesso!');
+		Toast::success('Funcionário excluído com sucesso!','Exclusão!');
         return redirect()->route('entidades.funcionarios.listar');
     }
 }

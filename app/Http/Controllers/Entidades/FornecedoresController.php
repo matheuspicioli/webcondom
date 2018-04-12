@@ -3,7 +3,9 @@
 namespace WebCondom\Http\Controllers\Entidades;
 
 use Illuminate\Http\Request;
+use Toast;
 use WebCondom\Http\Controllers\Controller;
+use WebCondom\Http\Requests\Entidades\FornecedorRequest;
 use WebCondom\Models\Diversos\EstadoCivil;
 use WebCondom\Models\Diversos\RegimeCasamento;
 use WebCondom\Models\Enderecos\Cidade;
@@ -34,7 +36,7 @@ class FornecedoresController extends Controller
         return view('entidades.fornecedores.criar', compact('estados_civis', 'regimes_casamentos', 'cidades', 'migalhas'));
     }
 
-    public function Salvar(Request $request)
+    public function Salvar(FornecedorRequest $request)
     {
         $fornecedor = Fornecedor::create($request->all());
         $entidade = $fornecedor->entidade()->create($request->all());
@@ -45,8 +47,7 @@ class FornecedoresController extends Controller
         $fornecedor->entidade()->associate($entidade);
         $entidade->save();
         $fornecedor->save();
-
-        $request->session()->flash('sucesso', 'Fornecedor criado com sucesso!');
+		Toast::success('Fornecedor incluído com sucesso!','Inclusão!');
         return redirect()->route('entidades.fornecedores.listar');
     }
 
@@ -68,7 +69,7 @@ class FornecedoresController extends Controller
             return redirect()->route('entidades.fornecedores.criar', 'migalhas');
     }
 
-    public function Alterar(Request $request, $id)
+    public function Alterar(FornecedorRequest $request, $id)
     {
         $fornecedor = Fornecedor::find($id);
         $fornecedor->update($request->all());
@@ -80,14 +81,14 @@ class FornecedoresController extends Controller
         //SALVA E SALVA OS RELACIONAMENTOS TAMBÉM
         $fornecedor->push();
 
-        $request->session()->flash('info', 'Fornecedor alterado com sucesso!');
+		Toast::success('Fornecedor alterado com sucesso!','Alteração!');
         return redirect()->route('entidades.fornecedores.listar');
     }
 
-    public function Excluir(Request $request, $id)
+    public function Excluir($id)
     {
         Fornecedor::find($id)->delete();
-        $request->session()->flash('warning', 'Fornecedor deletado com sucesso!');
+		Toast::success('Fornecedor excluído com sucesso!','Exclusão!');
         return redirect()->route('entidades.fornecedores.listar');
     }
 }

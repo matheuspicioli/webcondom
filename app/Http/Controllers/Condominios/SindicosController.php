@@ -3,7 +3,9 @@
 namespace WebCondom\Http\Controllers\Condominios;
 
 use Illuminate\Http\Request;
+use Toast;
 use WebCondom\Http\Controllers\Controller;
+use WebCondom\Http\Requests\Condominios\SindicoRequest;
 use WebCondom\Models\Condominios\Condominio;
 use WebCondom\Models\Condominios\Sindico;
 
@@ -29,10 +31,11 @@ class SindicosController extends Controller
         return view('condominios.sindicos.criar', compact('migalhas'));
     }
 
-    public function Salvar(Request $request)
+    public function Salvar(SindicoRequest $request)
     {
         //dd($request->except('_token'));
         Sindico::create($request->all());
+		Toast::success('Sindico incluída com sucesso!', 'Inclusão!');
         return redirect()->route('condominios.sindicos.listar');
     }
 
@@ -53,16 +56,17 @@ class SindicosController extends Controller
             return redirect()->route('condominios.sindicos.criar');
     }
 
-    public function Alterar(Request $request, $id)
+    public function Alterar(SindicoRequest $request, $id)
     {
-        //dd($request->except(['_token', '_method']));
         Sindico::find($id)->update($request->all());
+		Toast::success('Sindico alterado com sucesso!', 'Alteração!');
         return redirect()->route('condominios.sindicos.listar');
     }
 
     public function Excluir($id)
     {
         Sindico::find($id)->delete();
+		Toast::error('Sindico excluída com sucesso!', 'Exclusão!');
         return redirect()->route('condominios.sindicos.listar');
     }
 }
