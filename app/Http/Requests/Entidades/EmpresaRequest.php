@@ -26,14 +26,11 @@ class EmpresaRequest extends FormRequest
         return [
         	//EMPRESA
         	'creci'			=> 'nullable|max:10',
-			'logo'			=> 'required|max:255',
 			'email_nfe'		=> 'nullable|email',
 
 			//ENTIDADE
-			'tipo'					=> 'required',
 			'cpf_cnpj'				=> 'required|unique:entidades,cpf_cnpj,'.$this->id,
 			'nome'					=> 'nullable|max:100',
-			'apelido'				=> 'nullable|max:20',
 			'rg_ie'					=> 'nullable|max:30',
 			'celular_1'				=> 'required|max:15',
 			'celular_2'				=> 'nullable|max:15',
@@ -45,6 +42,7 @@ class EmpresaRequest extends FormRequest
 			'inscricao_municipal'	=> 'nullable|max:30',
 			'ramo_atividade'		=> 'required|max:100',
 			'data_abertura'			=> 'date',
+			'logo_imagem'			=> 'image',
 
 			//ENDEREÇO
 			'cep'			=> 'required|max:8|min:8',

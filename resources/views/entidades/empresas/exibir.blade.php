@@ -367,7 +367,7 @@
     <script>
         $(document).ready(function () {
             $('.select2').select2();
-            $('#tipo').focus();
+            $('#cpf_cnpj').focus();
         });
     </script>
 @endsection

@@ -255,7 +255,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="Bairro" class="control-label" @if($errors->has('bairro')) style="color: #f56954" @endif>Bairro</label>
-                                                        <input id="Bairro" type="text" class="form-control pula" name="bairro" value="{{ old('complemento') }}" @if($errors->has('bairro')) style="border:1px solid #f56954" @endif>
+                                                        <input id="Bairro" type="text" class="form-control pula" name="bairro" value="{{ old('bairro') }}" @if($errors->has('bairro')) style="border:1px solid #f56954" @endif>
                                                         @if( $errors->has('bairro') )
                                                             <span style="color: #f56954">{{ $errors->get('bairro')[0] }}</span>
                                                         @endif
