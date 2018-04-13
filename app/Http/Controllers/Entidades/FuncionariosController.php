@@ -3,7 +3,9 @@
 namespace WebCondom\Http\Controllers\Entidades;
 
 use Illuminate\Http\Request;
+use Toast;
 use WebCondom\Http\Controllers\Controller;
+use WebCondom\Http\Requests\Entidades\FuncionarioRequest;
 use WebCondom\Models\Diversos\Departamento;
 use WebCondom\Models\Diversos\EstadoCivil;
 use WebCondom\Models\Diversos\RegimeCasamento;
@@ -41,7 +43,7 @@ class FuncionariosController extends Controller
         );
     }
 
-    public function Salvar(Request $request)
+    public function Salvar(FuncionarioRequest $request)
     {
         $funcionario = Funcionario::create($request->all());
         $entidade = $funcionario->entidade()->create($request->all());
@@ -80,7 +82,7 @@ class FuncionariosController extends Controller
             return redirect()->route('entidades.funcionarios.criar', 'migalhas');
     }
 
-    public function Alterar(Request $request, $id)
+    public function Alterar(FuncionarioRequest $request, $id)
     {
         $funcionario = Funcionario::find($id);
         $funcionario->update($request->all());
@@ -99,7 +101,7 @@ class FuncionariosController extends Controller
     public function Excluir(Request $request, $id)
     {
         Funcionario::find($id)->delete();
-		Toast::success('Funcionário excluído com sucesso!','Exclusão!');
+		Toast::error('Funcionário excluído com sucesso!','Exclusão!');
         return redirect()->route('entidades.funcionarios.listar');
     }
 }

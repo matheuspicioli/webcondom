@@ -232,16 +232,20 @@
 								</div>
 								<div class="col-md-3">
 									<div class="form-group">
-										<label for="regime_casamento_id" class="control-label cpf">Regime
-											casamento</label>
-										<select name="regime_casamento_id" id="regime_casamento_id"
+										<label for="regime_casamento_id" class="control-label cpf"
+											   @if($errors->has('regime_casamento_id')) style="color: #f56954" @endif>Regime casamento</label>
+										<select name="regime_casamento_id" id="regime_casamento_id" @if($errors->has('regime_casamento_id')) style="border:1px solid #f56954" @endif
 												class="form-control cpf pula">
 											<option value="-1" selected disabled>-----SELECIONE-----</option>
 											@foreach($regimes_casamentos as $regime_casamento)
-												<option value="{{ $regime_casamento->id }}" {{ $fornecedor->entidade->regime_casamento_id == $regime_casamento->id ? 'selected' : '' }}>
+												<option value="{{ $regime_casamento->id }}"
+														{{ old('regime_casamento_id') == $regime_casamento->id ? 'selected' : ($fornecedor->entidade->regime_casamento_id == $regime_casamento->id ? 'selected' : '') }}>
 													{{ $regime_casamento->descricao }}</option>
 											@endforeach
 										</select>
+										@if( $errors->has('regime_casamento_id') )
+											<span style="color: #f56954">{{ $errors->get('regime_casamento_id')[0] }}</span>
+										@endif
 									</div>
 								</div>
 							</div>
@@ -261,9 +265,7 @@
 								<div class="col-md-4">
 									<div class="form-group">
 										<label for="data_nascimento" class="control-label cpf"
-											   @if($errors->has('data_nascimento')) style="color: #f56954" @endif>Data
-											de
-											nascimento</label>
+											   @if($errors->has('data_nascimento')) style="color: #f56954" @endif>Data de nascimento</label>
 										<input type="date" name="data_nascimento" id="data_nascimento"
 											   class="form-control cpf pula"
 											   @if($errors->has('data_nascimento')) style="border:1px solid #f56954"
@@ -363,8 +365,7 @@
 								<div class="col-md-3">
 									<div class="form-group">
 										<label for="celular_1" class="control-label"
-											   @if($errors->has('celular_1')) style="color: #f56954" @endif>Celular
-											1</label>
+											   @if($errors->has('celular_1')) style="color: #f56954" @endif>Celular 1</label>
 										<input type="text" name="celular_1" id="celular_1"
 											   @if($errors->has('celular_1')) style="border:1px solid #f56954" @endif
 											   class="form-control pula"
@@ -377,8 +378,7 @@
 								<div class="col-md-3">
 									<div class="form-group">
 										<label for="celular_2" class="control-label"
-											   @if($errors->has('celular_2')) style="color: #f56954" @endif>Celular
-											2</label>
+											   @if($errors->has('celular_2')) style="color: #f56954" @endif>Celular 2</label>
 										<input type="text" name="celular_2" id="celular_2"
 											   @if($errors->has('celular_2')) style="border:1px solid #f56954" @endif
 											   class="form-control pula"
