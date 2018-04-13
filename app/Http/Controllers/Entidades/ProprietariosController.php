@@ -3,7 +3,9 @@
 namespace WebCondom\Http\Controllers\Entidades;
 
 use Illuminate\Http\Request;
+use Toast;
 use WebCondom\Http\Controllers\Controller;
+use WebCondom\Http\Requests\Entidades\ProprietarioRequest;
 use WebCondom\Models\Diversos\EstadoCivil;
 use WebCondom\Models\Diversos\RegimeCasamento;
 use WebCondom\Models\Enderecos\Cidade;
@@ -35,7 +37,7 @@ class ProprietariosController extends Controller
         return view('entidades.proprietarios.criar', compact('estados_civis', 'regimes_casamentos', 'cidades', 'migalhas'));
     }
 
-    public function Salvar(Request $request)
+    public function Salvar(ProprietarioRequest $request)
     {
         $proprietario = Proprietario::create($request->all());
         $entidade = $proprietario->entidade()->create($request->all());
@@ -61,7 +63,7 @@ class ProprietariosController extends Controller
         $entidade->save();
         $proprietario->save();
 
-        $request->session()->flash('sucesso', 'Proprietário criado com sucesso!');
+		Toast::success('Proprietário incluso com sucesso!', 'Inclusão!');
         return redirect()->route('entidades.proprietarios.listar');
     }
 
@@ -83,7 +85,7 @@ class ProprietariosController extends Controller
             return redirect()->route('entidades.proprietarios.criar', 'migalhas');
     }
 
-    public function Alterar(Request $request, $id)
+    public function Alterar(ProprietarioRequest $request, $id)
     {
         $proprietario = Proprietario::find($id);
         $proprietario->update($request->all());
@@ -93,6 +95,7 @@ class ProprietariosController extends Controller
             'logradouro'    => $request->input('logradouro_principal'),
             'numero'        => $request->input('numero_principal'),
             'cep'           => $request->input('cep_principal'),
+            'complemento'	=> $request->input('complemento_principal'),
             'bairro'        => $request->input('bairro_principal'),
             'cidade_id'     => $request->input('cidade_id_principal')
         ]);
@@ -102,6 +105,7 @@ class ProprietariosController extends Controller
             'logradouro'    => $request->input('logradouro_cobranca'),
             'numero'        => $request->input('numero_cobranca'),
             'cep'           => $request->input('cep_cobranca'),
+			'complemento'	=> $request->input('complemento_cobranca'),
             'bairro'        => $request->input('bairro_cobranca'),
             'cidade_id'     => $request->input('cidade_id_cobranca')
         ]);
@@ -109,14 +113,14 @@ class ProprietariosController extends Controller
         //SALVA E SALVA OS RELACIONAMENTOS TAMBÉM
         $proprietario->push();
 
-        $request->session()->flash('info', 'Proprietário alterado com sucesso!');
+		Toast::success('Proprietário alterado com sucesso!', 'Alteração!');
         return redirect()->route('entidades.proprietarios.listar');
     }
 
-    public function Excluir(Request $request, $id)
+    public function Excluir($id)
     {
         Proprietario::find($id)->delete();
-        $request->session()->flash('warning', 'Proprietário deletado com sucesso!');
+		Toast::error('Proprietário excluído com sucesso!', 'Exclusão!');
         return redirect()->route('entidades.proprietarios.listar');
     }
 }

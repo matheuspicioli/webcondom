@@ -488,7 +488,7 @@
 															   @if($errors->has('bairro')) style="color: #f56954" @endif>Bairro</label>
 														<input id="Bairro" type="text" class="form-control pula"
 															   name="bairro"
-															   value="{{ old('complemento') ? old('complemento') : $funcionario->entidade->endereco_principal->bairro }}"
+															   value="{{ old('bairro') ? old('bairro') : $funcionario->entidade->endereco_principal->bairro }}"
 															   @if($errors->has('bairro')) style="border:1px solid #f56954" @endif>
 														@if( $errors->has('bairro') )
 															<span style="color: #f56954">{{ $errors->get('bairro')[0] }}</span>

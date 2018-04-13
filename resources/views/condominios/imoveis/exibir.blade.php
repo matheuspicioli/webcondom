@@ -163,7 +163,8 @@
                                 <div class="col-md-10 col-md-offset-1">
                                     <div class="form-group">
 										<label for="descritivo" class="control-label" @if($errors->has('descritivo')) style="color: #f56954" @endif>Descritivo</label>
-                                        <textarea name="descritivo" id="descritivo" class="form-control pula" rows="4">
+                                        <textarea name="descritivo" id="descritivo" class="form-control pula" rows="4"
+												  @if($errors->has('descritivo')) style="border:1px solid #f56954" @endif>
 											{{ old('descritivo') ? old('descritivo') : $imovel->descritivo }}
 										</textarea>
 										@if( $errors->has('descritivo') )
@@ -223,7 +224,7 @@
 										<div class="col-md-4">
 											<div class="form-group">
 												<label for="Bairro" class="control-label" @if($errors->has('bairro')) style="color: #f56954" @endif>Bairro</label>
-												<input id="Bairro" type="text" class="form-control pula" name="bairro" value="{{ old('complemento') ? old('complemento') : $imovel->endereco->bairro }}"
+												<input id="Bairro" type="text" class="form-control pula" name="bairro" value="{{ old('bairro') ? old('bairro') : $imovel->endereco->bairro }}"
 													   @if($errors->has('bairro')) style="border:1px solid #f56954" @endif>
 												@if( $errors->has('bairro') )
 													<span style="color: #f56954">{{ $errors->get('bairro')[0] }}</span>

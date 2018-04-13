@@ -118,7 +118,7 @@
                                     <div class="form-group">
                                         <label for="data_abertura" class="control-label cnpj">Data abertura</label>
                                         <input type="date" name="data_abertura" id="data_abertura"
-                                               class="form-control cnpj pula" value="{{ $inquilino->entidade->data_abertura }}">
+                                               class="form-control cnpj pula" value="{{ $inquilino->entidade->data_abertura? $inquilino->entidade->data_abertura->format('Y-m-d') : '' }}">
                                     </div>
                                 </div>
                             </div>
@@ -168,7 +168,7 @@
                                     <div class="form-group">
                                         <label for="data_nascimento" class="control-label cpf">Data de nascimento</label>
                                         <input type="date" name="data_nascimento" id="data_nascimento"
-                                               class="form-control cpf pula" value="{{ $inquilino->entidade->data_nascimento }}">
+                                               class="form-control cpf pula" value="{{ $inquilino->entidade->data_nascimento ? $inquilino->entidade->data_nascimento->format('Y-d-m') : '' }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -358,7 +358,7 @@
                                                         <label for="complemento" class="control-label">Complemento</label>
                                                         <input type="text" id="complemento" name="complemento_cobranca"
                                                                class="form-control pula"
-                                                               value="{{ $inquilino->entidade->endereco_cobranca->complemento }}">
+                                                               value="{{ $inquilino->entidade->endereco_cobranca->complemento or '' }}">
                                                     </div>
                                                 </div>
                                             </div>
