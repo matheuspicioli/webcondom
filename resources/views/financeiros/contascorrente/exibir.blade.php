@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 @section('title', 'Contas corrente - Alterar')
 @section('content_header')
-    <h1>Cadastro <small>de conta corrente</small></h1>
+    <h1>Alteração <small>de conta corrente</small></h1>
     <ol class="breadcrumb">
         <li>
             <a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a>
@@ -143,7 +143,7 @@
                                                     <div class="form-group">
                                                         <label for="nosso_numero" class="control-label">Nosso número</label>
                                                         <input id="nosso_numero" type="text" class="form-control pula" name="nosso_numero"
-                                                            value="{{ $conta->dados->nosso_numero }} ">
+															   data-mask="{{ $conta->dados->banco->mascara_nossonumero }}" value="{{ $conta->dados->nosso_numero }} ">
 
                                                     </div>
                                                 </div>
@@ -310,11 +310,11 @@
 @stop
 
 @section('js')
+	<script src="{{ asset('js/mask/jquery.mask.min.js') }}"></script>
     <script>
         $(document).ready(function () {
             $('.select2').select2();
             $("#condominio").focus();
-            $('#nosso_numero').mask('{{ $bancoAtual->dados->mascara_nossonumero}}');
         });
         $('#salvar').on('click', function(e){
             e.preventDefault();
