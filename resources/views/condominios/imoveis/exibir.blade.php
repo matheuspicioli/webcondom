@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <form method="POST" action="{{ route('condominios.imoveis.alterar', ['id' => $imovel->id ]) }}">
+                        <form method="POST" action="{{ route('condominios.imoveis.alterar', ['id' => $imovel->id ]) }}" id="form">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
 
@@ -252,7 +252,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         @can("editar_imovel")
-                                            <button class="btn btn-info" type="submit">
+                                            <button class="btn btn-info" type="submit" id="salvar">
                                                 <i class="fa fa-save"></i> Salvar</button>
                                         @else
                                             <button disabled class="btn btn-info" type="submit">
@@ -316,7 +316,14 @@
     <script>
         $(document).ready(function () {
             $('#Codigo').focus();
-            });
+            $('#CEP').mask('00000-000');
+        });
+        $('#salvar').on('click', function(e){
+            e.preventDefault();
+            $('#CEP').unmask();
+            $('#form').submit();
+        });
+
     </script>
 @endsection
 

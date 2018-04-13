@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="box-body">
-                        <form action="{{ route('condominios.imoveis.salvar') }}" method="POST">
+                        <form action="{{ route('condominios.imoveis.salvar') }}" method="POST" id="form">
                             {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-md-3">
@@ -246,7 +246,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <button class="btn btn-primary" type="submit">
+                                        <button class="btn btn-primary" type="submit" id="salvar">
                                             <i class="fa fa-save"></i> Cadastrar</button>
                                     </div>
                                 </div>
@@ -273,6 +273,13 @@
     <script>
         $(document).ready(function () {
             $("#codigo").focus();
+            $('#CEP').mask('00000-000');
         });
+        $('#salvar').on('click', function(e){
+            e.preventDefault();
+            $('#CEP').unmask();
+            $('#form').submit();
+        });
+
     </script>
 @endsection
