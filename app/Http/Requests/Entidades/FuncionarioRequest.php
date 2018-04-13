@@ -1,10 +1,10 @@
 <?php
 
-namespace WebCondom\Http\Requests\Condominios;
+namespace WebCondom\Http\Requests\Entidades;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TaxaRequest extends FormRequest
+class FuncionarioRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,7 @@ class TaxaRequest extends FormRequest
     public function rules()
     {
         return [
-        	'descricao' 	=> 'required|max:100',
-			'valor'			=> 'required|max:100'
+            //
         ];
     }
 }

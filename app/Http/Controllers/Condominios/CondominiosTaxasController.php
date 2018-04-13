@@ -37,7 +37,7 @@ class CondominiosTaxasController extends Controller
         $taxa = $this->taxa->create($request->all());
         $taxa->condominio_id = $idCondominio;
         $taxa->save();
-		Toast::success('Condomínio incluído com sucesso!', 'Inclusão!');
+		Toast::success('Taxa para esse condomínio incluído com sucesso!', 'Inclusão!');
         return redirect()->route('condominios.condominios.exibir', ['id' => $idCondominio]);
     }
 
@@ -59,14 +59,18 @@ class CondominiosTaxasController extends Controller
 			Toast::success('Condomínio alterado com sucesso!', 'Alteração!');
 			return redirect()->route('condominios.condominios.exibir', ['id' => $idCondominio]);
 		}
-		$taxas = $this->taxa->where('condominio_id', $idCondominio);
 		Toast::error('Taxa não encontrada!', 'Erro!');
-		return redirect()->route('condominios.condominios.listar', ['taxas' => $taxas, 'idCondominio' => $idCondominio]);
+		return redirect()->route('condominios.condominios.exibir',  ['id' => $idCondominio]);
     }
 
     public function Excluir($id, $idCondominio)
     {
-        CondominioTaxa::find($id)->delete();
-        return redirect()->route('condominios.condominios.exibir', ['idCondominio' => $idCondominio]);
+    	if($taxa_cond = $this->taxa->find($id)){
+    		$taxa_cond->delete($id);
+			Toast::error('Taxa desse condomínio excluída!', 'Exclusão!');
+			return redirect()->route('condominios.condominios.exibir', ['idCondominio' => $idCondominio]);
+		}
+		Toast::error('Taxa não encontrada!', 'Erro!');
+		return redirect()->route('condominios.condominios.exibir', ['idCondominio' => $idCondominio]);
     }
 }

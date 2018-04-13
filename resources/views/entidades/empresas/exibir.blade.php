@@ -41,93 +41,131 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="cpf_cnpj" class="control-label">CPF/CNPJ</label>
-                                        <input type="text" name="cpf_cnpj" id="cpf_cnpj" class="form-control pula"
-                                               value="{{ $empresa->entidade->cpf_cnpj }}">
+                                        <label for="cpf_cnpj" class="control-label" @if($errors->has('cpf_cnpj')) style="color: #f56954" @endif>CPF/CNPJ</label>
+                                        <input type="text" name="cpf_cnpj" id="cpf_cnpj" class="form-control pula" @if($errors->has('cpf_cnpj')) style="border:1px solid #f56954" @endif
+                                               value="{{ old('cpf_cnpj') ? old('cpf_cnpj') : $empresa->entidade->cpf_cnpj }}">
+                                        @if( $errors->has('cpf_cnpj') )
+                                            <span style="color: #f56954">{{ $errors->get('cpf_cnpj')[0] }}</span>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-9">
                                     <div class="form-group">
-                                        <label for="nome" class="control-label cnpj">Razão social</label>
-                                        <input type="text" name="nome" id="nome"
-                                               class="form-control cnpj pula" value="{{ $empresa->entidade->nome }}">
+                                        <label for="nome" class="control-label" @if($errors->has('nome')) style="color: #f56954" @endif>Razão social</label>
+                                        <input type="text" name="nome" id="nome" @if($errors->has('nome')) style="border:1px solid #f56954" @endif
+                                               class="form-control cnpj pula" value="{{ old('nome') ? old('nome') : $empresa->entidade->nome }}">
+                                        @if( $errors->has('nome') )
+                                            <span style="color: #f56954">{{ $errors->get('nome')[0] }}</span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="rg_ie" class="control-label cnpj">Inscrição estadual</label>
-                                        <input type="text" name="rg_ie" id="rg_ie"
-                                               class="form-control cnpj pula" value="{{ $empresa->entidade->rg_ie }}">
+										<label for="rg_ie" class="control-label" @if($errors->has('rg_ie')) style="color: #f56954" @endif>Inscrição estadual</label>
+                                        <input type="text" name="rg_ie" id="rg_ie" @if($errors->has('rg_ie')) style="border:1px solid #f56954" @endif
+                                               class="form-control cnpj pula" value="{{ old('rg_ie') ? old('rg_ie') : $empresa->entidade->rg_ie }}">
+										@if( $errors->has('rg_ie') )
+											<span style="color: #f56954">{{ $errors->get('rg_ie')[0] }}</span>
+										@endif
                                     </div>
                                 </div>
                                 <div class="col-md-9">
                                     <div class="form-group">
-                                        <label for="fantasia" class="control-label cnpj">Fantasia</label>
-                                        <input type="text" name="fantasia" id="fantasia" class="form-control cnpj pula"
-                                               value="{{ $empresa->entidade->fantasia }}">
+										<label for="fantasia" class="control-label" @if($errors->has('fantasia')) style="color: #f56954" @endif>Fantasia</label>
+                                        <input type="text" name="fantasia" id="fantasia" class="form-control cnpj pula" @if($errors->has('fantasia')) style="border:1px solid #f56954" @endif
+                                               value="{{ old('fantasia') ? old('fantasia') : $empresa->entidade->fantasia }}">
+										@if( $errors->has('fantasia') )
+											<span style="color: #f56954">{{ $errors->get('fantasia')[0] }}</span>
+										@endif
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label for="creci" class="control-label">Creci</label>
-                                        <input type="text" name="creci" id="creci" class="form-control pula"
-                                               value="{{ $empresa->creci }}">
+										<label for="creci" class="control-label" @if($errors->has('creci')) style="color: #f56954" @endif>Creci</label>
+                                        <input type="text" name="creci" id="creci" class="form-control pula" @if($errors->has('creci')) style="border:1px solid #f56954" @endif
+                                               value="{{ old('creci') ? old('creci') : $empresa->creci }}">
+										@if( $errors->has('creci') )
+											<span style="color: #f56954">{{ $errors->get('creci')[0] }}</span>
+										@endif
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="ramo_atividade" class="control-label cnpj">Ramo Atividade</label>
-                                        <input type="text" name="ramo_atividade" id="ramo_atividade"
-                                               class="form-control cnpj pula" value="{{ $empresa->entidade->ramo_atividade }}">
+										<label for="ramo_atividade" class="control-label" @if($errors->has('ramo_atividade')) style="color: #f56954" @endif>Ramo Atividade</label>
+                                        <input type="text" name="ramo_atividade" id="ramo_atividade" @if($errors->has('creci')) style="border:1px solid #f56954" @endif
+                                               class="form-control cnpj pula" value="{{ old('ramo_atividade') ? old('ramo_atividade') : $empresa->entidade->ramo_atividade }}">
+										@if( $errors->has('ramo_atividade') )
+											<span style="color: #f56954">{{ $errors->get('ramo_atividade')[0] }}</span>
+										@endif
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="inscricao_municipal" class="control-label cnpj">Inscrição municipal</label>
-                                        <input type="text" name="inscricao_municipal" id="inscricao_municipal"
-                                               class="form-control cnpj pula" value="{{ $empresa->entidade->inscricao_municipal }}">
+										<label for="inscricao_municipal" class="control-label" @if($errors->has('inscricao_municipal')) style="color: #f56954" @endif>Inscrição municipal</label>
+                                        <input type="text" name="inscricao_municipal" id="inscricao_municipal" @if($errors->has('inscricao_municipal')) style="border:1px solid #f56954" @endif
+                                               class="form-control cnpj pula" value="{{ old('inscricao_municipal') ? old('inscricao_municipal') : $empresa->entidade->inscricao_municipal }}">
+										@if( $errors->has('inscricao_municipal') )
+											<span style="color: #f56954">{{ $errors->get('inscricao_municipal')[0] }}</span>
+										@endif
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="data_abertura" class="control-label cnpj">Data abertura</label>
-                                        <input type="date" name="data_abertura" id="data_abertura"
-                                               class="form-control cnpj pula" value="{{ $empresa->entidade->data_abertura ? $empresa->entidade->data_abertura->format('Y-m-d') : ''  }}">
+										<label for="data_abertura" class="control-label cnpj" @if($errors->has('data_abertura')) style="color: #f56954" @endif>Data abertura</label>
+                                        <input type="date" name="data_abertura" id="data_abertura" @if($errors->has('data_abertura')) style="border:1px solid #f56954" @endif
+                                               class="form-control cnpj pula" value="{{ old('data_abertura') ? old('data_abertura') : ($empresa->entidade->data_abertura ? $empresa->entidade->data_abertura->format('Y-m-d') : '')  }}">
+										@if( $errors->has('data_abertura') )
+											<span style="color: #f56954">{{ $errors->get('data_abertura')[0] }}</span>
+										@endif
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="telefone_principal" class="control-label">Telefone principal</label>
-                                        <input type="text" name="telefone_principal" id="telefone_principal"
-                                               class="form-control pula" value="{{ $empresa->entidade->telefone_principal }}">
+										<label for="telefone_principal" class="control-label" @if($errors->has('telefone_principal')) style="color: #f56954" @endif>Telefone principal</label>
+                                        <input type="text" name="telefone_principal" id="telefone_principal" @if($errors->has('telefone_principal')) style="border:1px solid #f56954" @endif
+                                               class="form-control pula" value="{{ old('telefone_principal') ? old('telefone_principal') : $empresa->entidade->telefone_principal }}">
+										@if( $errors->has('telefone_principal') )
+											<span style="color: #f56954">{{ $errors->get('telefone_principal')[0] }}</span>
+										@endif
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="telefone_comercial" class="control-label">Telefone comercial</label>
+										<label for="telefone_comercial" class="control-label" @if($errors->has('telefone_comercial')) style="color: #f56954" @endif>Telefone comercial</label>
                                         <input type="text" name="telefone_comercial"
-                                               id="telefone_comercial" class="form-control pula"
-                                               value="{{ $empresa->entidade->telefone_comercial }}">
+                                               id="telefone_comercial" class="form-control pula" @if($errors->has('telefone_comercial')) style="border:1px solid #f56954" @endif
+                                               value="{{ old('telefone_comercial') ? old('telefone_comercial') : $empresa->entidade->telefone_comercial }}">
+										@if( $errors->has('telefone_comercial') )
+											<span style="color: #f56954">{{ $errors->get('telefone_comercial')[0] }}</span>
+										@endif
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="celular_1" class="control-label">Celular 1</label>
-                                        <input type="text" name="celular_1" id="celular_1"
-                                               class="form-control pula" value="{{ $empresa->entidade->celular_1 }}">
+										<label for="celular_1" class="control-label" @if($errors->has('celular_1')) style="color: #f56954" @endif>Celular 1</label>
+                                        <input type="text" name="celular_1" id="celular_1" @if($errors->has('celular_1')) style="border:1px solid #f56954" @endif
+                                               class="form-control pula" value="{{ old('celular_1') ? old('celular_1') : $empresa->entidade->celular_1 }}">
+										@if( $errors->has('celular_1') )
+											<span style="color: #f56954">{{ $errors->get('celular_1')[0] }}</span>
+										@endif
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="celular_2" class="control-label">Celular 2</label>
-                                        <input type="text" name="celular_2" id="celular_2"
-                                               class="form-control pula" value="{{ $empresa->entidade->celular_2 }}">
+										<div class="form-group">
+											<label for="celular_2" class="control-label" @if($errors->has('celular_2')) style="color: #f56954" @endif>Celular 2</label>
+											<input type="text" name="celular_2" id="celular_2" @if($errors->has('celular_2')) style="border:1px solid #f56954" @endif
+												   class="form-control pula" value="{{ old('celular_2') ? old('celular_2') : $empresa->entidade->celular_2 }}">
+											@if( $errors->has('celular_2') )
+												<span style="color: #f56954">{{ $errors->get('celular_2')[0] }}</span>
+											@endif
+										</div>
                                     </div>
                                 </div>
                             </div>
@@ -135,38 +173,51 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="email" class="control-label">E-mail</label>
-                                        <input type="email" name="email" id="email"
-                                               class="form-control pula" value="{{ $empresa->entidade->email }}">
+										<label for="email" class="control-label" @if($errors->has('email')) style="color: #f56954" @endif>E-mail</label>
+                                        <input type="email" name="email" id="email" @if($errors->has('email')) style="border:1px solid #f56954" @endif
+                                               class="form-control pula" value="{{ old('email') ? old('email') : $empresa->entidade->email }}">
+										@if( $errors->has('email') )
+											<span style="color: #f56954">{{ $errors->get('email')[0] }}</span>
+										@endif
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="email_nfe" class="control-label">E-mail NFE</label>
-                                        <input type="email" name="email_nfe" id="email_nfe"
-                                               class="form-control pula" value="{{ $empresa->email_nfe }}">
+										<label for="email_nfe" class="control-label" @if($errors->has('email_nfe')) style="color: #f56954" @endif>E-mail NFE</label>
+                                        <input type="email" name="email_nfe" id="email_nfe" @if($errors->has('email_nfe')) style="border:1px solid #f56954" @endif
+                                               class="form-control pula" value="{{ old('email_nfe') ? old('email_nfe') : $empresa->email_nfe }}">
+										@if( $errors->has('email_nfe') )
+											<span style="color: #f56954">{{ $errors->get('email_nfe')[0] }}</span>
+										@endif
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="site" class="control-label">Site</label>
-                                        <input type="text" name="site" id="site"
-                                               class="form-control pula" value="{{ $empresa->entidade->site }}">
+										<label for="site" class="control-label" @if($errors->has('site')) style="color: #f56954" @endif>Site</label>
+                                        <input type="text" name="site" id="site" @if($errors->has('site')) style="border:1px solid #f56954" @endif
+                                               class="form-control pula" value="{{ old('site') ? old('site') : $empresa->entidade->site }}">
+										@if( $errors->has('site') )
+											<span style="color: #f56954">{{ $errors->get('site')[0] }}</span>
+										@endif
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="logo" class="control-label">Logo</label>
-                                        <input type="file" name="logo_imagem" id="logo" class="pula" value="$empresa->logo">
+										<label for="logo" class="control-label" @if($errors->has('logo_imagem')) style="color: #f56954" @endif>Logo</label>
+                                        <input type="file" name="logo_imagem" id="logo" @if($errors->has('logo_imagem')) style="border:1px solid #f56954" @endif
+											   class="pula">
+										@if( $errors->has('logo_imagem') )
+											<span style="color: #f56954">{{ $errors->get('logo_imagem')[0] }}</span>
+										@endif
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <img src="{{ Storage::url($empresa->logo) }}" alt="Não há logo" height="100px">
+								<div class="col-md-4">
+									<img src="{{ Storage::url($empresa->logo) }}" alt="Não há logo" height="100px">
+								</div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -178,59 +229,69 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="cep" class="control-label">CEP</label>
-                                                        <input type="text" id="cep" name="cep"
-                                                               class="form-control pula"
-                                                               value="{{ $empresa->entidade->endereco_principal->cep }}">
+                                                        <label for="CEP" class="control-label" @if($errors->has('cep')) style="color: #f56954" @endif>CEP</label>
+                                                        <input id="CEP" type="text" class="form-control pula" name="cep" value="{{ old('cep') ? old('cep') : $empresa->entidade->endereco_principal->cep }}" @if($errors->has('cep')) style="border:1px solid #f56954" @endif>
+                                                        @if( $errors->has('cep') )
+                                                            <span style="color: #f56954">{{ $errors->get('cep')[0] }}</span>
+                                                        @endif
                                                     </div>
                                                 </div>
+
                                                 <div class="col-md-8">
                                                     <div class="form-group">
-                                                        <label for="logradouro" class="control-label">Logradouro</label>
-                                                        <input id="logradouro" type="text" class="form-control pula"
-                                                               name="logradouro"
-                                                               value="{{ $empresa->entidade->endereco_principal->logradouro }}">
+                                                        <label for="Logradouro" class="control-label" @if($errors->has('logradouro')) style="color: #f56954" @endif>Logradouro</label>
+                                                        <input id="Logradouro" type="text" class="form-control pula" name="logradouro" value="{{ old('logradouro') ? old('logradouro') : $empresa->entidade->endereco_principal->logradouro }}" @if($errors->has('logradouro')) style="border:1px solid #f56954" @endif>
+                                                        @if( $errors->has('logradouro') )
+                                                            <span style="color: #f56954">{{ $errors->get('logradouro')[0] }}</span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-2">
                                                     <div class="form-group">
-                                                        <label for="numero" class="control-label">Número</label>
-                                                        <input type="text" id="numero" name="numero"
-                                                               class="form-control pula"
-                                                               value="{{ $empresa->entidade->endereco_principal->numero }}">
+                                                        <label for="Numero" class="control-label" @if($errors->has('numero')) style="color: #f56954" @endif>Número</label>
+                                                        <input id="Numero" type="text" class="form-control pula" name="numero" value="{{ old('numero') ? old('numero') : $empresa->entidade->endereco_principal->numero }}" @if($errors->has('numero')) style="border:1px solid #f56954" @endif>
+                                                        @if( $errors->has('numero') )
+                                                            <span style="color: #f56954">{{ $errors->get('numero')[0] }}</span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="col-md-10">
                                                     <div class="form-group">
-                                                        <label for="complemento" class="control-label">Complemento</label>
-                                                        <input type="text" id="complemento" name="complemento"
-                                                               class="form-control pula"
-                                                               value="{{ $empresa->entidade->endereco_principal->complemento }}">
+                                                        <label for="Complemento" class="control-label" @if($errors->has('complemento')) style="color: #f56954" @endif>Complemento</label>
+                                                        <input id="Complemento" type="text" class="form-control pula" name="complemento" value="{{ old('complemento') ? old('complemento') : ($empresa->entidade->endereco_principal->complemento ? $empresa->entidade->endereco_principal->complemento : '') }}"
+                                                               @if($errors->has('complemento')) style="border:1px solid #f56954" @endif>
+                                                        @if( $errors->has('complemento') )
+                                                            <span style="color: #f56954">{{ $errors->get('complemento')[0] }}</span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="bairro" class="control-label">Bairro</label>
-                                                        <input type="text" id="bairro" name="bairro"
-                                                               class="form-control pula"
-                                                               value="{{ $empresa->entidade->endereco_principal->bairro }}">
+                                                        <label for="Bairro" class="control-label" @if($errors->has('bairro')) style="color: #f56954" @endif>Bairro</label>
+                                                        <input id="Bairro" type="text" class="form-control pula" name="bairro" value="{{ old('complemento') ? old('complemento') : $empresa->entidade->endereco_principal->bairro }}"
+                                                               @if($errors->has('bairro')) style="border:1px solid #f56954" @endif>
+                                                        @if( $errors->has('bairro') )
+                                                            <span style="color: #f56954">{{ $errors->get('bairro')[0] }}</span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="col-md-8">
                                                     <div class="form-group">
-                                                        <label for="cidade_id_principal" class="control-label">Cidade</label>
-                                                        <select name="cidade_id" id="cidade_id_principal" class="form-control pula">
+                                                        <label for="CidadeCOD" class="control-label" @if($errors->has('cidade_id')) style="color: #f56954" @endif>Cidade</label>
+                                                        <select name="cidade_id" id="CidadeCOD" class="form-control pula select2" @if($errors->has('cidade_id')) style="border:1px solid #f56954" @endif>
                                                             <option selected disabled>-------Selecione uma cidade-------</option>
                                                             @foreach($cidades as $cidade)
-                                                                <option value="{{ $cidade->id }}" {{ $empresa->entidade->endereco_principal->cidade_id == $cidade->id ? 'selected' : '' }}>
-                                                                    {{ $cidade->descricao }} - {{ $cidade->estado->descricao }}
-                                                                </option>
+                                                                <option value="{{ $cidade->id }}" {{ old('cidade_id') == $cidade->id ? 'selected' : ($cidade->id == $empresa->entidade->endereco_principal->cidade_id ? 'selected' : '') }}>
+                                                                    {{ $cidade->descricao }} - {{ $cidade->estado->descricao }}</option>
                                                             @endforeach
                                                         </select>
+                                                        @if( $errors->has('cidade_id') )
+                                                            <span style="color: #f56954">{{ $errors->get('cidade_id')[0] }}</span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -306,7 +367,7 @@
     <script>
         $(document).ready(function () {
             $('.select2').select2();
-            $('#tipo').focus();
+            $('#cpf_cnpj').focus();
         });
     </script>
 @endsection

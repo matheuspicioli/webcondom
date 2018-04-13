@@ -89,7 +89,7 @@
                                                         <h3 class="modal-title">Confirmar exclusão</h3>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <h4>Deseja realmente excluir a Empresa "{{ $empresa->nome }}"?</h4>
+                                                        <h4>Deseja realmente excluir a Empresa "{{ $empresa->entidade->nome }}"?</h4>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>

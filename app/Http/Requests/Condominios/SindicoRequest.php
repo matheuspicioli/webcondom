@@ -4,7 +4,7 @@ namespace WebCondom\Http\Requests\Condominios;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TaxaRequest extends FormRequest
+class SindicoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,9 @@ class TaxaRequest extends FormRequest
     public function rules()
     {
         return [
-        	'descricao' 	=> 'required|max:100',
-			'valor'			=> 'required|max:100'
+            'nome'		=> 'required|max:100',
+			'telefone'	=> 'nullable|max:14',
+			'celular'	=> 'required|max:15'
         ];
     }
 }

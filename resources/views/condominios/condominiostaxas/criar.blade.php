@@ -34,14 +34,20 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="Descricao" class="control-label">Descrição</label>
-                                    <input id="Descricao" type="text" class="form-control pula" name="descricao">
+                                    <label for="Descricao" class="control-label" @if($errors->has('descricao')) style="color: #f56954" @endif>Descrição</label>
+                                    <input id="Descricao" type="text" class="form-control pula" name="descricao" {{ old('descricao') }} @if($errors->has('descricao')) style="border:1px solid #f56954" @endif>
+                                    @if( $errors->has('descricao') )
+                                        <span style="color: #f56954">{{ $errors->get('descricao')[0] }}</span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="Valor" class="control-label">Valor</label>
-                                    <input id="Valor" type="text" class="form-control pula" name="valor">
+                                    <label for="Valor" class="control-label" @if($errors->has('valor')) style="color: #f56954" @endif>Valor</label>
+                                    <input id="Valor" type="text" class="form-control pula" name="valor" value="{{ old('valor') }}" @if($errors->has('valor')) style="border:1px solid #f56954" @endif>
+                                    @if( $errors->has('valor') )
+                                        <span style="color: #f56954">{{ $errors->get('valor')[0] }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
