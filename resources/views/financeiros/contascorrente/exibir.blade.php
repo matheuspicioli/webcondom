@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="box-body">
-                        <form action="{{ route('financeiros.contascorrente.alterar', ['id' => $conta->dados->id]) }}" method="POST">
+                        <form action="{{ route('financeiros.contascorrente.alterar', ['id' => $conta->dados->id]) }}" method="POST" id="form">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
                             <div class="row">
@@ -143,7 +143,8 @@
                                                     <div class="form-group">
                                                         <label for="nosso_numero" class="control-label">Nosso número</label>
                                                         <input id="nosso_numero" type="text" class="form-control pula" name="nosso_numero"
-                                                            value="{{ $conta->dados->nosso_numero }}">
+                                                            value="{{ $conta->dados->nosso_numero }} ">
+
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
@@ -246,7 +247,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         @can("editar_contacorrente")
-                                            <button class="btn btn-info" type="submit">
+                                            <button class="btn btn-info" type="submit" id="salvar">
                                                 <i class="fa fa-save"></i> Salvar</button>
                                         @else
                                             <button disabled class="btn btn-info" type="submit">
@@ -313,6 +314,12 @@
         $(document).ready(function () {
             $('.select2').select2();
             $("#condominio").focus();
+            $('#nosso_numero').mask('{{ $bancoAtual->dados->mascara_nossonumero}}');
+        });
+        $('#salvar').on('click', function(e){
+            e.preventDefault();
+            $('#nosso_numero').unmask();
+            $('#form').submit();
         });
     </script>
 @stop
