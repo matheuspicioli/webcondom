@@ -3,7 +3,9 @@
 namespace WebCondom\Http\Controllers\Diversos;
 
 use Illuminate\Http\Request;
+use Toast;
 use WebCondom\Http\Controllers\Controller;
+use WebCondom\Http\Requests\Diversos\DepartamentoRequest;
 use WebCondom\Models\Diversos\Departamento;
 
 class DepartamentosController extends Controller
@@ -28,10 +30,11 @@ class DepartamentosController extends Controller
         return view('diversos.departamento.criar', compact('migalhas'));
     }
 
-    public function Salvar(Request $request)
+    public function Salvar(DepartamentoRequest $request)
     {
         //dd($request->except('_token'));
         Departamento::create($request->all());
+		Toast::success('Departamento incluído com sucesso!', 'Inclusão!');
         return redirect()->route('diversos.departamento.listar');
     }
 
@@ -50,17 +53,19 @@ class DepartamentosController extends Controller
             return redirect()->route('diversos.departamento.criar');
     }
 
-    public function Alterar(Request $request, $id)
+    public function Alterar(DepartamentoRequest $request, $id)
     {
         //dd($request->except(['_token', '_method']));
         $departamento = Departamento::find($id);
         $departamento->update($request->all());
+		Toast::success('Departamento alterado com sucesso!', 'Alteração!');
         return redirect()->route('diversos.departamento.listar');
     }
 
     public function Excluir($id)
     {
         Departamento::find($id)->delete();
+		Toast::error('Departamento excluído com sucesso!', 'Exclusão!');
         return redirect()->route('diversos.departamento.listar');
     }
 }

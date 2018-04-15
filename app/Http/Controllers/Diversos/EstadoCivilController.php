@@ -3,7 +3,9 @@
 namespace WebCondom\Http\Controllers\Diversos;
 
 use Illuminate\Http\Request;
+use Toast;
 use WebCondom\Http\Controllers\Controller;
+use WebCondom\Http\Requests\Diversos\EstadoCivilRequest;
 use WebCondom\Models\Diversos\EstadoCivil;
 
 class EstadoCivilController extends Controller
@@ -28,10 +30,11 @@ class EstadoCivilController extends Controller
         return view('diversos.estadoCivil.criar', compact('migalhas'));
     }
 
-    public function Salvar(Request $request)
+    public function Salvar(EstadoCivilRequest $request)
     {
         //dd($request->except('_token'));
         EstadoCivil::create($request->all());
+		Toast::success('Estado civil incluído com sucesso!', 'Inclusão!');
         return redirect()->route('diversos.estadoCivil.listar');
     }
 
@@ -50,17 +53,19 @@ class EstadoCivilController extends Controller
             return redirect()->route('diversos.estadoCivil.criar');
     }
 
-    public function Alterar(Request $request, $id)
+    public function Alterar(EstadoCivilRequest $request, $id)
     {
         //dd($request->except(['_token', '_method']));
         $estadoCivil = EstadoCivil::find($id);
         $estadoCivil->update($request->all());
+		Toast::success('Estado civil alterado com sucesso!', 'Alteração!');
         return redirect()->route('diversos.estadoCivil.listar');
     }
 
     public function Excluir($id)
     {
         EstadoCivil::find($id)->delete();
+		Toast::error('Estado civil excluído com sucesso!', 'Exclusão!');
         return redirect()->route('diversos.estadoCivil.listar');
     }
 }

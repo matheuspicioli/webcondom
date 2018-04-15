@@ -3,7 +3,9 @@
 namespace WebCondom\Http\Controllers\Entidades;
 
 use Illuminate\Http\Request;
+use Toast;
 use WebCondom\Http\Controllers\Controller;
+use WebCondom\Http\Requests\Entidades\InquilinoRequest;
 use WebCondom\Models\Diversos\EstadoCivil;
 use WebCondom\Models\Diversos\RegimeCasamento;
 use WebCondom\Models\Enderecos\Cidade;
@@ -34,7 +36,7 @@ class InquilinosController extends Controller
         return view('entidades.inquilinos.criar', compact('estados_civis', 'regimes_casamentos', 'cidades', 'migalhas'));
     }
 
-    public function Salvar(Request $request)
+    public function Salvar(InquilinoRequest $request)
     {
         $inquilino = Inquilino::create($request->all());
         $entidade = $inquilino->entidade()->create($request->all());
@@ -58,7 +60,7 @@ class InquilinosController extends Controller
         $entidade->save();
         $inquilino->save();
 
-        $request->session()->flash('sucesso', 'Inquilino criado com sucesso!');
+		Toast::success('Inquilino incluído com sucesso!', 'Inclusão!');
         return redirect()->route('entidades.inquilinos.listar');
     }
 
@@ -80,7 +82,7 @@ class InquilinosController extends Controller
             return redirect()->route('entidades.inquilinos.criar', 'migalhas');
     }
 
-    public function Alterar(Request $request, $id)
+    public function Alterar(InquilinoRequest $request, $id)
     {
         $inquilino = Inquilino::find($id);
         $inquilino->update($request->all());
@@ -105,14 +107,14 @@ class InquilinosController extends Controller
         //SALVA E SALVA OS RELACIONAMENTOS TAMBÉM
         $inquilino->push();
 
-        $request->session()->flash('info', 'Inquilino alterado com sucesso!');
+        Toast::success('Inquilino alterado com sucesso!', 'Alteração!');
         return redirect()->route('entidades.inquilinos.listar');
     }
 
     public function Excluir(Request $request, $id)
     {
         Inquilino::find($id)->delete();
-        $request->session()->flash('warning', 'Inquilino deletado com sucesso!');
+		Toast::error('Inquilino excluído com sucesso!', 'Exclusão!');
         return redirect()->route('entidades.inquilinos.listar');
     }
 }

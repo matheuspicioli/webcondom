@@ -34,19 +34,29 @@
                             {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="Descricao" class="control-label">Descrição</label>
-                                        <input id="Descricao" type="text" class="form-control pula" name="descricao">
-                                    </div>
+                                    <label for="Descricao" class="control-label"
+                                           @if($errors->has('descricao')) style="color: #f56954" @endif>Descrição</label>
+                                    <input type="text" name="descricao" id="Descricao" class="form-control pula"
+                                           @if($errors->has('descricao')) style="border:1px solid #f56954" @endif
+                                           value="{{ old('descricao') ? old('descricao') : '' }}">
+                                    @if( $errors->has('descricao') )
+                                        <span style="color: #f56954">{{ $errors->get('descricao')[0] }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="ExigeConjuge" class="control-label">Exige Conjuge?</label>
+                                        <label for="ExigeConjuge" class="control-label"
+                                               @if($errors->has('exige_conjuge')) style="color: #f56954" @endif>Exige conjuge?</label>
                                         <select name="exige_conjuge" id="ExigeConjuge" class="form-control pula">
-                                            <option disabled selected>Selecione</option>
-                                            <option value="1">Sim</option>
-                                            <option value="0">Não</option>
+                                            <option disabled selected>----------Selecione----------</option>
+                                            <option value="Sim" {{ old('exige_conjuge') == 1 ? 'selected' : '' }}>Sim
+                                            </option>
+                                            <option value="Nao" {{ old('exige_conjuge') == 0 ? 'selected' : '' }}>Não
+                                            </option>
                                         </select>
+                                        @if( $errors->has('exige_conjuge') )
+                                            <span style="color: #f56954">{{ $errors->get('exige_conjuge')[0] }}</span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

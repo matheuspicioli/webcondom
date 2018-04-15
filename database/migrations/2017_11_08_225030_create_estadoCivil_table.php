@@ -11,7 +11,7 @@ class CreateEstadoCivilTable extends Migration
         Schema::create('estado_civil', function (Blueprint $table) {
             $table->increments('id');
             $table->string('descricao', 100);
-            $table->boolean('exige_conjuge')->default(0);
+            $table->enum('exige_conjuge', ['Sim','Nao'])->default('Nao');
             $table->softDeletes();
             $table->timestamps();
         });
