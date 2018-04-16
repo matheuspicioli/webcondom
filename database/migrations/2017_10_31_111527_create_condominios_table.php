@@ -20,7 +20,7 @@ class CreateCondominiosTable extends Migration
             $table->string('telefone', 13)->nullable();
             $table->string('celular', 14);
             $table->integer('unidades')->unsigned();
-            $table->boolean('tem_gas')->default(0);
+            $table->enum('tem_gas', ['Sim','Nao']);
             $table->decimal('valor_gas', 12, 2)->nullable();
             $table->string('email', 255)->nullable();
 

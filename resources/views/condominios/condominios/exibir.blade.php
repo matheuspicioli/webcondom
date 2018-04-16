@@ -97,9 +97,9 @@
                                         <label for="TemGas" class="control-label" @if($errors->has('tem_gas')) style="color: #f56954" @endif>Tem gas?</label>
                                         <select name="tem_gas" id="TemGas" class="form-control pula">
                                             <option disabled selected>----------Selecione----------</option>
-                                            <option value="1" {{ $condominio->tem_gas == 1 ? 'selected' : '' }}>Sim
+                                            <option value="Sim" {{ old('tem_gas') == 'Sim' ? 'selected' : ($condominio->tem_gas == 'Sim' ? 'selected' : '') }}>Sim
                                             </option>
-                                            <option value="0" {{ $condominio->tem_gas == 0 ? 'selected' : '' }}>Não
+                                            <option value="Nao" {{ old('tem_gas') == 'Nao' ? 'selected' : ($condominio->tem_gas == 'Nao' ? 'selected' : '') }}>Não
                                             </option>
                                         </select>
                                         @if( $errors->has('tem_gas') )
@@ -360,20 +360,24 @@
         $(document).ready(function () {
             $('.select2').select2();
             $('#Nome').focus();
-            if ($("select[id=TemGas]").val() == 1)
+            if ($("select[id=TemGas]").val() == 'Sim')
                 $("#ValorGas").prop("disabled", false);
-            else
-                $("#ValorGas").prop("disabled", true);
+            else{
+				$("#ValorGas").prop("disabled", true);
+				$("#ValorGas").val('');
+            }
             $("select[id=TemGas]").on('change', function () {
-                if ($("select[id=TemGas]").val() != 1)
-                    $("#ValorGas").prop("disabled", true);
+                if ($("select[id=TemGas]").val() != 'Sim'){
+					$("#ValorGas").prop("disabled", true);
+					$("#ValorGas").val('');
+                }
                 else
                     $("#ValorGas").prop("disabled", false);
             });
 			$('#Celular').mask('(00) 00000-0000');
 			$('#Telefone').mask('(00) 0000-0000');
 			$('#CEP').mask('00000-000');
-			$('#ValorGas').mask("#.##0,00", {reverse: true});
+			//$('#ValorGas').mask("#.##0,00", {reverse: true});
         });
         $('#salvar').on('click', function(e){
         	e.preventDefault();

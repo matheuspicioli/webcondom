@@ -38,15 +38,25 @@ class Imovel extends Model
 
 	public function setValorLocacaoAttribute($valor)
 	{
-		$valor = str_replace('.', '', $valor);
-		$valor = str_replace(',', '.', $valor);
-		$this->attributes['valor_locacao'] = $valor;
+//		$valor = str_replace('.', '', $valor);
+//		$valor = str_replace(',', '.', $valor);
+		$this->attributes['valor_locacao'] = str_replace(',', '.', $valor);
+	}
+
+	public function getValorLocacaoAttribute()
+	{
+		return str_replace('.',',', $this->attributes['valor_locacao']);
 	}
 
 	public function setValorVendaAttribute($valor)
 	{
-		$valor = str_replace('.', '', $valor);
-		$valor = str_replace(',', '.', $valor);
-		$this->attributes['valor_venda'] = $valor;
+//		$valor = str_replace('.', '', $valor);
+//		$valor = str_replace(',', '.', $valor);
+		$this->attributes['valor_venda'] = str_replace(',', '.', $valor);
+	}
+
+	public function getValorVendaAttribute()
+	{
+		return str_replace('.',',', $this->attributes['valor_venda']);
 	}
 }

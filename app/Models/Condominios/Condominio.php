@@ -32,8 +32,13 @@ class Condominio extends Model
 
     public function setValorGasAttribute($valor)
 	{
-		$valor_gas = str_replace('.', '', $valor);
-		$valor_gas = str_replace(',', '.', $valor_gas);
-		$this->attributes['valor_gas'] = $valor_gas;
+//		$valor_gas = str_replace('.', '', $valor);
+//		$valor_gas = str_replace(',', '.', $valor_gas);
+		$this->attributes['valor_gas'] = str_replace(',', '.', $valor);
+	}
+
+	public function getValorGasAttribute()
+	{
+		return str_replace('.',',', $this->attributes['valor_gas']);
 	}
 }
