@@ -3,11 +3,16 @@
 namespace WebCondom\Http\Controllers\Financeiros;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Toast;
 use WebCondom\Http\Controllers\Controller;
 use WebCondom\Models\Financeiros\Banco;
+use WebCondom\Traits\UploadArquivos;
 
 class BancosController extends Controller
 {
+	use UploadArquivos;
+
     public function Listar()
     {
         $bancos = Banco::all();
@@ -21,7 +26,14 @@ class BancosController extends Controller
 
     public function Salvar(Request $request)
     {
-        Banco::create($request->all());
+        $banco = Banco::create($request->all());
+		//----------UPLOAD LOGO TIPO----------//
+		if($request->hasFile('foto')){
+			$caminho = $this->salvar_arquivo($request->file('foto'), 'fotos_bancos', md5(now()));
+			$banco->foto = $caminho;
+			$banco->save();
+		}
+		Toast::success('Banco incluso com sucesso!','Inclusão!');
         return redirect()->route('financeiros.bancos.listar');
     }
 
@@ -40,6 +52,14 @@ class BancosController extends Controller
         $banco = Banco::find($id);
         if($banco){
             $banco->update($request->all());
+			if($request->hasFile('foto')){
+				//DELETA O LOGO ANTIGO VERIFICAR SE VAI FICAR ASSIM MESMO
+				Storage::disk('public')->delete($banco->foto);
+				$caminho = $this->salvar_arquivo($request->file('foto'), 'fotos_bancos', md5(now()));
+				$banco->foto = $caminho;
+				$banco->save();
+			}
+			Toast::success('Banco alterado com sucesso!','Alteração!');
             return redirect()->route('financeiros.bancos.listar');
         }
         return redirect()->route('financeiros.bancos.listar');
@@ -49,7 +69,9 @@ class BancosController extends Controller
     {
         $banco = Banco::find($id);
         if($banco){
+			Storage::disk('public')->delete($banco->foto);
             $banco->delete();
+            Toast::error('Banco excluído com sucesso!','Exclusão!');
             return redirect()->route('financeiros.bancos.listar');
         }
     }

@@ -34,7 +34,8 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <form method="POST" action="{{ route('financeiros.bancos.alterar', ['id' => $banco->id ]) }}">
+                        <form method="POST" enctype="multipart/form-data"
+							  action="{{ route('financeiros.bancos.alterar', ['id' => $banco->id ]) }}">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
                             <div class="row">
@@ -64,6 +65,22 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-4 col-md-offset-2">
+                                    <label for="foto" class="control-label"
+                                           @if($errors->has('foto')) style="color: #f56954" @endif>Foto</label>
+                                    <input type="file" name="foto" id="foto"
+                                           @if($errors->has('foto')) style="border:1px solid #f56954" @endif
+                                           value="{{ old('foto') ? old('foto') : '' }}">
+                                    @if( $errors->has('foto') )
+                                        <span style="color: #f56954">{{ $errors->get('foto')[0] }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-md-4 col-md-offset-2">
+                                    <img src="{{ Storage::url($banco->foto) }}" alt="Não há logo" height="100px">
+                                </div>
+                            </div>
+							<div class="row"> &nbsp; </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="box box-primary box-solid">

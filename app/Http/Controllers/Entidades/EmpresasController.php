@@ -2,18 +2,17 @@
 
 namespace WebCondom\Http\Controllers\Entidades;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Toast;
 use WebCondom\Http\Controllers\Controller;
 use WebCondom\Http\Requests\Entidades\EmpresaRequest;
 use WebCondom\Models\Enderecos\Cidade;
 use WebCondom\Models\Entidades\Empresa;
-use WebCondom\Traits\Entidades\Empresas;
+use WebCondom\Traits\UploadArquivos;
 
 class EmpresasController extends Controller
 {
-    use Empresas;
+    use UploadArquivos;
     
     public function Listar()
     {
@@ -98,6 +97,7 @@ class EmpresasController extends Controller
     {
         $empresa = Empresa::find($id);
         if($empresa){
+			Storage::disk('public')->delete($empresa->foto);
 			$empresa->delete();
 			Toast::error('Empresa excluída com sucesso!', 'Exclusão!');
 			return redirect()->route('entidades.empresas.listar');

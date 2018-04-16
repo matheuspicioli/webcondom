@@ -36,7 +36,7 @@
 						</div>
 					</div>
 					<div class="box-body">
-						<form method="POST"
+						<form method="POST" enctype="multipart/form-data"
 							  action="{{ route('entidades.funcionarios.alterar', ['id' => $funcionario->id ]) }}">
 							{{ csrf_field() }}
 							{{ method_field('PUT') }}
@@ -72,12 +72,12 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="departamento" class="control-label"
-											   @if($errors->has('cpf_cnpj')) style="color: #f56954" @endif>Departamento</label>
+											   @if($errors->has('departamento_id')) style="color: #f56954" @endif>Departamento</label>
 										<select name="departamento_id" id="departamento" class="form-control pula"
 												@if($errors->has('cpf_cnpj')) style="border:1px solid #f56954" @endif>
 											<option value="-1" selected disabled>-----SELECIONE-----</option>
 											@foreach($departamentos as $departamento)
-												<option value="{{ $departamento->id }}" {{ old('departamento_id') ? 'selected'
+												<option value="{{ $departamento->id }}" {{ old('departamento_id') == $departamento->id ? 'selected'
                                                 	: ($departamento->id == $funcionario->departamento_id ? 'selected' : '') }}>
 													{{ $departamento->descricao }}
 												</option>
@@ -419,6 +419,22 @@
 									</div>
 								</div>
 							</div>
+							<div class="row">
+								<div class="col-md-4 col-md-offset-1">
+									<label for="foto" class="control-label"
+										   @if($errors->has('foto')) style="color: #f56954" @endif>Foto</label>
+									<input type="file" name="foto" id="foto"
+										   @if($errors->has('foto')) style="border:1px solid #f56954" @endif
+										   value="{{ old('foto') ? old('foto') : '' }}">
+									@if( $errors->has('foto') )
+										<span style="color: #f56954">{{ $errors->get('foto')[0] }}</span>
+									@endif
+								</div>
+								<div class="col-md-4 col-md-offset-1">
+									<img src="{{ Storage::url($funcionario->foto) }}" alt="Não há logo" height="100px">
+								</div>
+							</div>
+							<div class="row">&nbsp;</div>
 							<div class="row">
 								<div class="col-md-12">
 									<div class="box box-primary box-solid">

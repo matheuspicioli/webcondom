@@ -9,7 +9,7 @@ class Funcionario extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [ "codigo", "setor_id", "departamento_id", "entidade_id" ];
+    protected $fillable = [ "codigo", "setor_id", "departamento_id", "entidade_id", "foto" ];
     protected $dates = [ "deleted_at" ];
 
     public function entidade()

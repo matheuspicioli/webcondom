@@ -30,7 +30,7 @@
                         <h3 class="box-title">Cadastrar Banco</h3>
                     </div>
                     <div class="box-body">
-                        <form action="{{ route('financeiros.bancos.salvar') }}" method="POST">
+                        <form action="{{ route('financeiros.bancos.salvar') }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-md-2">
@@ -57,6 +57,19 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-4 col-md-offset-4">
+                                    <label for="foto" class="control-label"
+                                           @if($errors->has('foto')) style="color: #f56954" @endif>Foto</label>
+                                    <input type="file" name="foto" id="foto"
+                                           @if($errors->has('foto')) style="border:1px solid #f56954" @endif
+                                           value="{{ old('foto') ? old('foto') : '' }}">
+                                    @if( $errors->has('foto') )
+                                        <span style="color: #f56954">{{ $errors->get('foto')[0] }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row"> &nbsp; </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="box box-primary box-solid">
@@ -134,95 +147,95 @@
                                         </div>
                                         <div class="box-body">
                                             <div class="row">
-                                                <div class="col-md-1">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label for="linha_valor" class="control-label">Valor </label>
                                                         <input type="text" id="linha_valor" name="linha_valor" class="form-control pula" >
                                                     </div>
                                                 </div>
-                                                <div class="col-md-1">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
-                                                        <label for="coluna_valor" class="control-label"></label>
+                                                        <label for="coluna_valor" class="control-label">Coluna valor</label>
                                                         <input type="text" id="coluna_valor" name="coluna_valor" class="form-control pula" >
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-1">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label for="linha_extenso1" class="control-label">Extenso 1 </label>
                                                         <input type="text" id="linha_extenso1" name="linha_extenso1" class="form-control pula" >
                                                     </div>
                                                 </div>
-                                                <div class="col-md-1">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
-                                                        <label for="coluna_entenso1" class="control-label"></label>
+                                                        <label for="coluna_entenso1" class="control-label">Coluna ex 1</label>
                                                         <input type="text" id="coluna_extenso1" name="coluna_extenso1" class="form-control pula" >
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-1">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label for="linha_extenso2" class="control-label">Extenso 2 </label>
                                                         <input type="text" id="linha_extenso2" name="linha_extenso2" class="form-control pula" >
                                                     </div>
                                                 </div>
-                                                <div class="col-md-1">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
-                                                        <label for="coluna_entenso2" class="control-label"></label>
+                                                        <label for="coluna_entenso2" class="control-label">Coluna ex 2</label>
                                                         <input type="text" id="coluna_extenso2" name="coluna_extenso2" class="form-control pula" >
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-1">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label for="linha_nominal" class="control-label">Pago a </label>
                                                         <input type="text" id="linha_nominal" name="linha_nominal" class="form-control pula" >
                                                     </div>
                                                 </div>
-                                                <div class="col-md-1">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
-                                                        <label for="coluna_nominal" class="control-label"></label>
+                                                        <label for="coluna_nominal" class="control-label">Coluna nominal</label>
                                                         <input type="text" id="coluna_nominal" name="coluna_nominal" class="form-control pula" >
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-1">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label for="linha_dia" class="control-label">Dia </label>
                                                         <input type="text" id="linha_dia" name="linha_dia" class="form-control pula" >
                                                     </div>
                                                 </div>
-                                                <div class="col-md-1">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
-                                                        <label for="coluna_dia" class="control-label"></label>
+                                                        <label for="coluna_dia" class="control-label">Coluna dia</label>
                                                         <input type="text" id="coluna_dia" name="coluna_dia" class="form-control pula" >
                                                     </div>
                                                 </div>
-                                                <div class="col-md-1">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label for="linha_mes" class="control-label">Mes </label>
                                                         <input type="text" id="linha_mes" name="linha_mes" class="form-control pula" >
                                                     </div>
                                                 </div>
-                                                <div class="col-md-1">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
-                                                        <label for="coluna_mes" class="control-label"></label>
+                                                        <label for="coluna_mes" class="control-label">Coluna mês</label>
                                                         <input type="text" id="coluna_mes" name="coluna_mes" class="form-control pula" >
                                                     </div>
                                                 </div>
-                                                <div class="col-md-1">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label for="linha_ano" class="control-label">Ano </label>
                                                         <input type="text" id="linha_ano" name="linha_ano" class="form-control pula" >
                                                     </div>
                                                 </div>
-                                                <div class="col-md-1">
+                                                <div class="col-md-2">
                                                     <div class="form-group">
-                                                        <label for="coluna_ano" class="control-label"></label>
+                                                        <label for="coluna_ano" class="control-label">Coluna ano</label>
                                                         <input type="text" id="coluna_ano" name="coluna_ano" class="form-control pula" >
                                                     </div>
                                                 </div>
