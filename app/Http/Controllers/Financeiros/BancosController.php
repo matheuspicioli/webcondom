@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Toast;
 use WebCondom\Http\Controllers\Controller;
+use WebCondom\Http\Requests\Financeiros\BancoRequest;
 use WebCondom\Models\Financeiros\Banco;
 use WebCondom\Traits\UploadArquivos;
 
@@ -24,7 +25,7 @@ class BancosController extends Controller
         return view('financeiros.bancos.criar');
     }
 
-    public function Salvar(Request $request)
+    public function Salvar(BancoRequest $request)
     {
         $banco = Banco::create($request->all());
 		//----------UPLOAD LOGO TIPO----------//
@@ -47,7 +48,7 @@ class BancosController extends Controller
             return redirect()->route('financeiros.bancos.criar');
     }
 
-    public function Alterar(Request $request, $id)
+    public function Alterar(BancoRequest $request, $id)
     {
         $banco = Banco::find($id);
         if($banco){

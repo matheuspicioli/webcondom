@@ -74,7 +74,7 @@
 										<label for="departamento" class="control-label"
 											   @if($errors->has('departamento_id')) style="color: #f56954" @endif>Departamento</label>
 										<select name="departamento_id" id="departamento" class="form-control pula"
-												@if($errors->has('cpf_cnpj')) style="border:1px solid #f56954" @endif>
+												@if($errors->has('departamento_id')) style="border:1px solid #f56954" @endif>
 											<option value="-1" selected disabled>-----SELECIONE-----</option>
 											@foreach($departamentos as $departamento)
 												<option value="{{ $departamento->id }}" {{ old('departamento_id') == $departamento->id ? 'selected'
@@ -91,7 +91,7 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="setor" class="control-label"
-											   @if($errors->has('cpf_cnpj')) style="color: #f56954" @endif>Setor</label>
+											   @if($errors->has('setor_id')) style="color: #f56954" @endif>Setor</label>
 										<select name="setor_id" id="setor" class="form-control pula"
 												@if($errors->has('setor_id')) style="border:1px solid #f56954" @endif>
 											<option value="-1" selected disabled>-----SELECIONE-----</option>
@@ -431,7 +431,7 @@
 									@endif
 								</div>
 								<div class="col-md-4 col-md-offset-1">
-									<img src="{{ Storage::url($funcionario->foto) }}" alt="Não há logo" height="100px">
+									<img src="{{ Storage::url($funcionario->foto) }}" alt="Não há foto" height="100px">
 								</div>
 							</div>
 							<div class="row">&nbsp;</div>

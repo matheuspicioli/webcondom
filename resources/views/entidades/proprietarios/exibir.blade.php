@@ -480,7 +480,7 @@
                                                         <label for="CEP" class="control-label"
                                                                @if($errors->has('cep_cobranca')) style="color: #f56954" @endif>CEP</label>
                                                         <input id="CEP" type="text" class="form-control pula" name="cep_cobranca"
-                                                               value="{{ old('cep_cobranca') ? old('cep_cobranca') : $proprietario->entidade->endereco_cobranca->cep }}"
+                                                               value="{{ old('cep_cobranca') ? old('cep_cobranca') : ($proprietario->entidade->endereco_cobranca ? $proprietario->entidade->endereco_cobranca->cep : '') }}"
                                                                @if($errors->has('cep_cobranca')) style="border:1px solid #f56954" @endif>
                                                         @if( $errors->has('cep_cobranca') )
                                                             <span style="color: #f56954">{{ $errors->get('cep_cobranca')[0] }}</span>
@@ -493,7 +493,7 @@
                                                                @if($errors->has('logradouro_cobranca')) style="color: #f56954" @endif>Logradouro</label>
                                                         <input id="Logradouro" type="text" class="form-control pula"
                                                                name="logradouro_cobranca"
-                                                               value="{{ old('logradouro_cobranca') ? old('logradouro_cobranca') : $proprietario->entidade->endereco_cobranca->logradouro }}"
+                                                               value="{{ old('logradouro_cobranca') ? old('logradouro_cobranca') : ($proprietario->entidade->endereco_cobranca ? $proprietario->entidade->endereco_cobranca->logradouro : '') }}"
                                                                @if($errors->has('logradouro_cobranca')) style="border:1px solid #f56954" @endif>
                                                         @if( $errors->has('logradouro_cobranca') )
                                                             <span style="color: #f56954">{{ $errors->get('logradouro_cobranca')[0] }}</span>
@@ -508,7 +508,7 @@
                                                                @if($errors->has('numero_cobranca')) style="color: #f56954" @endif>Número</label>
                                                         <input id="Numero" type="text" class="form-control pula"
                                                                name="numero_cobranca"
-                                                               value="{{ old('numero_cobranca') ? old('numero_cobranca') : $proprietario->entidade->endereco_cobranca->numero }}"
+                                                               value="{{ old('numero_cobranca') ? old('numero_cobranca') : ($proprietario->entidade->endereco_cobranca ? $proprietario->entidade->endereco_cobranca->numero : '') }}"
                                                                @if($errors->has('numero_cobranca')) style="border:1px solid #f56954" @endif>
                                                         @if( $errors->has('numero_cobranca') )
                                                             <span style="color: #f56954">{{ $errors->get('numero_cobranca')[0] }}</span>
@@ -521,7 +521,7 @@
                                                                @if($errors->has('complemento_cobranca')) style="color: #f56954" @endif>Complemento</label>
                                                         <input id="Complemento" type="text" class="form-control pula"
                                                                name="complemento_cobranca"
-                                                               value="{{ old('complemento_cobranca') ? old('complemento_cobranca') : ($proprietario->entidade->endereco_cobranca->complemento or '') }}"
+                                                               value="{{ old('complemento_cobranca') ? old('complemento_cobranca') : (isset($proprietario->entidade->endereco_cobranca->complemento) ? $proprietario->entidade->endereco_cobranca->complemento : '') }}"
                                                                @if($errors->has('complemento_cobranca')) style="border:1px solid #f56954" @endif>
                                                         @if( $errors->has('complemento_cobranca') )
                                                             <span style="color: #f56954">{{ $errors->get('complemento_cobranca')[0] }}</span>
@@ -536,7 +536,7 @@
                                                                @if($errors->has('bairro_cobranca')) style="color: #f56954" @endif>Bairro</label>
                                                         <input id="Bairro" type="text" class="form-control pula"
                                                                name="bairro_cobranca"
-                                                               value="{{ old('bairro_cobranca') ? old('bairro_cobranca') : $proprietario->entidade->endereco_cobranca->bairro }}"
+                                                               value="{{ old('bairro_cobranca') ? old('bairro_cobranca') : ($proprietario->entidade->endereco_cobranca ? $proprietario->entidade->endereco_cobranca->bairro : '') }}"
                                                                @if($errors->has('bairro_cobranca')) style="border:1px solid #f56954" @endif>
                                                         @if( $errors->has('bairro_cobranca') )
                                                             <span style="color: #f56954">{{ $errors->get('bairro_cobranca')[0] }}</span>
@@ -552,7 +552,8 @@
                                                                 @if($errors->has('cidade_id_cobranca')) style="border:1px solid #f56954" @endif>
                                                             <option selected disabled>-------Selecione uma cidade------</option>
                                                             @foreach($cidades as $cidade)
-                                                                <option value="{{ $cidade->id }}" {{ old('cidade_id_cobranca') == $cidade->id ? 'selected' : ($cidade->id == $proprietario->entidade->endereco_cobranca->cidade_id ? 'selected' : '') }}>
+                                                                <option value="{{ $cidade->id }}" {{ old('cidade_id_cobranca') == $cidade->id ? 'selected'
+                                                                    : ($proprietario->entidade->endereco_cobranca ? ($cidade->id == $proprietario->entidade->endereco_cobranca->cidade_id ? 'selected' : '') : '') }}>
                                                                     {{ $cidade->descricao }}
                                                                     - {{ $cidade->estado->descricao }}
                                                                 </option>
