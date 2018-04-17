@@ -47,7 +47,7 @@
                                     <div class="form-group">
                                         <label for="Telefone" class="control-label" @if($errors->has('telefone')) style="color: #f56954" @endif>Telefone</label>
                                         <input type="text" id="Telefone" name="telefone" class="form-control pula" @if($errors->has('telefone')) style="border:1px solid #f56954" @endif
-                                        value="{{ old('telefone') }}">
+                                            data-mask="(99) 9999-9999" value="{{ old('telefone') }}">
                                         @if( $errors->has('telefone') )
                                             <span style="color: #f56954">{{ $errors->get('telefone')[0] }}</span>
                                         @endif
@@ -59,7 +59,7 @@
                                     <div class="form-group">
                                         <label for="Celular" class="control-label" @if($errors->has('celular')) style="color: #f56954" @endif>Celular</label>
                                         <input type="text" id="Celular" name="celular" class="form-control pula"
-                                               value="{{ old('celular') }}" @if($errors->has('celular')) style="border:1px solid #f56954" @endif>
+                                           data-mask="(99) 99999-9999" value="{{ old('celular') }}" @if($errors->has('celular')) style="border:1px solid #f56954" @endif>
                                         @if( $errors->has('celular') )
                                             <span style="color: #f56954">{{ $errors->get('celular')[0] }}</span>
                                         @endif
@@ -95,8 +95,6 @@
     <script>
         $(document).ready(function () {
             $('#Nome').focus();
-            $('#Celular').mask('(00) 00000-0000');
-            $('#Telefone').mask('(00) 0000-0000');
         });
         $('#salvar').on('click', function(e){
             e.preventDefault();

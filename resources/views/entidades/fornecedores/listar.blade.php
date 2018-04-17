@@ -61,7 +61,7 @@
                                     <td>{{ $fornecedor->id }}</td>
                                     <td>{{ $fornecedor->entidade->nome }}</td>
                                     <td>{{ $fornecedor->entidade->apelido }}</td>
-                                    <td>{{ $fornecedor->entidade->cpf_cnpj }}</td>
+                                    <td @if($fornecedor->entidade->tipo == "CPF") data-mask="999.999.999-99" @else data-mask="99.999.999/9999-99" @endif >{{ $fornecedor->entidade->cpf_cnpj }}</td>
                                     <td>{{ $fornecedor->codigo }}</td>
                                     <td>
                                         @can("exibir_fornecedor")

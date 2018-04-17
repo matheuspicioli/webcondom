@@ -37,7 +37,8 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="Codigo" class="control-label" @if($errors->has('codigo')) style="color: #f56954" @endif>Código</label>
-                                        <input id="Codigo" type="text" class="form-control pula" name="codigo" value="{{ old('codigo') }}" @if($errors->has('codigo')) style="border:1px solid #f56954" @endif>
+                                        <input id="Codigo" type="text" class="form-control pula" name="codigo"
+                                               data-mask="999999" value="{{ old('codigo') }}" @if($errors->has('codigo')) style="border:1px solid #f56954" @endif>
                                         @if( $errors->has('codigo') )
                                             <span style="color: #f56954">{{ $errors->get('codigo')[0] }}</span>
                                         @endif
@@ -178,7 +179,8 @@
 											   <div class="col-md-4">
 												   <div class="form-group">
 													   <label for="CEP" class="control-label" @if($errors->has('cep')) style="color: #f56954" @endif>CEP</label>
-													   <input id="CEP" type="text" class="form-control pula" name="cep" value="{{ old('cep') }}" @if($errors->has('cep')) style="border:1px solid #f56954" @endif>
+													   <input id="CEP" type="text" class="form-control pula" name="cep"
+                                                              data-mask="99999-999" value="{{ old('cep') }}" @if($errors->has('cep')) style="border:1px solid #f56954" @endif>
 													   @if( $errors->has('cep') )
 														   <span style="color: #f56954">{{ $errors->get('cep')[0] }}</span>
 													   @endif
@@ -272,8 +274,7 @@
 @section('js')
     <script>
         $(document).ready(function () {
-            $("#codigo").focus();
-            $('#CEP').mask('00000-000');
+            $('#Codigo').focus();
         });
         $('#salvar').on('click', function(e){
             e.preventDefault();

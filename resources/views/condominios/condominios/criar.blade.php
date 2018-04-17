@@ -56,7 +56,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="Telefone" class="control-label" @if($errors->has('telefone')) style="color: #f56954" @endif>Telefone</label>
-                                        <input id="Telefone" type="text" class="form-control pula" name="telefone" value="{{ old('telefone') }}" @if($errors->has('telefone')) style="border:1px solid #f56954" @endif>
+                                        <input id="Telefone" type="text" class="form-control pula" name="telefone"
+                                               data-mask="(99) 9999-9999" value="{{ old('telefone') }}" @if($errors->has('telefone')) style="border:1px solid #f56954" @endif>
                                         @if( $errors->has('telefone') )
                                             <span style="color: #f56954">{{ $errors->get('telefone')[0] }}</span>
                                         @endif
@@ -65,7 +66,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="Celular" class="control-label" @if($errors->has('celular')) style="color: #f56954" @endif>Celular</label>
-                                        <input id="Celular" type="text" class="form-control pula" name="celular" value="{{ old('celular') }}" @if($errors->has('celular')) style="border:1px solid #f56954" @endif>
+                                        <input id="Celular" type="text" class="form-control pula" name="celular"
+                                               data-mask="(99) 99999-9999" value="{{ old('celular') }}" @if($errors->has('celular')) style="border:1px solid #f56954" @endif>
                                         @if( $errors->has('celular') )
                                             <span style="color: #f56954">{{ $errors->get('celular')[0] }}</span>
                                         @endif
@@ -142,7 +144,8 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="CEP" class="control-label" @if($errors->has('cep')) style="color: #f56954" @endif>CEP</label>
-                                                <input id="CEP" type="text" class="form-control pula" name="cep" value="{{ old('cep') }}" @if($errors->has('cep')) style="border:1px solid #f56954" @endif>
+                                                <input id="CEP" type="text" class="form-control pula" name="cep"
+                                                       data-mask="99999-999" value="{{ old('cep') }}" @if($errors->has('cep')) style="border:1px solid #f56954" @endif>
                                                 @if( $errors->has('cep') )
                                                     <span style="color: #f56954">{{ $errors->get('cep')[0] }}</span>
                                                 @endif
@@ -250,10 +253,6 @@
                 else
                     $("#ValorGas").prop("disabled", false);
             });
-			$('#Celular').mask('(00) 00000-0000');
-			$('#Telefone').mask('(00) 0000-0000');
-			$('#CEP').mask('00000-000');
-			//$('#ValorGas').mask("#.##0,00", {reverse: true});
         });
 		$('#salvar').on('click', function(e){
 			e.preventDefault();
