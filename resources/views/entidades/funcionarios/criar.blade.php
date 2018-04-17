@@ -32,7 +32,7 @@
 						<h3 class="box-title">Cadastrar Funcionários</h3>
 					</div>
 					<div class="box-body">
-						<form action="{{ route('entidades.funcionarios.salvar') }}" method="POST">
+						<form action="{{ route('entidades.funcionarios.salvar') }}" method="POST" enctype="multipart/form-data">
 							{{ csrf_field() }}
 							<div class="row">
 								<div class="col-md-6">
@@ -436,6 +436,19 @@
 									</div>
 								</div>
 							</div>
+							<div class="row">
+								<div class="col-md-4 col-md-offset-4">
+									<label for="foto" class="control-label"
+										   @if($errors->has('foto')) style="color: #f56954" @endif>Foto</label>
+									<input type="file" name="foto" id="foto"
+										   @if($errors->has('foto')) style="border:1px solid #f56954" @endif
+										   value="{{ old('foto') ? old('foto') : '' }}">
+									@if( $errors->has('foto') )
+										<span style="color: #f56954">{{ $errors->get('foto')[0] }}</span>
+									@endif
+								</div>
+							</div>
+							<div class="row">&nbsp;</div>
 							<!-- ENDEREÇO -->
 							<div class="row">
 								<div class="col-md-12">

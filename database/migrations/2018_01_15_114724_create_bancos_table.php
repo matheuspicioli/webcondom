@@ -22,7 +22,7 @@ class CreateBancosTable extends Migration
             $table->integer('tamanho_nossonumero')->nullable();
             $table->string('local_pagamento',100)->nullable();
             $table->string('mensagem', 100)->nullable();
-            $table->string('logotipo', 255)->nullable();
+            $table->string('foto', 255)->nullable();
             $table->string('mascara_cedente', 100)->nullable();
             $table->string('mascara_nossonumero', 100)->nullable();
             //-----Posição de Imporessão dos Cheques-----//
