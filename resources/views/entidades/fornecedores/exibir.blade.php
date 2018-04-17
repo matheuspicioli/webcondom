@@ -37,7 +37,7 @@
 					</div>
 					<div class="box-body">
 						<form method="POST"
-							  action="{{ route('entidades.fornecedores.alterar', ['id' => $fornecedor->id ]) }}">
+							  action="{{ route('entidades.fornecedores.alterar', ['id' => $fornecedor->id ]) }}" id="form">
 							{{ csrf_field() }}
 							{{ method_field('PUT') }}
 							<div class="row">
@@ -46,7 +46,8 @@
 										<label for="tipo" class="control-label">Tipo pessoa</label>
 										<select name="tipo" id="tipo" class="form-control pula">
 											<option value="-1" selected disabled>-----SELECIONE-----</option>
-											<option value="CPF" {{ old('tipo') == 'CPF' ? 'selected' : ($fornecedor->entidade->tipo == 'CPF' ? 'selected' : '') }}>
+											<option value="CPF"
+													{{ old('tipo') == 'CPF' ? 'selected' : ($fornecedor->entidade->tipo == 'CPF' ? 'selected' : '') }}>
 												CPF
 											</option>
 											<option value="CNPJ" {{ old('tipo') == 'CNPJ' ? 'selected' : ($fornecedor->entidade->tipo == 'CNPJ' ? 'selected' : '') }}>
@@ -77,7 +78,7 @@
 											   @if($errors->has('cpf_cnpj')) style="color: #f56954" @endif>CPF/CNPJ</label>
 										<input type="text" name="cpf_cnpj" id="cpf_cnpj" class="form-control pula"
 											   @if($errors->has('cpf_cnpj')) style="border:1px solid #f56954" @endif
-											   value="{{ old('cpf_cnpj') ? old('cpf_cnpj') : $fornecedor->entidade->cpf_cnpj }}">
+											   @if($fornecedor->entidade->tipo == "CPF") data-mask="999.999.999-99" @else data-mask="99.999.999/9999-99" @endif value="{{ old('cpf_cnpj') ? old('cpf_cnpj') : $fornecedor->entidade->cpf_cnpj }}">
 										@if( $errors->has('cpf_cnpj') )
 											<span style="color: #f56954">{{ $errors->get('cpf_cnpj')[0] }}</span>
 										@endif
@@ -127,7 +128,7 @@
 											   @if($errors->has('codigo')) style="color: #f56954" @endif>Código</label>
 										<input type="text" name="codigo" id="codigo" class="form-control pula"
 											   @if($errors->has('codigo')) style="border:1px solid #f56954" @endif
-											   value="{{ old('codigo') ? old('codigo') : $fornecedor->codigo }}">
+											   data-mask="999999" value="{{ old('codigo') ? old('codigo') : $fornecedor->codigo }}">
 										@if( $errors->has('codigo') )
 											<span style="color: #f56954">{{ $errors->get('codigo')[0] }}</span>
 										@endif
@@ -324,7 +325,7 @@
 											   @if($errors->has('telefone_principal')) style="color: #f56954" @endif>Telefone principal</label>
 										<input type="text" name="telefone_principal" id="telefone_principal"
 											   class="form-control pula" @if($errors->has('telefone_principal')) style="border:1px solid #f56954" @endif
-											   value="{{ old('telefone_principal') ? old('telefone_principal') : $fornecedor->entidade->telefone_principal }}">
+											   data-mask="(99) 9999-9999" value="{{ old('telefone_principal') ? old('telefone_principal') : $fornecedor->entidade->telefone_principal }}">
 										@if( $errors->has('telefone_principal') )
 											<span style="color: #f56954">{{ $errors->get('telefone_principal')[0] }}</span>
 										@endif
@@ -336,7 +337,7 @@
 											   @if($errors->has('telefone_comercial')) style="color: #f56954" @endif>Telefone comercial</label>
 										<input type="text" name="telefone_comercial" @if($errors->has('telefone_comercial')) style="border:1px solid #f56954" @endif
 											   id="telefone_comercial" class="form-control pula"
-											   value="{{ old('telefone_comercial') ? old('telefone_comercial') : $fornecedor->entidade->telefone_comercial }}">
+											   data-mask="(99) 9999-9999" value="{{ old('telefone_comercial') ? old('telefone_comercial') : $fornecedor->entidade->telefone_comercial }}">
 										@if( $errors->has('telefone_comercial') )
 											<span style="color: #f56954">{{ $errors->get('telefone_comercial')[0] }}</span>
 										@endif
@@ -347,7 +348,7 @@
 										<label for="celular_1" class="control-label"
 											   @if($errors->has('celular_1')) style="color: #f56954" @endif>Celular 1</label>
 										<input type="text" name="celular_1" id="celular_1" @if($errors->has('celular_1')) style="border:1px solid #f56954" @endif class="form-control pula"
-											   value="{{ old('celular_1') ? old('celular_1') : $fornecedor->entidade->celular_1 }}">
+											   data-mask="(99) 99999-9999" value="{{ old('celular_1') ? old('celular_1') : $fornecedor->entidade->celular_1 }}">
 										@if( $errors->has('celular_1') )
 											<span style="color: #f56954">{{ $errors->get('celular_1')[0] }}</span>
 										@endif
@@ -359,7 +360,7 @@
 											   @if($errors->has('celular_2')) style="color: #f56954" @endif>Celular 2</label>
 										<input type="text" name="celular_2" id="celular_2"
 											   @if($errors->has('celular_2')) style="border:1px solid #f56954" @endif class="form-control pula"
-											   value="{{ old('celular_2') ? old('celular_2') : $fornecedor->entidade->celular_2 }}">
+											   data-mask="(99) 99999-9999" value="{{ old('celular_2') ? old('celular_2') : $fornecedor->entidade->celular_2 }}">
 										@if( $errors->has('celular_2') )
 											<span style="color: #f56954">{{ $errors->get('celular_2')[0] }}</span>
 										@endif
@@ -404,7 +405,7 @@
 														<label for="CEP" class="control-label"
 															   @if($errors->has('cep')) style="color: #f56954" @endif>CEP</label>
 														<input id="CEP" type="text" class="form-control pula" name="cep"
-															   value="{{ old('cep') ? old('cep') : $fornecedor->entidade->endereco_principal->cep }}"
+															   data-mask="99999-999" value="{{ old('cep') ? old('cep') : $fornecedor->entidade->endereco_principal->cep }}"
 															   @if($errors->has('cep')) style="border:1px solid #f56954" @endif>
 														@if( $errors->has('cep') )
 															<span style="color: #f56954">{{ $errors->get('cep')[0] }}</span>
@@ -495,7 +496,7 @@
 								<div class="col-md-12">
 									<div class="form-group">
 										@can("editar_fornecedor")
-											<button class="btn btn-info" type="submit">
+											<button class="btn btn-info" type="submit" id="salvar">
 												<i class="fa fa-save"></i> Salvar
 											</button>
 										@else
@@ -575,7 +576,7 @@
 			}
 
 			$("select[id=tipo]").on('change', function () {
-				if ($("select[id=tipo]").val() == 'CPF') {
+				if ($("select[id=tipo]").val() == 'CNPJ') {
 					$(".cnpj").show();
 					$(".cpf").hide();
 				} else {
@@ -584,5 +585,15 @@
 				}
 			});
 		});
+        $('#salvar').on('click', function(e){
+            e.preventDefault();
+            $('#celular_1').unmask();
+            $('#celular_2').unmask();
+            $('#telefone_principal').unmask();
+            $('#telefone_comercial').unmask();
+            $('#CEP').unmask();
+            $('#cpf_cnpj').unmask();
+            $('#form').submit();
+        });
 	</script>
 @endsection

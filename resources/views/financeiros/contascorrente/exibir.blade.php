@@ -310,7 +310,6 @@
 @stop
 
 @section('js')
-	<script src="{{ asset('js/mask/jquery.mask.min.js') }}"></script>
     <script>
         $(document).ready(function () {
             $('.select2').select2();
