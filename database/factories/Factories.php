@@ -34,7 +34,7 @@ $factory->define(WebCondom\Models\Enderecos\Endereco::class, function (Faker $fa
         'cep'           => $faker->randomNumber(8),
         'logradouro'    => $faker->name,
         'numero'        => $faker->randomNumber(4),
-        'complemento'   => $faker->word,
+        'complemento'   => $faker->word(5),
         'bairro'        => $faker->name,
         'cidade_id'     => 1
      ];
@@ -65,12 +65,12 @@ $factory->define(WebCondom\Models\Entidades\Entidade::class, function (Faker $fa
         'fantasia'              => $faker->name,
         'inscricao_municipal'   => $faker->randomNumber(6),
         'tipo'                  => rand(1,2) == 1 ? 1 : 2,
-        'ramo_atividade'        => $faker->word,
+        'ramo_atividade'        => $faker->word(5),
         'data_abertura'         => $faker->date(),
         'nome_mae'              => $faker->name,
         'estado_civil_id'       => 1,
         'regime_casamento_id'   => 1,
-        'profissao'             => $faker->word,
+        'profissao'             => $faker->word(5),
         'data_nascimento'       => $faker->date(),
         'nacionalidade'         => 'Brasileiro(a)',
         'empresa'               => $faker->company,
@@ -95,14 +95,14 @@ $factory->define(WebCondom\Models\Entidades\Proprietario::class, function (Faker
 $factory->define(WebCondom\Models\Condominios\Imovel::class, function (Faker $faker) {
     return [
         'codigo'            => $faker->randomNumber(3),
-        'referencia'        => $faker->word,
+        'referencia'        => $faker->word(5),
         'tipo_imovel_id'    => 1,
         'categoria_id'      => 1,
         'valor_locacao'     => $faker->randomFloat(2,800, 12000),
         'valor_venda'       => $faker->randomFloat(2, 50000, 10000000),
-        'codigo_agua'       => $faker->word . $faker->numberBetween(1000,9000),
-        'codigo_iptu'       => $faker->word . $faker->numberBetween(20100,55000),
-        'codigo_energia'    => $faker->word . $faker->numberBetween(135711,533000),
+        'codigo_agua'       => $faker->word(5) . $faker->numberBetween(1000,9000),
+        'codigo_iptu'       => $faker->word(5) . $faker->numberBetween(20100,55000),
+        'codigo_energia'    => $faker->word(5) . $faker->numberBetween(135711,533000),
         'descritivo'        => $faker->sentence()
     ];
 });

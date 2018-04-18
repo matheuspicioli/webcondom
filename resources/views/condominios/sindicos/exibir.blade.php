@@ -34,29 +34,38 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <form method="POST" action="{{ route('condominios.sindicos.alterar', ['id' => $sindico->id ]) }}">
+                        <form method="POST" action="{{ route('condominios.sindicos.alterar', ['id' => $sindico->id ]) }}" id="form">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="Nome" class="control-label">Nome</label>
-                                        <input id="Nome" type="text" class="form-control pula" name="nome"
-                                               value="{{ $sindico->nome }}">
+                                        <label for="Nome" class="control-label" @if($errors->has('nome')) style="color: #f56954" @endif>Nome</label>
+                                        <input id="Nome" type="text" class="form-control pula" name="nome" @if($errors->has('nome')) style="border:1px solid #f56954" @endif
+                                        	value="{{ old('nome') ? old('nome') : $sindico->nome }}">
+                                        @if( $errors->has('nome') )
+                                            <span style="color: #f56954">{{ $errors->get('nome')[0] }}</span>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="Telefone" class="control-label">Telefone</label>
-                                        <input type="text" id="Telefone" name="telefone" class="form-control pula"
-                                               value="{{ $sindico->telefone ? $sindico->telefone : '' }}">
+										<label for="Telefone" class="control-label" @if($errors->has('telefone')) style="color: #f56954" @endif>Telefone</label>
+                                        <input type="text" id="Telefone" name="telefone" class="form-control pula" @if($errors->has('telefone')) style="border:1px solid #f56954" @endif
+                                            data-mask="(99) 9999-9999" value="{{ old('telefone') ? old('telefone') : ($sindico->telefone ? $sindico->telefone : '') }}">
+										@if( $errors->has('telefone') )
+											<span style="color: #f56954">{{ $errors->get('telefone')[0] }}</span>
+										@endif
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="Celular" class="control-label">Celular</label>
+										<label for="Celular" class="control-label" @if($errors->has('celular')) style="color: #f56954" @endif>Celular</label>
                                         <input type="text" id="Celular" name="celular" class="form-control pula"
-                                               value="{{ $sindico->celular }}">
+                                           data-mask="(99) 99999-9999" value="{{ old('celular') ? old('celular') : $sindico->celular }}" @if($errors->has('celular')) style="border:1px solid #f56954" @endif>
+										@if( $errors->has('celular') )
+											<span style="color: #f56954">{{ $errors->get('celular')[0] }}</span>
+										@endif
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +73,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         @can("editar_sindico")
-                                            <button class="btn btn-info" type="submit">
+                                            <button class="btn btn-info" type="submit" id="salvar">
                                                 <i class="fa fa-save"></i> Salvar</button>
                                         @else
                                             <button disabled class="btn btn-info" type="submit">
@@ -126,7 +135,15 @@
 @section('js')
     <script>
         $(document).ready(function () {
+            $('.select2').select2();
             $('#Nome').focus();
         });
+            $('#salvar').on('click', function(e){
+            e.preventDefault();
+            $('#Celular').unmask();
+            $('#Telefone').unmask();
+            $('#form').submit();
+        });
+
     </script>
 @endsection

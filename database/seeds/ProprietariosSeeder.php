@@ -13,9 +13,6 @@ class ProprietariosSeeder extends Seeder
     public function run()
     {
         $entidades = WebCondom\Models\Entidades\Entidade::all();
-        Proprietario::create([
-            'codigo'        => '2253',
-            'entidade_id'   => '2']);
 
         factory(WebCondom\Models\Entidades\Proprietario::class, 5)
             ->create()

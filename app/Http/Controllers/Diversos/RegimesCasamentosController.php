@@ -3,7 +3,9 @@
 namespace WebCondom\Http\Controllers\Diversos;
 
 use Illuminate\Http\Request;
+use Toast;
 use WebCondom\Http\Controllers\Controller;
+use WebCondom\Http\Requests\Diversos\RegimeCasamentoRequest;
 use WebCondom\Models\Diversos\RegimeCasamento;
 
 class RegimesCasamentosController extends Controller
@@ -28,10 +30,11 @@ class RegimesCasamentosController extends Controller
         return view('diversos.regimeCasamento.criar', compact('migalhas'));
     }
 
-    public function Salvar(Request $request)
+    public function Salvar(RegimeCasamentoRequest $request)
     {
         //dd($request->except('_token'));
         RegimeCasamento::create($request->all());
+        Toast::success('Regime de casamento incluído com sucesso!','Inclusão!');
         return redirect()->route('diversos.regimeCasamento.listar');
     }
 
@@ -50,17 +53,19 @@ class RegimesCasamentosController extends Controller
             return redirect()->route('diversos.regimeCasamento.criar');
     }
 
-    public function Alterar(Request $request, $id)
+    public function Alterar(RegimeCasamentoRequest $request, $id)
     {
         //dd($request->except(['_token', '_method']));
         $regimeCasamento = RegimeCasamento::find($id);
         $regimeCasamento->update($request->all());
+		Toast::success('Regime de casamento alterado com sucesso!','Alteração!');
         return redirect()->route('diversos.regimeCasamento.listar');
     }
 
     public function Excluir($id)
     {
         RegimeCasamento::find($id)->delete();
+		Toast::success('Regime de casamento excluído com sucesso!','Exclusão!');
         return redirect()->route('diversos.regimeCasamento.listar');
     }
 

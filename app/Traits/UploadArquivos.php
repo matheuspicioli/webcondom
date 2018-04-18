@@ -6,10 +6,10 @@
  * Time: 15:49
  */
 
-namespace WebCondom\Traits\Entidades;
+namespace WebCondom\Traits;
 
 
-trait Empresas
+trait UploadArquivos
 {
     private function salvar_arquivo($arquivo, $pasta, $nome, $disco = 'public')
     {

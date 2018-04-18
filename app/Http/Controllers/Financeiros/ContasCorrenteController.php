@@ -50,10 +50,11 @@ class ContasCorrenteController extends Controller
         $conta              = $this->service->Exibir($id);
         $bancos             = $this->bancosService->Listar();
         $bancosDados        = $bancos->dados;
+        $bancoAtual         = $this->bancosService->Exibir($conta->dados->banco_id);
 
         $condominios        = $this->condominiosService->Listar();
         $condominiosDados   = $condominios->dados;
-        return view('financeiros.contascorrente.exibir', compact('conta', 'bancosDados', 'condominiosDados'));
+        return view('financeiros.contascorrente.exibir', compact('conta', 'bancosDados', 'condominiosDados','bancoAtual'));
     }
 
     public function Alterar(Request $request, $id)

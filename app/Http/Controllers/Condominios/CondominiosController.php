@@ -3,10 +3,10 @@
 namespace WebCondom\Http\Controllers\Condominios;
 
 use Illuminate\Http\Request;
+use Toast;
 use WebCondom\Http\Controllers\Controller;
 use WebCondom\Http\Requests\Condominios\CondominioRequest;
 use WebCondom\Models\Condominios\Condominio;
-use WebCondom\Models\Condominios\CondominioTaxa;
 use WebCondom\Models\Condominios\Sindico;
 use WebCondom\Models\Enderecos\Cidade;
 use WebCondom\Models\Enderecos\Endereco;
@@ -46,7 +46,7 @@ class CondominiosController extends Controller
         $condominio = $this->condominio->create($request->all());
         $condominio->endereco()->associate($endereco);
         $condominio->save();
-        $request->session()->flash('sucesso', 'Condomínio criado com sucesso!');
+		Toast::success('Condomínio incluído com sucesso!', 'Inclusão!');
         return redirect()->route('condominios.condominios.listar');
     }
 
@@ -72,14 +72,15 @@ class CondominiosController extends Controller
 		$condominio->endereco()->update($request->all());
         //SALVA O RELACIONAMENTO TAMBÉM
         $condominio->push();
+		Toast::success('Condomínio alterado com sucesso!', 'Alteração!');
         return redirect()->route('condominios.condominios.listar')
 			->with('success', 'Condominio alterado com sucesso!');
     }
 
-    public function Excluir(Request $request, $id)
+    public function Excluir($id)
     {
         $this->condominio->find($id)->delete();
-        $request->session()->flash('warning', 'Condomínio deletado com sucesso!');
+		Toast::success('Condomínio excluído!', 'Exclusão!');
         return redirect()->route('condominios.condominios.listar');
     }
 }

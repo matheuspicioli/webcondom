@@ -33,8 +33,14 @@
                             <form action="{{ route('diversos.categorias.salvar') }}" method="POST">
                                 {{ csrf_field() }}
                                 <div class="form-group">
-                                    <label for="Descricao" class="control-label">Descrição</label>
-                                    <input id="Descricao" type="text" class="form-control" name="descricao">
+                                    <label for="Descricao" class="control-label"
+                                           @if($errors->has('descricao')) style="color: #f56954" @endif>Descrição</label>
+                                    <input type="text" name="descricao" id="Descricao" class="form-control pula"
+                                           @if($errors->has('descricao')) style="border:1px solid #f56954" @endif
+                                           value="{{ old('descricao') ? old('descricao') : '' }}">
+                                    @if( $errors->has('descricao') )
+                                        <span style="color: #f56954">{{ $errors->get('descricao')[0] }}</span>
+                                    @endif
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">

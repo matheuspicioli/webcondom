@@ -2,16 +2,17 @@
 
 namespace WebCondom\Http\Controllers\Entidades;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Toast;
 use WebCondom\Http\Controllers\Controller;
+use WebCondom\Http\Requests\Entidades\EmpresaRequest;
 use WebCondom\Models\Enderecos\Cidade;
 use WebCondom\Models\Entidades\Empresa;
-use WebCondom\Traits\Entidades\Empresas;
+use WebCondom\Traits\UploadArquivos;
 
 class EmpresasController extends Controller
 {
-    use Empresas;
+    use UploadArquivos;
     
     public function Listar()
     {
@@ -34,8 +35,9 @@ class EmpresasController extends Controller
         return view('entidades.empresas.criar', compact('cidades', 'migalhas'));
     }
 
-    public function Salvar(Request $request)
+    public function Salvar(EmpresaRequest $request)
     {
+        DD($request);
         $empresa = Empresa::create($request->all());
         //----------UPLOAD LOGO TIPO----------//
         if($request->hasFile('logo_imagem')){
@@ -53,7 +55,7 @@ class EmpresasController extends Controller
         $entidade->save();
         $empresa->save();
 
-        $request->session()->flash('sucesso', 'Empresa criado com sucesso!');
+		Toast::success('Empresa incluída com sucesso!', 'Inclusão!');
         return redirect()->route('entidades.empresas.listar');
     }
 
@@ -73,7 +75,7 @@ class EmpresasController extends Controller
             return redirect()->route('entidades.empresas.criar', 'migalhas');
     }
 
-    public function Alterar(Request $request, $id)
+    public function Alterar(EmpresaRequest $request, $id)
     {
         $empresa = Empresa::find($id);
         $empresa->update($request->all());
@@ -85,21 +87,23 @@ class EmpresasController extends Controller
         }
         $empresa->entidade()->update($request->all());
         //----ENDEREÇO PRINCIPAL---//
-        $empresa->entidade->endereco_principal()->update($request->only(
-            'logradouro', 'numero','cep','bairro','cidade_id'
-        ));
+        $empresa->entidade->endereco_principal()->update($request->all());
         $empresa->push();
 
-        $request->session()->flash('info', 'Empresa alterado com sucesso!');
+		Toast::success('Empresa alterada com sucesso!', 'Alteração!');
         return redirect()->route('entidades.empresas.listar');
     }
 
-    public function Excluir(Request $request, $id)
+    public function Excluir($id)
     {
         $empresa = Empresa::find($id);
-        Storage::disk('public')->delete($empresa->logo);
-        $empresa->delete();
-        $request->session()->flash('warning', 'Empresa deletado com sucesso!');
-        return redirect()->route('entidades.empresas.listar');
+        if($empresa){
+			Storage::disk('public')->delete($empresa->foto);
+			$empresa->delete();
+			Toast::success('Empresa excluída com sucesso!', 'Exclusão!');
+			return redirect()->route('entidades.empresas.listar');
+		}
+		Toast::error('Erro ao encontrar empresa!', 'Erro!');
+		return redirect()->route('entidades.empresas.listar');
     }
 }

@@ -413,8 +413,7 @@
                                 <td>{{ $lancamento->documento }}</td>
                                 <td>{{ $lancamento->historico }}</td>
                                 <td>
-                                    {{ $lancamento->plano_conta->grupo->plano_de_conta->tipo }}
-                                    .{{ $lancamento->plano_conta->grupo->grupo }}.{{ $lancamento->plano_conta->conta }}
+                                    {{ $lancamento->plano_conta->grupo->plano_de_conta->tipo }}.{{ $lancamento->plano_conta->grupo->grupo }}.{{ $lancamento->plano_conta->conta }}
                                 </td>
                                 <td align=right>{{ $lancamento->tipo == 'Credito' ?  number_format($lancamento->valor, 2,',','.') : '' }}</td>
                                 <td align=right>{{ $lancamento->tipo == 'Debito' ?  number_format($lancamento->valor, 2,',','.') : '' }}</td>

@@ -18,7 +18,7 @@ class Banco extends Model
         'tamanho_nossonumero',
         'local_pagamento',
         'mensagem',
-        'Logotipo',
+        'foto',
         'mascara_cedente',
         'mascara_nossonumero',
         'linha_valor',

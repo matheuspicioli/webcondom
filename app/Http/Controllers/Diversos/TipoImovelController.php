@@ -3,7 +3,9 @@
 namespace WebCondom\Http\Controllers\Diversos;
 
 use Illuminate\Http\Request;
+use Toast;
 use WebCondom\Http\Controllers\Controller;
+use WebCondom\Http\Requests\Diversos\TipoImovelRequest;
 use WebCondom\Models\Diversos\TipoImovel;
 
 class TipoImovelController extends Controller
@@ -28,10 +30,11 @@ class TipoImovelController extends Controller
         return view('diversos.tiposimoveis.criar', compact('migalhas'));
     }
 
-    public function Salvar(Request $request)
+    public function Salvar(TipoImovelRequest $request)
     {
         //dd($request->except('_token'));
         TipoImovel::create($request->all());
+        Toast::success('Tipo de imóvel incluído com sucesso!','Inclusão!');
         return redirect()->route('diversos.tiposimoveis.listar');
     }
 
@@ -50,17 +53,19 @@ class TipoImovelController extends Controller
             return redirect()->route('diversos.tiposimoveis.criar');
     }
 
-    public function Alterar(Request $request, $id)
+    public function Alterar(TipoImovelRequest $request, $id)
     {
         //dd($request->except(['_token', '_method']));
         $tipoImovel = TipoImovel::find($id);
         $tipoImovel->update($request->all());
+		Toast::success('Tipo de imóvel alterado com sucesso!','Alteração!');
         return redirect()->route('diversos.tiposimoveis.listar');
     }
 
     public function Excluir($id)
     {
         TipoImovel::find($id)->delete();
+		Toast::success('Tipo de imóvel excluído com sucesso!','Exclusão!');
         return redirect()->route('diversos.tiposimoveis.listar');
     }
 }

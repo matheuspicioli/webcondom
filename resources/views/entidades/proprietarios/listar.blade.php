@@ -60,7 +60,7 @@
                                     <td>{{ $proprietario->id }}</td>
                                     <td>{{ $proprietario->entidade->nome }}</td>
                                     <td>{{ $proprietario->entidade->apelido }}</td>
-                                    <td>{{ $proprietario->entidade->cpf_cnpj }}</td>
+                                    <td @if($proprietario->entidade->tipo == "CPF") data-mask="999.999.999-99" @else data-mask="99.999.999/9999-99" @endif >{{ $proprietario->entidade->cpf_cnpj }}</td>
                                     <td>{{ $proprietario->codigo }}</td>
                                     <td>
                                         @can("exibir_proprietario")
@@ -126,7 +126,7 @@
     <script>
         $(function () {
             $('#tabela').DataTable({
-                "order": [[ 1, "asc" ]]
+                "order": [[ 1, "asc" ]],
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
                 }

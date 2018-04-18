@@ -64,7 +64,7 @@
                                     <div class="form-group">
                                         <label for="Telefone" class="control-label" @if($errors->has('telefone')) style="color: #f56954" @endif>Telefone</label>
                                         <input id="Telefone" type="text" class="form-control pula" name="telefone" @if($errors->has('telefone')) style="border:1px solid #f56954" @endif
-                                               value="{{ old('telefone') ? old('telefone') : ($condominio->telefone ? $condominio->telefone : '')  }}">
+                                            data-mask="(99) 9999-9999" value="{{ old('telefone') ? old('telefone') : ($condominio->telefone ? $condominio->telefone : '')  }}">
                                         @if( $errors->has('telefone') )
                                             <span style="color: #f56954">{{ $errors->get('telefone')[0] }}</span>
                                         @endif
@@ -74,7 +74,7 @@
                                     <div class="form-group">
                                         <label for="Celular" class="control-label" @if($errors->has('celular')) style="color: #f56954" @endif>Celular</label>
                                         <input id="Celular" type="text" class="form-control pula" name="celular" @if($errors->has('celular')) style="border:1px solid #f56954" @endif
-                                               value="{{ old('celular') ? old('celular') : $condominio->celular }}">
+                                        data-mask="(99) 99999-9999" value="{{ old('celular') ? old('celular') : $condominio->celular }}">
                                         @if( $errors->has('celular') )
                                             <span style="color: #f56954">{{ $errors->get('celular')[0] }}</span>
                                         @endif
@@ -97,9 +97,9 @@
                                         <label for="TemGas" class="control-label" @if($errors->has('tem_gas')) style="color: #f56954" @endif>Tem gas?</label>
                                         <select name="tem_gas" id="TemGas" class="form-control pula">
                                             <option disabled selected>----------Selecione----------</option>
-                                            <option value="1" {{ $condominio->tem_gas == 1 ? 'selected' : '' }}>Sim
+                                            <option value="Sim" {{ old('tem_gas') == 'Sim' ? 'selected' : ($condominio->tem_gas == 'Sim' ? 'selected' : '') }}>Sim
                                             </option>
-                                            <option value="0" {{ $condominio->tem_gas == 0 ? 'selected' : '' }}>Não
+                                            <option value="Nao" {{ old('tem_gas') == 'Nao' ? 'selected' : ($condominio->tem_gas == 'Nao' ? 'selected' : '') }}>Não
                                             </option>
                                         </select>
                                         @if( $errors->has('tem_gas') )
@@ -157,7 +157,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="CEP" class="control-label" @if($errors->has('cep')) style="color: #f56954" @endif>CEP</label>
-                                                        <input type="text" id="CEP" name="cep" class="form-control pula" value="{{ old('cep') ? old('cep') : $condominio->endereco->cep }}" @if($errors->has('cep')) style="border:1px solid #f56954" @endif>
+                                                        <input type="text" id="CEP" name="cep" class="form-control pula"
+                                                               data-mask="99999-999" value="{{ old('cep') ? old('cep') : $condominio->endereco->cep }}" @if($errors->has('cep')) style="border:1px solid #f56954" @endif>
                                                         @if( $errors->has('cep') )
                                                             <span style="color: #f56954">{{ $errors->get('cep')[0] }}</span>
                                                         @endif
@@ -356,24 +357,25 @@
     </div>
 @endsection
 @section('js')
+    <script src="{{ asset('js/mask/jquery.mask.min.js') }}"></script>
     <script>
         $(document).ready(function () {
             $('.select2').select2();
             $('#Nome').focus();
-            if ($("select[id=TemGas]").val() == 1)
+            if ($("select[id=TemGas]").val() == 'Sim')
                 $("#ValorGas").prop("disabled", false);
-            else
-                $("#ValorGas").prop("disabled", true);
+            else{
+				$("#ValorGas").prop("disabled", true);
+				$("#ValorGas").val('');
+            }
             $("select[id=TemGas]").on('change', function () {
-                if ($("select[id=TemGas]").val() != 1)
-                    $("#ValorGas").prop("disabled", true);
+                if ($("select[id=TemGas]").val() != 'Sim'){
+					$("#ValorGas").prop("disabled", true);
+					$("#ValorGas").val('');
+                }
                 else
                     $("#ValorGas").prop("disabled", false);
             });
-			$('#Celular').mask('(00) 00000-0000');
-			$('#Telefone').mask('(00) 0000-0000');
-			$('#CEP').mask('00000-000');
-			$('#ValorGas').mask("#.##0,00", {reverse: true});
         });
         $('#salvar').on('click', function(e){
         	e.preventDefault();

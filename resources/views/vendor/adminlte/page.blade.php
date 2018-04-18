@@ -114,55 +114,8 @@
 
             <!-- Main content -->
             <section class="content">
-                @if ( Session::has('danger') )
-					<div class="row">
-						<div class="col-md-4 col-md-offset-4">
-							<div class="alert alert-danger alert-dismissible">
-								<button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
-								<h4>
-									<i class="icon fa fa-ban"></i>
-									{{ Session::get('danger') }}
-								</h4>
-							</div>
-						</div>
-					</div>
-				@elseif( Session::has('info') )
-					<div class="row">
-						<div class="col-md-4 col-md-offset-4">
-							<div class="alert alert-info alert-dismissible">
-								<button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
-								<h4>
-									<i class="icon fa fa-info"></i>
-									{{ Session::get('info') }}
-								</h4>
-							</div>
-						</div>
-					</div>
-				@elseif( Session::has('warning') )
-					<div class="row">
-						<div class="col-md-4 col-md-offset-4">
-							<div class="alert alert-alert alert-dismissible">
-								<button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
-								<h4>
-									<i class="icon fa fa-warning"></i>
-									{{ Session::get('warning') }}
-								</h4>
-							</div>
-						</div>
-					</div>
-				@elseif( Session::has('success') )
-					<div class="row">
-						<div class="col-md-4 col-md-offset-4">
-							<div class="alert alert-success alert-dismissible">
-								<button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
-								<h4>
-									<i class="icon fa fa-check"></i>
-									{{ Session::get('success') }}
-								</h4>
-							</div>
-						</div>
-					</div>
-                @endif
+				@include('toast::messages-jquery')
+
 				<div id="app">
 					@yield('content')
 				</div>

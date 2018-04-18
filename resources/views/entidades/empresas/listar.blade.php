@@ -59,7 +59,7 @@
                                     <td>{{ $empresa->id }}</td>
                                     <td>{{ $empresa->entidade->fantasia }}</td>
                                     <td>{{ $empresa->entidade->nome }}</td>
-                                    <td>{{ $empresa->entidade->cpf_cnpj }}</td>
+                                    <td @if($empresa->entidade->tipo == "CPF") data-mask="999.999.999-99" @else data-mask="99.999.999/9999-99" @endif >{{ $empresa->entidade->cpf_cnpj }}</td>
                                     <!-- <td><img src="{{ Storage::url($empresa->logo) }}" alt="Logo" width="90px" height="50px"></td> -->
                                     <td>
                                         @can("exibir_empresa")
@@ -89,7 +89,7 @@
                                                         <h3 class="modal-title">Confirmar exclusão</h3>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <h4>Deseja realmente excluir a Empresa "{{ $empresa->nome }}"?</h4>
+                                                        <h4>Deseja realmente excluir a Empresa "{{ $empresa->entidade->nome }}"?</h4>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>

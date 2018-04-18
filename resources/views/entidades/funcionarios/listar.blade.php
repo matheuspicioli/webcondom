@@ -62,7 +62,7 @@
                                     <td>{{ $funcionario->entidade->nome }}</td>
                                     <td>{{ $funcionario->departamento->descricao }}</td>
                                     <td>{{ $funcionario->setor->descricao }}</td>
-                                    <td>{{ $funcionario->apelido }}</td>
+                                    <td>{{ $funcionario->entidade->apelido }}</td>
                                     <td>
                                         @can("exibir_funcionario")
                                             <a class="btn btn-sm btn-warning" href="{{ route('entidades.funcionarios.exibir', ['id' => $funcionario->id ]) }}">
