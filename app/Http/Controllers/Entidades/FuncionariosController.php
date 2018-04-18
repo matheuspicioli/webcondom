@@ -115,9 +115,12 @@ class FuncionariosController extends Controller
 
     public function Excluir($id)
     {
-        $funcionario = Funcionario::find($id)->delete();
-		Storage::disk('public')->delete($funcionario->foto);
-		Toast::success('Funcionário excluído com sucesso!','Exclusão!');
-        return redirect()->route('entidades.funcionarios.listar');
+        $funcionario = Funcionario::find($id);
+        if($funcionario) {
+            Storage::disk('public')->delete($funcionario->foto);
+            $funcionario->delete();
+            Toast::success('Funcionário excluído com sucesso!', 'Exclusão!');
+            return redirect()->route('entidades.funcionarios.listar');
+        }
     }
 }
