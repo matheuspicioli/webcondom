@@ -28,7 +28,7 @@ class ProprietarioRequest extends FormRequest
 			'nome'					=> 'required|max:100',
 			'apelido'				=> 'required|max:20',
 			'rg_ie'					=> 'required|max:30',
-			'codigo'				=> 'nullable|integer',
+			'codigo'				=> 'required|integer',
 			'nome_mae'				=> 'required|max:100',
 			'estado_civil_id'		=> 'required',
 			'regime_casamento_id'	=> 'required',
