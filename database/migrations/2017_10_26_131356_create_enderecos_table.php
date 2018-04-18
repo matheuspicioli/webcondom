@@ -19,7 +19,7 @@ class CreateEnderecosTable extends Migration
             $table->string('logradouro', 255);
             $table->string('numero', 6);
             $table->string('complemento', 50)->nullable();
-            $table->string('bairro');
+            $table->string('bairro', 100);
 
             $table->integer('cidade_id')->unsigned();
             $table->foreign('cidade_id')

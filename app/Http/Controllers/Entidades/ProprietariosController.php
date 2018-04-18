@@ -120,7 +120,7 @@ class ProprietariosController extends Controller
     public function Excluir($id)
     {
         Proprietario::find($id)->delete();
-		Toast::error('Proprietário excluído com sucesso!', 'Exclusão!');
+		Toast::success('Proprietário excluído com sucesso!', 'Exclusão!');
         return redirect()->route('entidades.proprietarios.listar');
     }
 }

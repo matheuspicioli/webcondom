@@ -80,7 +80,7 @@ class ImoveisController extends Controller
     public function Excluir(Request $request, $id)
     {
         Imovel::find($id)->delete();
-		Toast::error('Imóvel excluído com sucesso!', 'Exclusão!');
+		Toast::success('Imóvel excluído com sucesso!', 'Exclusão!');
         return redirect()->route('condominios.imoveis.listar');
     }
 }

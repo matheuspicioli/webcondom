@@ -49,14 +49,14 @@ class InquilinoRequest extends FormRequest
 			'logradouro_principal'	=> 'required|max:255',
 			'numero_principal'		=> 'required|max:6',
 			'complemento_principal'	=> 'nullable|max:50',
-			'bairro_principal'		=> 'required|max:255',
+			'bairro_principal'		=> 'required|max:100',
 			'cidade_id_principal'	=> 'required',
 			//ENDEREÇO COBRANÇA
 			'cep_cobranca'			=> 'nullable|max:8|min:8',
 			'logradouro_cobranca'	=> 'nullable|max:255',
 			'numero_cobranca'		=> 'nullable|max:6',
 			'complemento_cobranca'	=> 'nullable|max:50',
-			'bairro_cobranca'		=> 'nullable|max:255',
+			'bairro_cobranca'		=> 'nullable|max:100',
 			'cidade_id_cobranca'	=> 'nullable'
 		];
     }

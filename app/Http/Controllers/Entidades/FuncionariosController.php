@@ -117,7 +117,7 @@ class FuncionariosController extends Controller
     {
         $funcionario = Funcionario::find($id)->delete();
 		Storage::disk('public')->delete($funcionario->foto);
-		Toast::error('Funcionário excluído com sucesso!','Exclusão!');
+		Toast::success('Funcionário excluído com sucesso!','Exclusão!');
         return redirect()->route('entidades.funcionarios.listar');
     }
 }

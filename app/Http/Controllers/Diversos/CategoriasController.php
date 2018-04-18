@@ -65,7 +65,7 @@ class CategoriasController extends Controller
     public function Excluir($id)
     {
         Categoria::find($id)->delete();
-		Toast::error('Categoria excluída com sucesso!', 'Exclusão!');
+		Toast::success('Categoria excluída com sucesso!', 'Exclusão!');
         return redirect()->route('diversos.categorias.listar');
     }
 }

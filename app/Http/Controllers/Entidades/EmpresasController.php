@@ -37,6 +37,7 @@ class EmpresasController extends Controller
 
     public function Salvar(EmpresaRequest $request)
     {
+        DD($request);
         $empresa = Empresa::create($request->all());
         //----------UPLOAD LOGO TIPO----------//
         if($request->hasFile('logo_imagem')){
@@ -99,7 +100,7 @@ class EmpresasController extends Controller
         if($empresa){
 			Storage::disk('public')->delete($empresa->foto);
 			$empresa->delete();
-			Toast::error('Empresa excluída com sucesso!', 'Exclusão!');
+			Toast::success('Empresa excluída com sucesso!', 'Exclusão!');
 			return redirect()->route('entidades.empresas.listar');
 		}
 		Toast::error('Erro ao encontrar empresa!', 'Erro!');

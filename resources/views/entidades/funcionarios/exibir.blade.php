@@ -61,7 +61,7 @@
 											   @if($errors->has('cpf_cnpj')) style="color: #f56954" @endif>CPF/CNPJ</label>
 										<input type="text" name="cpf_cnpj" id="cpf_cnpj" class="form-control pula"
 											   @if($errors->has('cpf_cnpj')) style="border:1px solid #f56954" @endif
-											   @if($funcionario->entidade->tipo == "CPF") data-mask="999.999.999-99" @else data-mask="99.999.999/9999-99" @endif value="{{ old('cpf_cnpj') ? old('cpf_cnpj') : $funcionario->entidade->cpf_cnpj }}">
+											   value="{{ old('cpf_cnpj') ? old('cpf_cnpj') : $funcionario->entidade->cpf_cnpj }}">
 										@if( $errors->has('cpf_cnpj') )
 											<span style="color: #f56954">{{ $errors->get('cpf_cnpj')[0] }}</span>
 										@endif
@@ -616,9 +616,11 @@
 			if ($("select[id=tipo]").val() == 'CNPJ') {
 				$(".cnpj").show();
 				$(".cpf").hide();
+                $('#cpf_cnpj').mask('99.999.999/9999-99');
 			} else {
 				$(".cnpj").hide();
 				$(".cpf").show();
+                $('#cpf_cnpj').mask('999.999.999-99');
 			}
 
 			$("select[id=tipo]").on('change', function () {
@@ -628,6 +630,7 @@
 				} else {
 					$(".cnpj").hide();
 					$(".cpf").show();
+                    $('#cpf_cnpj').mask('999.999.999-99');
 				}
 			});
 		});

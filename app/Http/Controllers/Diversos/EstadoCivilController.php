@@ -65,7 +65,7 @@ class EstadoCivilController extends Controller
     public function Excluir($id)
     {
         EstadoCivil::find($id)->delete();
-		Toast::error('Estado civil excluído com sucesso!', 'Exclusão!');
+		Toast::success('Estado civil excluído com sucesso!', 'Exclusão!');
         return redirect()->route('diversos.estadoCivil.listar');
     }
 }

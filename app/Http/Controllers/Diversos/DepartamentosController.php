@@ -65,7 +65,7 @@ class DepartamentosController extends Controller
     public function Excluir($id)
     {
         Departamento::find($id)->delete();
-		Toast::error('Departamento excluído com sucesso!', 'Exclusão!');
+		Toast::success('Departamento excluído com sucesso!', 'Exclusão!');
         return redirect()->route('diversos.departamento.listar');
     }
 }

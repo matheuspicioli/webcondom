@@ -66,7 +66,7 @@ class SetoresController extends Controller
     public function Excluir($id)
     {
         Setor::find($id)->delete();
-        Toast::error('Setor excluído com sucesso!','Exclusão!');
+        Toast::success('Setor excluído com sucesso!','Exclusão!');
         return redirect()->route('diversos.setores.listar');
     }
 }

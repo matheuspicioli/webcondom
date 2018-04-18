@@ -31,7 +31,7 @@
                         <h3 class="box-title">Cadastrar proprietário</h3>
                     </div>
                     <div class="box-body">
-                        <form method="POST" action="{{ route('entidades.proprietarios.salvar') }}">
+                        <form method="POST" action="{{ route('entidades.proprietarios.salvar') }}" id="form">
                             {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-md-6">
@@ -104,7 +104,7 @@
                                                @if($errors->has('codigo')) style="color: #f56954" @endif>Código</label>
                                         <input type="text" name="codigo" id="codigo" class="form-control pula"
                                                @if($errors->has('codigo')) style="border:1px solid #f56954" @endif
-                                               value="{{ old('codigo') ? old('codigo') : '' }}">
+                                               data-mask="999999" value="{{ old('codigo') ? old('codigo') : '' }}">
                                         @if( $errors->has('codigo') )
                                             <span style="color: #f56954">{{ $errors->get('codigo')[0] }}</span>
                                         @endif
@@ -296,7 +296,7 @@
                                                @if($errors->has('telefone_principal')) style="color: #f56954" @endif>Telefone principal</label>
                                         <input type="text" name="telefone_principal" id="telefone_principal"
                                                class="form-control pula" @if($errors->has('telefone_principal')) style="border:1px solid #f56954" @endif
-                                               value="{{ old('telefone_principal') ? old('telefone_principal') : '' }}">
+                                               data-mask="(99) 9999-9999" value="{{ old('telefone_principal') ? old('telefone_principal') : '' }}">
                                         @if( $errors->has('telefone_principal') )
                                             <span style="color: #f56954">{{ $errors->get('telefone_principal')[0] }}</span>
                                         @endif
@@ -308,7 +308,7 @@
                                                @if($errors->has('telefone_comercial')) style="color: #f56954" @endif>Telefone comercial</label>
                                         <input type="text" name="telefone_comercial" @if($errors->has('telefone_comercial')) style="border:1px solid #f56954" @endif
                                         id="telefone_comercial" class="form-control pula"
-                                               value="{{ old('telefone_comercial') ? old('telefone_comercial') : '' }}">
+                                               data-mask="(99) 9999-9999" value="{{ old('telefone_comercial') ? old('telefone_comercial') : '' }}">
                                         @if( $errors->has('telefone_comercial') )
                                             <span style="color: #f56954">{{ $errors->get('telefone_comercial')[0] }}</span>
                                         @endif
@@ -319,7 +319,7 @@
                                         <label for="celular_1" class="control-label"
                                                @if($errors->has('celular_1')) style="color: #f56954" @endif>Celular 1</label>
                                         <input type="text" name="celular_1" id="celular_1" @if($errors->has('celular_1')) style="border:1px solid #f56954" @endif class="form-control pula"
-                                               value="{{ old('celular_1') ? old('celular_1') : '' }}">
+                                               data-mask="(99) 99999-9999" value="{{ old('celular_1') ? old('celular_1') : '' }}">
                                         @if( $errors->has('celular_1') )
                                             <span style="color: #f56954">{{ $errors->get('celular_1')[0] }}</span>
                                         @endif
@@ -331,7 +331,7 @@
                                                @if($errors->has('celular_2')) style="color: #f56954" @endif>Celular 2</label>
                                         <input type="text" name="celular_2" id="celular_2"
                                                @if($errors->has('celular_2')) style="border:1px solid #f56954" @endif class="form-control pula"
-                                               value="{{ old('celular_2') ? old('celular_2') : '' }}">
+                                               data-mask="(99) 99999-9999" value="{{ old('celular_2') ? old('celular_2') : '' }}">
                                         @if( $errors->has('celular_2') )
                                             <span style="color: #f56954">{{ $errors->get('celular_2')[0] }}</span>
                                         @endif
@@ -374,8 +374,8 @@
                                                     <div class="form-group">
                                                         <label for="CEP" class="control-label"
                                                                @if($errors->has('cep_principal')) style="color: #f56954" @endif>CEP</label>
-                                                        <input id="CEP" type="text" class="form-control pula" name="cep_principal"
-                                                               value="{{ old('cep_principal') ? old('cep_principal') : '' }}"
+                                                        <input id="cep_principal" type="text" class="form-control pula" name="cep_principal"
+                                                               data-mask="99999-999" value="{{ old('cep_principal') ? old('cep_principal') : '' }}"
                                                                @if($errors->has('cep_principal')) style="border:1px solid #f56954" @endif>
                                                         @if( $errors->has('cep_principal') )
                                                             <span style="color: #f56954">{{ $errors->get('cep_principal')[0] }}</span>
@@ -386,7 +386,7 @@
                                                     <div class="form-group">
                                                         <label for="Logradouro" class="control-label"
                                                                @if($errors->has('logradouro_principal')) style="color: #f56954" @endif>Logradouro</label>
-                                                        <input id="Logradouro" type="text" class="form-control pula" name="logradouro_principal"
+                                                        <input id="logradouro_principal" type="text" class="form-control pula" name="logradouro_principal"
                                                                value="{{ old('logradouro_principal') ? old('logradouro_principal') : '' }}"
                                                                @if($errors->has('logradouro_principal')) style="border:1px solid #f56954" @endif>
                                                         @if( $errors->has('logradouro_principal') )
@@ -400,7 +400,7 @@
                                                     <div class="form-group">
                                                         <label for="Numero" class="control-label"
                                                                @if($errors->has('numero_principal')) style="color: #f56954" @endif>Número</label>
-                                                        <input id="Numero" type="text" class="form-control pula" name="numero_principal"
+                                                        <input id="numero_principal" type="text" class="form-control pula" name="numero_principal"
                                                                value="{{ old('numero_principal') ? old('numero_principal') : '' }}"
                                                                @if($errors->has('numero_principal')) style="border:1px solid #f56954" @endif>
                                                         @if( $errors->has('numero_principal') )
@@ -412,7 +412,7 @@
                                                     <div class="form-group">
                                                         <label for="Complemento" class="control-label"
                                                                @if($errors->has('complemento_principal')) style="color: #f56954" @endif>Complemento</label>
-                                                        <input id="Complemento" type="text" class="form-control pula" name="complemento_principal"
+                                                        <input id="complemento_principal" type="text" class="form-control pula" name="complemento_principal"
                                                                value="{{ old('complemento_principal') ? old('complemento_principal') : '' }}"
                                                                @if($errors->has('complemento_principal')) style="border:1px solid #f56954" @endif>
                                                         @if( $errors->has('complemento_principal') )
@@ -426,7 +426,7 @@
                                                     <div class="form-group">
                                                         <label for="Bairro" class="control-label"
                                                                @if($errors->has('bairro_principal')) style="color: #f56954" @endif>Bairro</label>
-                                                        <input id="Bairro" type="text" class="form-control pula" name="bairro_principal"
+                                                        <input id="bairro_principal" type="text" class="form-control pula" name="bairro_principal"
                                                                value="{{ old('bairro_principal') ? old('bairro_principal') : '' }}"
                                                                @if($errors->has('bairro_principal')) style="border:1px solid #f56954" @endif>
                                                         @if( $errors->has('bairro_principal') )
@@ -438,7 +438,7 @@
                                                     <div class="form-group">
                                                         <label for="CidadeCOD" class="control-label"
                                                                @if($errors->has('cidade_id_principal')) style="color: #f56954" @endif>Cidade</label>
-                                                        <select name="cidade_id_principal" id="CidadeCOD" class="form-control pula select2"
+                                                        <select name="cidade_id_principal" id="cidade_id_principal" class="form-control pula select2"
                                                                 @if($errors->has('cidade_id_principal')) style="border:1px solid #f56954" @endif>
                                                             <option selected disabled>-------Selecione uma cidade------</option>
                                                             @foreach($cidades as $cidade)
@@ -469,8 +469,8 @@
                                                     <div class="form-group">
                                                         <label for="CEP" class="control-label"
                                                                @if($errors->has('cep_cobranca')) style="color: #f56954" @endif>CEP</label>
-                                                        <input id="CEP" type="text" class="form-control pula" name="cep_cobranca"
-                                                               value="{{ old('cep_cobranca') ? old('cep_cobranca') : '' }}"
+                                                        <input id="cep_cobranca" type="text" class="form-control pula" name="cep_cobranca"
+                                                               data-mask="99999-999" value="{{ old('cep_cobranca') ? old('cep_cobranca') : '' }}"
                                                                @if($errors->has('cep_cobranca')) style="border:1px solid #f56954" @endif>
                                                         @if( $errors->has('cep_cobranca') )
                                                             <span style="color: #f56954">{{ $errors->get('cep_cobranca')[0] }}</span>
@@ -479,9 +479,9 @@
                                                 </div>
                                                 <div class="col-md-8">
                                                     <div class="form-group">
-                                                        <label for="Logradouro" class="control-label"
+                                                        <label for="logradouro_cobranca" class="control-label"
                                                                @if($errors->has('logradouro_cobranca')) style="color: #f56954" @endif>Logradouro</label>
-                                                        <input id="Logradouro" type="text" class="form-control pula" name="logradouro_cobranca"
+                                                        <input id="logradouro_cobranca" type="text" class="form-control pula" name="logradouro_cobranca"
                                                                value="{{ old('logradouro_cobranca') ? old('logradouro_cobranca') : '' }}"
                                                                @if($errors->has('logradouro_cobranca')) style="border:1px solid #f56954" @endif>
                                                         @if( $errors->has('logradouro_cobranca') )
@@ -495,7 +495,7 @@
                                                     <div class="form-group">
                                                         <label for="Numero" class="control-label"
                                                                @if($errors->has('numero_cobranca')) style="color: #f56954" @endif>Número</label>
-                                                        <input id="Numero" type="text" class="form-control pula" name="numero_cobranca"
+                                                        <input id="numero_cobranca" type="text" class="form-control pula" name="numero_cobranca"
                                                                value="{{ old('numero_cobranca') ? old('numero_cobranca') : '' }}"
                                                                @if($errors->has('numero_cobranca')) style="border:1px solid #f56954" @endif>
                                                         @if( $errors->has('numero_cobranca') )
@@ -507,7 +507,7 @@
                                                     <div class="form-group">
                                                         <label for="Complemento" class="control-label"
                                                                @if($errors->has('complemento_cobranca')) style="color: #f56954" @endif>Complemento</label>
-                                                        <input id="Complemento" type="text" class="form-control pula" name="complemento_cobranca"
+                                                        <input id="complemento_cobranca" type="text" class="form-control pula" name="complemento_cobranca"
                                                                value="{{ old('complemento_cobranca') ? old('complemento_cobranca') : '' }}"
                                                                @if($errors->has('complemento_cobranca')) style="border:1px solid #f56954" @endif>
                                                         @if( $errors->has('complemento_cobranca') )
@@ -521,7 +521,7 @@
                                                     <div class="form-group">
                                                         <label for="Bairro" class="control-label"
                                                                @if($errors->has('bairro_cobranca')) style="color: #f56954" @endif>Bairro</label>
-                                                        <input id="Bairro" type="text" class="form-control pula"
+                                                        <input id="bairro_cobranca" type="text" class="form-control pula"
                                                                name="bairro_cobranca"
                                                                value="{{ old('bairro_cobranca') ? old('bairro_cobranca') : '' }}"
                                                                @if($errors->has('bairro_cobranca')) style="border:1px solid #f56954" @endif>
@@ -534,7 +534,7 @@
                                                     <div class="form-group">
                                                         <label for="CidadeCOD" class="control-label"
                                                                @if($errors->has('cidade_id_cobranca')) style="color: #f56954" @endif>Cidade</label>
-                                                        <select name="cidade_id_cobranca" id="CidadeCOD"
+                                                        <select name="cidade_id_cobranca" id="cidade_id_cobranca"
                                                                 class="form-control pula select2"
                                                                 @if($errors->has('cidade_id_cobranca')) style="border:1px solid #f56954" @endif>
                                                             <option selected disabled>-------Selecione uma cidade------</option>
@@ -559,7 +559,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         @can("editar_proprietario")
-                                            <button class="btn btn-info" type="submit">
+                                            <button class="btn btn-info" type="submit" id="salvar">
                                                 <i class="fa fa-save"></i> Salvar</button>
                                         @else
                                             <button disabled class="btn btn-info" type="submit">
@@ -599,17 +599,38 @@
             $('.select2').select2();
             $("#tipo").focus();
 
-            $(".cnpj").hide();
+            if ($("select[id=tipo]").val() == 'CNPJ') {
+                $(".cnpj").show();
+                $(".cpf").hide();
+                $('#cpf_cnpj').mask('99.999.999/9999-99');
+            } else {
+                $(".cnpj").hide();
+                $(".cpf").show();
+                $('#cpf_cnpj').mask('999.999.999-99');
+            }
 
             $("select[id=tipo]").on('change', function () {
                 if ($("select[id=tipo]").val() == 'CNPJ') {
                     $(".cnpj").show();
                     $(".cpf").hide();
+                    $('#cpf_cnpj').mask('99.999.999/9999-99');
                 } else {
                     $(".cnpj").hide();
                     $(".cpf").show();
+                    $('#cpf_cnpj').mask('999.999.999-99');
                 }
             });
+        });
+        $('#salvar').on('click', function(e){
+            e.preventDefault();
+            $('#celular_1').unmask();
+            $('#celular_2').unmask();
+            $('#telefone_principal').unmask();
+            $('#telefone_comercial').unmask();
+            $('#cep_principal').unmask();
+            $('#cep_cobranca').unmask();
+            $('#cpf_cnpj').unmask();
+            $('#form').submit();
         });
     </script>
 @endsection
