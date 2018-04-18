@@ -37,7 +37,7 @@ class CondominioRequest extends FormRequest
 			'logradouro'	=> 'required|max:255',
 			'numero'		=> 'required|max:6',
 			'complemento'	=> 'nullable|max:50',
-			'bairro'		=> 'required',
+			'bairro'		=> 'required|mas:100',
 			'cidade_id'		=> 'required'
         ];
     }

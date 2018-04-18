@@ -65,7 +65,7 @@ class RegimesCasamentosController extends Controller
     public function Excluir($id)
     {
         RegimeCasamento::find($id)->delete();
-		Toast::error('Regime de casamento excluído com sucesso!','Exclusão!');
+		Toast::success('Regime de casamento excluído com sucesso!','Exclusão!');
         return redirect()->route('diversos.regimeCasamento.listar');
     }
 

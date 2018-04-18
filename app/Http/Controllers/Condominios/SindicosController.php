@@ -66,7 +66,7 @@ class SindicosController extends Controller
     public function Excluir($id)
     {
         Sindico::find($id)->delete();
-		Toast::error('Sindico excluída com sucesso!', 'Exclusão!');
+		Toast::success('Sindico excluída com sucesso!', 'Exclusão!');
         return redirect()->route('condominios.sindicos.listar');
     }
 }

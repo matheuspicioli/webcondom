@@ -114,7 +114,7 @@ class InquilinosController extends Controller
     public function Excluir(Request $request, $id)
     {
         Inquilino::find($id)->delete();
-		Toast::error('Inquilino excluído com sucesso!', 'Exclusão!');
+		Toast::success('Inquilino excluído com sucesso!', 'Exclusão!');
         return redirect()->route('entidades.inquilinos.listar');
     }
 }

@@ -63,7 +63,7 @@
                                     <td>{{ $imovel->codigo }}</td>
                                     <td>{{ $imovel->referencia }}</td>
                                     <td>{{ $imovel->endereco->logradouro }} {{$imovel->endereco->numero }}</td>
-                                    <td>{{ $imovel->condominio->nome }}</td>
+                                    <td>{{ $imovel->condominio_id ? $imovel->condominio->nome : '' }}</td>
                                     <td>{{ $imovel->categoria->descricao }}</td>
                                     <td>
                                         @can("exibir_imovel")

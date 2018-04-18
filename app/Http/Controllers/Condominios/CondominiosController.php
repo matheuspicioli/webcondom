@@ -80,7 +80,7 @@ class CondominiosController extends Controller
     public function Excluir($id)
     {
         $this->condominio->find($id)->delete();
-		Toast::error('Condomínio excluído!', 'Exclusão!');
+		Toast::success('Condomínio excluído!', 'Exclusão!');
         return redirect()->route('condominios.condominios.listar');
     }
 }

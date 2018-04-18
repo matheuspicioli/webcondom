@@ -32,7 +32,7 @@
 						<h3 class="box-title">Cadastrar fornecedor</h3>
 					</div>
 					<div class="box-body">
-						<form action="{{ route('entidades.fornecedores.salvar') }}" method="POST">
+						<form action="{{ route('entidades.fornecedores.salvar') }}" method="POST" id="form">
 							{{ csrf_field() }}
 							<div class="row">
 								<div class="col-md-4">
@@ -40,8 +40,10 @@
 										<label for="tipo" class="control-label">Tipo pessoa</label>
 										<select name="tipo" id="tipo" class="form-control pula">
 											<option value="-1" selected disabled>-----SELECIONE-----</option>
-											<option value="1" {{ old('tipo') == 1 ? 'selected' : '' }}>CPF</option>
-											<option value="2" {{ old('tipo') == 2 ? 'selected' : '' }}>CNPJ</option>
+											<option value="CPF"
+													{{ old('tipo') == 'CPF' ? 'selected' : '' }}>CPF</option>
+											<option value="CNPJ"
+													{{ old('tipo') == 'CNPJ' ? 'selected' : '' }}>CNPJ</option>
 										</select>
 									</div>
 								</div>
@@ -122,7 +124,7 @@
 											   @if($errors->has('codigo')) style="color: #f56954" @endif>Código</label>
 										<input type="text" name="codigo" id="codigo" class="form-control pula"
 											   @if($errors->has('codigo')) style="border:1px solid #f56954" @endif
-											   value="{{ old('codigo') ? old('codigo') : '' }}">
+											   data-mask="999999" value="{{ old('codigo') ? old('codigo') : '' }}">
 										@if( $errors->has('codigo') )
 											<span style="color: #f56954">{{ $errors->get('codigo')[0] }}</span>
 										@endif
@@ -334,13 +336,12 @@
 								<div class="col-md-3">
 									<div class="form-group">
 										<label for="telefone_principal" class="control-label"
-											   @if($errors->has('telefone_principal')) style="color: #f56954" @endif>Telefone
-											principal</label>
+											   @if($errors->has('telefone_principal')) style="color: #f56954" @endif>Telefone principal</label>
 										<input type="text" name="telefone_principal" id="telefone_principal"
 											   class="form-control pula"
 											   @if($errors->has('telefone_principal')) style="border:1px solid #f56954"
 											   @endif
-											   value="{{ old('telefone_principal') ? old('telefone_principal') : '' }}">
+											   data-mask="(99) 9999-9999" value="{{ old('telefone_principal') ? old('telefone_principal') : '' }}">
 										@if( $errors->has('telefone_principal') )
 											<span style="color: #f56954">{{ $errors->get('telefone_principal')[0] }}</span>
 										@endif
@@ -349,13 +350,12 @@
 								<div class="col-md-3">
 									<div class="form-group">
 										<label for="telefone_comercial" class="control-label"
-											   @if($errors->has('telefone_comercial')) style="color: #f56954" @endif>Telefone
-											comercial</label>
+											   @if($errors->has('telefone_comercial')) style="color: #f56954" @endif>Telefone comercial</label>
 										<input type="text" name="telefone_comercial"
 											   @if($errors->has('telefone_comercial')) style="border:1px solid #f56954"
 											   @endif
 											   id="telefone_comercial" class="form-control pula"
-											   value="{{ old('telefone_comercial') ? old('telefone_comercial') : '' }}">
+											   data-mask="(99) 9999-9999" value="{{ old('telefone_comercial') ? old('telefone_comercial') : '' }}">
 										@if( $errors->has('telefone_comercial') )
 											<span style="color: #f56954">{{ $errors->get('telefone_comercial')[0] }}</span>
 										@endif
@@ -364,12 +364,11 @@
 								<div class="col-md-3">
 									<div class="form-group">
 										<label for="celular_1" class="control-label"
-											   @if($errors->has('celular_1')) style="color: #f56954" @endif>Celular
-											1</label>
+											   @if($errors->has('celular_1')) style="color: #f56954" @endif>Celular 1</label>
 										<input type="text" name="celular_1" id="celular_1"
 											   @if($errors->has('celular_1')) style="border:1px solid #f56954" @endif
 											   class="form-control pula"
-											   value="{{ old('celular_1') ? old('celular_1') : '' }}">
+											   data-mask="(99) 99999-9999" value="{{ old('celular_1') ? old('celular_1') : '' }}">
 										@if( $errors->has('celular_1') )
 											<span style="color: #f56954">{{ $errors->get('celular_1')[0] }}</span>
 										@endif
@@ -378,12 +377,11 @@
 								<div class="col-md-3">
 									<div class="form-group">
 										<label for="celular_2" class="control-label"
-											   @if($errors->has('celular_2')) style="color: #f56954" @endif>Celular
-											2</label>
+											   @if($errors->has('celular_2')) style="color: #f56954" @endif>Celular 2</label>
 										<input type="text" name="celular_2" id="celular_2"
 											   @if($errors->has('celular_2')) style="border:1px solid #f56954" @endif
 											   class="form-control pula"
-											   value="{{ old('celular_2') ? old('celular_2') : '' }}">
+											   data-mask="(99) 99999-9999" value="{{ old('celular_2') ? old('celular_2') : '' }}">
 										@if( $errors->has('celular_2') )
 											<span style="color: #f56954">{{ $errors->get('celular_2')[0] }}</span>
 										@endif
@@ -432,7 +430,7 @@
 														<label for="CEP" class="control-label"
 															   @if($errors->has('cep')) style="color: #f56954" @endif>CEP</label>
 														<input id="CEP" type="text" class="form-control pula" name="cep"
-															   value="{{ old('cep') }}"
+															   data-mask="99999-999" value="{{ old('cep') }}"
 															   @if($errors->has('cep')) style="border:1px solid #f56954" @endif>
 														@if( $errors->has('cep') )
 															<span style="color: #f56954">{{ $errors->get('cep')[0] }}</span>
@@ -518,7 +516,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
-										<button class="btn btn-primary" type="submit">
+										<button class="btn btn-primary" type="submit" id="salvar">
 											<i class="fa fa-save"></i> Cadastrar
 										</button>
 									</div>
@@ -546,18 +544,39 @@
 		$(document).ready(function () {
 			$('.select2').select2();
 			$("#tipo").focus();
+            if ($("select[id=tipo]").val() == 'CNPJ') {
+                $(".cnpj").show();
+                $(".cpf").hide();
+                $('#cpf_cnpj').mask('99.999.999/9999-99');
+            } else {
+                $(".cnpj").hide();
+                $(".cpf").show();
+                $('#cpf_cnpj').mask('999.999.999-99');
+            }
 
-			$(".cnpj").hide();
+			//$(".cnpj").hide();
 
 			$("select[id=tipo]").on('change', function () {
-				if ($("select[id=tipo]").val() == 2) {
+				if ($("select[id=tipo]").val() == 'CNPJ') {
 					$(".cnpj").show();
 					$(".cpf").hide();
+                    $('#cpf_cnpj').mask('99.999.999/9999-99');
 				} else {
 					$(".cnpj").hide();
 					$(".cpf").show();
+                    $('#cpf_cnpj').mask('999.999.999-99');
 				}
 			});
 		});
+        $('#salvar').on('click', function(e){
+            e.preventDefault();
+            $('#celular_1').unmask();
+            $('#celular_2').unmask();
+            $('#telefone_principal').unmask();
+            $('#telefone_comercial').unmask();
+            $('#CEP').unmask();
+            $('#cpf_cnpj').unmask();
+            $('#form').submit();
+        });
 	</script>
 @endsection

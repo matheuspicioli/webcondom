@@ -39,9 +39,9 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nome</th>
-                                <th>Apelido</th>
+                                <th>Fantasia</th>
                                 <th>CPF/CNPJ</th>
-                                <th>Código</th>
+                                <th>Apelido</th>
                                 <th>Ações</th>
                             </tr>
                             </thead>
@@ -49,9 +49,9 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nome</th>
-                                <th>Apelido</th>
+                                <th>Fantasia</th>
                                 <th>CPF/CNPJ</th>
-                                <th>Código</th>
+                                <th>Apelido</th>
                                 <th>Ações</th>
                             </tr>
                             </tfoot>
@@ -60,9 +60,9 @@
                                 <tr>
                                     <td>{{ $fornecedor->id }}</td>
                                     <td>{{ $fornecedor->entidade->nome }}</td>
+                                    <td>{{ $fornecedor->entidade->fantasia }}</td>
+                                    <td @if($fornecedor->entidade->tipo == "CPF") data-mask="999.999.999-99" @else data-mask="99.999.999/9999-99" @endif >{{ $fornecedor->entidade->cpf_cnpj }}</td>
                                     <td>{{ $fornecedor->entidade->apelido }}</td>
-                                    <td>{{ $fornecedor->entidade->cpf_cnpj }}</td>
-                                    <td>{{ $fornecedor->codigo }}</td>
                                     <td>
                                         @can("exibir_fornecedor")
                                             <a class="btn btn-sm btn-warning" href="{{ route('entidades.fornecedores.exibir', ['id' => $fornecedor->id ]) }}">

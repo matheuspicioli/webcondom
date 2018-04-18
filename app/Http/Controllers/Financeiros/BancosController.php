@@ -72,7 +72,7 @@ class BancosController extends Controller
         if($banco){
 			Storage::disk('public')->delete($banco->foto);
             $banco->delete();
-            Toast::error('Banco excluído com sucesso!','Exclusão!');
+            Toast::success('Banco excluído com sucesso!','Exclusão!');
             return redirect()->route('financeiros.bancos.listar');
         }
     }

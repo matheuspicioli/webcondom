@@ -67,7 +67,7 @@ class CondominiosTaxasController extends Controller
     {
     	if($taxa_cond = $this->taxa->find($id)){
     		$taxa_cond->delete($id);
-			Toast::error('Taxa desse condomínio excluída!', 'Exclusão!');
+			Toast::success('Taxa desse condomínio excluída!', 'Exclusão!');
 			return redirect()->route('condominios.condominios.exibir', ['idCondominio' => $idCondominio]);
 		}
 		Toast::error('Taxa não encontrada!', 'Erro!');

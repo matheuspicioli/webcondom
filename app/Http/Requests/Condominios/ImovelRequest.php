@@ -25,22 +25,22 @@ class ImovelRequest extends FormRequest
     {
         return [
             'codigo' 		=> 'required|integer',
-			'referencia'	=> 'required|max:20',
+			'referencia'	=> 'nullable|max:20',
 			'tipo_imovel_id'=> 'required',
 			'categoria_id'	=> 'required',
-			'condominio_id'	=> 'required',
-			'valor_locacao'	=> 'required',
-			'valor_venda'	=> 'required',
-			'codigo_agua'	=> 'required|max:20',
-			'codigo_iptu'	=> 'required|max:20',
-			'codigo_energia'=> 'required|max:20',
-			'descritivo'	=> 'required|max:255',
+			'condominio_id'	=> 'nullable',
+			'valor_locacao'	=> 'nullable',
+			'valor_venda'	=> 'nullable',
+			'codigo_agua'	=> 'nullable|max:20',
+			'codigo_iptu'	=> 'nullable|max:20',
+			'codigo_energia'=> 'nullable|max:20',
+			'descritivo'	=> 'nullable|max:255',
 
 			'cep'			=> 'required|max:8|min:8',
 			'logradouro'	=> 'required|max:255',
 			'numero'		=> 'required|max:6',
 			'complemento'	=> 'nullable|max:50',
-			'bairro'		=> 'required',
+			'bairro'		=> 'required|max:100',
 			'cidade_id'		=> 'required'
         ];
     }

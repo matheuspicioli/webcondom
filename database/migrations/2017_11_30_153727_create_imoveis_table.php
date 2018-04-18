@@ -16,17 +16,17 @@ class CreateImoveisTable extends Migration
         Schema::create('imoveis', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('codigo');
-            $table->string('referencia', 20);
+            $table->string('referencia', 20)->nullable();
             $table->integer('endereco_id')->unsigned()->nullable();
             $table->integer('tipo_imovel_id')->unsigned();
             $table->integer('categoria_id')->unsigned();
             $table->integer('condominio_id')->unsigned()->nullable();
             $table->decimal('valor_locacao', 12, 2)->unsigned();
             $table->decimal('valor_venda', 12, 2)->unsigned();
-            $table->string('codigo_agua', 20);
-            $table->string('codigo_iptu', 20);
-            $table->string('codigo_energia', 20);
-            $table->string('descritivo', 255);
+            $table->string('codigo_agua', 20)->nullable();
+            $table->string('codigo_iptu', 20)->nullable();
+            $table->string('codigo_energia', 20)->nullable();
+            $table->string('descritivo', 255)->nullable();
 
             $table->foreign('endereco_id')
                 ->references('id')

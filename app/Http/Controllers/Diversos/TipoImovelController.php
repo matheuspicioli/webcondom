@@ -65,7 +65,7 @@ class TipoImovelController extends Controller
     public function Excluir($id)
     {
         TipoImovel::find($id)->delete();
-		Toast::error('Tipo de imóvel excluído com sucesso!','Exclusão!');
+		Toast::success('Tipo de imóvel excluído com sucesso!','Exclusão!');
         return redirect()->route('diversos.tiposimoveis.listar');
     }
 }

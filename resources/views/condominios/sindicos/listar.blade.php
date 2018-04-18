@@ -59,8 +59,8 @@
                                 <tr>
                                     <td>{{ $sindico->id }}</td>
                                     <td>{{ $sindico->nome }}</td>
-                                    <td id="telefone">{{ $sindico->telefone ? $sindico->telefone : 'Não informado' }}</td>
-                                    <td id="celular">{{ $sindico->celular ? $sindico->celular : 'Não informado' }}</td>
+                                    <td data-mask="(99) 9999-9999">{{ $sindico->telefone ? $sindico->telefone : 'Não informado' }}</td>
+                                    <td data-mask="(99) 99999-9999">{{ $sindico->celular ? $sindico->celular : 'Não informado' }}</td>
                                     <td>
                                         @can("exibir_sindico")
                                             <a class="btn btn-sm btn-warning" href="{{ route('condominios.sindicos.exibir', ['id' => $sindico->id ]) }}">
@@ -123,6 +123,7 @@
 @stop
 
 @section('js')
+    <script src="{{ asset('js/mask/jquery.mask.min.js') }}"></script>
     <script>
         $(function () {
             $('#tabela').DataTable({
@@ -131,10 +132,6 @@
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
                 }
         })
-        });
-        $(function () {
-            $('#celular').mask('(00) 00000-0000');
-            $('#telefone').mask('(00) 0000-0000');
         });
     </script>
 @stop

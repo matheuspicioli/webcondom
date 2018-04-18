@@ -15,7 +15,7 @@ class CreateProprietariosTable extends Migration
     {
         Schema::create('proprietarios', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('codigo');
+            $table->integer('codigo')->unsigned();
 
             $table->integer('entidade_id')->unsigned()->nullable();
             $table->foreign('entidade_id')

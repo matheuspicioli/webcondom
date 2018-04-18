@@ -32,7 +32,7 @@ class EmpresaRequest extends FormRequest
 			'cpf_cnpj'				=> 'required|unique:entidades,cpf_cnpj,'.$this->id,
 			'nome'					=> 'nullable|max:100',
 			'rg_ie'					=> 'nullable|max:30',
-			'celular_1'				=> 'required|max:15',
+			'celular_1'				=> 'nullable|max:15',
 			'celular_2'				=> 'nullable|max:15',
 			'telefone_principal'	=> 'nullable|max:14',
 			'telefone_comercial'	=> 'nullable|max:14',
@@ -40,8 +40,8 @@ class EmpresaRequest extends FormRequest
 			'email'					=> 'required|email',
 			'fantasia'				=> 'required|max:100',
 			'inscricao_municipal'	=> 'nullable|max:30',
-			'ramo_atividade'		=> 'required|max:100',
-			'data_abertura'			=> 'date',
+			'ramo_atividade'		=> 'nullable|max:100',
+			'data_abertura'			=> 'nullable|date',
 			'logo_imagem'			=> 'image',
 
 			//ENDEREÇO
@@ -49,7 +49,7 @@ class EmpresaRequest extends FormRequest
 			'logradouro'	=> 'required|max:255',
 			'numero'		=> 'required|max:6',
 			'complemento'	=> 'nullable|max:50',
-			'bairro'		=> 'required',
+			'bairro'		=> 'required|max:100',
 			'cidade_id'		=> 'required'
         ];
     }
