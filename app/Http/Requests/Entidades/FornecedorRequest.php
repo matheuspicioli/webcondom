@@ -2,6 +2,7 @@
 
 namespace WebCondom\Http\Requests\Entidades;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Http\FormRequest;
 use WebCondom\Models\Entidades\Fornecedor;
 

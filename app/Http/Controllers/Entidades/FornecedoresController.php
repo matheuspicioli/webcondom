@@ -40,10 +40,8 @@ class FornecedoresController extends Controller
     {
         $fornecedor = Fornecedor::create($request->all());
         $entidade = $fornecedor->entidade()->create($request->all());
-        $enderecoPrincipal = $entidade->endereco_principal()->create($request->only(
-            'logradouro', 'numero', 'cep', 'complemento', 'bairro', 'cidade_id'
-            ));
-        $entidade->endereco_principal()->associate($enderecoPrincipal);
+        $endereco = $entidade->endereco_principal()->create($request->all());
+        $entidade->endereco_principal()->associate($endereco);
         $fornecedor->entidade()->associate($entidade);
         $entidade->save();
         $fornecedor->save();

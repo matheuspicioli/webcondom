@@ -32,15 +32,15 @@
 						<h3 class="box-title">Cadastrar fornecedor</h3>
 					</div>
 					<div class="box-body">
-						<form action="{{ route('entidades.fornecedores.salvar') }}" method="POST" id="form">
+						<form action="{{ route('entidades.fornecedores.salvar') }}"
+							  method="POST" id="form">
 							{{ csrf_field() }}
 							<div class="row">
 								<div class="col-md-4">
 									<div class="form-group">
 										<label for="tipo" class="control-label">Tipo pessoa</label>
 										<select name="tipo" id="tipo" class="form-control pula">
-											<option value="-1" selected disabled>-----SELECIONE-----</option>
-											<option value="CPF"
+											<option value="CPF" selected
 													{{ old('tipo') == 'CPF' ? 'selected' : '' }}>CPF</option>
 											<option value="CNPJ"
 													{{ old('tipo') == 'CNPJ' ? 'selected' : '' }}>CNPJ</option>
