@@ -37,7 +37,6 @@ class EmpresasController extends Controller
 
     public function Salvar(EmpresaRequest $request)
     {
-        DD($request);
         $empresa = Empresa::create($request->all());
         //----------UPLOAD LOGO TIPO----------//
         if($request->hasFile('logo_imagem')){
