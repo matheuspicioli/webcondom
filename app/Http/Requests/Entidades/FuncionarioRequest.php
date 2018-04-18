@@ -3,6 +3,7 @@
 namespace WebCondom\Http\Requests\Entidades;
 
 use Illuminate\Foundation\Http\FormRequest;
+use WebCondom\Models\Entidades\Funcionario;
 
 class FuncionarioRequest extends FormRequest
 {
@@ -26,7 +27,7 @@ class FuncionarioRequest extends FormRequest
 		if($this->tipo == 'CNPJ'){
 			return [
 				'tipo'					=> 'required',
-				'cpf_cnpj'				=> 'required|max:14|min:14',
+				'cpf_cnpj'				=> 'required|max:14|min:14|unique:entidades,cpf_cnpj,'.Funcionario::find($this->id)->entidade->id,
 				'departamento_id'		=> 'required',
 				'setor_id'				=> 'required',
 				'nome'					=> 'required|max:100',
@@ -54,7 +55,7 @@ class FuncionarioRequest extends FormRequest
 		}
 		return [
 			'tipo'					=> 'required',
-			'cpf_cnpj'				=> 'required|max:11|min:11',
+			'cpf_cnpj'				=> 'required|max:11|min:11|unique:entidades,cpf_cnpj,'.Funcionario::find($this->id)->entidade->id,
 			'departamento_id'		=> 'required',
 			'setor_id'				=> 'required',
 			'nome'					=> 'required|max:100',

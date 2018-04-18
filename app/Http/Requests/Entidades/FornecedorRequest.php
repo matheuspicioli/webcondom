@@ -3,6 +3,7 @@
 namespace WebCondom\Http\Requests\Entidades;
 
 use Illuminate\Foundation\Http\FormRequest;
+use WebCondom\Models\Entidades\Fornecedor;
 
 class FornecedorRequest extends FormRequest
 {
@@ -27,7 +28,7 @@ class FornecedorRequest extends FormRequest
 			return [
 				'tipo'					=> 'required',
 				'tipo_fornecedor' 		=> 'required',
-				'cpf_cnpj'				=> 'required|max:14|min:14',
+				'cpf_cnpj'				=> 'required|max:14|min:14|unique:entidades,cpf_cnpj,'.Fornecedor::find($this->id)->entidade->id,
 				'nome'					=> 'required|max:100',
 				'apelido'				=> 'nullable|max:20',
 				'rg_ie'					=> 'nullable|max:30',
@@ -53,7 +54,7 @@ class FornecedorRequest extends FormRequest
 		}
 		return [
 			'tipo_fornecedor' 		=> 'required',
-			'cpf_cnpj'				=> 'required|max:11|min:11',
+			'cpf_cnpj'				=> 'required|max:11|min:11|unique:entidades,cpf_cnpj,'.Fornecedor::find($this->id)->entidade->id,
 			'nome'					=> 'required|max:100',
 			'apelido'				=> 'required|max:20',
 			'rg_ie'					=> 'nullable|max:30',

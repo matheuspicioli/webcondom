@@ -3,6 +3,7 @@
 namespace WebCondom\Http\Requests\Entidades;
 
 use Illuminate\Foundation\Http\FormRequest;
+use WebCondom\Models\Entidades\Proprietario;
 
 class ProprietarioRequest extends FormRequest
 {
@@ -25,7 +26,7 @@ class ProprietarioRequest extends FormRequest
     {
         if($this->tipo == 'CNPJ') {
             return [
-                'cpf_cnpj'              => 'required|unique:entidades,cpf_cnpj,'.$this->id,
+                'cpf_cnpj'              => 'required|min:14|max:14|unique:entidades,cpf_cnpj,'.Proprietario::find($this->id)->entidade->id,
                 'tipo'					=> 'required',
                 'nome'					=> 'required|max:100',
                 'apelido'				=> 'nullable|max:20',
@@ -58,7 +59,7 @@ class ProprietarioRequest extends FormRequest
             ];
         }
         return [
-            'cpf_cnpj'				=> 'required|unique:entidades,cpf_cnpj,'.$this->id,
+            'cpf_cnpj'				=> 'required|min:11|max:11|unique:entidades,cpf_cnpj,'.Proprietario::find($this->id)->entidade->id,
             'nome'					=> 'required|max:100',
             'apelido'				=> 'nullable|max:20',
             'rg_ie'					=> 'nullable|max:30',

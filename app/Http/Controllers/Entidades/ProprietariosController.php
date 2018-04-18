@@ -39,23 +39,24 @@ class ProprietariosController extends Controller
 
     public function Salvar(ProprietarioRequest $request)
     {
+		dd($request->all());
         $proprietario = Proprietario::create($request->all());
         $entidade = $proprietario->entidade()->create($request->all());
         $enderecoPrincipal = $entidade->endereco_principal()->create([
-            'logradouro'    => $request->input('logradouro_principal'),
-            'complemento'   => $request->input('complemento_principal'),
-            'numero'        => $request->input('numero_principal'),
-            'cep'           => $request->input('cep_principal'),
-            'bairro'        => $request->input('bairro_principal'),
-            'cidade_id'     => $request->input('cidade_id_principal'),
+            'logradouro'    => $request->logradouro_principal,
+            'complemento'   => $request->complemento_principal,
+            'numero'        => $request->numero_principal,
+            'cep'           => $request->cep_principal,
+            'bairro'        => $request->bairro_principal,
+            'cidade_id'     => $request->cidade_id_principal,
         ]);
         $enderecoCobranca = $entidade->endereco_cobranca()->create([
-            'logradouro'    => $request->input('logradouro_cobranca'),
-            'complemento'   => $request->input('complemento_cobranca'),
-            'numero'        => $request->input('numero_cobranca'),
-            'cep'           => $request->input('cep_cobranca'),
-            'bairro'        => $request->input('bairro_cobranca'),
-            'cidade_id'     => $request->input('cidade_id_cobranca'),
+            'logradouro'    => $request->logradouro_cobranca,
+            'complemento'   => $request->complemento_cobranca,
+            'numero'        => $request->numero_cobranca,
+            'cep'           => $request->cep_cobranca,
+            'bairro'        => $request->bairro_cobranca,
+            'cidade_id'     => $request->cidade_id_cobranca,
         ]);
         $entidade->endereco_principal()->associate($enderecoPrincipal);
         $entidade->endereco_cobranca()->associate($enderecoCobranca);

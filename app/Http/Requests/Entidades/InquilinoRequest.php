@@ -3,6 +3,7 @@
 namespace WebCondom\Http\Requests\Entidades;
 
 use Illuminate\Foundation\Http\FormRequest;
+use WebCondom\Models\Entidades\Inquilino;
 
 class InquilinoRequest extends FormRequest
 {
@@ -24,7 +25,7 @@ class InquilinoRequest extends FormRequest
     public function rules()
     {
 		return [
-			'cpf_cnpj'				=> 'required|max:11|min:11',
+			'cpf_cnpj'				=> 'required|max:11|min:11|unique:entidades,cpf_cnpj,'.Inquilino::find($this->id)->entidade->id,
 			'nome'					=> 'required|max:100',
 			'apelido'				=> 'required|max:20',
 			'rg_ie'					=> 'required|max:30',

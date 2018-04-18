@@ -3,6 +3,7 @@
 namespace WebCondom\Http\Requests\Entidades;
 
 use Illuminate\Foundation\Http\FormRequest;
+use WebCondom\Models\Entidades\Empresa;
 
 class EmpresaRequest extends FormRequest
 {
@@ -29,7 +30,7 @@ class EmpresaRequest extends FormRequest
 			'email_nfe'		=> 'nullable|email',
 
 			//ENTIDADE
-			'cpf_cnpj'				=> 'required|unique:entidades,cpf_cnpj,'.$this->id,
+			'cpf_cnpj'				=> 'required|min:14|max:14|unique:entidades,cpf_cnpj,'.Empresa::find($this->id)->entidade->id,
 			'nome'					=> 'nullable|max:100',
 			'rg_ie'					=> 'nullable|max:30',
 			'celular_1'				=> 'nullable|max:15',
