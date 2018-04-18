@@ -24,11 +24,16 @@ class FornecedorRequest extends FormRequest
      */
     public function rules()
     {
+		try{
+			$id = Fornecedor::findOrFail($this->id)->entidade->id;
+		}catch (ModelNotFoundException $e) {
+			$id = 0;
+		}
     	if($this->tipo == 'CNPJ'){
 			return [
 				'tipo'					=> 'required',
 				'tipo_fornecedor' 		=> 'required',
-				'cpf_cnpj'				=> 'required|max:14|min:14|unique:entidades,cpf_cnpj,'.Fornecedor::find($this->id)->entidade->id,
+				'cpf_cnpj'				=> 'required|max:14|min:14|unique:entidades,cpf_cnpj,'.$id,
 				'nome'					=> 'required|max:100',
 				'apelido'				=> 'nullable|max:20',
 				'rg_ie'					=> 'nullable|max:30',
@@ -54,7 +59,7 @@ class FornecedorRequest extends FormRequest
 		}
 		return [
 			'tipo_fornecedor' 		=> 'required',
-			'cpf_cnpj'				=> 'required|max:11|min:11|unique:entidades,cpf_cnpj,'.Fornecedor::find($this->id)->entidade->id,
+			'cpf_cnpj'				=> 'required|max:11|min:11|unique:entidades,cpf_cnpj,'.$id,
 			'nome'					=> 'required|max:100',
 			'apelido'				=> 'required|max:20',
 			'rg_ie'					=> 'nullable|max:30',

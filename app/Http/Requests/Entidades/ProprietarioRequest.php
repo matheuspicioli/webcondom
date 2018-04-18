@@ -2,6 +2,7 @@
 
 namespace WebCondom\Http\Requests\Entidades;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Http\FormRequest;
 use WebCondom\Models\Entidades\Proprietario;
 
@@ -24,14 +25,19 @@ class ProprietarioRequest extends FormRequest
      */
     public function rules()
     {
+		try{
+			$id = Proprietario::findOrFail($this->id)->entidade->id;
+		}catch (ModelNotFoundException $e) {
+			$id = 0;
+		}
         if($this->tipo == 'CNPJ') {
             return [
-                'cpf_cnpj'              => 'required|min:14|max:14|unique:entidades,cpf_cnpj,'.Proprietario::find($this->id)->entidade->id,
+                'cpf_cnpj'              => 'required|min:14|max:14|unique:entidades,cpf_cnpj,'.$id,
                 'tipo'					=> 'required',
                 'nome'					=> 'required|max:100',
                 'apelido'				=> 'nullable|max:20',
                 'rg_ie'					=> 'nullable|max:30',
-                'codigo'				=> 'required',
+                'codigo'				=> 'required|integer',
                 'fantasia'				=> 'required|max:100|min:5',
                 'inscricao_municipal' 	=> 'nullable|max:30',
                 'ramo_atividade'		=> 'nullable|max:100',
@@ -59,11 +65,11 @@ class ProprietarioRequest extends FormRequest
             ];
         }
         return [
-            'cpf_cnpj'				=> 'required|min:11|max:11|unique:entidades,cpf_cnpj,'.Proprietario::find($this->id)->entidade->id,
+            'cpf_cnpj'				=> 'required|min:11|max:11|unique:entidades,cpf_cnpj,'.$id,
             'nome'					=> 'required|max:100',
             'apelido'				=> 'nullable|max:20',
             'rg_ie'					=> 'nullable|max:30',
-            'codigo'				=> 'nullable|integer',
+            'codigo'				=> 'required|integer',
             'nome_mae'				=> 'nullable|max:100',
             'estado_civil_id'		=> 'required',
             'regime_casamento_id'	=> 'required',

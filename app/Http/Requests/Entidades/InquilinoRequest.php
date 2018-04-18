@@ -24,8 +24,13 @@ class InquilinoRequest extends FormRequest
      */
     public function rules()
     {
+		try{
+			$id = Inquilino::findOrFail($this->id)->entidade->id;
+		}catch (ModelNotFoundException $e) {
+			$id = 0;
+		}
 		return [
-			'cpf_cnpj'				=> 'required|max:11|min:11|unique:entidades,cpf_cnpj,'.Inquilino::find($this->id)->entidade->id,
+			'cpf_cnpj'				=> 'required|max:11|min:11|unique:entidades,cpf_cnpj,'.$id,
 			'nome'					=> 'required|max:100',
 			'apelido'				=> 'required|max:20',
 			'rg_ie'					=> 'required|max:30',

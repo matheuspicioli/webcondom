@@ -24,10 +24,15 @@ class FuncionarioRequest extends FormRequest
      */
     public function rules()
     {
+		try{
+			$id = Funcionario::findOrFail($this->id)->entidade->id;
+		}catch (ModelNotFoundException $e) {
+			$id = 0;
+		}
 		if($this->tipo == 'CNPJ'){
 			return [
 				'tipo'					=> 'required',
-				'cpf_cnpj'				=> 'required|max:14|min:14|unique:entidades,cpf_cnpj,'.Funcionario::find($this->id)->entidade->id,
+				'cpf_cnpj'				=> 'required|max:14|min:14|unique:entidades,cpf_cnpj,'.$id,
 				'departamento_id'		=> 'required',
 				'setor_id'				=> 'required',
 				'nome'					=> 'required|max:100',
@@ -55,7 +60,7 @@ class FuncionarioRequest extends FormRequest
 		}
 		return [
 			'tipo'					=> 'required',
-			'cpf_cnpj'				=> 'required|max:11|min:11|unique:entidades,cpf_cnpj,'.Funcionario::find($this->id)->entidade->id,
+			'cpf_cnpj'				=> 'required|max:11|min:11|unique:entidades,cpf_cnpj,'.$id,
 			'departamento_id'		=> 'required',
 			'setor_id'				=> 'required',
 			'nome'					=> 'required|max:100',

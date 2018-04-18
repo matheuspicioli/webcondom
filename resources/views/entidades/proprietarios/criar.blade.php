@@ -38,8 +38,7 @@
                                     <div class="form-group">
                                         <label for="tipo" class="control-label">Tipo pessoa</label>
                                         <select name="tipo" id="tipo" class="form-control pula">
-                                            <option value="-1" selected disabled>-----SELECIONE-----</option>
-                                            <option value="CPF" {{ old('tipo') == 'CPF' ? 'selected' : '' }}>
+                                            <option value="CPF" selected {{ old('tipo') == 'CPF' ? 'selected' : '' }}>
                                                 CPF
                                             </option>
                                             <option value="CNPJ" {{ old('tipo') == 'CNPJ' ? 'selected' : '' }}>

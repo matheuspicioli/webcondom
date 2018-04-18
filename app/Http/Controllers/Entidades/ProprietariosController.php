@@ -39,7 +39,6 @@ class ProprietariosController extends Controller
 
     public function Salvar(ProprietarioRequest $request)
     {
-		dd($request->all());
         $proprietario = Proprietario::create($request->all());
         $entidade = $proprietario->entidade()->create($request->all());
         $enderecoPrincipal = $entidade->endereco_principal()->create([
@@ -50,16 +49,19 @@ class ProprietariosController extends Controller
             'bairro'        => $request->bairro_principal,
             'cidade_id'     => $request->cidade_id_principal,
         ]);
-        $enderecoCobranca = $entidade->endereco_cobranca()->create([
-            'logradouro'    => $request->logradouro_cobranca,
-            'complemento'   => $request->complemento_cobranca,
-            'numero'        => $request->numero_cobranca,
-            'cep'           => $request->cep_cobranca,
-            'bairro'        => $request->bairro_cobranca,
-            'cidade_id'     => $request->cidade_id_cobranca,
-        ]);
+
+        if($request->cep_cobranca != null){
+			$enderecoCobranca = $entidade->endereco_cobranca()->create([
+				'logradouro'    => $request->logradouro_cobranca,
+				'complemento'   => $request->complemento_cobranca,
+				'numero'        => $request->numero_cobranca,
+				'cep'           => $request->cep_cobranca,
+				'bairro'        => $request->bairro_cobranca,
+				'cidade_id'     => $request->cidade_id_cobranca,
+			]);
+			$entidade->endereco_cobranca()->associate($enderecoCobranca);
+		}
         $entidade->endereco_principal()->associate($enderecoPrincipal);
-        $entidade->endereco_cobranca()->associate($enderecoCobranca);
         $proprietario->entidade()->associate($entidade);
         $entidade->save();
         $proprietario->save();
@@ -101,16 +103,17 @@ class ProprietariosController extends Controller
             'cidade_id'     => $request->input('cidade_id_principal')
         ]);
 
-        //----ENDEREÇO COBRANÇA---//
-        $proprietario->entidade->endereco_cobranca()->update([
-            'logradouro'    => $request->input('logradouro_cobranca'),
-            'numero'        => $request->input('numero_cobranca'),
-            'cep'           => $request->input('cep_cobranca'),
-			'complemento'	=> $request->input('complemento_cobranca'),
-            'bairro'        => $request->input('bairro_cobranca'),
-            'cidade_id'     => $request->input('cidade_id_cobranca')
-        ]);
-        //dd($proprietario->entidade->endereco_cobranca);
+		if($request->cep_cobranca != null){
+			//----ENDEREÇO COBRANÇA---//
+			$proprietario->entidade->endereco_cobranca()->update([
+				'logradouro'    => $request->input('logradouro_cobranca'),
+				'numero'        => $request->input('numero_cobranca'),
+				'cep'           => $request->input('cep_cobranca'),
+				'complemento'	=> $request->input('complemento_cobranca'),
+				'bairro'        => $request->input('bairro_cobranca'),
+				'cidade_id'     => $request->input('cidade_id_cobranca')
+			]);
+		}
         //SALVA E SALVA OS RELACIONAMENTOS TAMBÉM
         $proprietario->push();
 

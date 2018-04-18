@@ -24,13 +24,18 @@ class EmpresaRequest extends FormRequest
      */
     public function rules()
     {
+		try{
+			$id = Empresa::findOrFail($this->id)->entidade->id;
+		}catch (ModelNotFoundException $e) {
+			$id = 0;
+		}
         return [
         	//EMPRESA
         	'creci'			=> 'nullable|max:10',
 			'email_nfe'		=> 'nullable|email',
 
 			//ENTIDADE
-			'cpf_cnpj'				=> 'required|min:14|max:14|unique:entidades,cpf_cnpj,'.Empresa::find($this->id)->entidade->id,
+			'cpf_cnpj'				=> 'required|min:14|max:14|unique:entidades,cpf_cnpj,'.$id,
 			'nome'					=> 'nullable|max:100',
 			'rg_ie'					=> 'nullable|max:30',
 			'celular_1'				=> 'nullable|max:15',
