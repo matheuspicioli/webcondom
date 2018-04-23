@@ -23,13 +23,13 @@ class BalancetesController extends Controller
 	{
 		$balancetes = $this->balancete->all();
 		$condominios = $this->condominio->all();
-		return view('financeiros.balancetes.listar', compact('balancetes','condominios'));
+		return view('balancetes.balancetes.listar', compact('balancetes','condominios'));
 	}
 
 	public function Criar()
 	{
 		$condominios = $this->condominio->all();
-		return view('financeiros.balancetes.criar', compact('condominios'));
+		return view('balancetes.balancetes.criar', compact('condominios'));
 	}
 
 	public function Salvar(BalanceteRequest $request)
@@ -48,7 +48,7 @@ class BalancetesController extends Controller
 		$condominios = $this->condominio->all();
 
 		if ($balancete) {
-			return view('financeiros.balancetes.exibir', compact('balancete','condominios'));
+			return view('balancetes.balancetes.exibir', compact('balancete','condominios'));
 		} else {
 			$this->balancete->erro('Balancete não encontrado!','Erro!');
 		}

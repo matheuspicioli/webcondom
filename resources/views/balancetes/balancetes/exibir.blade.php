@@ -178,6 +178,7 @@
     <script>
         $(document).ready(function () {
             $('#condominio_id').focus();
+            $('.select2').select2();
         });
     </script>
 @endsection

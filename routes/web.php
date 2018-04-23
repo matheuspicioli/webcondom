@@ -107,6 +107,15 @@ Route::prefix('Balancetes')->namespace('Balancetes')->middleware('auth')->group(
 		Route::put('{id}/Alterar', 'BalancetesController@alterar')->name('financeiros.balancetes.alterar');
 		Route::delete('{id}', 'BalancetesController@excluir')->name('financeiros.balancetes.excluir');
 	});
+
+	Route::prefix('Lancamentos')->group(function(){
+		Route::get('/', 'BalanceteLancamentosController@listar')->name('balancetes.lancamentos.listar');
+		Route::get('Criar', 'BalanceteLancamentosController@criar')->name('balancetes.lancamentos.criar');
+		Route::post('/', 'BalanceteLancamentosController@salvar')->name('balancetes.lancamentos.salvar');
+		Route::get('{id}/Exibir', 'BalanceteLancamentosController@exibir')->name('balancetes.lancamentos.exibir');
+		Route::put('{id}/Alterar', 'BalanceteLancamentosController@alterar')->name('balancetes.lancamentos.alterar');
+		Route::delete('{id}', 'BalanceteLancamentosController@excluir')->name('balancetes.lancamentos.excluir');
+	});
 });
 
 Route::prefix('Enderecos')->namespace('Enderecos')->middleware('auth')->group(function() {

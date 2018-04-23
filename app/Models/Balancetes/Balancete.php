@@ -3,10 +3,13 @@
 namespace WebCondom\Models\Balancetes;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Toast;
 
 class Balancete extends Model
 {
+	use SoftDeletes;
+
     protected $fillable = [
     	'referencia','competencia','data_inicial','data_final',
 		'saldo_anterior','saldo_atual', 'condominio_id'

@@ -28,6 +28,7 @@ class CreateBalancetesTable extends Migration
 				->on('condominios')
 				->onDelete('cascade');
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }
