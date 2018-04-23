@@ -59,7 +59,7 @@
                                     <td>{{ $inquilino->id }}</td>
                                     <td>{{ $inquilino->entidade->nome }}</td>
                                     <td>{{ $inquilino->entidade->apelido }}</td>
-                                    <td>{{ $inquilino->entidade->cpf_cnpj }}</td>
+                                    <td @if($inquilino->entidade->tipo == "CPF") data-mask="999.999.999-99" @else data-mask="99.999.999/9999-99" @endif >{{ $inquilino->entidade->cpf_cnpj }}</td>
                                     <td>{{ $inquilino->codigo }}</td>
                                     <td>
                                         @can("exibir_inquilino")
