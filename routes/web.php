@@ -98,6 +98,17 @@ Route::prefix('Financeiros')->namespace('Financeiros')->middleware('auth')->grou
     });
 });
 
+Route::prefix('Balancetes')->namespace('Balancetes')->middleware('auth')->group(function(){
+	Route::prefix('Balancetes')->group(function(){
+		Route::get('/', 'BalancetesController@listar')->name('financeiros.balancetes.listar');
+		Route::get('Criar', 'BalancetesController@criar')->name('financeiros.balancetes.criar');
+		Route::post('/', 'BalancetesController@salvar')->name('financeiros.balancetes.salvar');
+		Route::get('{id}/Exibir', 'BalancetesController@exibir')->name('financeiros.balancetes.exibir');
+		Route::put('{id}/Alterar', 'BalancetesController@alterar')->name('financeiros.balancetes.alterar');
+		Route::delete('{id}', 'BalancetesController@excluir')->name('financeiros.balancetes.excluir');
+	});
+});
+
 Route::prefix('Enderecos')->namespace('Enderecos')->middleware('auth')->group(function() {
     Route::prefix('Estados')->group(function () {
         Route::get('/', 'EstadosController@listar')->name('enderecos.estados.listar');
