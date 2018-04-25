@@ -117,40 +117,48 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="box-body">
-                                <form action="{{ route('financeiros.lancamentos.salvar') }}" method="POST">
+                                <form action="{{ route('financeiros.lancamentos.salvar') }}" method="POST" id="form">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="conta_corrente_id" value="{{ $contaL->id }}">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="data" class="control-label">Data</label>
-                                                <input id="data" type="date" class="form-control pula"
-                                                       name="data_lancamento">
+                                                <label for="data" class="control-label" @if($errors->has('data_lancamento')) style="border:1px solid #f56954" @endif>Data</label>
+                                                <input id="data" type="date" class="form-control pula" @if($errors->has('data_lancamento')) style="border:1px solid #f56954" @endif
+                                                value="{{ old('data_lancamento') }}" name="data_lancamento">
+                                                @if( $errors->has('data_lancamento') )
+                                                    <span style="color: #f56954">{{ $errors->get('data_lancamento')[0] }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="documento" class="control-label">Documento</label>
-                                                <input id="documento" type="text" class="form-control pula"
-                                                       name="documento">
+                                                <label for="documento" class="control-label" @if($errors->has('documento')) style="border:1px solid #f56954" @endif>Documento</label>
+                                                <input id="documento" type="text" class="form-control pula" @if($errors->has('data')) style="border:1px solid #f56954" @endif
+                                                value="{{ old('documento') }}" name="documento">
+                                                @if( $errors->has('documento') )
+                                                    <span style="color: #f56954">{{ $errors->get('documento')[0] }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="tipo_conta" class="control-label">Plano de contas</label>
-                                                <select name="plano_conta" id="tipo_conta" class="form-control">
+                                                <label for="plano_conta_id" class="control-label" @if($errors->has('plano_conta_id')) style="color: #f56954" @endif>Plano de contas</label>
+                                                <select name="plano_conta_id" id="plano_conta_id" class="form-control" @if($errors->has('plano_conta_id')) style="color: #f56954" @endif>
                                                     <option selected disabled>SELECIONE</option>
                                                     @foreach($tipos as $tipo)
                                                         @foreach($tipo->grupos as $grupo)
                                                             @foreach($grupo->contas as $conta)
-                                                                <option value="{{ $conta->id }}">
-                                                                    {{ "$tipo->tipo.$grupo->grupo.$conta->conta" }} -
-                                                                    <b>{{ $conta->descricao }}</b>
+                                                                <option value="{{ $conta->id }}" {{ old('plano_conta_id') == $conta->id ? 'selected' : '' }}>
+                                                                    {{ "$tipo->tipo.$grupo->grupo.$conta->conta" }} - <b>{{ $conta->descricao }}</b>
                                                                 </option>
                                                             @endforeach
                                                         @endforeach
                                                     @endforeach
                                                 </select>
+                                                @if( $errors->has('plano_conta_id') )
+                                                    <span style="color: #f56954">{{ $errors->get('plano_conta_id')[0] }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -158,36 +166,45 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="historico" class="control-label">Histórico</label>
-                                                <input id="historico" type="text" class="form-control pula"
-                                                       name="historico">
+                                                <label for="historico" class="control-label" @if($errors->has('historico')) style="border:1px solid #f56954" @endif>Histórico</label>
+                                                <input id="historico" type="text" class="form-control pula" name="historico" @if($errors->has('historico')) style="border:1px solid #f56954" @endif
+                                                value="{{ old('historico') }}" >
+                                                @if( $errors->has('historico') )
+                                                    <span style="color: #f56954">{{ $errors->get('historico')[0] }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                <label for="valor" class="control-label">Valor</label>
-                                                <input id="valor" type="text" class="form-control pula"
-                                                       name="valor">
+                                                <label for="valor" class="control-label" @if($errors->has('valor')) style="border:1px solid #f56954" @endif>Valor</label>
+                                                <input id="valor" type="text" class="form-control pula" name="valor" @if($errors->has('valor')) style="border:1px solid #f56954" @endif
+                                                    value="{{ old('valor') }}" >
+                                                @if( $errors->has('valor') )
+                                                    <span style="color: #f56954">{{ $errors->get('valor')[0] }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <div class="radio">
-                                                    <label><input type="radio" name="tipo"
-                                                                  value="Debito">Débito</label>
+                                                    <label><input type="radio" name="tipo" id="tipo"
+                                                                  value="{{ old('Debito') ? "checked" : '' }}">Débito</label>
                                                 </div>
                                                 <div class="radio">
-                                                    <label><input type="radio" name="tipo"
-                                                                  value="Credito">Crédito</label>
+                                                    <label><input type="radio" name="tipo" id="tipo"
+                                                                  value="{{ old('Credito') ? "checked" : '' }}">Crédito</label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
-                                            <div class="checkbox" id="compensado-div">
+                                            <div class="checkbox">
                                                 <label for="compensado">
-                                                    <input type="checkbox" class="flat-red" name="compensado"
-                                                           id="compensado"> Compensado?
+                                                    <input type="checkbox" name="compensado" id="compensado"
+                                                    value="{{ old('compensado') ? "checked" : '' }}" @if($errors->has('compensado')) style="border:1px solid #f56954" @endif> Compensado?
                                                 </label>
+                                                @if( $errors->has('compensado') )
+                                                    <span style="color: #f56954">{{ $errors->get('compensado')[0] }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -195,29 +212,40 @@
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group">
-                                                <label for="fornecedor" class="control-label">Fornecedor</label>
-                                                <select name="fornecedor_id" id="fornecedor"
+                                                <label for="fornecedor" class="control-label" @if($errors->has('fornecedor_id')) style="border:1px solid #f56954" @endif>Fornecedor</label>
+                                                <select name="fornecedor_id" id="fornecedor" @if($errors->has('fornecedor_id')) style="border:1px solid #f56954" @endif
                                                         class="form-control">
                                                     <option selected disabled>===============SELECIONE===============
                                                     </option>
                                                     @foreach($fornecedores as $fornecedor)
-                                                        <option value="{{ $fornecedor->id }}">{{ $fornecedor->entidade->nome }}</option>
+                                                        <option value="{{ $fornecedor->id }}" {{ old('fornecedor_id') == $fornecedor->id ? 'selected' : '' }}>
+                                                            {{ $fornecedor->entidade->nome }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
+                                                @if( $errors->has('fornecedor_id') )
+                                                    <span style="color: #f56954">{{ $errors->get('fornecedor_id')[0] }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="nota" class="control-label">Nota fiscal</label>
-                                                <input id="nota" type="text" class="form-control pula"
-                                                       name="nota_fiscal">
+                                                <label for="nota" class="control-label" @if($errors->has('nota_fiscal')) style="border:1px solid #f56954" @endif>Nota fiscal</label>
+                                                <input id="nota" type="text" class="form-control pula" @if($errors->has('nota_fiscal')) style="border:1px solid #f56954" @endif
+                                                    value="{{ old('nota_fiscal') }}"  name="nota_fiscal">
+                                                @if( $errors->has('nota_fiscal') )
+                                                    <span style="color: #f56954">{{ $errors->get('nota_fiscal')[0] }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="parcela" class="control-label">Parcela</label>
-                                                <input id="parcela" type="text" class="form-control pula"
-                                                       name="parcela">
+                                                <label for="parcela" class="control-label" @if($errors->has('parcela')) style="border:1px solid #f56954" @endif>Parcela</label>
+                                                <input id="parcela" type="text" class="form-control pula" @if($errors->has('parcela')) style="border:1px solid #f56954" @endif
+                                                    value="{{ old('parcela') }}"  name="parcela">
+                                                @if( $errors->has('parcela') )
+                                                    <span style="color: #f56954">{{ $errors->get('parcela')[0] }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -483,7 +511,7 @@
                                                         {{ csrf_field() }}
                                                         {{ method_field('PUT') }}
 
-                                                        <input type="hidden" name="compensado" id="compensado-cc" value="{{ $lancamento->compensado = '1' }}">
+                                                        <input type="hidden" name="compensado-cc" id="compensado-cc" value="{{ $lancamento->compensado = '1' }}">
 
                                                         <button class="btn btn-outline" type="submit">Compensar</button>
                                                     </form>

@@ -34,7 +34,7 @@ class BancosController extends Controller
 			$banco->foto = $caminho;
 			$banco->save();
 		}
-		Toast::success('Banco incluso com sucesso!','Inclusão!');
+		Toast::success('Banco incluído com sucesso!','Inclusão!');
         return redirect()->route('financeiros.bancos.listar');
     }
 

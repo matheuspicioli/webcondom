@@ -35,7 +35,7 @@ class SindicosController extends Controller
     {
         //dd($request->except('_token'));
         Sindico::create($request->all());
-		Toast::success('Sindico incluída com sucesso!', 'Inclusão!');
+		Toast::success('Sindico incluído com sucesso!', 'Inclusão!');
         return redirect()->route('condominios.sindicos.listar');
     }
 

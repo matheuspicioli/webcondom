@@ -3,10 +3,12 @@
 namespace WebCondom\Http\Controllers\Financeiros;
 
 use Carbon\Carbon;
+use Toast;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use function PHPSTORM_META\type;
 use WebCondom\Http\Controllers\Controller;
+use WebCondom\Http\Requests\Financeiros\LancamentoRequest;
 use WebCondom\Models\Entidades\Fornecedor;
 use WebCondom\Models\Financeiros\Banco;
 use WebCondom\Models\Financeiros\Conta;
@@ -248,7 +250,7 @@ class ContaCorrenteLancamentosController extends Controller
         return view('financeiros.lancamentos.listar', compact('credito_periodo','debito_periodo','saldo_lancamento', 'saldo_anterior','saldo_compensado','lancamentos','fornecedores','contas','tipos','dias'));
     }
 
-    public function Salvar(Request $request)
+    public function Salvar(LancamentoRequest $request)
     {
         $dados = $request->all();
 
@@ -265,6 +267,7 @@ class ContaCorrenteLancamentosController extends Controller
             $dados['assinado'] = $dados['assinado'] == "on" ? 'Sim' : 'Nao';
         }
         $this->lancamento->create($dados);
+        Toast::success('Lancamento incluído com sucesso!','Inclusão!');
         return redirect()->back();
     }
 
@@ -274,8 +277,10 @@ class ContaCorrenteLancamentosController extends Controller
         if($lancamento){
             $lancamento->delete();
             if($dias) {
+                Toast::success('Lançamento excluído com sucesso!','Exclusão!');
                 return redirect()->route('financeiros.lancamentos.listar', ['conta_id' => $conta_id, 'dias' => $dias]);
             } else {
+                Toast::success('Lançamento excluído com sucesso!','Exclusão!');
                 return redirect()->route('financeiros.lancamentos.listar', ['conta_id' => $conta_id, 'dias' => null]);
             }
         }
@@ -294,7 +299,7 @@ class ContaCorrenteLancamentosController extends Controller
         }
     }
 
-    public function Alterar(Request $request, $id, $conta_id, $dias = null)
+    public function Alterar(LancamentoRequest $request, $id, $conta_id, $dias = null)
     {
         $dados = $request->all();
 
@@ -315,8 +320,10 @@ class ContaCorrenteLancamentosController extends Controller
             $lancamento->update($dados);
             //return redirect()->route('financeiros.lancamentos.listar',['conta_id' => $conta_id]);
             if($dias) {
+                Toast::success('Lançamento alterado com sucesso!','Alteração!');
                 return redirect()->route('financeiros.lancamentos.listar', ['conta_id' => $conta_id, 'dias' => $dias]);
             } else {
+                Toast::success('Lançamento alterado com sucesso!','Alteração!');
                 return redirect()->route('financeiros.lancamentos.listar', ['conta_id' => $conta_id, 'dias' => $dias]);
             }
 
