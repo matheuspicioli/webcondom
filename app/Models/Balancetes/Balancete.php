@@ -43,6 +43,11 @@ class Balancete extends Model
 		return str_replace('.',',', $this->attributes['saldo_anterior']);
 	}
 
+	public function lancamentos()
+	{
+		return $this->hasMany('WebCondom\Models\Balancetes\BalancateLancamento','balancete_id');
+	}
+
     public function condominio()
 	{
 		return $this->belongsTo('WebCondom\Models\Condominios\Condominio','condominio_id');

@@ -62,7 +62,7 @@
                             </tr>
                             </tfoot>
                             <tbody>
-                            @foreach($balancete_lancamentos as $lancamento)
+                            @forelse($balancete_lancamentos as $lancamento)
                                 <tr>
                                     <td>{{ $lancamento->id }}</td>
                                     <td>{{ $lancamento->data_lancamento->format('d/m/Y') }}</td>
@@ -114,7 +114,9 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach
+							@empty
+								Nenhum lançamento desse balancete encontrado
+                            @endforelse
                             </tbody>
                         </table>
                     </div>

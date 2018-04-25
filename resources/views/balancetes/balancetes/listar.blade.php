@@ -95,6 +95,9 @@
 									<td>R$ {{ $balancete->saldo_anterior }}</td>
 									<td>R$ {{ $balancete->saldo_atual }}</td>
                                     <td>
+										<a href="{{ route('balancetes.lancamentos.listar',['idBalancete' => $balancete->id]) }}" class="btn btn-xs btn-success">
+											<i class="fa fa-th-list"></i>
+										</a>
                                         @can("exibir_balancete")
                                             <a class="btn btn-xs btn-warning" href="{{ route('financeiros.balancetes.exibir', ['id' => $balancete->id ]) }}">
                                                 <i class="fa fa-pencil"></i></a>

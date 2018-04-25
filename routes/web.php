@@ -110,7 +110,7 @@ Route::prefix('Balancetes')->namespace('Balancetes')->middleware('auth')->group(
 	});
 
 	Route::prefix('Lancamentos')->group(function(){
-		Route::get('/', 'BalanceteLancamentosController@listar')->name('balancetes.lancamentos.listar');
+		Route::get('/{idBalancete}', 'BalanceteLancamentosController@listar')->name('balancetes.lancamentos.listar');
 		Route::get('Criar', 'BalanceteLancamentosController@criar')->name('balancetes.lancamentos.criar');
 		Route::post('/', 'BalanceteLancamentosController@salvar')->name('balancetes.lancamentos.salvar');
 		Route::get('{id}/Exibir', 'BalanceteLancamentosController@exibir')->name('balancetes.lancamentos.exibir');

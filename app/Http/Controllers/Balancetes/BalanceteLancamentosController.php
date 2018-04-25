@@ -28,10 +28,16 @@ class BalanceteLancamentosController extends Controller
 		$this->condominio 				= $condominio;
 	}
 
-	public function Listar()
+	public function Listar($idBalancete)
 	{
-		$balancete_lancamentos = $this->balancete_lancamento->all();
-		return view('balancetes.lancamentos.listar', compact('balancete_lancamentos'));
+		$balancete_lancamentos = [];
+		if( $balancete = $this->balancete->find($idBalancete) ){
+			$balancete_lancamentos = $balancete->lancamentos;
+			return view('balancetes.lancamentos.listar', compact('balancete_lancamentos'));
+		}
+		//$balancete_lancamentos = $this->balancete_lancamento->all();
+		Toast::error('Nenhum balancete encontrado!', 'Erro!');
+		return view('balancetes.lancamentos.listar',compact('balancete_lancamentos'));
 	}
 
 	public function Criar()
