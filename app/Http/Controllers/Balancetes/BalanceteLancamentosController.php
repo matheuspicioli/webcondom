@@ -7,6 +7,7 @@ use WebCondom\Http\Requests\Balancetes\BalanceteLancamentoRequest;
 use WebCondom\Models\Balancetes\BalancateLancamento;
 use WebCondom\Http\Controllers\Controller;
 use WebCondom\Models\Balancetes\Balancete;
+use WebCondom\Models\Condominios\Condominio;
 use WebCondom\Models\Entidades\Fornecedor;
 use WebCondom\Models\Financeiros\PlanoDeConta;
 
@@ -16,13 +17,15 @@ class BalanceteLancamentosController extends Controller
 	private $balancete;
 	private $plano;
 	private $fornecedor;
+	private $condominio;
 
-	public function __construct(BalancateLancamento $lancamento, Balancete $balancete, PlanoDeConta $plano, Fornecedor $fornecedor)
+	public function __construct(BalancateLancamento $lancamento, Balancete $balancete, PlanoDeConta $plano, Fornecedor $fornecedor, Condominio $condominio)
 	{
 		$this->balancete_lancamento  	= $lancamento;
 		$this->balancete 				= $balancete;
 		$this->plano 					= $plano;
 		$this->fornecedor 				= $fornecedor;
+		$this->condominio 				= $condominio;
 	}
 
 	public function Listar()

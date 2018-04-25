@@ -14,10 +14,35 @@
 
 @section('content')
     @can("listar_balancete")
+		<form action="{{ route('financeiros.balancetes.listarPost') }}" method="POST">
+			{{ csrf_field() }}
+        	<div class="row">
+				<div class="col-md-4 col-md-offset-4">
+					<div class="form-group">
+						<label for="conodominio" class="control-label">Condomínio</label>
+						<select name="condominio_id" id="conodominio" class="form-control">
+							@forelse($condominios as $condominio)
+								<option value="{{ $condominio->id }}">{{ $condominio->nome }} - {{ $condominio->apelido }}</option>
+							@empty
+								<option value="">Nenhum condomínio</option>
+							@endforelse
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2 col-md-offset-4">
+					<div class="form-group">
+						<a class="btn btn-default" href="{{ route('financeiros.balancetes.listar') }}">Limpar filtro</a>
+						<button type="submit" class="btn btn-success">Filtrar</button>
+					</div>
+				</div>
+			</div>
+		</form>
         <div class="row">
             <div class="col-md-1">
                 @can("incluir_balancetes")
-                    <a href="{{ route('financeiros.balancetes.criar') }}#" class="btn btn-success">
+                    <a href="{{ route('financeiros.balancetes.criar') }}" class="btn btn-success">
                         <i class="fa fa-plus"></i> Cadastrar</a>
                 @else
                     <button disabled type="button" class="btn btn-success">
@@ -30,7 +55,7 @@
             <div class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Balancetes</h3>
+                        <h3 class="box-title">Balancetes @if(isset($condominio_titulo)) do condominio {{ $condominio_titulo->nome }} @endif</h3>
                     </div>
 
                     <div class="box-body">

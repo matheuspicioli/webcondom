@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-1">
                 @can("incluir_balancete_lancamentos")
-                    <a href="{{ route('balancetes.lancamentos.criar') }}#" class="btn btn-success">
+                    <a href="{{ route('balancetes.lancamentos.criar') }}" class="btn btn-success">
                         <i class="fa fa-plus"></i> Cadastrar</a>
                 @else
                     <button disabled type="button" class="btn btn-success">

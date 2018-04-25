@@ -15,6 +15,11 @@ class Condominio extends Model
     ];
     protected $dates = [ "deleted_at" ];
 
+    public function balancetes()
+	{
+		return $this->hasMany('WebCondom\Models\Balancetes\Balancete','condominio_id');
+	}
+
     public function endereco()
     {
         return $this->belongsTo('WebCondom\Models\Enderecos\Endereco');

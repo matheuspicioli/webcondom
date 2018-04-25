@@ -2,6 +2,7 @@
 
 namespace WebCondom\Http\Controllers\Balancetes;
 
+use Illuminate\Http\Request;
 use Toast;
 use WebCondom\Models\Balancetes\Balancete;
 use WebCondom\Http\Controllers\Controller;
@@ -23,13 +24,26 @@ class BalancetesController extends Controller
 	{
 		$balancetes = $this->balancete->all();
 		$condominios = $this->condominio->all();
-		return view('balancetes.balancetes.listar', compact('balancetes','condominios'));
+		return view('balancetes.balancetes.listar',compact('balancetes','condominios'));
+	}
+
+	public function ListarPost(Request $request)
+	{
+		$condominios = $this->condominio->all();
+		if($request->has('condominio_id') != null) {
+			if( $condominio = $this->condominio->find($request->condominio_id) ) {
+				$condominio_balancetes = $condominio->balancetes;
+			}
+		}
+		return view('balancetes.balancetes.listar',compact('condominios'))
+			->with('balancetes',$condominio_balancetes)
+			->with('condominio_titulo',$condominio);
 	}
 
 	public function Criar()
 	{
 		$condominios = $this->condominio->all();
-		return view('balancetes.balancetes.criar', compact('condominios'));
+		return view('balancetes.balancetes.criar',compact('condominios'));
 	}
 
 	public function Salvar(BalanceteRequest $request)

@@ -101,6 +101,7 @@ Route::prefix('Financeiros')->namespace('Financeiros')->middleware('auth')->grou
 Route::prefix('Balancetes')->namespace('Balancetes')->middleware('auth')->group(function(){
 	Route::prefix('Balancetes')->group(function(){
 		Route::get('/', 'BalancetesController@listar')->name('financeiros.balancetes.listar');
+		Route::post('/ListarFiltro', 'BalancetesController@listarPost')->name('financeiros.balancetes.listarPost');
 		Route::get('Criar', 'BalancetesController@criar')->name('financeiros.balancetes.criar');
 		Route::post('/', 'BalancetesController@salvar')->name('financeiros.balancetes.salvar');
 		Route::get('{id}/Exibir', 'BalancetesController@exibir')->name('financeiros.balancetes.exibir');
