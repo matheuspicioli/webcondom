@@ -81,7 +81,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <button class="btn btn-primary" id="enviar-plano-contas" type="submit">
-                                        <i class="fa fa-save"></i> Cadastrar
+                                        <i class="fa fa-save"></i> Incluir
                                     </button>
                                 </div>
                             </div>

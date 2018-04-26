@@ -3,7 +3,9 @@
 namespace WebCondom\Http\Controllers\Financeiros;
 
 use Illuminate\Http\Request;
+use Toast;
 use WebCondom\Http\Controllers\Controller;
+use WebCondom\Http\Requests\Financeiros\PlanoDeContaRequest;
 use WebCondom\Models\Financeiros\Conta;
 use WebCondom\Models\Financeiros\Grupo;
 use WebCondom\Models\Financeiros\PlanoDeConta;
@@ -67,7 +69,7 @@ class PlanoDeContasController extends Controller
         return view('financeiros.planodecontas.criar');
     }
 
-    public function Salvar(Request $request)
+    public function Salvar(PlanoDeContaRequest $request)
     {
         //dd($request->all());
         if($request->grupo != null && $request->conta == null){
@@ -118,6 +120,7 @@ class PlanoDeContasController extends Controller
                 ]);
             }
         }
+        Toast::success('Plano De Conta incluído com sucesso!','Inclusão!');
         return redirect()->route('financeiros.planodecontas.listar');
     }
 
@@ -129,6 +132,7 @@ class PlanoDeContasController extends Controller
         $conta  = $this->conta->find($conta);
 
         if ($plano && $grupo && $conta)
+
             return view('financeiros.planodecontas.exibir', compact('plano', 'grupo', 'conta', 'planos'));
 
         return view('financeiros.planodecontas.listar');
@@ -146,7 +150,7 @@ class PlanoDeContasController extends Controller
         return view('financeiros.planodecontas.listar');
     }
 
-    public function Alterar(Request $request, $plano, $grupo, $conta = null)
+    public function Alterar(PlanoDeContaRequest $request, $plano, $grupo, $conta = null)
     {
         //dd($request->all());
         if($request->exists('plano')){
@@ -177,6 +181,7 @@ class PlanoDeContasController extends Controller
                 'descricao' => $request->descricao_conta
             ]);
         }
+        Toast::success('Plano De Conta alterado com sucesso!','Alteração!');
         return redirect()->route('financeiros.planodecontas.listar');
     }
 
@@ -185,6 +190,7 @@ class PlanoDeContasController extends Controller
         $grupo = $this->grupo->find($id);
         if ($grupo) {
             $grupo->delete();
+            Toast::success('Grupo excluído com sucesso!','Exclusão!');
             return redirect()->route('financeiros.planodecontas.listar');
         }
     }
@@ -194,6 +200,7 @@ class PlanoDeContasController extends Controller
         $conta = $this->conta->find($id);
         if ($conta) {
             $conta->delete();
+            Toast::success('Plano De Conta excluído com sucesso!','Exclusão!');
             return redirect()->route('financeiros.planodecontas.listar');
         }
     }

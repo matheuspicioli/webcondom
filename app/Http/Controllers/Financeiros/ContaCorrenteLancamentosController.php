@@ -61,13 +61,12 @@ class ContaCorrenteLancamentosController extends Controller
 
     public function LancamentosPeriodo($dias, $conta_id)
     {
-        $data_atual             = $this->lancamento->where('conta_corrente_id', $conta_id)->orderBy('data_lancamento', 'DESC')->first()->data_lancamento;
-        $data_atual_formatada   = $this->lancamento->where('conta_corrente_id', $conta_id)->orderBy('data_lancamento', 'DESC')->first()->data_lancamento->toDateString();
-        $data_inicio_periodo    = $data_atual->subDay($dias);
-        $data_inicio_formatada  = $data_inicio_periodo->format('Y-m-d');
+        $data_atual = $this->lancamento->where('conta_corrente_id', $conta_id)->orderBy('data_lancamento', 'DESC')->first()->data_lancamento;
+        $data_atual_formatada = $this->lancamento->where('conta_corrente_id', $conta_id)->orderBy('data_lancamento', 'DESC')->first()->data_lancamento->toDateString();
+        $data_inicio_periodo = $data_atual->subDay($dias);
+        $data_inicio_formatada = $data_inicio_periodo->format('Y-m-d');
 
-        return $this->lancamento->where('conta_corrente_id','=',$conta_id)->where('data_lancamento', '>=', $data_inicio_formatada)->where('data_lancamento', '<=', $data_atual_formatada)->orderBy('data_lancamento', 'ASC')->get();
-        //return $this->lancamento->whereBetween('data_lancamento',[ $data_inicio_formatada,$data_atual_formatada ])->orderBy('data_lancamento', 'ASC')->get();
+        return $this->lancamento->where('conta_corrente_id', '=', $conta_id)->where('data_lancamento', '>=', $data_inicio_formatada)->where('data_lancamento', '<=', $data_atual_formatada)->orderBy('data_lancamento', 'ASC')->get();
     }
 
     public function LancamentosAnteriores($dia_anterior, $conta_id)
