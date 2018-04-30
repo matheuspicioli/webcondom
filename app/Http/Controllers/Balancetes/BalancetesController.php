@@ -33,11 +33,13 @@ class BalancetesController extends Controller
 		if($request->has('condominio_id') != null) {
 			if( $condominio = $this->condominio->find($request->condominio_id) ) {
 				$condominio_balancetes = $condominio->balancetes;
+				return view('balancetes.balancetes.listar',compact('condominios'))
+					->with('balancetes',$condominio_balancetes)
+					->with('condominio_titulo',$condominio);
 			}
 		}
-		return view('balancetes.balancetes.listar',compact('condominios'))
-			->with('balancetes',$condominio_balancetes)
-			->with('condominio_titulo',$condominio);
+		Toast::error('Nenhum condomínio com o ID passado encontrado!');
+		return view('balancetes.balancetes.listar',compact('condominios'));
 	}
 
 	public function Criar()

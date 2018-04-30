@@ -33,27 +33,25 @@ class BalanceteLancamentosController extends Controller
 		$balancete_lancamentos = [];
 		if( $balancete = $this->balancete->find($idBalancete) ){
 			$balancete_lancamentos = $balancete->lancamentos;
-			return view('balancetes.lancamentos.listar', compact('balancete_lancamentos'));
+			return view('balancetes.lancamentos.listar', compact('balancete_lancamentos','idBalancete'));
 		}
-		//$balancete_lancamentos = $this->balancete_lancamento->all();
-		Toast::error('Nenhum balancete encontrado!', 'Erro!');
-		return view('balancetes.lancamentos.listar',compact('balancete_lancamentos'));
+		Toast::error('Nenhum balancete com esse ID encontrado!', 'Erro!');
+		return view('balancetes.lancamentos.listar',compact('balancete_lancamentos','idBalancete'));
 	}
 
-	public function Criar()
+	public function Criar($idBalancete)
 	{
 		$balancetes 	= $this->balancete->all();
 		$plano_contas	= $this->plano->all();
 		$fornecedores 	= $this->fornecedor->all();
-		return view('balancetes.lancamentos.criar', compact('balancetes','plano_contas','fornecedores'));
+		return view('balancetes.lancamentos.criar', compact('balancetes','plano_contas','fornecedores','idBalancete'));
 	}
 
 	public function Salvar(BalanceteLancamentoRequest $request)
 	{
-		$lancamento = $this->balancete_lancamento->create($request->all());
-		if($lancamento){
+		if( $lancamento = $this->balancete_lancamento->create($request->all()) ){
 			Toast::success('Balancete lançamento incluso com sucesso!','Inclusão!');
-			return redirect()->route('balancetes.lancamentos.listar');
+			return redirect()->route('balancetes.lancamentos.listar',['idBalancete' => $request->balancete_id]);
 		}
 		$this->balancete_lancamento->erro('Balancete lançamento não criado!','Erro!');
 	}
@@ -65,7 +63,8 @@ class BalanceteLancamentosController extends Controller
 		$plano_contas	= $this->plano->all();
 		$fornecedores 	= $this->fornecedor->all();
 		if ($lancamento) {
-			return view('balancetes.lancamentos.exibir', compact('lancamento','balancetes','plano_contas','fornecedores'));
+			return view('balancetes.lancamentos.exibir', compact('lancamento','balancetes','plano_contas','fornecedores'))
+				->with('idBalancete',$lancamento ? $lancamento->balancete_id : null);
 		} else {
 			$this->balancete_lancamento->erro('Balancete lançamento não encontrado!','Erro!');
 		}
@@ -78,7 +77,7 @@ class BalanceteLancamentosController extends Controller
 		if($lancamento){
 			$lancamento->update($request->all());
 			Toast::success('Balancete lançamento alterado com sucesso!','Alteração!');
-			return redirect()->route('balancetes.lancamentos.listar');
+			return redirect()->route('balancetes.lancamentos.listar',['idBalancete' => $lancamento->balancete_id]);
 		}
 		$this->balancete_lancamento->erro('Balancete lançamento não encontrado!','Erro!');
 	}
@@ -87,9 +86,10 @@ class BalanceteLancamentosController extends Controller
 	{
 		$lancamento = $this->balancete_lancamento->find($id);
 		if($lancamento){
+			$balancete_id = $lancamento->balancete_id;
 			$lancamento->delete();
 			Toast::success('Balancete lançamento excluído com sucesso!','Exclusão!');
-			return redirect()->route('balancetes.lancamentos.listar');
+			return redirect()->route('balancetes.lancamentos.listar',['idBalancete'=>$balancete_id]);
 		}
 		$this->balancete_lancamento->erro('Balancete lançamento não encontrado!','Erro!');
 	}

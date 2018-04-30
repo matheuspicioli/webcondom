@@ -9,7 +9,7 @@
             <a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a>
         </li>
         <li>
-            <a href="{{ route('balancetes.lancamentos.listar') }}"><i class="fa fa-group"></i> Balancete lançamentos</a>
+            <a href="{{ route('balancetes.lancamentos.listar',['idBalancete'=>$idBalancete]) }}"><i class="fa fa-group"></i> Balancete lançamentos</a>
         </li>
         <li class="active">
             <i class="fa fa-plus"></i> Cadastrar balancete lançamento
@@ -19,7 +19,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-1">
-            <a href="{{ route('balancetes.lancamentos.listar') }}" class="btn btn-default">
+            <a href="{{ route('balancetes.lancamentos.listar',['idBalancete'=>$idBalancete]) }}" class="btn btn-default">
                 <i class="fa fa-rotate-left"></i> Voltar</a>
             <hr>
         </div>
@@ -34,16 +34,14 @@
                     <div class="box-body">
                         <form action="{{ route('balancetes.lancamentos.salvar') }}" method="POST">
                             {{ csrf_field() }}
+							<input type="hidden" value="{{ old('balancete_id') ? old('balancete_id') : $idBalancete }}" name="balancete_id">
 							<div class="row">
 								<div class="col-md-2 col-md-offset-2">
 									<div class="form-group">
 										<label for="data_lancamento" class="control-label"
-											   @if($errors->has('data_lancamento')) style="color: #f56954" @endif>Data
-											lançamento</label>
+											   @if($errors->has('data_lancamento')) style="color: #f56954" @endif>Data lançamento</label>
 										<input type="date" name="data_lancamento" id="data_lancamento"
-											   class="form-control"
-											   @if($errors->has('data_lancamento')) style="border:1px solid #f56954"
-											   @endif
+											   class="form-control" @if($errors->has('data_lancamento')) style="border:1px solid #f56954" @endif
 											   value="{{ old('data_lancamento') ? old('data_lancamento') : '' }}">
 										@if( $errors->has('data_lancamento') )
 											<span style="color: #f56954">{{ $errors->get('data_lancamento')[0] }}</span>
@@ -119,33 +117,14 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-md-4 col-md-offset-1">
-									<div class="form-group">
-										<label for="balancete_id" class="control-label" @if($errors->has('balancete_id')) style="color: #f56954" @endif>Balancete</label>
-										<select name="balancete_id" id="balancete_id" class="form-control select2">
-											@forelse($balancetes as $balancete)
-												<option value="{{ $balancete->id }}" {{ old('balancete_id') == $balancete->id
-													? 'selected' : '' }}>
-													#{{ $balancete->id }} - {{ $balancete->data_inicial->format('d/m/Y') }}
-													- {{ $balancete->data_final->format('d/m/Y') }}
-												</option>
-											@empty
-												<h2>Não existem balancetes</h2>
-											@endforelse
-										</select>
-										@if( $errors->has('balancete_id') )
-											<span style="color: #f56954">{{ $errors->get('balancete_id')[0] }}</span>
-										@endif
-									</div>
-								</div>
-								<div class="col-md-3">
+								<div class="col-md-4 col-md-offset-2">
 									<div class="form-group">
 										<label for="plano_contas_id" class="control-label" @if($errors->has('plano_contas_id')) style="color: #f56954" @endif>Plano de contas</label>
 										<select name="plano_contas_id" id="plano_contas_id" class="form-control select2">
 											@foreach($plano_contas as $plano_conta)
 												@foreach($plano_conta->grupos as $grupo)
 													@foreach($grupo->contas as $conta)
-														<option value="{{ $conta->id }}" {{ old('plano_contas_id') == $plano_conta->id
+														<option value="{{ $conta->id }}" {{ old('plano_contas_id') == $conta->id
 															? 'selected' : '' }}>
 															{{ $plano_conta->tipo }}.{{ $grupo->grupo }}.{{ $conta->conta }} - {{ $conta->descricao }}
 														</option>
@@ -158,7 +137,7 @@
 										@endif
 									</div>
 								</div>
-								<div class="col-md-3">
+								<div class="col-md-4">
 									<div class="form-group">
 										<label for="fornecedor_id" class="control-label" @if($errors->has('fornecedor_id')) style="color: #f56954" @endif>Fornecedor</label>
 										<select name="fornecedor_id" id="fornecedor_id" class="form-control select2">

@@ -9,7 +9,7 @@
 			<a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a>
 		</li>
 		<li>
-			<a href="{{ route('balancetes.lancamentos.listar') }}"><i class="fa fa-home"></i> Balancete lançamentos</a>
+			<a href="{{ route('balancetes.lancamentos.listar',['idBalancete' => $idBalancete]) }}"><i class="fa fa-home"></i> Balancete lançamentos</a>
 		</li>
 		<li class="active">
 			<i class="fa fa-pencil"></i> Editar Balancete lançamentos
@@ -19,7 +19,7 @@
 @section('content')
 	<div class="row">
 		<div class="col-md-1">
-			<a href="{{ route('financeiros.balancetes.listar') }}" class="btn btn-default">
+			<a href="{{ route('financeiros.balancetes.listar',['idBalancete' => $idBalancete]) }}" class="btn btn-default">
 				<i class="fa fa-rotate-left"></i> Voltar</a>
 			<hr>
 		</div>

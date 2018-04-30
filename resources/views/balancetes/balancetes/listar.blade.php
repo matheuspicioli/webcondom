@@ -21,6 +21,7 @@
 					<div class="form-group">
 						<label for="conodominio" class="control-label">Condomínio</label>
 						<select name="condominio_id" id="conodominio" class="form-control">
+							<option value="" selected disabled>------------------------SELECIONE------------------------</option>
 							@forelse($condominios as $condominio)
 								<option value="{{ $condominio->id }}">{{ $condominio->nome }} - {{ $condominio->apelido }}</option>
 							@empty
