@@ -252,19 +252,13 @@ class ContaCorrenteLancamentosController extends Controller
     public function Salvar(LancamentoRequest $request)
     {
         $dados = $request->all();
-
-        if ($request->exists('plano_conta')) {
-            $dados['plano_conta_id']    = $request->plano_conta;
-        }
-        if ( $request->exists('cheque') ) {
-            $dados['cheque'] = $dados['cheque'] == "on" ? 'Sim' : 'Nao';
-        }
-        if ( $request->exists('compensado') ) {
-            $dados['compensado'] = $dados['compensado'] == "on" ? 'Sim' : 'Nao';
-        }
-        if ( $request->exists('assinado') ) {
-            $dados['assinado'] = $dados['assinado'] == "on" ? 'Sim' : 'Nao';
-        }
+        if($request->has('compensado') && $request->compensado != 'Sim'){
+        	$dados['compensado'] = 'Nao';
+		}
+		if($request->has('cheque') && $request->cheque != 'Sim'){
+			$dados['cheque'] = 'Nao';
+		}
+		//dd($dados);
         $this->lancamento->create($dados);
         Toast::success('Lancamento incluído com sucesso!','Inclusão!');
         return redirect()->back();
