@@ -1,9 +1,7 @@
 @extends('adminlte::page')
 @section('title', 'Lançamentos conta corrente - Listar')
 @section('content_header')
-    <h1>Lançamentos conta corrente -
-        <small>listagem</small>
-    </h1>
+    <h1>Lançamentos conta corrente - <small>listagem</small></h1>
     <ol class="breadcrumb">
         <li>
             <a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a>
@@ -13,14 +11,13 @@
         </li>
     </ol>
 @stop
-
 @section('content')
     <!--<div class="fa fa-spinner fa-spin" id="carregando"></div>-->
     <div class="row">
         <div class="col-md-12">
             <div class="box box-info collapsed-box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Dados da conta corrente</h3>
+                    <h3 class="box-title">Dados da conta corrente -> {{ $condominio->nome }} - {{ $contaL->banco->nome_banco }} - {{ $contaL->conta }}</h3>
                     <div class="box-tools pull-right">
                         <button class="btn btn-box-tool" type="button" data-widget="collapse">
                             <i class="fa fa-plus"></i>
@@ -123,8 +120,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group @if($errors->has('data_lancamento')) has-error @endif">
-                                                <label for="data" class="control-label">
-													@if($errors->has('data_lancamento')) <span class="fa fa-times-circle-o"></span> @endif
+                                                <label for="data" class="control-label"> @if($errors->has('data_lancamento')) <span class="fa fa-times-circle-o"></span> @endif
 													Data</label>
                                                 <input id="data" type="date" class="form-control pula" value="{{ old('data_lancamento') }}" name="data_lancamento">
                                                 @if( $errors->has('data_lancamento') )
@@ -176,7 +172,8 @@
                                         <div class="col-md-2">
                                             <div class="form-group @if($errors->has('valor')) has-error @endif">
                                                 <label for="valor" class="control-label">Valor</label>
-                                                <input id="valor" type="text" class="form-control pula" name="valor" value="{{ old('valor') }}" >
+                                                <input id="valor" type="text" class="form-control pula" name="valor"
+                                                       value="{{ old('valor') }}" >
                                                 @if( $errors->has('valor') )
                                                     <span class="help-block">{{ $errors->get('valor')[0] }}</span>
                                                 @endif
@@ -198,15 +195,12 @@
                                             </div>
                                         </div>
                                         <div class="col-md-2">
-											<div class="form-group @if($errors->has('compensado')) has-error @endif">
+											<div class="form-group">
 												<div class="checkbox">
 													<label for="compensado">
 														<input type="checkbox" name="compensado" id="compensado" value="Sim" {{ old('compensado') == 'Sim' ? 'checked' : '' }}>
 														Compensado?
 													</label>
-													@if( $errors->has('compensado') )
-														<span class="help-block">{{ $errors->get('compensado')[0] }}</span>
-													@endif
 												</div>
 											</div>
                                         </div>
@@ -255,17 +249,12 @@
                                         <div class="col-md-offset-2">
                                             <div class="row">
                                                 <div class="col-md-2">
-													<div class="form-group @if($errors->has('cheque')) has-error @endif">
+													<div class="form-group">
 														<div class="checkbox">
 															<label for="cheque">
 																<input type="checkbox" name="cheque" id="cheque" value="Sim" {{ old('cheque') }}>
 																Cheque?
 															</label>
-															@if($errors->has('cheque'))
-																<span class="help-block">
-																	{{ $errors->get('cheque')[0] }}
-																</span>
-															@endif
 														</div>
 													</div>
                                                 </div>
@@ -293,16 +282,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
-													<div class="form-group @if($errors->has('assinado')) has-error @endif">
+													<div class="form-group">
 														<div class="checkbox">
 															<label for="assinado">
 																<input type="checkbox" name="assinado" id="assinado" value="Sim" {{ old('assinado') == 'Sim' ? 'checked' : '' }}>
 																Assinado?
 															</label>
 														</div>
-														@if($errors->has('assinado'))
-															<span class="help-block">{{ $errors->get('assinado')[0] }}</span>
-														@endif
 													</div>
                                                 </div>
                                             </div>
@@ -311,8 +297,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <button class="btn btn-primary">
-                                                <i class="fa fa-save"></i> Salvar
-                                            </button>
+                                                <i class="fa fa-save"></i> Salvar</button>
                                         </div>
                                     </div>
                                 </form>
@@ -524,6 +509,9 @@
                                                     <p>Documento: {{ $lancamento->documento }}</p>
                                                     <p>Histórico:   {{ $lancamento->historico }}</p>
                                                     <p>Valor:   {{ number_format($lancamento->valor, 2,',','.') }}</p>
+                                                    <label for="data" class="control-label">Data Compensado</label>
+                                                    <input id="data" type="date" class="form-control pula"
+                                                           name="data_lancamento" value="{{ $lancamento->data_lancamento->format('Y-m-d') }}">
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
@@ -531,9 +519,9 @@
                                                         {{ csrf_field() }}
                                                         {{ method_field('PUT') }}
 
-                                                        <input type="hidden" name="compensado-cc" id="compensado-cc" value="{{ $lancamento->compensado = '1' }}">
+                                                        <input type="hidden" name="compensado-cc" id="compensado-cc" value="{{ $lancamento->compensado = 'Sim   ' }}">
 
-                                                        <button class="btn btn-outline" type="submit">Compensar</button>
+                                                        <button class="btn btn-outline" type="submit" id="btn-compensar">Compensar</button>
                                                     </form>
                                                 </div>
                                             </div>
