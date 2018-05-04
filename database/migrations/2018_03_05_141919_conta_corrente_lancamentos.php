@@ -28,7 +28,7 @@ class ContaCorrenteLancamentos extends Migration
             $table->enum('cheque', ['Sim', 'Nao'])->default('Nao');
             $table->date('enviado_em')->nullable();
             $table->date('retorno_em')->nullable();
-            $table->enum('assinado', ['Sim', 'Nao']);
+            $table->enum('assinado', ['Sim', 'Nao'])->default('Nao');
             ##########CAMPOS PARA O CHEQUE##########
 
             $table->integer('fornecedor_id')->unsigned()->nullable();
