@@ -20,7 +20,7 @@
 				<div class="col-md-4 col-md-offset-4">
 					<div class="form-group">
 						<label for="conodominio" class="control-label">Condomínio</label>
-						<select name="condominio_id" id="conodominio" class="form-control">
+						<select name="condominio_id" id="conodominio" class="form-control select2">
 							<option value="" selected disabled>------------------------SELECIONE------------------------</option>
 							@forelse($condominios as $condominio)
 								<option value="{{ $condominio->id }}">{{ $condominio->nome }} - {{ $condominio->apelido }}</option>

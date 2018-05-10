@@ -73,7 +73,7 @@
                                 <tr>
                                     <td>{{ $lancamento->folha }}</td>
                                     <td>{{ $lancamento->documento }}</td>
-                                    <td>{{ $lancamento->plano_conta->grupo->plano_de_conta->tipo }}.{{ $lancamento->plano_conta->grupo->grupo }}.{{ $lancamento->plano_conta->conta }}</td>
+                                    <td><small>{{ $lancamento->plano_conta->grupo->plano_de_conta->tipo }}.{{ $lancamento->plano_conta->grupo->grupo }}.{{ $lancamento->plano_conta->conta }}</small></td>
                                     <td>{{ $lancamento->plano_conta->descricao  }}</td>
                                     <td>{{ $lancamento->historico }}</td>
                                     <td align=right><b>{{ $lancamento->tipo == 'Credito' ? $lancamento->valor : null }}</b></td>

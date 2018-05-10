@@ -323,6 +323,4 @@ class ContaCorrenteLancamentosController extends Controller
         }
         return redirect()->route('financeiros.lancamentos.listar',['conta_id' => $conta_id, 'dias' => $dias]);
     }
-
-
 }

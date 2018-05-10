@@ -32,7 +32,7 @@ class BalanceteLancamentosController extends Controller
     {
         $debitos_map = $lancamentos->map(function ($debitoPeriodo) {
             if ($debitoPeriodo->tipo == 'Debito') {
-                return $debitoPeriodo->valor;
+                return str_replace(',','.', $debitoPeriodo->valor);
             }
         });
         if ($debitos_map)
@@ -45,10 +45,11 @@ class BalanceteLancamentosController extends Controller
     {
         $creditos_map = $lancamentos->map(function ($creditoPeriodo) {
             if ($creditoPeriodo->tipo == 'Credito') {
-                return $creditoPeriodo->valor;
+                return str_replace(',','.', $creditoPeriodo->valor);
             }
         });
         if ($creditos_map)
+            //DD($creditos_map->sum());
             return $creditos_map->sum();
         else
             return 0.00;
