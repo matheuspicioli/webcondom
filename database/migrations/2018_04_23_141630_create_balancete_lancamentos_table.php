@@ -18,10 +18,10 @@ class CreateBalanceteLancamentosTable extends Migration
 
             $table->date('data_lancamento');
 			$table->string('documento',15);
-			$table->string('historico',100)->nullable();
+			$table->string('historico',100);
 			$table->decimal('valor',12,2);
 			$table->enum('tipo',['Credito','Debito']);
-			$table->string('folha',4);
+			$table->string('folha',4)->nullable();
 
             $table->integer('balancete_id')->unsigned();
             $table->integer('plano_contas_id')->unsigned();

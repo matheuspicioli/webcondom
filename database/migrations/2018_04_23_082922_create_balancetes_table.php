@@ -15,12 +15,12 @@ class CreateBalancetesTable extends Migration
     {
         Schema::create('balancetes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('referencia',20)->nullable();
-            $table->string('competencia',6)->nullable();
+            $table->string('referencia',20);
+            $table->string('competencia',6);
             $table->date('data_inicial');
             $table->date('data_final');
-            $table->decimal('saldo_anterior',12,2);
-            $table->decimal('saldo_atual',12,2);
+            $table->decimal('saldo_anterior',12,2)->default(0);
+            $table->decimal('saldo_atual',12,2)->default(0);
 
             $table->integer('condominio_id')->unsigned();
             $table->foreign('condominio_id')

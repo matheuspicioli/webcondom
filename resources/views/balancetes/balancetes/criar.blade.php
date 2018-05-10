@@ -32,14 +32,15 @@
                         <h3 class="box-title">Cadastrar balancete</h3>
                     </div>
                     <div class="box-body">
-                        <form action="{{ route('financeiros.balancetes.salvar') }}" method="POST">
+                        <form action="{{ route('financeiros.balancetes.salvar') }}" method="POST" id="form">
                             {{ csrf_field() }}
                             <div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="condominio_id" class="control-label" @if($errors->has('condominio_id')) style="color: #f56954" @endif>Condominío</label>
-										<select name="condominio_id" id="condominio_id" class="form-control select2">
-											@foreach($condominios as $condominio)
+                                        <select name="condominio_id" id="condominio_id" class="form-control select2">
+                                            <option value="" selected disabled>------------------------SELECIONE------------------------</option>
+                                            @foreach($condominios as $condominio)
 												<option value="{{ $condominio->id }}" {{ old('condominio_id') == $condominio->id ? 'selected' : '' }}>
 													{{ $condominio->id }} - {{ $condominio->nome }} - {{ $condominio->apelido }}
 												</option>
@@ -54,7 +55,7 @@
 									<div class="form-group">
 										<label for="competencia" class="control-label" @if($errors->has('competencia')) style="color: #f56954" @endif>Competência</label>
 										<input type="text" id="competencia" name="competencia" class="form-control pula" @if($errors->has('competencia')) style="border:1px solid #f56954" @endif
-										value="{{ old('competencia') ? old('competencia') : '' }}">
+										data-mask="9999/99" value="{{ old('competencia') ? old('competencia') : '' }}" placeholder="Ex.: aaaa/mm">
 										@if( $errors->has('competencia') )
 											<span style="color: #f56954">{{ $errors->get('competencia')[0] }}</span>
 										@endif
@@ -120,7 +121,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <button class="btn btn-primary" type="submit">
+                                        <button class="btn btn-primary" type="submit" id="salvar">
                                             <i class="fa fa-save"></i> Cadastrar</button>
                                     </div>
                                 </div>
@@ -147,6 +148,11 @@
         $(document).ready(function () {
         	$('#condominio_id').focus();
             $('.select2').select2();
+        });
+        $('#salvar').on('click', function(e){
+            e.preventDefault();
+            $('#competencia').unmask();
+            $('#form').submit();
         });
     </script>
 @endsection

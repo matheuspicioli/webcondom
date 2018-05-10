@@ -5,7 +5,7 @@ namespace WebCondom\Models\Balancetes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class BalancateLancamento extends Model
+class BalanceteLancamento extends Model
 {
 	use SoftDeletes;
 

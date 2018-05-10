@@ -14,7 +14,7 @@
 
 @section('content')
     @can("listar_balancete")
-		<form action="{{ route('financeiros.balancetes.listarPost') }}" method="POST">
+		<form action="{{ route('financeiros.balancetes.listarPost') }}" method="POST" id="form">
 			{{ csrf_field() }}
         	<div class="row">
 				<div class="col-md-4 col-md-offset-4">
@@ -64,41 +64,35 @@
                             <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Condomínio</th>
 								<th>Competência</th>
 								<th>Referência</th>
-                                <th>Data inicial</th>
-                                <th>Data final</th>
-								<th>Saldo anterior</th>
-								<th>Saldo atual</th>
+								<th align=right>Saldo anterior</th>
+								<th align=right>Saldo atual</th>
                                 <th>Ações</th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
 								<th>#</th>
+                                <th>Condomínio</th>
 								<th>Competência</th>
 								<th>Referência</th>
-								<th>Data inicial</th>
-								<th>Data final</th>
-								<th>Saldo anterior</th>
-								<th>Saldo atual</th>
+								<th align=right>Saldo anterior</th>
+								<th align=right>Saldo atual</th>
 								<th>Ações</th>
                             </tr>
                             </tfoot>
                             <tbody>
                             @foreach($balancetes as $balancete)
-                                <tr>
+                                <b>
                                     <td>{{ $balancete->id }}</td>
-                                    <td>{{ $balancete->competencia or 'Não preenchido' }}</td>
-                                    <td>{{ $balancete->referencia or 'Não preenchido' }}</td>
-                                    <td>{{ $balancete->data_inicial->format('d/m/Y') }}</td>
-                                    <td>{{ $balancete->data_final->format('d/m/Y') }}</td>
-									<td>R$ {{ $balancete->saldo_anterior }}</td>
-									<td>R$ {{ $balancete->saldo_atual }}</td>
+                                    <td>{{ $balancete->condominio->nome }}</td>
+                                    <td data-mask="9999/99"><b>{{ $balancete->competencia or 'Não informado' }}</b></td>
+                                    <td>{{ $balancete->referencia or 'Não informado' }}</td>
+									<td>{{ $balancete->saldo_anterior }}</td>
+									<td>{{ $balancete->saldo_atual }}</td>
                                     <td>
-										<a href="{{ route('balancetes.lancamentos.listar',['idBalancete' => $balancete->id]) }}" class="btn btn-xs btn-success">
-											<i class="fa fa-th-list"></i>
-										</a>
                                         @can("exibir_balancete")
                                             <a class="btn btn-xs btn-warning" href="{{ route('financeiros.balancetes.exibir', ['id' => $balancete->id ]) }}">
                                                 <i class="fa fa-pencil"></i></a>
@@ -106,6 +100,9 @@
                                             <button disabled type="button" class="btn btn-xs btn-warning">
                                                 <i class="fa fa-pencil"></i></button>
                                         @endcan
+                                        <a href="{{ route('balancetes.lancamentos.listar',['idBalancete' => $balancete->id]) }}" class="btn btn-xs btn-success">
+                                            <i class="fa fa-th-list"></i>
+                                        </a>
                                         @can("deletar_balancete")
                                             <button type="button" data-toggle="modal" data-target="#modal-danger-{{$balancete->id}}" href="#" class="btn btn-xs btn-danger">
                                                 <i class="fa fa-trash"></i></button>
@@ -124,8 +121,10 @@
                                                         <h3 class="modal-title">Confirmar exclusão</h3>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <h4>Deseja realmente excluir o balancete com o período entre
-															{{ $balancete->data_inicial->format('d/m/Y') }} - {{ $balancete->data_final->format('d/m/Y') }}?</h4>
+                                                        <h3>Dados da exclusão: </h3>
+                                                        <p>Condomínio:   {{ $condominio->nome }}</p>
+                                                        <p data-mask="9999/99">Competencia:   {{ $balancete->competencia }}</p>
+                                                        <p>Referendcia:   {{ $balancete->referencia}}</p>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
@@ -165,9 +164,10 @@
     <script src="https://cdn.datatables.net/plug-ins/1.10.10/sorting/datetime-moment.js"></script>
     <script>
         $(function () {
-        	//$('.select2').select2();
+        	$('.select2').select2();
             $('#tabela').DataTable({
-				"order": [[ 3, "asc" ]],
+				"order": [[ 1, "asc" ],[ 2, "asc" ]],
+                "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
                 }

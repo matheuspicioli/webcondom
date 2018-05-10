@@ -13,6 +13,13 @@
 @stop
 
 @section('content')
+    <div class="row">
+        <div class="col-md-1">
+            <a href="{{ route('financeiros.balancetes.listar') }}" class="btn btn-default"">
+                <i class="fa fa-rotate-left"></i> Voltar</a>
+            <hr>
+        </div>
+    </div>
     @can("listar_balancete_lancamentos")
         <div class="row">
             <div class="col-md-1">
@@ -37,54 +44,54 @@
                         <table class="table table-striped table-hover dataTable" id="tabela" role="grid">
                             <thead>
                             <tr>
-                                <th>#</th>
-								<th>Data lançamento</th>
+                                <th>Folha</th>
 								<th>Documento</th>
-                                <th>Valor</th>
-                                <th>Tipo</th>
-								<th>Folha</th>
-                                <th>Fornecedor</th>
-								<th>Plano de conta</th>
+								<th>Pl.Conta</th>
+                                <th>Descrição Plano Conta</th>
+                                <th>Histórico</th>
+                                <td align=right><b>Crédito</b></td>
+                                <td align=right><b>Débito</b></td>
+								<th>Fornecedor</th>
                                 <th>Ações</th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
-                                <th>#</th>
-                                <th>Data lançamento</th>
-                                <th>Documento</th>
-                                <th>Valor</th>
-                                <th>Tipo</th>
                                 <th>Folha</th>
-								<th>Fornecedor</th>
-								<th>Plano de conta</th>
+                                <th>Documento</th>
+                                <th>Pl.Conta</th>
+                                <th>Descrição Plano Conta</th>
+                                <th>Histórico</th>
+                                <td align=right><b>{{ isset($credito_periodo) ? number_format($credito_periodo, 2,',','.') : number_format(0, 2,',','.') }}</b></td>
+                                <td align=right><b>{{ isset($debito_periodo) ? number_format($debito_periodo, 2,',','.') : number_format(0, 2,',','.') }}</b></td>
+                                <th>Fornecedor</th>
                                 <th>Ações</th>
                             </tr>
                             </tfoot>
                             <tbody>
                             @forelse($balancete_lancamentos as $lancamento)
                                 <tr>
-                                    <td>{{ $lancamento->id }}</td>
-                                    <td>{{ $lancamento->data_lancamento->format('d/m/Y') }}</td>
+                                    <td>{{ $lancamento->folha }}</td>
                                     <td>{{ $lancamento->documento }}</td>
-                                    <td>R$ {{ $lancamento->valor }}</td>
-                                    <td>{{ $lancamento->tipo }}</td>
-									<td>{{ $lancamento->folha }}</td>
-									<td>{{ $lancamento->fornecedor->entidade->nome }}</td>
-									<td>{{ $lancamento->plano_conta->grupo->plano_de_conta->tipo }}.{{ $lancamento->plano_conta->grupo->grupo }}.{{ $lancamento->plano_conta->conta }}</td>
+                                    <td>{{ $lancamento->plano_conta->grupo->plano_de_conta->tipo }}.{{ $lancamento->plano_conta->grupo->grupo }}.{{ $lancamento->plano_conta->conta }}</td>
+                                    <td>{{ $lancamento->plano_conta->descricao  }}</td>
+                                    <td>{{ $lancamento->historico }}</td>
+                                    <td align=right><b>{{ $lancamento->tipo == 'Credito' ? $lancamento->valor : null }}</b></td>
+                                    <td align=right><b>{{ $lancamento->tipo == 'Debito' ? $lancamento->valor : null }}</b></td>
+									<td>{{ $lancamento->fornecedor_id ? $lancamento->fornecedor->entidade->nome : null }}</td>
                                     <td>
                                         @can("exibir_balancete_lancamentos")
-                                            <a class="btn btn-xs btn-warning" href="{{ route('balancetes.lancamentos.exibir', ['id' => $lancamento->id ]) }}">
+                                            <a class="btn btn-xs btn-warning" href="{{ route('balancetes.lancamentos.exibir', ['id' => $lancamento->id ]) }}" title="Alterar">
                                                 <i class="fa fa-pencil"></i></a>
                                         @else
-                                            <button disabled type="button" class="btn btn-xs btn-warning">
+                                            <button disabled type="button" class="btn btn-xs btn-warning" title="Alterar">
                                                 <i class="fa fa-pencil"></i></button>
                                         @endcan
                                         @can("deletar_balancete_lancamentos")
-                                            <button type="button" data-toggle="modal" data-target="#modal-danger-{{$lancamento->id}}" href="#" class="btn btn-xs btn-danger">
+                                            <button type="button" data-toggle="modal" data-target="#modal-danger-{{$lancamento->id}}" href="#" class="btn btn-xs btn-danger" title="Excluir">
                                                 <i class="fa fa-trash"></i></button>
                                         @else
-                                            <button disabled type="button" data-toggle="modal" data-target="#modal-danger-{{$lancamento->id}}" href="#" class="btn btn-xs btn-danger">
+                                            <button disabled type="button" data-toggle="modal" data-target="#modal-danger-{{$lancamento->id}}" href="#" class="btn btn-xs btn-danger" title="Excluir">
                                                 <i class="fa fa-trash"></i></button>
                                         @endcan
                                         <!-- MODAL EXCLUSÃO -->
@@ -98,8 +105,11 @@
                                                         <h3 class="modal-title">Confirmar exclusão</h3>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <h4>Deseja realmente excluir o lançamento de balancete com o documento
-															{{ $lancamento->documento }}, data de lançamento {{ $lancamento->data_lancamento->format('d/m/Y') }}?</h4>
+                                                        <h3>Dados da exclusão: </h3>
+                                                        <p>Data:   {{ $lancamento->data_lancamento->format('d/m/Y') }}</p>
+                                                        <p>Documento:   {{ $lancamento->documento }}</p>
+                                                        <p>Histórico:   {{ $lancamento->historico }}</p>
+                                                        <p>Valor:   {{ $lancamento->valor }}</p>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
@@ -143,11 +153,12 @@
         $(function () {
         	//$('.select2').select2();
             $('#tabela').DataTable({
-				"order": [[ 1, "asc" ]],
+                "order": [[ 2, "asc" ]],
+                "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
                 }
             } )
         });
     </script>
-@stop
+@stop'

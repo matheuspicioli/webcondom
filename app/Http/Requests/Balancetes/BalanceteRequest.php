@@ -24,8 +24,8 @@ class BalanceteRequest extends FormRequest
     public function rules()
     {
         return [
-			'referencia' 		=> 'nullable|min:5|max:20',
-			'competencia' 		=> 'nullable|min:6|max:6',
+            'competencia' 		=> 'required|min:6|max:6',
+			'referencia' 		=> 'required|min:3|max:20',
 			'data_inicial' 		=> 'required|date',
 			'data_final' 		=> 'required|date',
 			'saldo_anterior' 	=> 'required',

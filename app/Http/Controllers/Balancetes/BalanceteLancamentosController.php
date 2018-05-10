@@ -4,7 +4,7 @@ namespace WebCondom\Http\Controllers\Balancetes;
 
 use Toast;
 use WebCondom\Http\Requests\Balancetes\BalanceteLancamentoRequest;
-use WebCondom\Models\Balancetes\BalancateLancamento;
+use WebCondom\Models\Balancetes\BalanceteLancamento;
 use WebCondom\Http\Controllers\Controller;
 use WebCondom\Models\Balancetes\Balancete;
 use WebCondom\Models\Condominios\Condominio;
@@ -19,7 +19,7 @@ class BalanceteLancamentosController extends Controller
 	private $fornecedor;
 	private $condominio;
 
-	public function __construct(BalancateLancamento $lancamento, Balancete $balancete, PlanoDeConta $plano, Fornecedor $fornecedor, Condominio $condominio)
+	public function __construct(BalanceteLancamento $lancamento, Balancete $balancete, PlanoDeConta $plano, Fornecedor $fornecedor, Condominio $condominio)
 	{
 		$this->balancete_lancamento  	= $lancamento;
 		$this->balancete 				= $balancete;
@@ -28,12 +28,40 @@ class BalanceteLancamentosController extends Controller
 		$this->condominio 				= $condominio;
 	}
 
+    public function DebitoPeriodo ($lancamentos)
+    {
+        $debitos_map = $lancamentos->map(function ($debitoPeriodo) {
+            if ($debitoPeriodo->tipo == 'Debito') {
+                return $debitoPeriodo->valor;
+            }
+        });
+        if ($debitos_map)
+            return $debitos_map->sum();
+        else
+            return 0.00;
+    }
+
+    public function CreditoPeriodo ($lancamentos)
+    {
+        $creditos_map = $lancamentos->map(function ($creditoPeriodo) {
+            if ($creditoPeriodo->tipo == 'Credito') {
+                return $creditoPeriodo->valor;
+            }
+        });
+        if ($creditos_map)
+            return $creditos_map->sum();
+        else
+            return 0.00;
+    }
 	public function Listar($idBalancete)
 	{
 		$balancete_lancamentos = [];
 		if( $balancete = $this->balancete->find($idBalancete) ){
 			$balancete_lancamentos = $balancete->lancamentos;
-			return view('balancetes.lancamentos.listar', compact('balancete_lancamentos','idBalancete'));
+            $debito_periodo   = $this->DebitoPeriodo($balancete_lancamentos);
+            $credito_periodo  = $this->CreditoPeriodo($balancete_lancamentos);
+
+			return view('balancetes.lancamentos.listar', compact('balancete_lancamentos','idBalancete','debito_periodo','credito_periodo'));
 		}
 		Toast::error('Nenhum balancete com esse ID encontrado!', 'Erro!');
 		return view('balancetes.lancamentos.listar',compact('balancete_lancamentos','idBalancete'));

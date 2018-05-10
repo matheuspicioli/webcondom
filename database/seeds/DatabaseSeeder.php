@@ -36,5 +36,7 @@ class DatabaseSeeder extends Seeder
         $this->call('TiposSeeder');
         $this->call('PlanoContasSeeder');
         $this->call('ContasCorrentesLancamentosSeeder');
+        $this->call('BalancetesSeeder');
+        $this->call('BalancetesLancamentosSeeder');
     }
 }

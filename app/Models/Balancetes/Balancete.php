@@ -4,6 +4,7 @@ namespace WebCondom\Models\Balancetes;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+//use WebCondom\Models\Condominios\Condominio;
 use Toast;
 
 class Balancete extends Model
@@ -45,11 +46,11 @@ class Balancete extends Model
 
 	public function lancamentos()
 	{
-		return $this->hasMany('WebCondom\Models\Balancetes\BalancateLancamento','balancete_id');
+		return $this->hasMany('WebCondom\Models\Balancetes\BalanceteLancamento','balancete_id');
 	}
 
     public function condominio()
 	{
-		return $this->belongsTo('WebCondom\Models\Condominios\Condominio','condominio_id');
+	    return $this->belongsTo('WebCondom\Models\Condominios\Condominio','condominio_id');
 	}
 }

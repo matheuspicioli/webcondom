@@ -36,7 +36,7 @@
                             {{ csrf_field() }}
 							<input type="hidden" value="{{ old('balancete_id') ? old('balancete_id') : $idBalancete }}" name="balancete_id">
 							<div class="row">
-								<div class="col-md-2 col-md-offset-2">
+								<div class="col-md-2 col-md-offset-1">
 									<div class="form-group">
 										<label for="data_lancamento" class="control-label"
 											   @if($errors->has('data_lancamento')) style="color: #f56954" @endif>Data lançamento</label>
@@ -45,6 +45,18 @@
 											   value="{{ old('data_lancamento') ? old('data_lancamento') : '' }}">
 										@if( $errors->has('data_lancamento') )
 											<span style="color: #f56954">{{ $errors->get('data_lancamento')[0] }}</span>
+										@endif
+									</div>
+								</div>
+								<div class="col-md-1">
+									<div class="form-group">
+										<label for="folha" class="control-label"
+											   @if($errors->has('folha')) style="color: #f56954" @endif>Folha/Anexo</label>
+										<input type="text" id="folha" name="folha" class="form-control pula"
+											   @if($errors->has('folha')) style="border:1px solid #f56954" @endif
+											   value="{{ old('folha') ? old('folha') : '' }}">
+										@if( $errors->has('folha') )
+											<span style="color: #f56954">{{ $errors->get('folha')[0] }}</span>
 										@endif
 									</div>
 								</div>
@@ -60,21 +72,7 @@
 										@endif
 									</div>
 								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<label for="historico" class="control-label"
-											   @if($errors->has('historico')) style="color: #f56954" @endif>Histórico</label>
-										<input type="text" id="historico" name="historico" class="form-control pula"
-											   @if($errors->has('historico')) style="border:1px solid #f56954" @endif
-											   value="{{ old('historico') ? old('historico') : '' }}">
-										@if( $errors->has('historico') )
-											<span style="color: #f56954">{{ $errors->get('historico')[0] }}</span>
-										@endif
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-2 col-md-offset-3">
+								<div class="col-md-2">
 									<div class="form-group">
 										<label for="valor" class="control-label"
 											   @if($errors->has('valor')) style="color: #f56954" @endif>Valor</label>
@@ -103,29 +101,17 @@
 										@endif
 									</div>
 								</div>
-								<div class="col-md-2">
-									<div class="form-group">
-										<label for="folha" class="control-label"
-											   @if($errors->has('folha')) style="color: #f56954" @endif>Folha</label>
-										<input type="text" id="folha" name="folha" class="form-control pula"
-											   @if($errors->has('folha')) style="border:1px solid #f56954" @endif
-											   value="{{ old('folha') ? old('folha') : '' }}">
-										@if( $errors->has('folha') )
-											<span style="color: #f56954">{{ $errors->get('folha')[0] }}</span>
-										@endif
-									</div>
-								</div>
 							</div>
 							<div class="row">
-								<div class="col-md-4 col-md-offset-2">
+								<div class="col-md-4 col-md-offset-1" >
 									<div class="form-group">
 										<label for="plano_contas_id" class="control-label" @if($errors->has('plano_contas_id')) style="color: #f56954" @endif>Plano de contas</label>
 										<select name="plano_contas_id" id="plano_contas_id" class="form-control select2">
+											<option value="" selected disabled>------------------------ SELECIONE ------------------------</option>
 											@foreach($plano_contas as $plano_conta)
 												@foreach($plano_conta->grupos as $grupo)
 													@foreach($grupo->contas as $conta)
-														<option value="{{ $conta->id }}" {{ old('plano_contas_id') == $conta->id
-															? 'selected' : '' }}>
+														<option value="{{ $conta->id }}" {{ old('plano_contas_id') == $conta->id ? 'selected' : '' }}>
 															{{ $plano_conta->tipo }}.{{ $grupo->grupo }}.{{ $conta->conta }} - {{ $conta->descricao }}
 														</option>
 													@endforeach
@@ -137,19 +123,33 @@
 										@endif
 									</div>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-5">
 									<div class="form-group">
 										<label for="fornecedor_id" class="control-label" @if($errors->has('fornecedor_id')) style="color: #f56954" @endif>Fornecedor</label>
 										<select name="fornecedor_id" id="fornecedor_id" class="form-control select2">
+											<option value="" selected disabled>------------------------ SELECIONE ------------------------</option>
 											@foreach($fornecedores as $fornecedor)
-												<option value="{{ $fornecedor->id }}" {{ old('fornecedor_id') == $fornecedor->id
-													? 'selected' : '' }}>
+												<option value="{{ $fornecedor->id }}" {{ old('fornecedor_id') == $fornecedor->id ? 'selected' : '' }}>
 													{{ $fornecedor->entidade->nome }}
 												</option>
 											@endforeach
 										</select>
 										@if( $errors->has('fornecedor_id') )
 											<span style="color: #f56954">{{ $errors->get('fornecedor_id')[0] }}</span>
+										@endif
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-9 col-md-offset-1">
+									<div class="form-group">
+										<label for="historico" class="control-label"
+											   @if($errors->has('historico')) style="color: #f56954" @endif>Histórico</label>
+										<input type="text" id="historico" name="historico" class="form-control pula"
+											   @if($errors->has('historico')) style="border:1px solid #f56954" @endif
+											   value="{{ old('historico') ? old('historico') : '' }}">
+										@if( $errors->has('historico') )
+											<span style="color: #f56954">{{ $errors->get('historico')[0] }}</span>
 										@endif
 									</div>
 								</div>

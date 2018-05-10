@@ -1,9 +1,7 @@
 @extends('adminlte::page')
 @section('title', 'Lançamentos conta corrente - Listar')
 @section('content_header')
-    <h1>Lançamentos conta corrente -
-        <small>listagem</small>
-    </h1>
+    <h1>Lançamentos conta corrente - <small>listagem</small></h1>
     <ol class="breadcrumb">
         <li>
             <a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a>

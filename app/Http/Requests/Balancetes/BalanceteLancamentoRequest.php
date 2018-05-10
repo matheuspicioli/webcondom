@@ -25,14 +25,14 @@ class BalanceteLancamentoRequest extends FormRequest
     {
         return [
 			'data_lancamento' 	=> 'required|date',
-			'documento' 		=> 'required|min:2|max:15',
-			'historico'			=> 'nullable|max:100',
+			'documento' 		=> 'required|max:15',
+			'historico'			=> 'required|max:100',
 			'valor'				=> 'required',
 			'tipo'				=> 'required',
-			'folha'				=> 'required|max:4|min:4',
+			'folha'				=> 'nullable',
 			'balancete_id'		=> 'required',
 			'plano_contas_id'	=> 'required',
-			'fornecedor_id'		=> 'required'
+			'fornecedor_id'		=> 'nullable'
 		];
     }
 }

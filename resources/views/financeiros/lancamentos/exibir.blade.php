@@ -177,10 +177,10 @@
                                     <div class="form-group">
                                         @can("editar_lancamento")
                                             <button class="btn btn-info" type="submit">
-                                                <i class="fa fa-save"></i> Salvar</button>
+                                                <i class="fa fa-save"></i> Alterar</button>
                                         @else
                                             <button disabled class="btn btn-info" type="submit">
-                                                <i class="fa fa-save"></i> Salvar</button>
+                                                <i class="fa fa-save"></i> Alterar</button>
                                         @endcan
                                         @can("deletar_lancamento")
                                             <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">

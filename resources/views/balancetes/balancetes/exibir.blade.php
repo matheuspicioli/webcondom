@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <form method="POST" enctype="multipart/form-data"
+                        <form method="POST" enctype="multipart/form-data" id="form"
 							  action="{{ route('financeiros.balancetes.alterar', ['id' => $balancete->id ]) }}">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
@@ -44,8 +44,7 @@
 										<label for="condominio_id" class="control-label" @if($errors->has('condominio_id')) style="color: #f56954" @endif>Condominío</label>
 										<select name="condominio_id" id="condominio_id" class="form-control select2">
 											@foreach($condominios as $condominio)
-												<option value="{{ $condominio->id }}" {{ old('condominio_id') == $condominio->id
-													? 'selected' : ($balancete->condominio_id == $condominio->id ? 'selected' : '') }}>
+												<option value="{{ $condominio->id }}" {{ old('condominio_id') == $condominio->id ? 'selected' : ($balancete->condominio_id == $condominio->id ? 'selected' : '') }}>
 													{{ $condominio->id }} - {{ $condominio->nome }} - {{ $condominio->apelido }}
 												</option>
 											@endforeach
@@ -59,7 +58,7 @@
 									<div class="form-group">
 										<label for="competencia" class="control-label" @if($errors->has('competencia')) style="color: #f56954" @endif>Competência</label>
 										<input type="text" id="competencia" name="competencia" class="form-control pula" @if($errors->has('competencia')) style="border:1px solid #f56954" @endif
-											value="{{ old('competencia') ? old('competencia') : ($balancete->competencia ? $balancete->competencia : '') }}">
+											data-mask="9999/99" placeholder="Ex: aaaa/mm" value="{{ old('competencia') ? old('competencia') : ($balancete->competencia ? $balancete->competencia : '') }}">
 										@if( $errors->has('competencia') )
 											<span style="color: #f56954">{{ $errors->get('competencia')[0] }}</span>
 										@endif
@@ -124,11 +123,20 @@
 							</div>
 							<div class="row">
 								<div class="col-md-12">
-									<div class="form-group">
-										<button class="btn btn-info" type="submit">
-											<i class="fa fa-save"></i> Alterar</button>
-									</div>
-								</div>
+                                    @can("editar_balancete")
+                                        <button class="btn btn-info" type="submit" id="salvar">
+                                            <i class="fa fa-save"></i> Alterar</button>
+                                    @else
+                                        <button disabled class="btn btn-info" type="submit">
+                                            <i class="fa fa-save"></i> Alterar</button>
+                                    @endcan
+                                    @can("deletar_balancete")
+                                        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
+                                            <i class="fa fa-trash"></i> Excluir</button>
+                                    @else
+                                        <button disabled class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
+                                            <i class="fa fa-trash"></i> Excluir</button>
+                                    @endcan								</div>
 							</div>
                         </form>
                     </div>
@@ -147,8 +155,10 @@
                     </div>
 
                     <div class="modal-body">
-                        <h4>Deseja realmente excluir o balancete com o período entre
-							{{ $balancete->data_inicial->format('d/m/Y') }} - {{ $balancete->data_final->format('d/m/Y') }}?</h4>
+                        <h3>Dados da exclusão: </h3>
+                        <p>Condomínio:   {{ $condominio->nome }}</p>
+                        <p data-mask="9999/99">Competencia:   {{ $balancete->competencia }}</p>
+                        <p>Referendcia:   {{ $balancete->referencia}}</p>
                     </div>
 
                     <div class="modal-footer">
@@ -179,6 +189,11 @@
         $(document).ready(function () {
             $('#condominio_id').focus();
             $('.select2').select2();
+        });
+        $('#salvar').on('click', function(e){
+            e.preventDefault();
+            $('#competencia').unmask();
+            $('#form').submit();
         });
     </script>
 @endsection
