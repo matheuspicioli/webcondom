@@ -19,6 +19,16 @@ class ContaCorrenteLancamento extends Model
     ];
     protected $dates = [ 'data_lancamento' ];
 
+	public function setValorAttribute($valor)
+	{
+		$this->attributes['valor'] = str_replace(',', '.', $valor);
+	}
+
+//	public function getValorAttribute()
+//	{
+//		return str_replace('.',',', $this->attributes['valor']);
+//	}
+
     public function fornecedor()
     {
         return $this->belongsTo(Fornecedor::class, 'fornecedor_id');

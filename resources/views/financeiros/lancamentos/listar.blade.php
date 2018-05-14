@@ -11,14 +11,13 @@
         </li>
     </ol>
 @stop
-
 @section('content')
     <!--<div class="fa fa-spinner fa-spin" id="carregando"></div>-->
     <div class="row">
         <div class="col-md-12">
             <div class="box box-info collapsed-box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Dados da conta corrente</h3>
+                    <h3 class="box-title">Dados da conta corrente -> {{ $condominio->nome }} - {{ $contaL->banco->nome_banco }} - {{ $contaL->conta }}</h3>
                     <div class="box-tools pull-right">
                         <button class="btn btn-box-tool" type="button" data-widget="collapse">
                             <i class="fa fa-plus"></i>
@@ -115,145 +114,182 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="box-body">
-                                <form action="{{ route('financeiros.lancamentos.salvar') }}" method="POST">
+                                <form action="{{ route('financeiros.lancamentos.salvar') }}" method="POST" id="form">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="conta_corrente_id" value="{{ $contaL->id }}">
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="data" class="control-label">Data</label>
-                                                <input id="data" type="date" class="form-control pula"
-                                                       name="data_lancamento">
+                                            <div class="form-group @if($errors->has('data_lancamento')) has-error @endif">
+                                                <label for="data" class="control-label"> @if($errors->has('data_lancamento')) <span class="fa fa-times-circle-o"></span> @endif
+													Data</label>
+                                                <input id="data" type="date" class="form-control pula" value="{{ old('data_lancamento') }}" name="data_lancamento">
+                                                @if( $errors->has('data_lancamento') )
+                                                    <span class="help-block">{{ $errors->get('data_lancamento')[0] }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <div class="form-group">
+                                            <div class="form-group @if($errors->has('documento')) has-error @endif">
                                                 <label for="documento" class="control-label">Documento</label>
-                                                <input id="documento" type="text" class="form-control pula"
-                                                       name="documento">
+                                                <input id="documento" type="text" class="form-control pula" value="{{ old('documento') }}" name="documento">
+                                                @if( $errors->has('documento') )
+                                                    <span class="help-block">{{ $errors->get('documento')[0] }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="tipo_conta" class="control-label">Plano de contas</label>
-                                                <select name="plano_conta" id="tipo_conta" class="form-control">
+                                            <div class="form-group @if($errors->has('plano_conta_id')) has-error @endif">
+                                                <label for="plano_conta_id" class="control-label" >Plano de contas</label>
+                                                <select name="plano_conta_id" id="plano_conta_id" class="form-control select2">
                                                     <option selected disabled>SELECIONE</option>
                                                     @foreach($tipos as $tipo)
                                                         @foreach($tipo->grupos as $grupo)
                                                             @foreach($grupo->contas as $conta)
-                                                                <option value="{{ $conta->id }}">
-                                                                    {{ "$tipo->tipo.$grupo->grupo.$conta->conta" }} -
-                                                                    <b>{{ $conta->descricao }}</b>
+                                                                <option value="{{ $conta->id }}" {{ old('plano_conta_id') == $conta->id ? 'selected' : '' }}>
+                                                                    {{ "$tipo->tipo.$grupo->grupo.$conta->conta" }} - <b>{{ $conta->descricao }}</b>
                                                                 </option>
                                                             @endforeach
                                                         @endforeach
                                                     @endforeach
                                                 </select>
+                                                @if( $errors->has('plano_conta_id') )
+                                                    <span class="help-block">{{ $errors->get('plano_conta_id')[0] }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
                                     <!-- 2ª linha -->
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="form-group">
+                                            <div class="form-group @if($errors->has('historico')) has-error @endif">
                                                 <label for="historico" class="control-label">Histórico</label>
-                                                <input id="historico" type="text" class="form-control pula"
-                                                       name="historico">
+                                                <input id="historico" type="text" class="form-control pula" name="historico" value="{{ old('historico') }}" >
+                                                @if( $errors->has('historico') )
+                                                    <span class="help-block">{{ $errors->get('historico')[0] }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-2">
-                                            <div class="form-group">
+                                            <div class="form-group @if($errors->has('valor')) has-error @endif">
                                                 <label for="valor" class="control-label">Valor</label>
-                                                <input id="valor" type="text" class="form-control pula"
-                                                       name="valor">
+                                                <input id="valor" type="text" class="form-control pula" name="valor"
+                                                       value="{{ old('valor') }}" >
+                                                @if( $errors->has('valor') )
+                                                    <span class="help-block">{{ $errors->get('valor')[0] }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-2">
-                                            <div class="form-group">
+                                            <div class="form-group @if($errors->has('tipo')) has-error @endif">
                                                 <div class="radio">
-                                                    <label><input type="radio" name="tipo"
-                                                                  value="Debito">Débito</label>
+                                                    <label><input type="radio" name="tipo" id="tipo"
+                                                                  value="Debito" {{ old('tipo') == 'Debito' ? 'checked' : '' }}>Débito</label>
                                                 </div>
                                                 <div class="radio">
-                                                    <label><input type="radio" name="tipo"
-                                                                  value="Credito">Crédito</label>
+                                                    <label><input type="radio" name="tipo" id="tipo"
+                                                                  value="Credito" {{ old('tipo') == 'Credito' ? 'checked' : '' }}>Crédito</label>
                                                 </div>
+                                                @if( $errors->has('tipo') )
+                                                    <span class="help-block">{{ $errors->get('tipo')[0] }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-2">
-                                            <div class="checkbox" id="compensado-div">
-                                                <label for="compensado">
-                                                    <input type="checkbox" class="flat-red" name="compensado"
-                                                           id="compensado"> Compensado?
-                                                </label>
-                                            </div>
+											<div class="form-group">
+												<div class="checkbox">
+													<label for="compensado">
+														<input type="checkbox" name="compensado" id="compensado" value="Sim" {{ old('compensado') == 'Sim' ? 'checked' : '' }}>
+														Compensado?
+													</label>
+												</div>
+											</div>
                                         </div>
                                     </div>
                                     <!-- 3ª linha -->
                                     <div class="row">
                                         <div class="col-md-5">
-                                            <div class="form-group">
+                                            <div class="form-group @if($errors->has('fornecedor_id')) has-error @endif">
                                                 <label for="fornecedor" class="control-label">Fornecedor</label>
-                                                <select name="fornecedor_id" id="fornecedor"
-                                                        class="form-control">
-                                                    <option selected disabled>===============SELECIONE===============
-                                                    </option>
+                                                <select name="fornecedor_id" id="fornecedor" class="form-control">
+                                                    <option selected disabled>===============SELECIONE===============</option>
                                                     @foreach($fornecedores as $fornecedor)
-                                                        <option value="{{ $fornecedor->id }}">{{ $fornecedor->entidade->nome }}</option>
+                                                        <option value="{{ $fornecedor->id }}" {{ old('fornecedor_id') == $fornecedor->id ? 'selected' : '' }}>
+                                                            {{ $fornecedor->entidade->nome }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
+                                                @if( $errors->has('fornecedor_id') )
+                                                    <span class="help-block">
+														<i class="fa fa-times-circle-o"></i>
+														{{ $errors->get('fornecedor_id')[0] }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <div class="form-group">
+                                            <div class="form-group @if($errors->has('nota_fiscal')) has-error @endif">
                                                 <label for="nota" class="control-label">Nota fiscal</label>
-                                                <input id="nota" type="text" class="form-control pula"
-                                                       name="nota_fiscal">
+                                                <input id="nota" type="text" class="form-control pula" value="{{ old('nota_fiscal') }}"  name="nota_fiscal">
+                                                @if( $errors->has('nota_fiscal') )
+                                                    <span class="help-block">{{ $errors->get('nota_fiscal')[0] }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="form-group">
+                                            <div class="form-group @if($errors->has('parcela')) has-error @endif">
                                                 <label for="parcela" class="control-label">Parcela</label>
-                                                <input id="parcela" type="text" class="form-control pula"
-                                                       name="parcela">
+                                                <input id="parcela" type="text" class="form-control pula" value="{{ old('parcela') }}" name="parcela">
+                                                @if( $errors->has('parcela') )
+                                                    <span class="help-block">{{ $errors->get('parcela')[0] }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
                                     <!-- 4ª LINHA -->
                                     <div class="row">
-                                        <div class="col-md-offset-1">
+                                        <div class="col-md-offset-2">
                                             <div class="row">
                                                 <div class="col-md-2">
-                                                    <div class="checkbox">
-                                                        <label for="cheque">
-                                                            <input type="checkbox" name="cheque" id="cheque">
-                                                            Cheque?
-                                                        </label>
+													<div class="form-group">
+														<div class="checkbox">
+															<label for="cheque">
+																<input type="checkbox" name="cheque" id="cheque" value="Sim" {{ old('cheque') }}>
+																Cheque?
+															</label>
+														</div>
+													</div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group @if($errors->has('enviado_em')) has-error @endif">
+                                                        <label for="enviado_em" class="control-label">Enviado em</label>
+                                                        <input type="date" name="enviado_em" id="enviado_em" class="form-control" value="{{ old('enviado_em') }}">
+														@if($errors->has('enviado_em'))
+															<span class="help-block">
+																{{ $errors->get('enviado_em')[0] }}
+															</span>
+														@endif
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label for="enviado_em" class="control-label">Enviado
-                                                            em</label>
-                                                        <input type="date" name="enviado_em" id="enviado_em"
-                                                               class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label for="retorno_em" class="control-label">Retorno
-                                                            em</label>
+                                                    <div class="form-group @if($errors->has('retorno_em')) has-error @endif">
+                                                        <label for="retorno_em" class="control-label">Retorno em</label>
                                                         <input type="date" name="retorno_em" id="retorno_em"
-                                                               class="form-control">
+                                                               class="form-control" value="{{ old('retorno_em') }}">
+														@if($errors->has('retorno_em'))
+															<span class="help-block">
+																{{ $errors->get('retorno_em')[0] }}
+															</span>
+														@endif
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <div class="checkbox">
-                                                        <label for="assinado">
-                                                            <input type="checkbox" name="assinado" id="assinado">
-                                                            Assinado?
-                                                        </label>
-                                                    </div>
+													<div class="form-group">
+														<div class="checkbox">
+															<label for="assinado">
+																<input type="checkbox" name="assinado" id="assinado" value="Sim" {{ old('assinado') == 'Sim' ? 'checked' : '' }}>
+																Assinado?
+															</label>
+														</div>
+													</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -261,8 +297,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <button class="btn btn-primary">
-                                                <i class="fa fa-save"></i> Salvar
-                                            </button>
+                                                <i class="fa fa-save"></i> Salvar</button>
                                         </div>
                                     </div>
                                 </form>
@@ -474,6 +509,9 @@
                                                     <p>Documento: {{ $lancamento->documento }}</p>
                                                     <p>Histórico:   {{ $lancamento->historico }}</p>
                                                     <p>Valor:   {{ number_format($lancamento->valor, 2,',','.') }}</p>
+                                                    <label for="data" class="control-label">Data Compensado</label>
+                                                    <input id="data" type="date" class="form-control pula"
+                                                           name="data_lancamento" value="{{ $lancamento->data_lancamento->format('Y-m-d') }}">
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
@@ -481,9 +519,9 @@
                                                         {{ csrf_field() }}
                                                         {{ method_field('PUT') }}
 
-                                                        <input type="hidden" name="compensado" id="compensado-cc" value="{{ $lancamento->compensado = '1' }}">
+                                                        <input type="hidden" name="compensado-cc" id="compensado-cc" value="{{ $lancamento->compensado = 'Sim   ' }}">
 
-                                                        <button class="btn btn-outline" type="submit">Compensar</button>
+                                                        <button class="btn btn-outline" type="submit" id="btn-compensar">Compensar</button>
                                                     </form>
                                                 </div>
                                             </div>

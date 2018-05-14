@@ -66,7 +66,7 @@ class ProprietariosController extends Controller
         $entidade->save();
         $proprietario->save();
 
-		Toast::success('Proprietário incluso com sucesso!', 'Inclusão!');
+		Toast::success('Proprietário incluído com sucesso!', 'Inclusão!');
         return redirect()->route('entidades.proprietarios.listar');
     }
 

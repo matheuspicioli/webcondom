@@ -41,19 +41,22 @@ class InquilinosController extends Controller
         $inquilino = Inquilino::create($request->all());
         $entidade = $inquilino->entidade()->create($request->all());
         $enderecoPrincipal = $entidade->endereco_principal()->create([
-            'logradouro'    => $request->input('logradouro_principal'),
-            'numero'        => $request->input('numero_principal'),
-            'cep'           => $request->input('cep_principal'),
-            'bairro'        => $request->input('bairro_principal'),
-            'cidade_id'     => $request->input('cidade_id_principal'),
+            'logradouro'    => $request->logradouro_principal,
+            'complemento'   => $request->complemento_principal,
+            'numero'        => $request->numero_principal,
+            'cep'           => $request->cep_principal,
+            'bairro'        => $request->bairro_principal,
+            'cidade_id'     => $request->cidade_id_principal,
         ]);
+
 		if($request->cep_cobranca != null){
 			$enderecoCobranca = $entidade->endereco_cobranca()->create([
-				'logradouro'    => $request->input('logradouro_cobranca'),
-				'numero'        => $request->input('numero_cobranca'),
-				'cep'           => $request->input('cep_cobranca'),
-				'bairro'        => $request->input('bairro_cobranca'),
-				'cidade_id'     => $request->input('cidade_id_cobranca'),
+                'logradouro'    => $request->logradouro_cobranca,
+                'complemento'   => $request->complemento_cobranca,
+                'numero'        => $request->numero_cobranca,
+                'cep'           => $request->cep_cobranca,
+                'bairro'        => $request->bairro_cobranca,
+                'cidade_id'     => $request->cidade_id_cobranca,
 			]);
 			$entidade->endereco_cobranca()->associate($enderecoCobranca);
 		}
@@ -94,20 +97,22 @@ class InquilinosController extends Controller
             'logradouro'    => $request->input('logradouro_principal'),
             'numero'        => $request->input('numero_principal'),
             'cep'           => $request->input('cep_principal'),
+            'complemento'	=> $request->input('complemento_principal'),
             'bairro'        => $request->input('bairro_principal'),
             'cidade_id'     => $request->input('cidade_id_principal')
         ]);
+
 		if($request->cep_cobranca != null) {
 			//----ENDEREÇO COBRANÇA---//
 			$inquilino->entidade->endereco_cobranca()->update([
 				'logradouro'    => $request->input('logradouro_cobranca'),
 				'numero'        => $request->input('numero_cobranca'),
 				'cep'           => $request->input('cep_cobranca'),
+                'complemento'	=> $request->input('complemento_cobranca'),
 				'bairro'        => $request->input('bairro_cobranca'),
 				'cidade_id'     => $request->input('cidade_id_cobranca')
 			]);
 		}
-        //dd($inquilino->entidade->endereco_cobranca);
         //SALVA E SALVA OS RELACIONAMENTOS TAMBÉM
         $inquilino->push();
 
@@ -115,7 +120,7 @@ class InquilinosController extends Controller
         return redirect()->route('entidades.inquilinos.listar');
     }
 
-    public function Excluir(Request $request, $id)
+    public function Excluir($id)
     {
         Inquilino::find($id)->delete();
 		Toast::success('Inquilino excluído com sucesso!', 'Exclusão!');

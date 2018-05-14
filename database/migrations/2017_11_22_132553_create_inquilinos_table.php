@@ -15,7 +15,7 @@ class CreateInquilinosTable extends Migration
     {
         Schema::create('inquilinos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('codigo');
+            $table->integer('codigo')->nullable();
 
             $table->integer('entidade_id')->nullable()->unsigned();
             $table->foreign('entidade_id')

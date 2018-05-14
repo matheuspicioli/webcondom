@@ -69,7 +69,6 @@ Route::prefix('Financeiros')->namespace('Financeiros')->middleware('auth')->grou
     });
 
     Route::prefix('Lancamentos')->group(function(){
-        //Route::get('/debug/{plano}/{atributo}', 'ContaCorrenteLancamentosController@separarplanocontas')->name('financeiros.lancamentos.debug');
         Route::post('/ListarDatas', 'ContaCorrenteLancamentosController@ListarDatas')->name('financeiros.lancamentos.listardatas');
         Route::get('/{conta_id}/{dias?}', 'ContaCorrenteLancamentosController@listar')->name('financeiros.lancamentos.listar');
         Route::get('Criar', 'ContaCorrenteLancamentosController@criar')->name('financeiros.lancamentos.criar');

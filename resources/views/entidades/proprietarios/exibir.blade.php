@@ -480,7 +480,8 @@
                                                         <label for="CEP" class="control-label"
                                                                @if($errors->has('cep_cobranca')) style="color: #f56954" @endif>CEP</label>
                                                         <input id="cep_cobranca" type="text" class="form-control pula" name="cep_cobranca"
-                                                               data-mask="99999-999" value="{{ old('cep_cobranca') ? old('cep_cobranca') : ($proprietario->entidade->endereco_cobranca ? $proprietario->entidade->endereco_cobranca->cep : '') }}"
+                                                               data-mask="99999-999" value="{{ old('cep_cobranca') ? old('cep_cobranca')
+                                                               : ($proprietario->entidade->endereco_cobranca ? $proprietario->entidade->endereco_cobranca->cep : '') }}"
                                                                @if($errors->has('cep_cobranca')) style="border:1px solid #f56954" @endif>
                                                         @if( $errors->has('cep_cobranca') )
                                                             <span style="color: #f56954">{{ $errors->get('cep_cobranca')[0] }}</span>
