@@ -85,7 +85,7 @@
                             </tfoot>
                             <tbody>
                             @foreach($balancetes as $balancete)
-                                <b>
+								<tr>
                                     <td>{{ $balancete->id }}</td>
                                     <td>{{ $balancete->condominio->nome }}</td>
                                     <td data-mask="9999/99"><b>{{ $balancete->competencia or 'Não informado' }}</b></td>
@@ -138,7 +138,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                </tr>
+								</tr>
                             @endforeach
                             </tbody>
                         </table>

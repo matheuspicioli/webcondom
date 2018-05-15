@@ -10,6 +10,7 @@ let mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
+mix.copy('bower_components/select2-tab-fix/src/select2-tab-fix.min.js', 'public/js/select2-tab-fix/');
 mix.copy('node_modules/jquery-mask-plugin/dist/', 'public/js/mask/');
 //mix.copy('node_modules/vee-validate/dist/', 'public/js/vee-validate/');
 //mix.copy('node_modules/vue-material/dist/vue-material.css', 'public/css/vue-material/');

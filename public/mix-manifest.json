@@ -1,5 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/css/_bootstrap.css": "/css/_bootstrap.css"
+    "/css/_bootstrap.css": "/css/_bootstrap.css",
+    "/js/select2-tab-fix/select2-tab-fix.min.js": "/js/select2-tab-fix/select2-tab-fix.min.js"
 }
