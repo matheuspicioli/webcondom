@@ -523,6 +523,7 @@
                                             class="btn btn-xs btn-danger" title="Excluir">
                                         <i class="fa fa-trash"></i></button>
                                     <button type="button" data-toggle="modal"
+											@if($lancamento->compensado == 'Sim') disabled @endif
                                             data-target="#modal-primary-{{$lancamento->id}}" href="#"
                                             class="btn btn-xs btn-primary" title="Compensar Cheque">
                                         <i class="fa fa-cc"></i></button>
@@ -576,11 +577,19 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
-                                                    <form method="POST" action="{{ route('financeiros.lancamentos.alterar', ['id' => $lancamento->id, 'conta_id' => $contaL->id, 'dias' => $dias]) }}">
+                                                    <form method="POST" action="{{ route('financeiros.lancamentos.compensar', ['id' => $lancamento->id]) }}">
                                                         {{ csrf_field() }}
                                                         {{ method_field('PUT') }}
 
-                                                        <input type="hidden" name="compensado-cc" id="compensado-cc" value="{{ $lancamento->compensado = 'Sim   ' }}">
+														@component('formularios.Hidden',[
+															'nome' 		=> 'conta_id',
+															'valor' 	=> $contaL->id
+														])@endcomponent
+                                                        @component('formularios.Hidden',[
+															'nome' 		=> 'condominio_id',
+															'valor' 	=> $condominio->id
+														])@endcomponent
+                                                        <input type="hidden" name="compensado" id="compensado-cc" value="Sim">
 
                                                         <button class="btn btn-outline" type="submit" id="btn-compensar">Compensar</button>
                                                     </form>
