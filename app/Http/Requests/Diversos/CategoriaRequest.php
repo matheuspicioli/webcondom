@@ -24,7 +24,7 @@ class CategoriaRequest extends FormRequest
     public function rules()
     {
         return [
-            'descricao' => 'required|max:100|min:5'
+            'descricao' => 'required|min:5',
         ];
     }
 }
