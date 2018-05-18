@@ -102,24 +102,10 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <h3>Dados da exclusão: </h3>
-                                                        <table class="table table-striped table-bordered">
-                                                            <tr>
-                                                                <td>Data: </td>
-                                                                <td>{{ $lancamento->data_lancamento->format('d/m/Y') }}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Documento: </td>
-                                                                <td>{{ $lancamento->documento }}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Histórico: </td>
-                                                                <td>{{ $lancamento->historico }}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Valor: </td>
-                                                                <td>{{ $lancamento->valor }}</td>
-                                                            </tr>
-                                                        </table>
+                                                        <p>Data: {{ $lancamento->data_lancamento->format('d/m/Y') }}</p>
+                                                        <p>Documento: {{ $lancamento->documento }}</p>
+                                                        <p>Histórico: {{ $lancamento->historico }}</p>
+                                                        <p>Valor: {{ $lancamento->valor }}</p>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
