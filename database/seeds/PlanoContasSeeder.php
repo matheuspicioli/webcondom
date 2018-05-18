@@ -138,6 +138,11 @@ class PlanoContasSeeder extends Seeder
                 'grupo_id'  => 5
             ],
             [
+                'conta'     => '0019',
+                'descricao' => 'TARIFAS BANCARIAS',
+                'grupo_id'  => 5
+            ],
+            [
                 'conta'     => '0001',
                 'descricao' => 'TRANSFERENCIA C/C PARA POUPANCA',
                 'grupo_id'  => 6
