@@ -13,18 +13,14 @@
 @stop
 
 @section('content')
-    <div class="row">
-        <div class="col-md-1">
-            <a href="{{ route('financeiros.balancetes.listar') }}" class="btn btn-default"">
-                <i class="fa fa-rotate-left"></i> Voltar</a>
-            <hr>
-        </div>
-    </div>
     @can("listar_balancete_lancamentos")
         <div class="row">
-            <div class="col-md-1">
+            <div class="col-md-3">
+				<a href="{{ route('financeiros.balancetes.listar') }}" class="btn btn-default btn-sm">
+					<i class="fa fa-rotate-left"></i> Voltar
+				</a>
                 @can("incluir_balancete_lancamentos")
-                    <a href="{{ route('balancetes.lancamentos.criar',['idBalancete'=>$idBalancete]) }}" class="btn btn-success">
+                    <a href="{{ route( 'balancetes.lancamentos.criar', [ 'idBalancete' => $idBalancete ] ) }}" class="btn btn-success btn-sm">
                         <i class="fa fa-plus"></i> Cadastrar</a>
                 @else
                     <button disabled type="button" class="btn btn-success">
@@ -49,8 +45,8 @@
 								<th>Pl.Conta</th>
                                 <th>Descrição Plano Conta</th>
                                 <th>Histórico</th>
-                                <td align=right><b>Crédito</b></td>
-                                <td align=right><b>Débito</b></td>
+                                <td><b>Crédito</b></td>
+                                <td><b>Débito</b></td>
 								<th>Fornecedor</th>
                                 <th>Ações</th>
                             </tr>
@@ -62,8 +58,8 @@
                                 <th>Pl.Conta</th>
                                 <th>Descrição Plano Conta</th>
                                 <th>Histórico</th>
-                                <td align=right><b>{{ isset($credito_periodo) ? number_format($credito_periodo, 2,',','.') : number_format(0, 2,',','.') }}</b></td>
-                                <td align=right><b>{{ isset($debito_periodo) ? number_format($debito_periodo, 2,',','.') : number_format(0, 2,',','.') }}</b></td>
+                                <td><b>{{ isset($credito_periodo) ? number_format($credito_periodo, 2,',','.') : number_format(0, 2,',','.') }}</b></td>
+                                <td><b>{{ isset($debito_periodo) ? number_format($debito_periodo, 2,',','.') : number_format(0, 2,',','.') }}</b></td>
                                 <th>Fornecedor</th>
                                 <th>Ações</th>
                             </tr>
@@ -73,12 +69,12 @@
                                 <tr>
                                     <td>{{ $lancamento->folha }}</td>
                                     <td>{{ $lancamento->documento }}</td>
-                                    <td><small>{{ $lancamento->plano_conta->grupo->plano_de_conta->tipo }}.{{ $lancamento->plano_conta->grupo->grupo }}.{{ $lancamento->plano_conta->conta }}</small></td>
+                                    <td>{{ $lancamento->plano_conta->grupo->plano_de_conta->tipo }}.{{ $lancamento->plano_conta->grupo->grupo }}.{{ $lancamento->plano_conta->conta }}</td>
                                     <td>{{ $lancamento->plano_conta->descricao  }}</td>
                                     <td>{{ $lancamento->historico }}</td>
-                                    <td align=right><b>{{ $lancamento->tipo == 'Credito' ? $lancamento->valor : null }}</b></td>
-                                    <td align=right><b>{{ $lancamento->tipo == 'Debito' ? $lancamento->valor : null }}</b></td>
-									<td>{{ $lancamento->fornecedor_id ? $lancamento->fornecedor->entidade->nome : null }}</td>
+                                    <td class="align-right"><b>{{ $lancamento->tipo == 'Credito' ? $lancamento->valor_view : '' }}</b></td>
+                                    <td class="align-right"><b>{{ $lancamento->tipo == 'Debito' ? $lancamento->valor_view : '' }}</b></td>
+									<td>{{ $lancamento->fornecedor_id ? $lancamento->fornecedor->entidade->nome : '' }}</td>
                                     <td>
                                         @can("exibir_balancete_lancamentos")
                                             <a class="btn btn-xs btn-warning" href="{{ route('balancetes.lancamentos.exibir', ['id' => $lancamento->id ]) }}" title="Alterar">
@@ -106,10 +102,24 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <h3>Dados da exclusão: </h3>
-                                                        <p>Data:   {{ $lancamento->data_lancamento->format('d/m/Y') }}</p>
-                                                        <p>Documento:   {{ $lancamento->documento }}</p>
-                                                        <p>Histórico:   {{ $lancamento->historico }}</p>
-                                                        <p>Valor:   {{ $lancamento->valor }}</p>
+                                                        <table class="table table-striped table-bordered">
+                                                            <tr>
+                                                                <td>Data: </td>
+                                                                <td>{{ $lancamento->data_lancamento->format('d/m/Y') }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Documento: </td>
+                                                                <td>{{ $lancamento->documento }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Histórico: </td>
+                                                                <td>{{ $lancamento->historico }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Valor: </td>
+                                                                <td>{{ $lancamento->valor }}</td>
+                                                            </tr>
+                                                        </table>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
@@ -151,14 +161,14 @@
     <script src="https://cdn.datatables.net/plug-ins/1.10.10/sorting/datetime-moment.js"></script>
     <script>
         $(function () {
-        	//$('.select2').select2();
-            $('#tabela').DataTable({
-                "order": [[ 2, "asc" ]],
-                "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
-                }
-            } )
+        	$('.select2').select2();
+			$('#tabela').DataTable({
+				"order": [[ 1, "asc" ],[ 2, "asc" ]],
+				"lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
+				"language": {
+					"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
+				}
+			} )
         });
     </script>
-@stop'
+@stop

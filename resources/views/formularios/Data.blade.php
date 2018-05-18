@@ -1,0 +1,1 @@
+<input type="date" class="form-control {{ $classes }}" name="{{ $nome }}" value="{{ $valor ?? null }}" {{ $atributos }} />

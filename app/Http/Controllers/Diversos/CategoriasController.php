@@ -22,12 +22,7 @@ class CategoriasController extends Controller
 
     public function Criar()
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Categorias', 'url' => route('diversos.categorias.listar')],
-            ['titulo' => 'Cadastrar categoria', 'url' => '']
-        ]);
-        return view('diversos.categorias.criar', compact('migalhas'));
+        return view('diversos.categorias.formulario');
     }
 
     public function Salvar(CategoriaRequest $request)
@@ -40,15 +35,10 @@ class CategoriasController extends Controller
 
     public function Exibir($id)
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Categorias', 'url' => route('diversos.categorias.listar')],
-            ['titulo' => 'Alterar categoria', 'url' => '']
-        ]);
         $categoria = Categoria::find($id) ? Categoria::find($id) : null;
 
         if($categoria)
-            return view('diversos.categorias.exibir', compact('categoria', 'migalhas'));
+            return view('diversos.categorias.formulario', compact('categoria'));
         else
             return redirect()->route('diversos.categorias.criar');
     }

@@ -9,6 +9,15 @@ No entanto está registrado aqui em caso de problemas futuros.
 * Page not found -> verifique se existe o arquivo .env (por padrão ele sobe pro git)
 * Os textos do admin LTE não estão encontrando a tradução. Vá em `resources/lang/vendor/adminlte/` verifique se a pasta está com o nome de `pt-BR`. PS: É case-sensitive.
 
+### Problema select2 ###
+* Instalar o bower na máquina (globalmente)
+* Rodar o comando `bower install select2-tab-fix`
+* Rodar o comando `npm run dev`
+* Colocar a tag `<script src="{{ asset('js/select2-tab-fix/select2-tab-fix.min.js') }}"></script>`
+* Adicionar a tag HTML `tabindex="número_sequenciador_dos_inputs"`, exemplo `tabindex="1"`,
+segundo input: `tabindex="2"`, e assim por diante.
+
+
 ### Problema ao carregar a data em um input date ###
 
 Adicionar na model do dado, um array de configurações do laravel `protected $dates = [ "campo_data_banco_dados" ];` 
@@ -21,11 +30,3 @@ tenta jogar para o nosso padrão também.
 
 Rodar o comando `php artisan storage:link`. Após voltarmos o HTML puro,
 esqueci de adicionar o enctype no formulário que faz o upload.
-
-### CONSULTAR PRÓXIMA CONTA DO GRUPO ###
-
-Alterar a linha `6` do arquivo `consulta.js` localizado em 
-`public\js\ajax\financeiros\plano de contas` para a sua url em questão.
-
-Exemplo: `webcondom.dev/Financeiros/PlanoDeContas/ConsultarProximaConta`.
-Exemplo 2: `localhost:8000//Financeiros/PlanoDeContas/ConsultarProximaConta`.

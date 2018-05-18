@@ -29,9 +29,9 @@ class Balancete extends Model
 		$this->attributes['saldo_atual'] = str_replace(',', '.', $valor);
 	}
 
-	public function getSaldoAtualAttribute()
+	public function getSaldoAtualViewAttribute()
 	{
-		return str_replace('.',',', $this->attributes['saldo_atual']);
+		return number_format($this->attributes['saldo_atual'],'2',',','.');
 	}
 
 	public function setSaldoAnteriorAttribute($valor)
@@ -39,9 +39,9 @@ class Balancete extends Model
 		$this->attributes['saldo_anterior'] = str_replace(',', '.', $valor);
 	}
 
-	public function getSaldoAnteriorAttribute()
+	public function getSaldoAnteriorViewAttribute()
 	{
-		return str_replace('.',',', $this->attributes['saldo_anterior']);
+		return number_format($this->attributes['saldo_anterior'],'2',',','.');
 	}
 
 	public function lancamentos()

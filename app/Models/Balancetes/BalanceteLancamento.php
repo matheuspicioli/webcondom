@@ -36,9 +36,9 @@ class BalanceteLancamento extends Model
 		$this->attributes['valor'] = str_replace(',', '.', $valor);
 	}
 
-	public function getValorAttribute()
+	public function getValorViewAttribute()
 	{
-		return str_replace('.',',', $this->attributes['valor']);
+		return number_format($this->attributes['valor'],'2',',','.');
 	}
 
 	public function erro($mensagem, $titulo)
