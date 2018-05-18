@@ -24,10 +24,10 @@ class ContaCorrenteLancamento extends Model
 		$this->attributes['valor'] = str_replace(',', '.', $valor);
 	}
 
-//	public function getValorAttribute()
-//	{
-//		return str_replace('.',',', $this->attributes['valor']);
-//	}
+	public function getValorViewAttribute()
+	{
+		return number_format($this->attributes['valor'],'2',',','.');
+	}
 
     public function fornecedor()
     {

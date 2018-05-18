@@ -78,8 +78,8 @@
                                 <th>Condomínio</th>
 								<th>Competência</th>
 								<th>Referência</th>
-								<th align=right>Saldo anterior</th>
-								<th align=right>Saldo atual</th>
+								<th align="right">Saldo anterior</th>
+								<th align="right">Saldo atual</th>
 								<th>Ações</th>
                             </tr>
                             </tfoot>
@@ -90,8 +90,8 @@
                                     <td>{{ $balancete->condominio->nome }}</td>
                                     <td data-mask="9999/99"><b>{{ $balancete->competencia or 'Não informado' }}</b></td>
                                     <td>{{ $balancete->referencia or 'Não informado' }}</td>
-									<td>{{ $balancete->saldo_anterior }}</td>
-									<td>{{ $balancete->saldo_atual }}</td>
+									<td>{{ $balancete->saldo_anterior_view }}</td>
+									<td>{{ $balancete->saldo_atual_view }}</td>
                                     <td>
                                         @can("exibir_balancete")
                                             <a class="btn btn-xs btn-warning" href="{{ route('financeiros.balancetes.exibir', ['id' => $balancete->id ]) }}">

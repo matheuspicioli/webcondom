@@ -104,7 +104,7 @@
 									<div class="form-group">
 										<label for="saldo_anterior" class="control-label" @if($errors->has('saldo_anterior')) style="color: #f56954" @endif>Saldo anterior</label>
 										<input type="text" id="saldo_anterior" name="saldo_anterior" class="form-control pula" @if($errors->has('saldo_anterior')) style="border:1px solid #f56954" @endif
-											value="{{ old('saldo_anterior') ? old('saldo_anterior') : $balancete->saldo_anterior }}">
+											value="{{ old('saldo_anterior') ? old('saldo_anterior') : $balancete->saldo_anterior_view }}">
 										@if( $errors->has('saldo_anterior') )
 											<span style="color: #f56954">{{ $errors->get('saldo_anterior')[0] }}</span>
 										@endif
@@ -114,7 +114,7 @@
 									<div class="form-group">
 										<label for="saldo_atual" class="control-label" @if($errors->has('saldo_atual')) style="color: #f56954" @endif>Saldo atual</label>
 										<input type="text" id="saldo_atual" name="saldo_atual" class="form-control pula" @if($errors->has('saldo_atual')) style="border:1px solid #f56954" @endif
-											value="{{ old('saldo_atual') ? old('saldo_anterior') : $balancete->saldo_atual }}">
+											value="{{ old('saldo_atual') ? old('saldo_anterior') : $balancete->saldo_atual_view }}">
 										@if( $errors->has('saldo_atual') )
 											<span style="color: #f56954">{{ $errors->get('saldo_atual')[0] }}</span>
 										@endif

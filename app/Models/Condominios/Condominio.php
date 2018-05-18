@@ -35,15 +35,13 @@ class Condominio extends Model
         return $this->hasMany('WebCondom\Models\Condominios\CondominioTaxa');
     }
 
-    public function setValorGasAttribute($valor)
+	public function setValorGasAttribute($valor)
 	{
-//		$valor_gas = str_replace('.', '', $valor);
-//		$valor_gas = str_replace(',', '.', $valor_gas);
 		$this->attributes['valor_gas'] = str_replace(',', '.', $valor);
 	}
 
-	public function getValorGasAttribute()
+	public function getValorGasViewAttribute()
 	{
-		return str_replace('.',',', $this->attributes['valor_gas']);
+		return number_format($this->attributes['valor_gas'],'2',',','.');
 	}
 }
