@@ -111,7 +111,7 @@
                                     <div class="form-group">
                                         <label for="ValorGas" class="control-label" @if($errors->has('valor_gas')) style="color: #f56954" @endif>Valor do gás (R$)</label>
                                         <input id="ValorGas" type="text" class="form-control pula" name="valor_gas" @if($errors->has('valor_gas')) style="border:1px solid #f56954" @endif
-                                               value="{{ old('valor_gas') ? old('valor_gas') : $condominio->valor_gas }}">
+                                               value="{{ old('valor_gas') ? old('valor_gas') : $condominio->valor_gas_view }}">
                                         @if( $errors->has('valor_gas') )
                                             <span style="color: #f56954">{{ $errors->get('valor_gas')[0] }}</span>
                                         @endif

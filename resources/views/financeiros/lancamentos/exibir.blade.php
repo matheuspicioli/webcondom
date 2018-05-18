@@ -93,7 +93,7 @@
                                     <div class="form-group">
                                         <label for="valor" class="control-label" @if($errors->has('valor')) style="color: #f56954" @endif>Valor</label>
                                         <input id="valor" type="text" class="form-control pula" @if($errors->has('valor')) style="color: #f56954" @endif
-                                               name="valor" value="{{ $lancamento->valor }}">
+                                               name="valor" value="{{ $lancamento->valor_view }}">
                                     </div>
                                     @if( $errors->has('valor') )
                                         <span style="color: #f56954">{{ $errors->get('valor')[0] }}</span>
