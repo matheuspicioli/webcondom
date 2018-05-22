@@ -45,8 +45,8 @@
 								<th>Pl.Conta</th>
                                 <th>Descrição Plano Conta</th>
                                 <th>Histórico</th>
-                                <td><b>Crédito</b></td>
-                                <td><b>Débito</b></td>
+                                <td align="right"><b>Crédito</b></td>
+                                <td align="right"><b>Débito</b></td>
 								<th>Fornecedor</th>
                                 <th>Ações</th>
                             </tr>
@@ -58,8 +58,8 @@
                                 <th>Pl.Conta</th>
                                 <th>Descrição Plano Conta</th>
                                 <th>Histórico</th>
-                                <td><b>{{ isset($credito_periodo) ? number_format($credito_periodo, 2,',','.') : number_format(0, 2,',','.') }}</b></td>
-                                <td><b>{{ isset($debito_periodo) ? number_format($debito_periodo, 2,',','.') : number_format(0, 2,',','.') }}</b></td>
+                                <td align="right"><b>{{ isset($credito_periodo) ? number_format($credito_periodo, 2,',','.') : number_format(0, 2,',','.') }}</b></td>
+                                <td align="right"><b>{{ isset($debito_periodo) ? number_format($debito_periodo, 2,',','.') : number_format(0, 2,',','.') }}</b></td>
                                 <th>Fornecedor</th>
                                 <th>Ações</th>
                             </tr>
@@ -72,8 +72,8 @@
                                     <td>{{ $lancamento->plano_conta->grupo->plano_de_conta->tipo }}.{{ $lancamento->plano_conta->grupo->grupo }}.{{ $lancamento->plano_conta->conta }}</td>
                                     <td>{{ $lancamento->plano_conta->descricao  }}</td>
                                     <td>{{ $lancamento->historico }}</td>
-                                    <td class="align-right"><b>{{ $lancamento->tipo == 'Credito' ? $lancamento->valor_view : '' }}</b></td>
-                                    <td class="align-right"><b>{{ $lancamento->tipo == 'Debito' ? $lancamento->valor_view : '' }}</b></td>
+                                    <td align="right"><b>{{ $lancamento->tipo == 'Credito' ? $lancamento->valor_view : '' }}</b></td>
+                                    <td align="right"><b>{{ $lancamento->tipo == 'Debito' ? $lancamento->valor_view : '' }}</b></td>
 									<td>{{ $lancamento->fornecedor_id ? $lancamento->fornecedor->entidade->nome : '' }}</td>
                                     <td>
                                         @can("exibir_balancete_lancamentos")
