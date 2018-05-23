@@ -308,7 +308,7 @@
                                                     'titulo'    => 'Clique aqui para excluir',
                                                     'toogle'    => 'modal',
                                                     'target'    => '#modal-excluir',
-                                                    'atributos'	=> 'tabindex=17'
+                                                    'atributos'	=> 'tabindex=17 type=button'
                                                 ])@endcomponent
                                         @else
                                             <button disabled class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
