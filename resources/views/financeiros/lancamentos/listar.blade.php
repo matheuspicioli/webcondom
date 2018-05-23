@@ -584,35 +584,35 @@
                                                     </button>
                                                     <h3 class="modal-title">Compensar Lançamento</h3>
                                                 </div>
-                                                <div class="modal-body">
-                                                    <h3>Dados do Lançamento: </h3>
-                                                    <p>Data:   {{ $lancamento->data_lancamento->format('d/m/Y') }}</p>
-                                                    <p>Documento: {{ $lancamento->documento }}</p>
-                                                    <p>Histórico:   {{ $lancamento->historico }}</p>
-                                                    <p>Valor:   {{ number_format($lancamento->valor, 2,',','.') }}</p>
-                                                    <label for="data" class="control-label">Data Compensado</label>
-                                                    <input id="data" type="date" class="form-control pula"
-                                                           name="data_lancamento" value="{{ $lancamento->data_lancamento->format('Y-m-d') }}">
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
-                                                    <form method="POST" action="{{ route('financeiros.lancamentos.compensar', ['id' => $lancamento->id]) }}">
-                                                        {{ csrf_field() }}
-                                                        {{ method_field('PUT') }}
-
+												<form method="POST" action="{{ route('financeiros.lancamentos.compensar', ['id' => $lancamento->id]) }}">
+													{{ csrf_field() }}
+													{{ method_field('PUT') }}
+													<div class="modal-body">
+														<h3>Dados do Lançamento: </h3>
+														<p>Data:   {{ $lancamento->data_lancamento->format('d/m/Y') }}</p>
+														<p>Documento: {{ $lancamento->documento }}</p>
+														<p>Histórico:   {{ $lancamento->historico }}</p>
+														<p>Valor:   {{ number_format($lancamento->valor, 2,',','.') }}</p>
+														<input type="hidden" name="compensado" id="compensado-cc" value="Sim">
 														@component('formularios.Hidden',[
-															'nome' 		=> 'conta_id',
-															'valor' 	=> $contaL->id
+															'nome' 	=> 'compensado',
+															'id'	=> 'compensado-cc',
+															'valor'	=> 'Sim'
 														])@endcomponent
-                                                        @component('formularios.Hidden',[
-															'nome' 		=> 'condominio_id',
-															'valor' 	=> $condominio->id
+														@component('formularios.Data',[
+															'nome' 		=> 'data_lancamento',
+															'id'		=> 'data_lancamento_compensar',
+															'valor'		=> $lancamento->data_lancamento->format('Y-m-d'),
+															'texto'		=> 'Data Compensado',
+															'titulo'	=> 'Data Compensado',
+															'tabindex'	=> '1'
 														])@endcomponent
-                                                        <input type="hidden" name="compensado" id="compensado-cc" value="Sim">
-
-                                                        <button class="btn btn-outline" type="submit" id="btn-compensar">Compensar</button>
-                                                    </form>
-                                                </div>
+													</div>
+													<div class="modal-footer">
+														<button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
+															<button class="btn btn-outline" type="submit" id="btn-compensar">Compensar</button>
+													</div>
+												</form>
                                             </div>
                                         </div>
                                     </div>
