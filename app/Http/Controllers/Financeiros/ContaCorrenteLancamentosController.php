@@ -101,6 +101,29 @@ class ContaCorrenteLancamentosController extends Controller
         }
     }
 
+    public function Compensar($id, Request $request)
+	{
+		$contaL 			= $this->conta->find($request->get('conta_id'));
+
+		if( $lancamento = $this->lancamento->find($id) ){
+			$lancamento->update($request->all());
+			Toast::success('Lançamento compensado com sucesso!','Compensado!');
+		} else {
+			Toast::error("Lançamento não encontrado","Erro!");
+		}
+
+		return redirect()->back();
+//		return view('financeiros.lancamentos.listar',['conta_id' => $contaL->id])
+//			->with('dias',7)
+//			->with('lancamentos',$lancamentos)
+//			->with('fornecedores',$fornecedores)
+//			->with('tipos',$tipos)
+//			->with('contaL', $contaL)
+//			->with('banco',$banco)
+//			->with('contas',$contas)
+//			->with('condominio',$condominio);
+	}
+
     public function Alterar(LancamentoRequest $request, $id, $conta_id, $dias = null)
     {
         $dados = $request->all();

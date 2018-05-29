@@ -110,7 +110,7 @@
                                     <div class="form-group">
 										<label for="valor_locacao" class="control-label" @if($errors->has('valor_locacao')) style="color: #f56954" @endif>Valor de locação</label>
                                         <input id="valor_locacao" type="text" class="form-control pula" name="valor_locacao" placeholder="0,00"
-                                               value="{{ old('valor_locacao') ? old('valor_locacao') : $imovel->valor_locacao }}">
+                                               value="{{ old('valor_locacao') ? old('valor_locacao') : $imovel->valor_locacao_view }}">
 										@if( $errors->has('valor_locacao') )
 											<span style="color: #f56954">{{ $errors->get('valor_locacao')[0] }}</span>
 										@endif
@@ -120,7 +120,7 @@
                                     <div class="form-group">
 										<label for="valor_venda" class="control-label" @if($errors->has('valor_venda')) style="color: #f56954" @endif>Valor de venda</label>
                                         <input id="valor_venda" type="text" class="form-control pula" name="valor_venda" placeholder="0,00"
-                                               value="{{ old('valor_venda') ? old('valor_venda') : $imovel->valor_venda }}">
+                                               value="{{ old('valor_venda') ? old('valor_venda') : $imovel->valor_venda_view }}">
 										@if( $errors->has('valor_venda') )
 											<span style="color: #f56954">{{ $errors->get('valor_venda')[0] }}</span>
 										@endif

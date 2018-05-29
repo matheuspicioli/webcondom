@@ -75,6 +75,7 @@ Route::prefix('Financeiros')->namespace('Financeiros')->middleware('auth')->grou
         Route::post('/', 'ContaCorrenteLancamentosController@salvar')->name('financeiros.lancamentos.salvar');
         Route::get('/Exibir/{id}/{conta_id}/{dias?}', 'ContaCorrenteLancamentosController@exibir')->name('financeiros.lancamentos.exibir');
         Route::put('/Alterar/{id}/{conta_id}/{dias?}', 'ContaCorrenteLancamentosController@alterar')->name('financeiros.lancamentos.alterar');
+        Route::put('{id}/Compensar', 'ContaCorrenteLancamentosController@compensar')->name('financeiros.lancamentos.compensar');
         Route::delete('{id}/{conta_id}/{dias?}', 'ContaCorrenteLancamentosController@excluir')->name('financeiros.lancamentos.excluir');
     });
 
