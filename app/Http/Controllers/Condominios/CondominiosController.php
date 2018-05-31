@@ -36,7 +36,7 @@ class CondominiosController extends Controller
     {
         $sindicos = $this->sindico->all();
         $cidades = $this->cidade->all();
-        return view('condominios.condominios.criar', compact('sindicos', 'cidades'));
+        return view('condominios.condominios.formulario', compact('sindicos', 'cidades'));
     }
 
     public function Salvar(CondominioRequest $request)
@@ -58,9 +58,9 @@ class CondominiosController extends Controller
             $taxas 		= $condominio->taxas;
             $sindicos 	= $this->sindico->all();
             $cidades 	= $this->cidade->all();
-            return view('condominios.condominios.exibir', compact('condominio', 'sindicos', 'cidades', 'taxas'));
+            return view('condominios.condominios.formulario', compact('condominio', 'sindicos', 'cidades', 'taxas'));
         } else
-            return redirect()->route('condominios.condominios.criar');
+            return redirect()->route('condominios.condominios.formulario');
     }
 
     public function Alterar(CondominioRequest $request, $id)

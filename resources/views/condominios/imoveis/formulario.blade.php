@@ -24,8 +24,12 @@
 @section('content')
     <div class="row">
         <div class="col-md-1">
-            <a href="{{ route('condominios.imoveis.listar') }}" class="btn btn-default">
-                <i class="fa fa-rotate-left"></i> Voltar</a>
+			@component('formularios.Link',[
+				'link'		=> route('condominios.imoveis.listar'),
+				'classes'	=> 'btn btn-default',
+				'icone'		=> 'fa fa-rotate-left',
+				'texto'		=> 'Voltar'
+			])@endcomponent
             <hr>
         </div>
     </div>
@@ -58,7 +62,7 @@
 												'id'		=> 'Codigo',
 												'nome'		=> 'codigo',
 												'texto'		=> 'Código',
-												'valor'		=> old('codigo') ?? $imovel->codigo,
+												'valor'		=> old('codigo') ?? $imovel->codigo ?? '',
 												'tabindex'	=> '1',
 												'titulo'	=> 'Código',
 												'atributos'	=> 'data-mask=999999'
@@ -74,7 +78,7 @@
 												'id'		=> 'referencia',
 												'nome'		=> 'referencia',
 												'texto'		=> 'Referência',
-												'valor'		=> old('referencia') ?? $imovel->referencia,
+												'valor'		=> old('referencia') ?? $imovel->referencia ?? '',
 												'tabindex'	=> '2',
 												'titulo'	=> 'Referência',
 											])@endcomponent
@@ -94,9 +98,15 @@
 												'classes'	=> 'select2',
 											])
 												@foreach($tiposImoveis as $tipoImovel)
-													<option value="{{ $tipoImovel->id }}" {{ old('tipo_imovel_id') == $tipoImovel->id ? 'selected' : ($tipoImovel->id == $imovel->tipo_imovel_id ? 'selected' : '') }}>
-														{{ $tipoImovel->descricao }}
-													</option>
+													@if( isset($imovel) )
+														<option value="{{ $tipoImovel->id }}" {{ old('tipo_imovel_id') == $tipoImovel->id ? 'selected' : ($tipoImovel->id == $imovel->tipo_imovel_id ? 'selected' : '') }}>
+															{{ $tipoImovel->descricao }}
+														</option>
+													@else
+														<option value="{{ $tipoImovel->id }}" {{ old('tipo_imovel_id') == $tipoImovel->id ? 'selected' : '' }}>
+															{{ $tipoImovel->descricao }}
+														</option>
+													@endif
 												@endforeach
 											@endcomponent
 											@if( $errors->has('tipo_imovel_id') )
@@ -115,9 +125,15 @@
 												'classes'	=> 'select2'
 											])
 												@foreach($categorias as $categoria)
-													<option value="{{ $categoria->id }}" {{ old('categoria_id') == $categoria->id ? 'selected' : ($categoria->id == $imovel->categoria_id ? 'selected' : '') }}>
-														{{ $categoria->descricao }}
-													</option>
+													@if( isset($imovel) )
+														<option value="{{ $categoria->id }}" {{ old('categoria_id') == $categoria->id ? 'selected' : ($categoria->id == $imovel->categoria_id ? 'selected' : '') }}>
+															{{ $categoria->descricao }}
+														</option>
+													@else
+														<option value="{{ $categoria->id }}" {{ old('categoria_id') == $categoria->id ? 'selected' : '' }}>
+															{{ $categoria->descricao }}
+														</option>
+													@endif
 												@endforeach
 											@endcomponent
 											@if( $errors->has('categoria_id') )
@@ -138,9 +154,15 @@
 												'classes'	=> 'select2',
 											])
 												@foreach($condominios as $condominio)
-													<option value="{{ $condominio->id }}" {{ old('condominio_id') == $condominio->id ? 'selected' : ($condominio->id == $imovel->condominio_id ? 'selected' : '') }}>
-														{{ $condominio->nome }}
-													</option>
+													@if( isset($imovel) )
+														<option value="{{ $condominio->id }}" {{ old('condominio_id') == $condominio->id ? 'selected' : ($condominio->id == $imovel->condominio_id ? 'selected' : '') }}>
+															{{ $condominio->nome }}
+														</option>
+													@else
+														<option value="{{ $condominio->id }}" {{ old('condominio_id') == $condominio->id ? 'selected' : '' }}>
+															{{ $condominio->nome }}
+														</option>
+													@endif
 												@endforeach
 											@endcomponent
 											@if( $errors->has('condominio_id') )
@@ -155,7 +177,7 @@
 												'nome'		=> 'valor_locacao',
 												'texto'		=> 'Valor de locação',
 												'titulo'	=> 'Valor de locação',
-												'valor'		=> old('valor_locacao') ?? $imovel->valor_locacao_view,
+												'valor'		=> old('valor_locacao') ?? $imovel->valor_locacao_view ?? '',
 												'tabindex'	=> '6'
 											])@endcomponent
 											@if( $errors->has('valor_locacao') )
@@ -170,7 +192,7 @@
 												'nome'		=> 'valor_venda',
 												'texto'		=> 'Valor de venda',
 												'titulo'	=> 'Valor de venda',
-												'valor'		=> old('valor_venda') ?? $imovel->valor_venda_view,
+												'valor'		=> old('valor_venda') ?? $imovel->valor_venda_view ?? '',
 												'tabindex'	=> '7'
 											])@endcomponent
 											@if( $errors->has('valor_venda') )
@@ -187,7 +209,7 @@
 												'nome'		=> 'codigo_agua',
 												'texto'		=> 'Código água',
 												'titulo'	=> 'Código água',
-												'valor'		=> old('codigo_agua') ?? $imovel->codigo_agua,
+												'valor'		=> old('codigo_agua') ?? $imovel->codigo_agua ?? '',
 												'tabindex'	=> '8'
 											])@endcomponent
 											@if( $errors->has('codigo_agua') )
@@ -202,7 +224,7 @@
 												'nome'		=> 'codigo_iptu',
 												'texto'		=> 'Código IPTU',
 												'titulo'	=> 'Código IPTU',
-												'valor'		=> old('codigo_iptu') ?? $imovel->codigo_iptu,
+												'valor'		=> old('codigo_iptu') ?? $imovel->codigo_iptu ?? '',
 												'tabindex'	=> '9'
 											])@endcomponent
 											@if( $errors->has('codigo_iptu') )
@@ -217,7 +239,7 @@
 												'nome'		=> 'codigo_iptu',
 												'texto'		=> 'Código energia',
 												'titulo'	=> 'Código energia',
-												'valor'		=> old('codigo_energia') ?? $imovel->codigo_energia,
+												'valor'		=> old('codigo_energia') ?? $imovel->codigo_energia ?? '',
 												'tabindex'	=> '10'
 											])@endcomponent
 											@if( $errors->has('codigo_energia') )
@@ -234,7 +256,7 @@
 												'nome'		=> 'descritivo',
 												'texto'		=> 'Descritivo',
 												'titulo'	=> 'Descritivo',
-												'valor'		=> old('descritivo') ?? $imovel->descritivo,
+												'valor'		=> old('descritivo') ?? $imovel->descritivo ?? '',
 												'rows'		=> '4',
 												'tabindex'	=> '11'
 											])
@@ -246,7 +268,7 @@
 									</div>
 								</div>
 								@component('formularios.enderecos.Endereco',[
-									'model'     => $imovel,
+									'model'     => $imovel ?? null,
 									'cidades'   => $cidades,
 									'prox_tab'	=> '12'
 								])@endcomponent

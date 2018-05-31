@@ -13,7 +13,7 @@
 								'id'		=> 'CEP',
 								'texto'		=> 'CEP',
 								'titulo'	=> 'CEP',
-								'valor'		=> old('cep') ?? $model->endereco->cep,
+								'valor'		=> old('cep') ?? $model->endereco->cep ?? '',
 								'tabindex'	=> $prox_tab,
 								'atributos'	=> 'data-mask=99999-999'
 							])@endcomponent
@@ -30,7 +30,7 @@
 								'id'		=> 'Logradouro',
 								'texto'		=> 'Logradouro',
 								'titulo'	=> 'Logradouro',
-								'valor'		=> old('logradouro') ?? $model->endereco->logradouro,
+								'valor'		=> old('logradouro') ?? $model->endereco->logradouro ?? '',
 								'tabindex'	=> $prox_tab+=1
 							])@endcomponent
 							@if( $errors->has('logradouro') )
@@ -47,7 +47,7 @@
 								'id'		=> 'Numero',
 								'texto'		=> 'Número',
 								'titulo'	=> 'Número',
-								'valor'		=> old('numero') ?? $model->endereco->numero,
+								'valor'		=> old('numero') ?? $model->endereco->numero ?? '',
 								'tabindex'	=> $prox_tab+=1
 							])@endcomponent
 							@if( $errors->has('numero') )
@@ -80,7 +80,7 @@
 								'id'		=> 'Bairro',
 								'texto'		=> 'Bairro',
 								'titulo'	=> 'Bairro',
-								'valor'		=> old('bairro') ?? $model->endereco->bairro,
+								'valor'		=> old('bairro') ?? $model->endereco->bairro ?? '',
 								'tabindex'	=> $prox_tab+=1
 							])@endcomponent
 							@if( $errors->has('bairro') )
@@ -99,8 +99,13 @@
 							])
 								<option selected disabled>-------Selecione uma cidade-------</option>
 								@foreach($cidades as $cidade)
-									<option value="{{ $cidade->id }}" {{ old('cidade_id') == $cidade->id ? 'selected' : ($cidade->id == $model->endereco->cidade->id ? 'selected' : '') }}>{{ $cidade->descricao }}
-										- {{ $cidade->estado->descricao }}</option>
+									@if( isset($model) )
+										<option value="{{ $cidade->id }}" {{ old('cidade_id') == $cidade->id ? 'selected' : ($cidade->id == $model->endereco->cidade->id ? 'selected' : '') }}>{{ $cidade->descricao }}
+											- {{ $cidade->estado->descricao }}</option>
+									@else
+										<option value="{{ $cidade->id }}" {{ old('cidade_id') == $cidade->id ? 'selected' : '' }}>{{ $cidade->descricao }}
+											- {{ $cidade->estado->descricao }}</option>
+									@endif
 								@endforeach
 							@endcomponent
 							@if( $errors->has('cidade_id') )
