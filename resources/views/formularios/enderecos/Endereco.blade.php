@@ -2,7 +2,7 @@
 	<div class="col-md-12">
 		<div class="box box-primary box-solid">
 			<div class="box-header with-border">
-				<h3 class="box-title">Endereço</h3>
+				<h3 class="box-title">@if( isset($model->endereco_principal) ) Endereço principal @else Endereço @endif</h3>
 			</div>
 			<div class="box-body">
 				<div class="row">
@@ -13,7 +13,7 @@
 								'id'		=> 'CEP',
 								'texto'		=> 'CEP',
 								'titulo'	=> 'CEP',
-								'valor'		=> old('cep') ?? $model->endereco->cep ?? '',
+								'valor'		=> old('cep') ?? $model->endereco->cep ?? $model->endereco_principal->cep ?? '',
 								'tabindex'	=> $prox_tab,
 								'atributos'	=> 'data-mask=99999-999'
 							])@endcomponent
@@ -30,7 +30,7 @@
 								'id'		=> 'Logradouro',
 								'texto'		=> 'Logradouro',
 								'titulo'	=> 'Logradouro',
-								'valor'		=> old('logradouro') ?? $model->endereco->logradouro ?? '',
+								'valor'		=> old('logradouro') ?? $model->endereco->logradouro ?? $model->endereco_principal->logradouro ?? '',
 								'tabindex'	=> $prox_tab+=1
 							])@endcomponent
 							@if( $errors->has('logradouro') )
@@ -47,7 +47,7 @@
 								'id'		=> 'Numero',
 								'texto'		=> 'Número',
 								'titulo'	=> 'Número',
-								'valor'		=> old('numero') ?? $model->endereco->numero ?? '',
+								'valor'		=> old('numero') ?? $model->endereco->numero ?? $model->endereco_principal->numero ?? '',
 								'tabindex'	=> $prox_tab+=1
 							])@endcomponent
 							@if( $errors->has('numero') )
@@ -62,7 +62,7 @@
 								'id'		=> 'Complemento',
 								'texto'		=> 'Complemento',
 								'titulo'	=> 'Complemento',
-								'valor'		=> old('complemento') ?? $model->endereco->complemento ?? '',
+								'valor'		=> old('complemento') ?? $model->endereco->complemento ?? $model->endereco_principal->complemento ?? '',
 								'tabindex'	=> $prox_tab+=1
 							])@endcomponent
 							@if( $errors->has('complemento') )
@@ -80,7 +80,7 @@
 								'id'		=> 'Bairro',
 								'texto'		=> 'Bairro',
 								'titulo'	=> 'Bairro',
-								'valor'		=> old('bairro') ?? $model->endereco->bairro ?? '',
+								'valor'		=> old('bairro') ?? $model->endereco->bairro ?? $model->endereco_principal->bairro ?? '',
 								'tabindex'	=> $prox_tab+=1
 							])@endcomponent
 							@if( $errors->has('bairro') )
@@ -100,8 +100,13 @@
 								<option selected disabled>-------Selecione uma cidade-------</option>
 								@foreach($cidades as $cidade)
 									@if( isset($model) )
-										<option value="{{ $cidade->id }}" {{ old('cidade_id') == $cidade->id ? 'selected' : ($cidade->id == $model->endereco->cidade->id ? 'selected' : '') }}>{{ $cidade->descricao }}
-											- {{ $cidade->estado->descricao }}</option>
+										@if( isset($model->endereco) )
+											<option value="{{ $cidade->id }}" {{ old('cidade_id') == $cidade->id ? 'selected' : ($cidade->id == $model->endereco->cidade->id ? 'selected' : '') }}>{{ $cidade->descricao }}
+												- {{ $cidade->estado->descricao }}</option>
+										@else
+											<option value="{{ $cidade->id }}" {{ old('cidade_id') == $cidade->id ? 'selected' : ($cidade->id == $model->endereco_principal->cidade->id ? 'selected' : '') }}>{{ $cidade->descricao }}
+												- {{ $cidade->estado->descricao }}</option>
+										@endif
 									@else
 										<option value="{{ $cidade->id }}" {{ old('cidade_id') == $cidade->id ? 'selected' : '' }}>{{ $cidade->descricao }}
 											- {{ $cidade->estado->descricao }}</option>

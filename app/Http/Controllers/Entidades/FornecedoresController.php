@@ -16,24 +16,15 @@ class FornecedoresController extends Controller
     public function Listar()
     {
         $fornecedores = Fornecedor::all();
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Fornecedores', 'url' => '']
-        ]);
-        return view('entidades.fornecedores.listar', compact('fornecedores', 'migalhas'));
+        return view('entidades.fornecedores.listar', compact('fornecedores'));
     }
 
     public function Criar()
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Fornecedores', 'url' => route('entidades.fornecedores.listar')],
-            ['titulo' => 'Cadastrar fornecedor', 'url' => '']
-        ]);
         $estados_civis = EstadoCivil::all();
         $regimes_casamentos = RegimeCasamento::all();
         $cidades = Cidade::all();
-        return view('entidades.fornecedores.criar', compact('estados_civis', 'regimes_casamentos', 'cidades', 'migalhas'));
+        return view('entidades.fornecedores.formulario', compact('estados_civis', 'regimes_casamentos', 'cidades'));
     }
 
     public function Salvar(FornecedorRequest $request)
@@ -51,20 +42,14 @@ class FornecedoresController extends Controller
 
     public function Exibir($id)
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Fornecedores', 'url' => route('entidades.fornecedores.listar')],
-            ['titulo' => 'Alterar fornecedor', 'url' => '']
-        ]);
         $fornecedor = Fornecedor::find($id) ? Fornecedor::find($id) : null;
-
         if ($fornecedor) {
             $estados_civis = EstadoCivil::all();
             $regimes_casamentos = RegimeCasamento::all();
             $cidades = Cidade::all();
-            return view('entidades.fornecedores.exibir', compact('estados_civis', 'regimes_casamentos', 'fornecedor', 'cidades', 'migalhas'));
+            return view('entidades.fornecedores.formulario', compact('estados_civis', 'regimes_casamentos', 'fornecedor', 'cidades'));
         } else
-            return redirect()->route('entidades.fornecedores.criar', 'migalhas');
+            return redirect()->route('entidades.fornecedores.formulario');
     }
 
     public function Alterar(FornecedorRequest $request, $id)

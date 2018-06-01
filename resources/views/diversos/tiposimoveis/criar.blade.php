@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('titulo', 'Tipos de Imóveis - Criar')
+@section('ti', 'Tipos de Imóveis - Criar')
 @section('content_header')
     <h1>Cadastro <small>de Tipos de Imóveis</small></h1>
     <ol class="breadcrumb">

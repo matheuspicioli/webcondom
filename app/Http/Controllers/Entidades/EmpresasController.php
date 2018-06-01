@@ -17,22 +17,13 @@ class EmpresasController extends Controller
     public function Listar()
     {
         $empresas = Empresa::all();
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Empresas', 'url' => '']
-        ]);
-        return view('entidades.empresas.listar', compact('empresas', 'migalhas'));
+        return view('entidades.empresas.listar', compact('empresas'));
     }
 
     public function Criar()
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Empresas', 'url' => route('entidades.empresas.listar')],
-            ['titulo' => 'Cadastrar empresa', 'url' => '']
-        ]);
         $cidades = Cidade::all();
-        return view('entidades.empresas.criar', compact('cidades', 'migalhas'));
+        return view('entidades.empresas.formulario', compact('cidades'));
     }
 
     public function Salvar(EmpresaRequest $request)
@@ -60,18 +51,13 @@ class EmpresasController extends Controller
 
     public function Exibir($id)
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Empresas', 'url' => route('entidades.empresas.listar')],
-            ['titulo' => 'Alterar empresa', 'url' => '']
-        ]);
         $empresa = Empresa::find($id) ? Empresa::find($id) : null;
 
         if ($empresa) {
             $cidades = Cidade::all();
-            return view('entidades.empresas.exibir', compact('empresa', 'cidades', 'migalhas'));
+            return view('entidades.empresas.formulario', compact('empresa', 'cidades'));
         } else
-            return redirect()->route('entidades.empresas.criar', 'migalhas');
+            return redirect()->route('entidades.empresas.formulario');
     }
 
     public function Alterar(EmpresaRequest $request, $id)

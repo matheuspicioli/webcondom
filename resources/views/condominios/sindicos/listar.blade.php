@@ -17,11 +17,20 @@
         <div class="row">
             <div class="col-md-1">
                 @can("incluir_sindico")
-                    <a href="{{ route('condominios.sindicos.criar') }}" class="btn btn-success">
-                        <i class="fa fa-plus"></i> Cadastrar</a>
+                    @component('formularios.Link',[
+						'link'		=> route('condominios.sindicos.criar'),
+						'classes'	=> 'btn btn-success',
+						'icone'		=> 'fa fa-plus',
+						'texto'		=> 'Cadastrar'
+					])@endcomponent
                 @else
-                    <button disabled type="button" class="btn btn-success">
-                        <i class="fa fa-plus"></i> Cadastrar</button>
+					@component('formularios.Link',[
+						'link'		=> route('condominios.sindicos.criar'),
+						'classes'	=> 'btn btn-success',
+						'icone'		=> 'fa fa-plus',
+						'texto'		=> 'Cadastrar',
+						'atributos'	=> 'disabled'
+					])@endcomponent
                 @endcan
                 <hr>
             </div>
@@ -56,24 +65,25 @@
 
                             <tbody>
                             @foreach($sindicos as $sindico)
+								@php $tem_telefone = isset($sindico->telefone) @endphp
                                 <tr>
                                     <td>{{ $sindico->id }}</td>
                                     <td>{{ $sindico->nome }}</td>
-                                    <td data-mask="(99) 9999-9999">{{ $sindico->telefone ? $sindico->telefone : 'Não informado' }}</td>
-                                    <td data-mask="(99) 99999-9999">{{ $sindico->celular ? $sindico->celular : 'Não informado' }}</td>
+                                    <td {{ $tem_telefone ? "data-mask=(99)9999-9999" : '' }}>{{ $sindico->telefone ?? 'Não informado' }}</td>
+                                    <td data-mask="(99) 99999-9999">{{ $sindico->celular }}</td>
                                     <td>
                                         @can("exibir_sindico")
-                                            <a class="btn btn-sm btn-warning" href="{{ route('condominios.sindicos.exibir', ['id' => $sindico->id ]) }}">
+                                            <a class="btn btn-xs btn-warning" href="{{ route('condominios.sindicos.exibir', ['id' => $sindico->id ]) }}">
                                                 <i class="fa fa-pencil"></i></a>
                                         @else
-                                            <button disabled type="button" class="btn btn-sm btn-warning">
+                                            <button disabled type="button" class="btn btn-xs btn-warning">
                                                 <i class="fa fa-pencil"></i></button>
                                         @endcan
                                         @can("deletar_sindico")
-                                            <button type="button" data-toggle="modal" data-target="#modal-danger-{{$sindico->id}}" href="#" class="btn btn-sm btn-danger">
+                                            <button type="button" data-toggle="modal" data-target="#modal-danger-{{$sindico->id}}" href="#" class="btn btn-xs btn-danger">
                                                 <i class="fa fa-trash"></i></button>
                                         @else
-                                            <button disabled type="button" class="btn btn-sm btn-danger">
+                                            <button disabled type="button" class="btn btn-xs btn-danger">
                                                 <i class="fa fa-trash"></i></button>
                                         @endcan
                                         <!-- MODAL EXCLUSÃO -->
