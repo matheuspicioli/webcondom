@@ -1,24 +1,32 @@
+@php
+    $editar = isset($regimeCasamento);
+	$tab = 0;
+@endphp
 @extends('adminlte::page')
-@section('title', 'Estado Civil - Exibir/Alterar')
+@section('title', 'Regime de Casamento - '.($editar ? 'Exibir/Alterar' : 'Cadastrar') )
 @section('content_header')
-    <h1>Estado Civil - <small>edição</small></h1>
+	@if($editar)
+		<h1>Regime de Casamento - <small>edição</small></h1>
+	@else
+		<h1>Cadastro <small>de Regime de Casamento</small></h1>
+	@endif
     <ol class="breadcrumb">
         <li>
             <a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a>
         </li>
         <li>
-            <a href="{{ route('diversos.estadoCivil.listar') }}"><i class="fa fa-home"></i> Estado Civil</a>
+            <a href="{{ route('diversos.regimeCasamento.listar') }}"><i class="fa fa-home"></i> Regime de Casamento</a>
         </li>
-        <li class="active">
-            <i class="fa fa-pencil"></i> Editar estado civil
-        </li>
+		<li class="active">
+			<i class="fa fa-pencil"></i> {{ $editar ? 'Editar' : 'Cadastrar' }} Regime de Casamento
+		</li>
     </ol>
 @stop
 @section('content')
-    @can("exibir_estadocivil")
+    @can("exibir_regimecasamento")
         <div class="row">
             <div class="col-md-1">
-                <a href="{{ route('diversos.estadoCivil.listar') }}" class="btn btn-default">
+                <a href="{{ route('diversos.regimeCasamento.listar') }}" class="btn btn-default">
                     <i class="fa fa-rotate-left"></i> Voltar</a>
                 <hr>
             </div>
@@ -27,40 +35,32 @@
             <div class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Editar estado civil</h3>
+						<h3 class="box-title">{{ $editar ? 'Editar' : 'Cadastrar' }} Editar regime de casamento</h3>
                         <div class="box-tools pull-right">
                             <button class="btn btn-box-tool" type="button" data-widget="collapse">
                                 <i class="fa fa-minus"></i></button>
                         </div>
                     </div>
                     <div class="box-body">
-                        <form method="POST" action="{{ route('diversos.estadoCivil.alterar', ['id' => $estadoCivil->id ]) }}">
-                            {{ csrf_field() }}
-                            {{ method_field('PUT') }}
+						@if( isset($regimeCasamento) )
+							<form method="POST" action="{{ route('diversos.regimeCasamento.alterar', ['id' => $regimeCasamento->id ]) }}" id="form">
+								{{ csrf_field() }}
+								{{ method_field('PUT') }}
+						@else
+							<form method="POST" action="{{ route('diversos.regimeCasamento.salvar') }}" id="form">
+								{{ csrf_field() }}
+						@endif
                             <div class="row">
-                                <div class="col-md-6">
-                                    <label for="Descricao" class="control-label"
-                                           @if($errors->has('descricao')) style="color: #f56954" @endif>Descrição</label>
-                                    <input type="text" name="descricao" id="Descricao" class="form-control pula"
-                                           @if($errors->has('descricao')) style="border:1px solid #f56954" @endif
-                                           value="{{ old('descricao') ? old('descricao') : $estadoCivil->descricao }}">
-                                    @if( $errors->has('descricao') )
-                                        <span style="color: #f56954">{{ $errors->get('descricao')[0] }}</span>
-                                    @endif
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="ExigeConjuge" class="control-label"
-                                               @if($errors->has('exige_conjuge')) style="color: #f56954" @endif>Exige conjuge?</label>
-                                        <select name="exige_conjuge" id="ExigeConjuge" class="form-control pula">
-                                            <option disabled selected>----------Selecione----------</option>
-                                            <option value="Sim" {{ old('exige_conjuge') == 1 ? 'selected' : ($estadoCivil->exige_conjuge == 1 ? 'selected' : '') }}>Sim
-                                            </option>
-                                            <option value="Nao" {{ old('exige_conjuge') == 0 ? 'selected' : ($estadoCivil->exige_conjuge == 1 ? 'selected' : '') }}>Não
-                                            </option>
-                                        </select>
-                                        @if( $errors->has('exige_conjuge') )
-                                            <span style="color: #f56954">{{ $errors->get('exige_conjuge')[0] }}</span>
+                                <div class="col-md-12">
+                                    <div class="form-group @if($errors->has('descricao')) has-error @endif">
+										@component('formularios.String',[
+											'id'		=> 'Descricao',
+											'nome'		=> 'descricao',
+											'texto'		=> 'Descrição',
+											'valor'		=> old('descricao') ?? $regimeCasamento->descricao ?? ''
+										])@endcomponent
+                                        @if( $errors->has('descricao') )
+                                            <span style="color: #f56954">{{ $errors->get('descricao')[0] }}</span>
                                         @endif
                                     </div>
                                 </div>
@@ -68,14 +68,14 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        @can("editar_estadocivil")
+                                        @can("editar_regimecasamento")
                                             <button class="btn btn-info" type="submit">
                                                 <i class="fa fa-save"></i> Salvar</button>
                                         @else
                                             <button disabled class="btn btn-info" type="submit">
                                                 <i class="fa fa-save"></i> Salvar</button>
                                         @endcan
-                                        @can("deletar_estadocivil")
+                                        @can("deletar_regimecasamento")
                                             <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
                                                 <i class="fa fa-trash"></i> Excluir</button>
                                         @else
@@ -90,8 +90,9 @@
                 </div>
             </div>
         </div>
-        <!-- MODAL EXCLUIR ESTADO CIVIL -->
-        <div id="modal-excluir" class="modal modal-danger fade">
+		@if( $editar )
+			<!-- MODAL EXCLUIR REGIME DE CASAMENTO -->
+			<div id="modal-excluir" class="modal modal-danger fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -102,12 +103,12 @@
                     </div>
 
                     <div class="modal-body">
-                        <h4>Deseja realmente excluir estado civil "{{ $estadoCivil->descricao }}"?</h4>
+                        <h4>Deseja realmente excluir regime de casamento"{{ $regimeCasamento->descricao }}"?</h4>
                     </div>
 
                     <div class="modal-footer">
                         <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
-                        <form method="POST" action="{{ route('diversos.estadoCivil.excluir', ['id' => $estadoCivil->id]) }}">
+                        <form method="POST" action="{{ route('diversos.regimeCasamento.excluir', ['id' => $regimeCasamento->id]) }}">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
                             <button class="btn btn-outline" type="submit">Confirmar exclusão</button>
@@ -116,6 +117,7 @@
                 </div>
             </div>
         </div>
+		@endif
     @else
         <div class="row">
             <div class="col-md-12">

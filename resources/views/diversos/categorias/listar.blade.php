@@ -55,17 +55,17 @@
                                     <td>{{ $categoria->descricao }}</td>
                                     <td>
                                         @can("exibir_categoria")
-                                        <a class="btn btn-sm btn-warning" href="{{ route('diversos.categorias.exibir', ['id' => $categoria->id ]) }}">
+                                        <a class="btn btn-xs btn-warning" href="{{ route('diversos.categorias.exibir', ['id' => $categoria->id ]) }}">
                                             <i class="fa fa-pencil"></i></a>
                                         @else
-                                            <button disabled type="button" class="btn btn-sm btn-warning">
+                                            <button disabled type="button" class="btn btn-xs btn-warning">
                                                 <i class="fa fa-pencil"></i></button>
                                         @endcan
                                         @can("deletar_categoria")
-                                            <button type="button" data-toggle="modal" data-target="#modal-danger-{{$categoria->id}}" href="#" class="btn btn-sm btn-danger">
+                                            <button type="button" data-toggle="modal" data-target="#modal-danger-{{$categoria->id}}" href="#" class="btn btn-xs btn-danger">
                                                 <i class="fa fa-trash"></i></button>
                                         @else
-                                            <button disabled type="button" class="btn btn-sm btn-danger">
+                                            <button disabled type="button" class="btn btn-xs btn-danger">
                                                 <i class="fa fa-trash"></i></button>
                                         @endcan
                                         <!-- MODAL EXCLUSÃO -->

@@ -22,12 +22,7 @@ class DepartamentosController extends Controller
 
     public function Criar()
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Departamentos', 'url' => route('diversos.departamento.listar')],
-            ['titulo' => 'Cadastrar departamento', 'url' => '']
-        ]);
-        return view('diversos.departamento.criar', compact('migalhas'));
+        return view('diversos.departamento.formulario');
     }
 
     public function Salvar(DepartamentoRequest $request)
@@ -40,17 +35,12 @@ class DepartamentosController extends Controller
 
     public function Exibir($id)
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Departamentos', 'url' => route('diversos.departamento.listar')],
-            ['titulo' => 'Alterar departamento', 'url' => '']
-        ]);
         $departamento = Departamento::find($id) ? Departamento::find($id) : null;
 
         if($departamento)
-            return view('diversos.departamento.exibir', compact('departamento', 'migalhas'));
+            return view('diversos.departamento.formulario', compact('departamento'));
         else
-            return redirect()->route('diversos.departamento.criar');
+            return redirect()->route('diversos.departamento.formulario');
     }
 
     public function Alterar(DepartamentoRequest $request, $id)

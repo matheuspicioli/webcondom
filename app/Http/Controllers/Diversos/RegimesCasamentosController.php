@@ -12,22 +12,13 @@ class RegimesCasamentosController extends Controller
 {
     public function Listar()
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Regimes de casamento', 'url' => '']
-        ]);
         $regimeCasamento = RegimeCasamento::all();
-        return view('diversos.regimeCasamento.listar', compact('regimeCasamento', 'migalhas'));
+        return view('diversos.regimeCasamento.listar', compact('regimeCasamento'));
     }
 
     public function Criar()
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Regimes de casamento', 'url' => route('diversos.regimeCasamento.listar')],
-            ['titulo' => 'Cadastrar regimes de casamento', 'url' => '']
-        ]);
-        return view('diversos.regimeCasamento.criar', compact('migalhas'));
+        return view('diversos.regimeCasamento.formulario');
     }
 
     public function Salvar(RegimeCasamentoRequest $request)
@@ -40,17 +31,12 @@ class RegimesCasamentosController extends Controller
 
     public function Exibir($id)
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Regimes de casamento', 'url' => route('diversos.regimeCasamento.listar')],
-            ['titulo' => 'Alterar regimes de casamento', 'url' => '']
-        ]);
         $regimeCasamento = RegimeCasamento::find($id) ? RegimeCasamento::find($id) : null;
 
         if($regimeCasamento)
-            return view('diversos.regimeCasamento.exibir', compact('regimeCasamento', 'migalhas'));
+            return view('diversos.regimeCasamento.formulario', compact('regimeCasamento'));
         else
-            return redirect()->route('diversos.regimeCasamento.criar');
+            return redirect()->route('diversos.regimeCasamento.formulario');
     }
 
     public function Alterar(RegimeCasamentoRequest $request, $id)

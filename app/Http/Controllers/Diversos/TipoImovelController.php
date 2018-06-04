@@ -12,22 +12,13 @@ class TipoImovelController extends Controller
 {
     public function Listar()
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Tipos imoveis', 'url' => '']
-        ]);
         $tiposImoveis = TipoImovel::all();
-        return view('diversos.tiposimoveis.listar', compact('tiposImoveis', 'migalhas'));
+        return view('diversos.tiposimoveis.listar', compact('tiposImoveis'));
     }
 
     public function Criar()
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Tipos imoveis', 'url' => route('diversos.tiposimoveis.listar')],
-            ['titulo' => 'Cadastrar tipo imovel', 'url' => '']
-        ]);
-        return view('diversos.tiposimoveis.criar', compact('migalhas'));
+        return view('diversos.tiposimoveis.formulario');
     }
 
     public function Salvar(TipoImovelRequest $request)
@@ -40,17 +31,12 @@ class TipoImovelController extends Controller
 
     public function Exibir($id)
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Tipos imoveis', 'url' => route('diversos.tiposimoveis.listar')],
-            ['titulo' => 'Alterar tipo imovel', 'url' => '']
-        ]);
         $tipoImovel = TipoImovel::find($id) ? TipoImovel::find($id) : null;
 
         if($tipoImovel)
-            return view('diversos.tiposimoveis.exibir', compact('tipoImovel', 'migalhas'));
+            return view('diversos.tiposimoveis.formulario', compact('tipoImovel'));
         else
-            return redirect()->route('diversos.tiposimoveis.criar');
+            return redirect()->route('diversos.tiposimoveis.formulario');
     }
 
     public function Alterar(TipoImovelRequest $request, $id)

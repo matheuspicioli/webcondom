@@ -1,7 +1,15 @@
+@php
+    $editar = isset($tipoImovel);
+	$tab = 0;
+@endphp
 @extends('adminlte::page')
-@section('titulo', 'Tipos de Imóveis - Exibir/Alterar')
+@section('title', 'Tipos de Imóveis - '.($editar ? 'Exibir/Alterar' : 'Cadastrar') )
 @section('content_header')
-    <h1>Tipos de Imóveis - <small>edição</small></h1>
+	@if($editar)
+		<h1>Tipos de Imóveis - <small>edição</small></h1>
+	@else
+		<h1>Cadastro <small>de Tipos de Imóveis</small></h1>
+	@endif
     <ol class="breadcrumb">
         <li>
             <a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a>
@@ -9,9 +17,9 @@
         <li>
             <a href="{{ route('diversos.tiposimoveis.listar') }}"><i class="fa fa-home"></i> Tipos de Imóveis</a>
         </li>
-        <li class="active">
-            <i class="fa fa-pencil"></i> Editar tipoide imóvel
-        </li>
+		<li class="active">
+			<i class="fa fa-pencil"></i> {{ $editar ? 'Editar' : 'Cadastrar' }} tipo de imóvel
+		</li>
     </ol>
 @stop
 @section('content')
@@ -26,24 +34,30 @@
         <div class="col-md-12">
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Editar tipo de imóvel</h3>
+					<h3 class="box-title">{{ $editar ? 'Editar' : 'Cadastrar' }} tipo de imóvel</h3>
                     <div class="box-tools pull-right">
                         <button class="btn btn-box-tool" type="button" data-widget="collapse">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
                 <div class="box-body">
-                    <form method="POST" action="{{ route('diversos.tiposimoveis.alterar', ['id' => $tipoImovel->id ]) }}">
-                        {{ csrf_field() }}
-                        {{ method_field('PUT') }}
+					@if( $editar )
+						<form method="POST" action="{{ route('diversos.tiposimoveis.alterar', ['id' => $tipoImovel->id ]) }}" id="form">
+							{{ csrf_field() }}
+							{{ method_field('PUT') }}
+					@else
+						<form method="POST" action="{{ route('diversos.tiposimoveis.salvar') }}" id="form">
+							{{ csrf_field() }}
+					@endif
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="Descricao" class="control-label"
-                                           @if($errors->has('descricao')) style="color: #f56954" @endif>Descrição</label>
-                                    <input type="text" name="descricao" id="Descricao" class="form-control pula"
-                                           @if($errors->has('descricao')) style="border:1px solid #f56954" @endif
-                                           value="{{ old('descricao') ? old('descricao') : $tipoImovel->descricao }}">
+                                <div class="form-group @if($errors->has('descricao')) has-error @endif">
+									@component('formularios.String',[
+										'id'		=> 'Descricao',
+										'nome'		=> 'descricao',
+										'texto'		=> 'Descrição',
+										'valor'		=> old('descricao') ?? $tipoImovel->descricao ?? ''
+									])@endcomponent
                                     @if( $errors->has('descricao') )
                                         <span style="color: #f56954">{{ $errors->get('descricao')[0] }}</span>
                                     @endif
@@ -66,8 +80,9 @@
             </div>
         </div>
     </div>
-    <!-- MODAL EXCLUIR Tipos de Imóveis -->
-    <div id="modal-excluir" class="modal modal-danger fade">
+	@if( $editar )
+		<!-- MODAL EXCLUIR Tipos de Imóveis -->
+		<div id="modal-excluir" class="modal modal-danger fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -92,7 +107,7 @@
             </div>
         </div>
     </div>
-
+	@endif
 @endsection
 @section('js')
     <script>
