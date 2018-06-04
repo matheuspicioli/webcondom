@@ -31,18 +31,13 @@ class FuncionariosController extends Controller
 
     public function Criar()
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Funcionarios', 'url' => route('entidades.funcionarios.listar')],
-            ['titulo' => 'Cadastrar funcionario', 'url' => '']
-        ]);
         $estados_civis = EstadoCivil::all();
         $regimes_casamentos = RegimeCasamento::all();
         $cidades = Cidade::all();
         $setores = Setor::all();
         $departamentos = Departamento::all();
-        return view('entidades.funcionarios.criar', compact(
-                'estados_civis', 'regimes_casamentos', 'cidades', 'migalhas', 'setores', 'departamentos'
+        return view('entidades.funcionarios.formulario', compact(
+                'estados_civis', 'regimes_casamentos', 'cidades', 'setores', 'departamentos'
             )
         );
     }
@@ -70,11 +65,6 @@ class FuncionariosController extends Controller
 
     public function Exibir($id)
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Funcionário', 'url' => route('entidades.funcionarios.listar')],
-            ['titulo' => 'Alterar funcionario', 'url' => '']
-        ]);
         $funcionario = Funcionario::find($id) ? Funcionario::find($id) : null;
 
         if ($funcionario) {
@@ -83,12 +73,12 @@ class FuncionariosController extends Controller
             $estados_civis = EstadoCivil::all();
             $regimes_casamentos = RegimeCasamento::all();
             $cidades = Cidade::all();
-            return view('entidades.funcionarios.exibir', compact(
-                    'estados_civis', 'regimes_casamentos', 'funcionario', 'cidades', 'migalhas', 'setores', 'departamentos'
+            return view('entidades.funcionarios.formulario', compact(
+                    'estados_civis', 'regimes_casamentos', 'funcionario', 'cidades', 'setores', 'departamentos'
                 )
             );
         } else
-            return redirect()->route('entidades.funcionarios.criar', 'migalhas');
+            return redirect()->route('entidades.funcionarios.formulario', 'migalhas');
     }
 
     public function Alterar(FuncionarioRequest $request, $id)

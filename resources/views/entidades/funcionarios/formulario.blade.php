@@ -1,41 +1,41 @@
 @php
-	$editar = isset($fornecedor);
+	$editar = isset($funcionario);
 	$tab = 0;
 @endphp
 @extends('adminlte::page')
-@section('title', 'Fornecedores - '.($editar ? 'Exibir/Alterar' : 'Cadastrar') )
+@section('title', 'Funcionários - '.($editar ? 'Exibir/Alterar' : 'Cadastrar') )
 @section('content_header')
 	@if($editar)
-		<h1>Fornecedores - <small>edição</small></h1>
+		<h1>Funcionários - <small>edição</small></h1>
 	@else
-		<h1>Cadastro <small>de Fornecedores</small></h1>
+		<h1>Cadastro <small>de Funcionários</small></h1>
 	@endif
 	<ol class="breadcrumb">
 		<li>
 			<a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a>
 		</li>
 		<li>
-			<a href="{{ route('entidades.fornecedores.listar') }}"><i class="fa fa-home"></i> Fornecedores</a>
+			<a href="{{ route('entidades.funcionarios.listar') }}"><i class="fa fa-home"></i> Funcionários</a>
 		</li>
 		<li class="active">
-			<i class="fa fa-pencil"></i> {{ $editar ? 'Editar' : 'Cadastrar' }} Fornecedores
+			<i class="fa fa-pencil"></i> {{ $editar ? 'Editar' : 'Cadastrar' }} Funcionários
 		</li>
 	</ol>
 @stop
 @section('content')
 	<div class="row">
 		<div class="col-md-1">
-			<a href="{{ route('entidades.fornecedores.listar') }}" class="btn btn-default">
+			<a href="{{ route('entidades.funcionarios.listar') }}" class="btn btn-default">
 				<i class="fa fa-rotate-left"></i> Voltar</a>
 			<hr>
 		</div>
 	</div>
-	@can("exibir_fornecedor")
+	@can("exibir_funcionario")
 		<div class="row">
 			<div class="col-md-12">
 				<div class="box box-info">
 					<div class="box-header with-border">
-						<h3 class="box-title">{{ $editar ? 'Editar' : 'Cadastrar' }} Fornecedor</h3>
+						<h3 class="box-title">{{ $editar ? 'Editar' : 'Cadastrar' }} Funcionário</h3>
 						<div class="box-tools pull-right">
 							<button class="btn btn-box-tool" type="button" data-widget="collapse">
 								<i class="fa fa-minus"></i></button>
@@ -43,29 +43,32 @@
 					</div>
 					<div class="box-body">
 						@if( isset($fornecedor) )
-							<form method="POST" action="{{ route('entidades.fornecedores.alterar', ['id' => $fornecedor->id ]) }}" id="form">
+							<form method="POST"
+								enctype="multipart/form-data"
+								action="{{ route('entidades.funcionarios.alterar', ['id' => $funcionario->id ]) }}" id="form">
 								{{ csrf_field() }}
 								{{ method_field('PUT') }}
 						@else
-							<form method="POST" action="{{ route('entidades.fornecedores.salvar') }}" id="form">
+							<form method="POST" action="{{ route('entidades.funcionarios.salvar') }}" id="form">
 								{{ csrf_field() }}
 						@endif
 							<div class="row">
-								<div class="col-md-4">
-									<div class="form-group @if($errors->has('tipo')) has-error @endif">
+								<div class="col-md-6">
+									<div class="form-group @if( $errors->has('tipo') ) has-error @endif">
 										@component('formularios.Select',[
 											'id'		=> 'tipo',
 											'nome'		=> 'tipo',
 											'texto'		=> 'Tipo pessoa',
-											'tabindex'	=> $tab += 1
+											'tabindex'	=> $tab += 1,
+											'classes'	=> 'select2'
 										])
 											<option value="-1" selected disabled>-----SELECIONE-----</option>
-											@if ( isset($fornecedor) )
+											@if ( isset($funcionario) )
 												<option value="CPF"
-														{{ old('tipo') == 'CPF' ? 'selected' : ($fornecedor->entidade->tipo == 'CPF' ? 'selected' : '') }}>
+														{{ old('tipo') == 'CPF' ? 'selected' : ($funcionario->entidade->tipo == 'CPF' ? 'selected' : '') }}>
 													CPF
 												</option>
-												<option value="CNPJ" {{ old('tipo') == 'CNPJ' ? 'selected' : ($fornecedor->entidade->tipo == 'CNPJ' ? 'selected' : '') }}>
+												<option value="CNPJ" {{ old('tipo') == 'CNPJ' ? 'selected' : ($funcionario->entidade->tipo == 'CNPJ' ? 'selected' : '') }}>
 													CNPJ
 												</option>
 											@else
@@ -83,53 +86,73 @@
 										@endif
 									</div>
 								</div>
-								<div class="col-md-4">
-									<div class="form-group @if($errors->has('tipo_fornecedor')) has-error @endif">
-										@component('formularios.Select',[
-											'id'		=> 'tipo_fornecedor',
-											'nome'		=> 'tipo_fornecedor',
-											'texto'		=> 'Tipo',
-											'tabindex'	=> $tab += 1,
-											'classes'	=> 'select2',
-										])
-											@if( isset($fornecedor) )
-												<option value="-1" selected disabled>-----SELECIONE-----</option>
-												<option value="PECAS"
-														{{ old('tipo_fornecedor') == 'PECAS' ? 'selected' : ($fornecedor->tipo_fornecedor == 'PECAS' ? 'selected' : '') }}>
-													PECAS
-												</option>
-												<option value="SERVICOS"
-														{{ old('tipo_fornecedor') == 'SERVICOS' ? 'selected' : ($fornecedor->tipo_fornecedor == 'SERVICOS' ? 'selected' : '') }}>
-													SERVICOS
-												</option>
-											@else
-												<option value="-1" selected disabled>-----SELECIONE-----</option>
-												<option value="PECAS"
-														{{ old('tipo_fornecedor') == 'PECAS' ? 'selected' : '' }}>
-													PECAS
-												</option>
-												<option value="SERVICOS"
-														{{ old('tipo_fornecedor') == 'SERVICOS' ? 'selected' : '' }}>
-													SERVICOS
-												</option>
-											@endif
-										@endcomponent
-										@if( $errors->has('tipo_fornecedor') )
-											<span style="color: #f56954">{{ $errors->get('tipo_fornecedor')[0] }}</span>
-										@endif
-									</div>
-								</div>
-								<div class="col-md-4">
+								<div class="col-md-6">
 									<div class="form-group @if($errors->has('cpf_cnpj')) has-error @endif">
 										@component('formularios.String',[
 											'id'		=> 'cpf_cnpj',
 											'nome'		=> 'cpf_cnpj',
 											'texto'		=> 'CPF/CNPJ',
-											'valor'		=> old('cpf_cnpj') ?? $fornecedor->entidade->cpf_cnpj ?? '',
+											'valor'		=> old('cpf_cnpj') ?? $funcionario->entidade->cpf_cnpj ?? '',
 											'tabindex'	=> $tab += 1
 										])@endcomponent
 										@if( $errors->has('cpf_cnpj') )
 											<span style="color: #f56954">{{ $errors->get('cpf_cnpj')[0] }}</span>
+										@endif
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group @if($errors->has('departamento_id')) has-error @endif">
+										@component('formularios.Select',[
+											'id'			=> 'departamento',
+											'nome'			=> 'departamento_id',
+											'texto'			=> 'Departamento',
+											'tabindex'		=> $tab += 1,
+											'classes'		=> 'select2'
+										])
+											<option value="-1" selected disabled>-----SELECIONE-----</option>
+											@foreach($departamentos as $departamento)
+												@if( isset($funcionario) )
+													<option value="{{ $departamento->id }}" {{ old('departamento_id') == $departamento->id ? 'selected' : ($funcionario->departamento_id == $departamento->id ? 'selected' : '') }}>
+														{{ $departamento->descricao }}
+													</option>
+												@else
+													<option value="{{ $departamento->id }}" {{ old('departamento_id') == $departamento->id ? 'selected' : '' }}>
+														{{ $departamento->descricao }}
+													</option>
+												@endif
+											@endforeach
+										@endcomponent
+										@if( $errors->has('departamento_id') )
+											<span style="color: #f56954">{{ $errors->get('departamento_id')[0] }}</span>
+										@endif
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group @if($errors->has('setor_id')) has-error @endif">
+										@component('formularios.Select',[
+											'id'			=> 'setor',
+											'nome'			=> 'setor_id',
+											'texto'			=> 'Setor',
+											'tabindex'		=> $tab += 1,
+											'classes'		=> 'select2'
+										])
+											<option value="-1" selected disabled>-----SELECIONE-----</option>
+											@foreach($setores as $setor)
+												@if( isset($funcionario) )
+													<option value="{{ $setor->id }}" {{ old('setor_id') ? old('setor_id') : ($setor->id == $funcionario->setor_id ? 'selected' : '') }}>
+														{{ $setor->descricao }}
+													</option>
+												@else
+													<option value="{{ $setor->id }}" {{ old('setor_id') ? old('setor_id') : '' }}>
+														{{ $setor->descricao }}
+													</option>
+												@endif
+											@endforeach
+										@endcomponent
+										@if( $errors->has('setor_id') )
+											<span style="color: #f56954">{{ $errors->get('setor_id')[0] }}</span>
 										@endif
 									</div>
 								</div>
@@ -141,7 +164,7 @@
 											'id'		=> 'nome',
 											'nome'		=> 'nome',
 											'texto'		=> 'Nome',
-											'valor'		=> old('nome') ?? $fornecedor->entidade->nome ?? '',
+											'valor'		=> old('nome') ?? $funcionario->entidade->nome ?? '',
 											'tabindex'	=> $tab += 1
 										])@endcomponent
 										@if( $errors->has('nome') )
@@ -155,7 +178,7 @@
 											'id'		=> 'apelido',
 											'nome'		=> 'apelido',
 											'texto'		=> 'Apelido',
-											'valor'		=> old('apelido') ?? $fornecedor->entidade->apelido ?? '',
+											'valor'		=> old('apelido') ?? $funcionario->entidade->apelido ?? '',
 											'tabindex'	=> $tab += 1
 										])@endcomponent
 										@if( $errors->has('apelido') )
@@ -169,7 +192,7 @@
 											'id'		=> 'rg_ie',
 											'nome'		=> 'rg_ie',
 											'texto'		=> 'RGIE',
-											'valor'		=> old('rg_ie') ?? $fornecedor->entidade->rg_ie ?? '',
+											'valor'		=> old('rg_ie') ?? $funcionario->entidade->rg_ie ?? '',
 											'tabindex'	=> $tab += 1
 										])@endcomponent
 										@if( $errors->has('rg_ie') )
@@ -183,7 +206,7 @@
 											'id'		=> 'codigo',
 											'nome'		=> 'codigo',
 											'texto'		=> 'Código',
-											'valor'		=> old('codigo') ?? $fornecedor->codigo ?? '',
+											'valor'		=> old('codigo') ?? $funcionario->codigo ?? '',
 											'tabindex'	=> $tab += 1,
 											'atributos'	=> 'data-mask=999999'
 										])@endcomponent
@@ -200,7 +223,7 @@
 											'id'			=> 'fantasia',
 											'nome'			=> 'fantasia',
 											'texto'			=> 'Fantasia',
-											'valor'			=> old('fantasia') ?? $fornecedor->entidade->fantasia ?? '',
+											'valor'			=> old('fantasia') ?? $funcionario->entidade->fantasia ?? '',
 											'tabindex'		=> $tab += 1,
 											'classes'		=> 'cnpj',
 											'classes_label'	=> 'cnpj'
@@ -216,7 +239,7 @@
 											'id'			=> 'inscricao_municipal',
 											'nome'			=> 'inscricao_municipal',
 											'texto'			=> 'Inscrição municipal',
-											'valor'			=> old('inscricao_municipal') ?? $fornecedor->entidade->inscricao_municipal ?? '',
+											'valor'			=> old('inscricao_municipal') ?? $funcionario->entidade->inscricao_municipal ?? '',
 											'tabindex'		=> $tab += 1,
 											'classes'		=> 'cnpj',
 											'classes_label'	=> 'cnpj'
@@ -234,7 +257,7 @@
 											'id'			=> 'ramo_atividade',
 											'nome'			=> 'ramo_atividade',
 											'texto'			=> 'Ramo atividade',
-											'valor'			=> old('ramo_atividade') ?? $fornecedor->entidade->ramo_atividade ?? '',
+											'valor'			=> old('ramo_atividade') ?? $funcionario->entidade->ramo_atividade ?? '',
 											'tabindex'		=> $tab += 1,
 											'classes'		=> 'cnpj',
 											'classes_label'	=> 'cnpj'
@@ -250,7 +273,7 @@
 											'id'			=> 'data_abertura',
 											'nome'			=> 'data_abertura',
 											'texto'			=> 'Data abertura',
-											'valor'			=> old('data_abertura') ?? ( isset($fornecedor->entidade->ramo_atividade) ? $fornecedor->entidade->data_abertura->format('Y-m-d') : ''),
+											'valor'			=> old('data_abertura') ?? ( isset($funcionario->entidade->ramo_atividade) ? $funcionario->entidade->data_abertura->format('Y-m-d') : ''),
 											'tabindex'		=> $tab += 1,
 											'classes'		=> 'cnpj',
 											'classes_label'	=> 'cnpj'
@@ -268,7 +291,7 @@
 											'id'			=> 'nome_mae',
 											'nome'			=> 'nome_mae',
 											'texto'			=> 'Nome da mãe',
-											'valor'			=> old('nome_mae') ?? $fornecedor->entidade->nome_mae ?? '',
+											'valor'			=> old('nome_mae') ?? $funcionario->entidade->nome_mae ?? '',
 											'tabindex'		=> $tab += 1,
 											'classes'		=> 'cpf',
 											'classes_label'	=> 'cpf'
@@ -290,8 +313,8 @@
 										])
 											<option value="-1" selected disabled>-----SELECIONE-----</option>
 											@foreach($estados_civis as $estados_civil)
-												@if( isset($fornecedor) )
-													<option value="{{ $estados_civil->id }}" {{ old('estado_civil_id') == $estados_civil->id ? 'selected' : ($fornecedor->entidade->estado_civil_id == $estados_civil->id ? 'selected' : '') }}>
+												@if( isset($funcionario) )
+													<option value="{{ $estados_civil->id }}" {{ old('estado_civil_id') == $estados_civil->id ? 'selected' : ($funcionario->entidade->estado_civil_id == $estados_civil->id ? 'selected' : '') }}>
 														{{ $estados_civil->descricao }}
 													</option>
 												@else
@@ -318,9 +341,9 @@
 										])
 											<option value="-1" selected disabled>-----SELECIONE-----</option>
 											@foreach($regimes_casamentos as $regime_casamento)
-												@if( isset($fornecedor) )
+												@if( isset($funcionario) )
 													<option value="{{ $regime_casamento->id }}"
-															{{ old('regime_casamento_id') == $regime_casamento->id ? 'selected' : ($fornecedor->entidade->regime_casamento_id == $regime_casamento->id ? 'selected' : '') }}>
+															{{ old('regime_casamento_id') == $regime_casamento->id ? 'selected' : ($funcionario->entidade->regime_casamento_id == $regime_casamento->id ? 'selected' : '') }}>
 														{{ $regime_casamento->descricao }}</option>
 												@else
 													<option value="{{ $regime_casamento->id }}"
@@ -342,7 +365,7 @@
 											'id'			=> 'profissao',
 											'nome'			=> 'profissao',
 											'texto'			=> 'Profissão',
-											'valor'			=> old('profissao') ?? $fornecedor->entidade->profissao ?? '',
+											'valor'			=> old('profissao') ?? $funcionario->entidade->profissao ?? '',
 											'tabindex'		=> $tab += 1,
 											'classes'		=> 'cpf',
 											'classes_label'	=> 'cpf'
@@ -358,7 +381,7 @@
 											'id'			=> 'data_nascimento',
 											'nome'			=> 'data_nascimento',
 											'texto'			=> 'Data de nascimento',
-											'valor'			=> old('data_nascimento') ?? (isset($fornecedor->entidade->data_nascimento) ? $fornecedor->entidade->data_nascimento->format('Y-m-d') : ''),
+											'valor'			=> old('profissao') ?? (isset($funcionario->entidade->data_nascimento) ? $funcionario->entidade->data_nascimento->format('Y-m-d') : ''),
 											'tabindex'		=> $tab += 1,
 											'classes'		=> 'cpf',
 											'classes_label'	=> 'cpf'
@@ -374,7 +397,7 @@
 											'id'			=> 'nacionalidade',
 											'nome'			=> 'nacionalidade',
 											'texto'			=> 'Nacionalidade',
-											'valor'			=> old('nacionalidade') ?? $fornecedor->entidade->nacionalidade ?? '',
+											'valor'			=> old('nacionalidade') ?? $funcionario->entidade->nacionalidade ?? '',
 											'tabindex'		=> $tab += 1,
 											'classes'		=> 'cpf',
 											'classes_label'	=> 'cpf'
@@ -392,7 +415,7 @@
 											'id'			=> 'empresa',
 											'nome'			=> 'empresa',
 											'texto'			=> 'Empresa',
-											'valor'			=> old('empresa') ?? $fornecedor->entidade->empresa ?? '',
+											'valor'			=> old('empresa') ?? $funcionario->entidade->empresa ?? '',
 											'tabindex'		=> $tab += 1,
 											'classes'		=> 'cpf',
 											'classes_label'	=> 'cpf'
@@ -408,7 +431,7 @@
 											'id'			=> 'inss',
 											'nome'			=> 'inss',
 											'texto'			=> 'INSS',
-											'valor'			=> old('inss') ?? $fornecedor->entidade->inss ?? '',
+											'valor'			=> old('inss') ?? $funcionario->entidade->inss ?? '',
 											'tabindex'		=> $tab += 1,
 											'classes'		=> 'cpf',
 											'classes_label'	=> 'cpf'
@@ -424,7 +447,7 @@
 											'id'			=> 'dependentes',
 											'nome'			=> 'dependentes',
 											'texto'			=> 'Dependentes',
-											'valor'			=> old('dependentes') ?? $fornecedor->entidade->dependentes ?? '',
+											'valor'			=> old('dependentes') ?? $funcionario->entidade->dependentes ?? '',
 											'tabindex'		=> $tab += 1,
 											'classes'		=> 'cpf',
 											'classes_label'	=> 'cpf'
@@ -442,7 +465,7 @@
 											'id'			=> 'telefone_principal',
 											'nome'			=> 'telefone_principal',
 											'texto'			=> 'Telefone principal',
-											'valor'			=> old('telefone_principal') ?? $fornecedor->entidade->telefone_principal ?? '',
+											'valor'			=> old('telefone_principal') ?? $funcionario->entidade->telefone_principal ?? '',
 											'tabindex'		=> $tab += 1,
 											'atributos'		=> 'data-mask=(99)9999-9999'
 										])@endcomponent
@@ -457,7 +480,7 @@
 											'id'			=> 'telefone_comercial',
 											'nome'			=> 'telefone_comercial',
 											'texto'			=> 'Telefone comercial',
-											'valor'			=> old('telefone_comercial') ?? $fornecedor->entidade->telefone_comercial ?? '',
+											'valor'			=> old('telefone_comercial') ?? $funcionario->entidade->telefone_comercial ?? '',
 											'tabindex'		=> $tab += 1,
 											'atributos'		=> 'data-mask=(99)9999-9999'
 										])@endcomponent
@@ -472,7 +495,7 @@
 											'id'			=> 'celular_1',
 											'nome'			=> 'celular_1',
 											'texto'			=> 'Celular 1',
-											'valor'			=> old('celular_1') ?? $fornecedor->entidade->celular_1 ?? '',
+											'valor'			=> old('celular_1') ?? $funcionario->entidade->celular_1 ?? '',
 											'tabindex'		=> $tab += 1,
 											'atributos'		=> 'data-mask=(99)99999-9999'
 										])@endcomponent
@@ -487,7 +510,7 @@
 											'id'			=> 'celular_2',
 											'nome'			=> 'celular_2',
 											'texto'			=> 'Celular 2',
-											'valor'			=> old('celular_2') ?? $fornecedor->entidade->celular_2 ?? '',
+											'valor'			=> old('celular_2') ?? $funcionario->entidade->celular_2 ?? '',
 											'tabindex'		=> $tab += 1,
 											'atributos'		=> 'data-mask=(99)99999-9999'
 										])@endcomponent
@@ -504,7 +527,7 @@
 											'id'			=> 'site',
 											'nome'			=> 'site',
 											'texto'			=> 'Site',
-											'valor'			=> old('site') ?? $fornecedor->entidade->site ?? '',
+											'valor'			=> old('site') ?? $funcionario->entidade->site ?? '',
 											'tabindex'		=> $tab += 1
 										])@endcomponent
 										@if( $errors->has('site') )
@@ -518,7 +541,7 @@
 											'id'			=> 'email',
 											'nome'			=> 'email',
 											'texto'			=> 'E-mail',
-											'valor'			=> old('email') ?? $fornecedor->entidade->email ?? '',
+											'valor'			=> old('email') ?? $funcionario->entidade->email ?? '',
 											'tabindex'		=> $tab += 1
 										])@endcomponent
 										@if( $errors->has('email') )
@@ -527,15 +550,30 @@
 									</div>
 								</div>
 							</div>
+							<div class="row">
+								<div class="form-group @if($errors->has('foto')) has-error @endif">
+									<div class="col-md-4 col-md-offset-1">
+										<label for="foto" class="control-label">Foto</label>
+										<input type="file" name="foto" id="foto" value="{{ old('foto') ?? '' }}">
+										@if( $errors->has('foto') )
+											<span style="color: #f56954">{{ $errors->get('foto')[0] }}</span>
+										@endif
+									</div>
+									<div class="col-md-4 col-md-offset-1">
+										<img src="{{ isset($funcionario) ? Storage::url($funcionario->foto) : null }}" alt="Não há foto" height="100px">
+									</div>
+								</div>
+							</div>
+							<div class="row">&nbsp;</div>
 							@component('formularios.enderecos.Endereco',[
-								'model'     => $fornecedor->entidade ?? null,
+								'model'     => $funcionario->entidade ?? null,
 								'cidades'   => $cidades,
 								'prox_tab'	=> $tab
 							])@endcomponent
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
-										@can("editar_fornecedor")
+										@can("editar_funcionario")
 											<button class="btn btn-info" type="submit" id="salvar">
 												<i class="fa fa-save"></i> Salvar
 											</button>
@@ -544,7 +582,7 @@
 												<i class="fa fa-save"></i> Salvar
 											</button>
 										@endcan
-										@can("deletar_fornecedor")
+										@can("deletar_funcionario")
 											<button class="btn btn-danger" type="button" data-toggle="modal"
 													data-target="#modal-excluir">
 												<i class="fa fa-trash"></i> Excluir
@@ -563,8 +601,8 @@
 				</div>
 			</div>
 		</div>
-		@if( isset($fornecedor) )
-			<!-- MODAL EXCLUIR FORNECEDORES -->
+		@if( isset($funcionario) )
+			<!-- MODAL EXCLUIR FUNCIONARIOS -->
 			<div id="modal-excluir" class="modal modal-danger fade">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -576,13 +614,13 @@
 						</div>
 
 						<div class="modal-body">
-							<h4>Deseja realmente excluir o fornecedor "{{ $fornecedor->nome }}"?</h4>
+							<h4>Deseja realmente excluir o funcionário "{{ $funcionario->nome }}"?</h4>
 						</div>
 
 						<div class="modal-footer">
 							<button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
 							<form method="POST"
-								  action="{{ route('entidades.fornecedores.excluir', ['id' => $fornecedor->id]) }}">
+								  action="{{ route('entidades.funcionarios.excluir', ['id' => $funcionario->id]) }}">
 								{{ csrf_field() }}
 								{{ method_field('DELETE') }}
 								<button class="btn btn-outline" type="submit">Confirmar exclusão</button>
@@ -605,7 +643,6 @@
 	@endcan
 @endsection
 @section('js')
-	<script src="{{ asset('js/mask/jquery.mask.min.js') }}"></script>
 	<script src="{{ asset('js/select2-tab-fix/select2-tab-fix.min.js') }}"></script>
 	<script src="{{ asset('js/entidades/entidade.js') }}"></script>
 @endsection
