@@ -34,7 +34,7 @@ class ProprietariosController extends Controller
         $estados_civis = EstadoCivil::all();
         $regimes_casamentos = RegimeCasamento::all();
         $cidades = Cidade::all();
-        return view('entidades.proprietarios.criar', compact('estados_civis', 'regimes_casamentos', 'cidades', 'migalhas'));
+        return view('entidades.proprietarios.formulario', compact('estados_civis', 'regimes_casamentos', 'cidades', 'migalhas'));
     }
 
     public function Salvar(ProprietarioRequest $request)
@@ -42,12 +42,12 @@ class ProprietariosController extends Controller
         $proprietario = Proprietario::create($request->all());
         $entidade = $proprietario->entidade()->create($request->all());
         $enderecoPrincipal = $entidade->endereco_principal()->create([
-            'logradouro'    => $request->logradouro_principal,
-            'complemento'   => $request->complemento_principal,
-            'numero'        => $request->numero_principal,
-            'cep'           => $request->cep_principal,
-            'bairro'        => $request->bairro_principal,
-            'cidade_id'     => $request->cidade_id_principal,
+            'logradouro'    => $request->logradouro,
+            'complemento'   => $request->complemento,
+            'numero'        => $request->numero,
+            'cep'           => $request->cep,
+            'bairro'        => $request->bairro,
+            'cidade_id'     => $request->cidade_id,
         ]);
 
         if($request->cep_cobranca != null){
@@ -83,9 +83,9 @@ class ProprietariosController extends Controller
             $estados_civis = EstadoCivil::all();
             $regimes_casamentos = RegimeCasamento::all();
             $cidades = Cidade::all();
-            return view('entidades.proprietarios.exibir', compact('estados_civis', 'regimes_casamentos', 'proprietario', 'cidades', 'migalhas'));
+            return view('entidades.proprietarios.formulario', compact('estados_civis', 'regimes_casamentos', 'proprietario', 'cidades', 'migalhas'));
         } else
-            return redirect()->route('entidades.proprietarios.criar', 'migalhas');
+            return redirect()->route('entidades.proprietarios.formulario', 'migalhas');
     }
 
     public function Alterar(ProprietarioRequest $request, $id)
@@ -95,12 +95,12 @@ class ProprietariosController extends Controller
         $proprietario->entidade()->update($request->all());
         //----ENDEREÇO PRINCIPAL---//
         $proprietario->entidade->endereco_principal()->update([
-            'logradouro'    => $request->input('logradouro_principal'),
-            'numero'        => $request->input('numero_principal'),
-            'cep'           => $request->input('cep_principal'),
-            'complemento'	=> $request->input('complemento_principal'),
-            'bairro'        => $request->input('bairro_principal'),
-            'cidade_id'     => $request->input('cidade_id_principal')
+            'logradouro'    => $request->get('logradouro'),
+            'numero'        => $request->get('numero'),
+            'cep'           => $request->get('cep'),
+            'complemento'	=> $request->get('complemento'),
+            'bairro'        => $request->get('bairro'),
+            'cidade_id'     => $request->get('cidade_id')
         ]);
 
 		if($request->cep_cobranca != null){

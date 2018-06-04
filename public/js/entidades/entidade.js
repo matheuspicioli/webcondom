@@ -1,6 +1,6 @@
 $(document).ready(function () {
 	$('.select2').select2();
-	$('#tipo').focus();
+	$('#codigo').focus();
 	if ($("select[id=tipo]").val() == 'CNPJ') {
 		$(".cnpj").show();
 		$(".cpf").hide();
@@ -25,6 +25,9 @@ $(document).ready(function () {
 });
 $('#salvar').on('click', function(e){
 	e.preventDefault();
+	if( $('#cep_cobranca').val() != 'undefined' && $('#cep_cobranca').val() != '') {
+		$('#cep_cobranca').unmask();
+	}
 	$('#celular_1').unmask();
 	$('#celular_2').unmask();
 	$('#telefone_principal').unmask();

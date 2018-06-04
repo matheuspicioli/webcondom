@@ -62,7 +62,6 @@
 											'tabindex'	=> $tab += 1,
 											'classes'	=> 'select2'
 										])
-											<option value="-1" selected disabled>-----SELECIONE-----</option>
 											@if ( isset($funcionario) )
 												<option value="CPF"
 														{{ old('tipo') == 'CPF' ? 'selected' : ($funcionario->entidade->tipo == 'CPF' ? 'selected' : '') }}>
@@ -381,7 +380,7 @@
 											'id'			=> 'data_nascimento',
 											'nome'			=> 'data_nascimento',
 											'texto'			=> 'Data de nascimento',
-											'valor'			=> old('profissao') ?? (isset($funcionario->entidade->data_nascimento) ? $funcionario->entidade->data_nascimento->format('Y-m-d') : ''),
+											'valor'			=> old('data_nascimento') ?? (isset($funcionario->entidade->data_nascimento) ? $funcionario->entidade->data_nascimento->format('Y-m-d') : ''),
 											'tabindex'		=> $tab += 1,
 											'classes'		=> 'cpf',
 											'classes_label'	=> 'cpf'
@@ -426,7 +425,7 @@
 									</div>
 								</div>
 								<div class="col-md-4">
-									<div class="form-group @if( $errors->has('inss') ) has-error @endif">
+									<div class="form-group @if($errors->has('inss')) has-error @endif">
 										@component('formularios.String',[
 											'id'			=> 'inss',
 											'nome'			=> 'inss',

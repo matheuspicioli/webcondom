@@ -25,15 +25,10 @@ class InquilinosController extends Controller
 
     public function Criar()
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Inquilinos', 'url' => route('entidades.inquilinos.listar')],
-            ['titulo' => 'Cadastrar inquilino', 'url' => '']
-        ]);
         $estados_civis = EstadoCivil::all();
         $regimes_casamentos = RegimeCasamento::all();
         $cidades = Cidade::all();
-        return view('entidades.inquilinos.criar', compact('estados_civis', 'regimes_casamentos', 'cidades', 'migalhas'));
+        return view('entidades.inquilinos.formulario', compact('estados_civis', 'regimes_casamentos', 'cidades'));
     }
 
     public function Salvar(InquilinoRequest $request)
@@ -41,12 +36,12 @@ class InquilinosController extends Controller
         $inquilino = Inquilino::create($request->all());
         $entidade = $inquilino->entidade()->create($request->all());
         $enderecoPrincipal = $entidade->endereco_principal()->create([
-            'logradouro'    => $request->logradouro_principal,
-            'complemento'   => $request->complemento_principal,
-            'numero'        => $request->numero_principal,
-            'cep'           => $request->cep_principal,
-            'bairro'        => $request->bairro_principal,
-            'cidade_id'     => $request->cidade_id_principal,
+            'logradouro'    => $request->get('logradouro'),
+            'complemento'   => $request->get('complemento'),
+            'numero'        => $request->get('numero'),
+            'cep'           => $request->get('cep'),
+            'bairro'        => $request->get('bairro'),
+            'cidade_id'     => $request->get('cidade_id'),
         ]);
 
 		if($request->cep_cobranca != null){
@@ -71,20 +66,15 @@ class InquilinosController extends Controller
 
     public function Exibir($id)
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Inquilinos', 'url' => route('entidades.inquilinos.listar')],
-            ['titulo' => 'Alterar inquilino', 'url' => '']
-        ]);
         $inquilino = Inquilino::find($id) ? Inquilino::find($id) : null;
 
         if ($inquilino) {
             $estados_civis = EstadoCivil::all();
             $regimes_casamentos = RegimeCasamento::all();
             $cidades = Cidade::all();
-            return view('entidades.inquilinos.exibir', compact('estados_civis', 'regimes_casamentos', 'inquilino', 'cidades', 'migalhas'));
+            return view('entidades.inquilinos.formulario', compact('estados_civis', 'regimes_casamentos', 'inquilino', 'cidades'));
         } else
-            return redirect()->route('entidades.inquilinos.criar', 'migalhas');
+            return redirect()->route('entidades.inquilinos.formulario');
     }
 
     public function Alterar(InquilinoRequest $request, $id)
@@ -94,12 +84,12 @@ class InquilinosController extends Controller
         $inquilino->entidade()->update($request->all());
         //----ENDEREÇO PRINCIPAL---//
         $inquilino->entidade->endereco_principal()->update([
-            'logradouro'    => $request->input('logradouro_principal'),
-            'numero'        => $request->input('numero_principal'),
-            'cep'           => $request->input('cep_principal'),
-            'complemento'	=> $request->input('complemento_principal'),
-            'bairro'        => $request->input('bairro_principal'),
-            'cidade_id'     => $request->input('cidade_id_principal')
+            'logradouro'    => $request->get('logradouro'),
+            'numero'        => $request->get('numero'),
+            'cep'           => $request->get('cep'),
+            'complemento'	=> $request->get('complemento'),
+            'bairro'        => $request->get('bairro'),
+            'cidade_id'     => $request->get('cidade_id')
         ]);
 
 		if($request->cep_cobranca != null) {
