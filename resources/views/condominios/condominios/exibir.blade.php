@@ -16,9 +16,17 @@
 @stop
 @section('content')
     <div class="row">
-        <div class="col-md-1">
+        <div class="col-md-2">
             <a href="{{ route('condominios.condominios.listar') }}" class="btn btn-default">
                 <i class="fa fa-rotate-left"></i> Voltar</a>
+            @can("listar_unidade")
+                <a href="{{ route('condominios.unidades.listar', ['idCondominio' => $condominio->id]) }}" class="btn btn-success">
+                    <i class="fa fa-th-list"></i> Unidades</a>
+            @else
+                <button disabled type="button" class="btn btn-success">
+                    <i class="fa fa-th-list"></i> Unidades</a>
+            @endcan
+
             <hr>
         </div>
     </div>

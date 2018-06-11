@@ -31,13 +31,34 @@ class UnidadesController extends Controller
 
     public function Listar($idCondominio)
     {
-        if( $condominio = $this->condominio->find($idCondominio) ){
-            $unidades = $condominio->unidades;
+        $condominio = $this->condominio->find($idCondominio);
+        $unidades   = $this->unidade->where('condominio_id','=',$idCondominio)->get();
 
-            return view('condominios.unidades.listar', compact('unidades','idCondominio'));
+        if( $unidades ){
+            return view('condominios.unidades.listar', compact('unidades','condominio'));
         }
         Toast::error('Nenhuma condomínio com esse ID foi encontrado!', 'Erro!');
-        return view('condominio.unidades.listar',compact('idCondominio'));
+        return view('condominios.unidades.listar',compact('condominio'));
     }
 
-}
+    public function Excluir($id, $idCondominio)
+    {
+        Unidade::find($id)->delete();
+        Toast::success('Unidade excluída com sucesso!','Exclusão!');
+        return redirect()->route('condominios.unidades.listar',compact('idCondominio'));
+    }
+
+    public function Exibir($id, $idCondominio)
+    {
+        $unidade        = $this->unidade->find($id) or null;
+        $condominio     = $this->condominio->find($idCondominio);
+        $proprietarios = $this->proprietario->all();
+        $inquilinos     = $this->inquilino->all();
+        $tiposimoveis   = $this->tipoimovel->all();
+
+        if ($unidade) {
+            return view('condominios.unidades.exibir', compact('unidade','condominio','proprietarios','inquilinos','tiposimoveis'));
+        } else {
+            $this->unidade->erro('Unidade não encontrada!','Erro!');
+        }
+    }}
