@@ -35,14 +35,14 @@
 			<div class="col-md-12">
 				<div class="box box-info">
 					<div class="box-header with-border">
-						<h3 class="box-title">{{ $editar ? 'Editar' : 'Cadastrar' }} Funcionário</h3>
+						<h3 class="box-title">{{ $editar ? 'Editar' : 'Cadastrar' }} Funcionário. {{ $editar ? 'Tipo pessoa: '.$funcionario->entidade->tipo : '' }}</h3>
 						<div class="box-tools pull-right">
 							<button class="btn btn-box-tool" type="button" data-widget="collapse">
 								<i class="fa fa-minus"></i></button>
 						</div>
 					</div>
 					<div class="box-body">
-						@if( isset($fornecedor) )
+						@if( isset($funcionario) )
 							<form method="POST"
 								enctype="multipart/form-data"
 								action="{{ route('entidades.funcionarios.alterar', ['id' => $funcionario->id ]) }}" id="form">
@@ -55,33 +55,41 @@
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group @if( $errors->has('tipo') ) has-error @endif">
-										@component('formularios.Select',[
+										@if($editar)
+											@component('formularios.Hidden',[
+												'id'	=> 'tipo',
+												'nome'	=> 'tipo',
+												'valor'	=> $funcionario->entidade->tipo ?? ''
+											])@endcomponent
+										@else
+											@component('formularios.Select',[
 											'id'		=> 'tipo',
 											'nome'		=> 'tipo',
 											'texto'		=> 'Tipo pessoa',
 											'tabindex'	=> $tab += 1,
-											'classes'	=> 'select2'
+											'classes'	=> 'select2',
 										])
-											@if ( isset($funcionario) )
-												<option value="CPF"
-														{{ old('tipo') == 'CPF' ? 'selected' : ($funcionario->entidade->tipo == 'CPF' ? 'selected' : '') }}>
-													CPF
-												</option>
-												<option value="CNPJ" {{ old('tipo') == 'CNPJ' ? 'selected' : ($funcionario->entidade->tipo == 'CNPJ' ? 'selected' : '') }}>
-													CNPJ
-												</option>
-											@else
-												<option value="CPF"
-														{{ old('tipo') == 'CPF' ? 'selected' : '' }}>
-													CPF
-												</option>
-												<option value="CNPJ" {{ old('tipo') == 'CNPJ' ? 'selected' : '' }}>
-													CNPJ
-												</option>
+												@if ( isset($funcionario) )
+													<option value="CPF"
+															{{ old('tipo') == 'CPF' ? 'selected' : ($funcionario->entidade->tipo == 'CPF' ? 'selected' : '') }}>
+														CPF
+													</option>
+													<option value="CNPJ" {{ old('tipo') == 'CNPJ' ? 'selected' : ($funcionario->entidade->tipo == 'CNPJ' ? 'selected' : '') }}>
+														CNPJ
+													</option>
+												@else
+													<option value="CPF"
+															{{ old('tipo') == 'CPF' ? 'selected' : '' }}>
+														CPF
+													</option>
+													<option value="CNPJ" {{ old('tipo') == 'CNPJ' ? 'selected' : '' }}>
+														CNPJ
+													</option>
+												@endif
+											@endcomponent
+											@if( $errors->has('tipo') )
+												<span style="color: #f56954">{{ $errors->get('tipo')[0] }}</span>
 											@endif
-										@endcomponent
-										@if( $errors->has('tipo') )
-											<span style="color: #f56954">{{ $errors->get('tipo')[0] }}</span>
 										@endif
 									</div>
 								</div>

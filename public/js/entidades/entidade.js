@@ -1,7 +1,8 @@
 $(document).ready(function () {
 	$('.select2').select2();
 	$('#codigo').focus();
-	if ($("select[id=tipo]").val() == 'CNPJ') {
+
+	if ($("[id=tipo]").val() == 'CNPJ') {
 		$(".cnpj").show();
 		$(".cpf").hide();
 		$('#cpf_cnpj').mask('99.999.999/9999-99');
@@ -11,8 +12,8 @@ $(document).ready(function () {
 		$('#cpf_cnpj').mask('999.999.999-99');
 	}
 
-	$("select[id=tipo]").on('change', function () {
-		if ($("select[id=tipo]").val() == 'CNPJ') {
+	$("[id=tipo]").on('change', function () {
+		if ($("[id=tipo]").val() == 'CNPJ') {
 			$(".cnpj").show();
 			$(".cpf").hide();
 			$('#cpf_cnpj').mask('99.999.999/9999-99');

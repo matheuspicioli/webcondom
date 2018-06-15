@@ -35,7 +35,7 @@
             <div class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header with-border">
-						<h3 class="box-title">{{ $editar ? 'Editar' : 'Cadastrar' }} Proprietário</h3>
+						<h3 class="box-title">{{ $editar ? 'Editar' : 'Cadastrar' }} Proprietário. {{ $editar ? 'Tipo pessoa: '.$proprietario->entidade->tipo : '' }}</h3>
                         <div class="box-tools pull-right">
                             <button class="btn btn-box-tool" type="button" data-widget="collapse">
                                 <i class="fa fa-minus"></i></button>
@@ -67,11 +67,12 @@
 									</div>
 								</div>
 								@component('formularios.entidades.Entidade',[
-									'entidade'			=> isset($proprietario) ? $proprietario->entidade : null,
+									'entidade'			=> isset($proprietario->entidade) ? $proprietario->entidade : null,
 									'tab'				=> $tab,
 									'estados_civis' 	=> $estados_civis,
 									'cidades'			=> $cidades,
-									'regimes_casamentos'=> $regimes_casamentos
+									'regimes_casamentos'=> $regimes_casamentos,
+									'editar'			=> $editar
 								])
 									@slot('endereco_cobranca')
 										<div class="row">

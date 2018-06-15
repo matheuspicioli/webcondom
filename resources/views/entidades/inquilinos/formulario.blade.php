@@ -1,5 +1,5 @@
 @php
-	$editar = isset($inquilinos);
+	$editar = isset($inquilino);
 	$tab = 0;
 @endphp
 @extends('adminlte::page')
@@ -35,14 +35,14 @@
             <div class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header with-border">
-						<h3 class="box-title">{{ $editar ? 'Editar' : 'Cadastrar' }} Inquilino</h3>
+						<h3 class="box-title">{{ $editar ? 'Editar' : 'Cadastrar' }} Inquilino. {{ $editar ? 'Tipo pessoa: '.$inquilino->entidade->tipo : '' }}</h3>
                         <div class="box-tools pull-right">
                             <button class="btn btn-box-tool" type="button" data-widget="collapse">
                                 <i class="fa fa-minus"></i></button>
                         </div>
                     </div>
                     <div class="box-body">
-						@if( isset($inquilino) )
+						@if( $editar )
 							<form method="POST" action="{{ route('entidades.inquilinos.alterar', ['id' => $inquilino->id ]) }}" id="form">
 								{{ csrf_field() }}
 								{{ method_field('PUT') }}
@@ -71,7 +71,8 @@
 									'tab'				=> $tab,
 									'estados_civis' 	=> $estados_civis,
 									'cidades'			=> $cidades,
-									'regimes_casamentos'=> $regimes_casamentos
+									'regimes_casamentos'=> $regimes_casamentos,
+									'editar'			=> $editar
 								])
 									@slot('endereco_cobranca')
 										<div class="row">
