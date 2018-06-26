@@ -2,6 +2,8 @@
 
 namespace WebCondom\Http\Controllers\Relatorios;
 
+use Illuminate\Support\Facades\Storage;
+use PDF;
 use Illuminate\Http\Request;
 use WebCondom\Http\Controllers\Controller;
 use WebCondom\Models\Financeiros\ContaCorrenteLancamento;
@@ -17,8 +19,11 @@ class RelatoriosController extends Controller
 
 	public function exemplo () {
     	$lancamentos = $this->lancamento->all()->sortBy('data_lancamento');
-		return \PDF::loadView('relatorios.exemplo', compact('lancamentos'))
-			->setPaper('a4', 'landscape')
-			->download('lancamentos-conta-corrente.pdf');
+    	dd( $lancamentos );
+    	$data = [ 'lancamentos' => $lancamentos ];
+//		$pdf = PDF::loadView('relatorios.exemplo', $data )
+//			->setPaper('a4', 'landscape');
+		return view('relatorios.exemplo', $data);
+//		return $pdf->stream();
 	}
 }
