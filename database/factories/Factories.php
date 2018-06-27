@@ -92,6 +92,12 @@ $factory->define(WebCondom\Models\Entidades\Proprietario::class, function (Faker
     ];
 });
 
+$factory->define(WebCondom\Models\Entidades\Inquilino::class, function (Faker $faker) {
+    return [
+        'codigo'        => $faker->randomNumber(3),
+        'entidade_id'   => 1
+    ];
+});
 $factory->define(WebCondom\Models\Condominios\Imovel::class, function (Faker $faker) {
     return [
         'codigo'            => $faker->randomNumber(3),

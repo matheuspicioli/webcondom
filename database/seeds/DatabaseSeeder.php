@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call('SetoresSeeder');
         $this->call('EntidadesSeeder');
         $this->call('ProprietariosSeeder');
+        $this->call('InquilinosSeeder');
         $this->call('CategoriasSeeder');
         $this->call('TipoImoveisSeeder');
         $this->call('ImoveisSeeder');
@@ -38,5 +39,6 @@ class DatabaseSeeder extends Seeder
         $this->call('ContasCorrentesLancamentosSeeder');
         $this->call('BalancetesSeeder');
         $this->call('BalancetesLancamentosSeeder');
+        $this->call('UnidadesSeeder');
     }
 }
