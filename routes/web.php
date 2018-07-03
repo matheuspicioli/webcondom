@@ -16,6 +16,10 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home')->middleware('auth');
 Route::get('/debug', 'DebugController@debug')->name('debug')->middleware('auth');
 
+Route::prefix('Relatorios')->namespace('Relatorios')->middleware('auth')->group( function() {
+	Route::get('/', 'RelatoriosController@exemplo')->name('relatorios.exemplo');
+});
+
 Route::prefix('Condominios')->namespace('Condominios')->middleware('auth')->group(function(){
     Route::prefix('Sindicos')->group(function(){
         Route::get('/', 'SindicosController@listar')->name('condominios.sindicos.listar');
