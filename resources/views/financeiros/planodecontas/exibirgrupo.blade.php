@@ -1,3 +1,6 @@
+@php
+	$tab = 0;
+@endphp
 @extends('adminlte::page')
 @section('title', 'Plano de contas - Editar')
 @section('content_header')
@@ -43,61 +46,96 @@
                             <div class="col-md-12 col-md-offset-2">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        {!! Form::label('plano', 'Tipo', ['class' => 'control-label']) !!}
-                                            <select name="plano_id" id="plano" class="form-control">
-                                                @foreach($planos as $planosF)
-                                                    <option {{$planosF->id == $plano->id ? 'selected' : '' }} value="{{ $planosF->id }}">{{ $planosF->tipo }}
-                                                        - {{ $planosF->descricao }}</option>
-                                                @endforeach
-                                            </select>
+										@component('formularios.Select',[
+											'id'		=> 'plano',
+											'nome'		=> 'plano',
+											'texto'		=> 'Tipo',
+											'tabindex'	=> $tab += 1,
+											'classes'	=> 'select2'
+										])
+											@foreach($planos as $planosF)
+												<option {{$planosF->id == $plano->id ? 'selected' : '' }} value="{{ $planosF->id }}">{{ $planosF->tipo }}
+													- {{ $planosF->descricao }}</option>
+											@endforeach
+										@endcomponent
                                     </div>
                                 </div>
                                 <div class="col-md-1">
                                     <div class="form-group">
-                                        {!! Form::label('grupo', 'Grupo', ['class' => 'control-label']) !!}
-                                            {!! Form::text('grupo', $grupo->grupo, ['class' => 'form-control', 'maxlength' => '3', 'readonly']) !!}
+										@component('formularios.String',[
+											'id'		=> 'grupo',
+											'nome'		=> 'grupo',
+											'texto'		=> 'Grupo',
+											'valor'		=> $grupo->grupo ?? null,
+											'tabindex'	=> $tab += 1,
+											'atributos'	=> 'maxlength=3 readonly'
+										])@endcomponent
                                     </div>
                                 </div>
                                 <div class="col-md-1">
                                     <div class="form-group">
-                                        {!! Form::label('conta', 'Conta', ['class' => 'control-label']) !!}
-
-                                            {!! Form::text('conta', '', ['class' => 'form-control', 'maxlength' => '4', 'disabled']) !!}
+										@component('formularios.String',[
+											'id'		=> 'conta',
+											'nome'		=> 'conta',
+											'texto'		=> 'Conta',
+											'valor'		=> null,
+											'tabindex'	=> $tab += 1,
+											'atributos'	=> 'maxlength=4 disabled'
+										])@endcomponent
                                     </div>
                                 </div>
                                 <div class="col-md-2">
-                                    {!! Form::label('ratear', 'Ratear?', ['class' => 'control-label']) !!}
-                                    <select name="ratear" id="ratear" class="form-control" >
-                                        <option {{$grupo->ratear == 'Sim' ? 'selected' : '' }} value="Sim">
-                                            Sim
-                                        </option>
-                                        <option {{$grupo->ratear == 'Não' ? 'selected' : '' }} value="Não">
-                                            Não
-                                        </option>
-                                    </select>
+									@component('formularios.Select',[
+										'id'		=> 'ratear',
+										'nome'		=> 'ratear',
+										'texto'		=> 'Ratear?',
+										'tabindex'	=> $tab += 1,
+										'classes'	=> 'select2'
+									])
+										<option {{$grupo->ratear == 'Sim' ? 'selected' : '' }} value="Sim">
+											Sim
+										</option>
+										<option {{$grupo->ratear == 'Não' ? 'selected' : '' }} value="Não">
+											Não
+										</option>
+									@endcomponent
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {!! Form::label('descricao_grupo', 'Descrição grupo', ['class' => 'control-label']) !!}
-                                    {!! Form::text('descricao_grupo', $grupo->descricao, ['class' => 'form-control']) !!}
+									@component('formularios.String',[
+										'id'		=> 'descricao_grupo',
+										'nome'		=> 'descricao_grupo',
+										'texto'		=> 'Descrição grupo',
+										'valor'		=> $grupo->descricao ?? null,
+										'tabindex'	=> $tab += 1
+									])@endcomponent
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {!! Form::label('descricao_conta', 'Descrição conta', ['class' => 'control-label']) !!}
-                                    {!! Form::text('descricao_conta', '', ['class' => 'form-control','disabled']) !!}
+									@component('formularios.String',[
+										'id'		=> 'descricao_conta',
+										'nome'		=> 'descricao_conta',
+										'texto'		=> 'Descrição conta',
+										'valor'		=> $grupo->descricao ?? null,
+										'tabindex'	=> $tab += 1,
+										'atributos'	=> 'disabled'
+									])@endcomponent
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <button class="btn btn-info" type="submit">
-                                        <i class="fa fa-pencil"></i> Alterar
-                                    </button>
+									@component('formularios.Botao',[
+										'classes'	=> 'btn-info',
+										'icone'		=> 'fa fa-pencil',
+										'texto'		=> 'Alterar',
+										'atributos'	=> 'type=submit'
+									])@endcomponent
                                 </div>
                             </div>
                         </div>
@@ -129,6 +167,7 @@
     </div>
 @endsection
 @section('js')
+	<script src="{{ asset('js/select2-tab-fix/select2-tab-fix.min.js') }}"></script>
     <script>
         $(document).ready(function () {
             $('.select2').select2();

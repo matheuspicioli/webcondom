@@ -16,11 +16,20 @@
         <div class="row">
             <div class="col-md-1">
                 @can("incluir_imovel")
-                    <a href="{{ route('condominios.imoveis.criar') }}" class="btn btn-success">
-                        <i class="fa fa-plus"></i> Cadastrar</a>
+                    @component('formularios.Link',[
+						'link'		=> route('condominios.imoveis.criar'),
+						'classes'	=> 'btn btn-success',
+						'icone'		=> 'fa fa-plus',
+						'texto'		=> 'Cadastrar'
+					])@endcomponent
                 @else
-                    <button disabled type="button" class="btn btn-success">
-                        <i class="fa fa-plus"></i> Cadastrar</button>
+					@component('formularios.Link',[
+						'link'		=> route('condominios.imoveis.criar'),
+						'classes'	=> 'btn btn-success',
+						'icone'		=> 'fa fa-plus',
+						'texto'		=> 'Cadastrar',
+						'atributos'	=> 'disabled'
+					])@endcomponent
                 @endcan
                 <hr>
             </div>

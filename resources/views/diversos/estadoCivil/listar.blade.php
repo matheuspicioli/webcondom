@@ -55,20 +55,20 @@
                                 <tr>
                                     <td>{{ $estadocivis->id }}</td>
                                     <td>{{ $estadocivis->descricao }}</td>
-                                    <td>{{ $estadocivis->exige_conjuge_formatado }}</td>
+                                    <td>{{ $estadocivis->exige_conjuge }}</td>
                                     <td>
                                         @can("exibir_estadocivil")
-                                            <a class="btn btn-sm btn-warning" href="{{ route('diversos.estadoCivil.exibir', ['id' => $estadocivis->id ]) }}">
+                                            <a class="btn btn-xs btn-warning" href="{{ route('diversos.estadoCivil.exibir', ['id' => $estadocivis->id ]) }}">
                                                 <i class="fa fa-pencil"></i></a>
                                         @else
-                                            <button disabled type="button" class="btn btn-sm btn-warning">
+                                            <button disabled type="button" class="btn btn-xs btn-warning">
                                                 <i class="fa fa-pencil"></i></button>
                                         @endcan
                                         @can("deletar_estadocivil")
-                                            <button type="button" data-toggle="modal" data-target="#modal-danger-{{$estadocivis->id}}" href="#" class="btn btn-sm btn-danger">
+                                            <button type="button" data-toggle="modal" data-target="#modal-danger-{{$estadocivis->id}}" href="#" class="btn btn-xs btn-danger">
                                                 <i class="fa fa-trash"></i></button>
                                         @else
-                                            <button disabled type="button" class="btn btn-sm btn-danger">
+                                            <button disabled type="button" class="btn btn-xs btn-danger">
                                                 <i class="fa fa-trash"></i></button>
                                         @endcan
                                         <!-- MODAL EXCLUSÃO -->

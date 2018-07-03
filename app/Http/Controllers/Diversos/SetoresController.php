@@ -19,17 +19,13 @@ class SetoresController extends Controller
 
 	public function Listar()
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Setores', 'url' => '']
-        ]);
         $setores = Setor::all();
-        return view('diversos.setores.listar', compact('setores', 'migalhas'));
+        return view('diversos.setores.listar', compact('setores'));
     }
 
     public function Criar()
     {
-        return view('diversos.setores.criar', compact('migalhas'));
+        return view('diversos.setores.formulario');
     }
 
     public function Salvar(SetorRequest $request)
@@ -41,17 +37,12 @@ class SetoresController extends Controller
 
     public function Exibir($id)
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Setores', 'url' => route('diversos.setores.listar')],
-            ['titulo' => 'Alterar setor', 'url' => '']
-        ]);
         $setor = Setor::find($id) ? Setor::find($id) : null;
 
         if($setor)
-            return view('diversos.setores.exibir', compact('setor', 'migalhas'));
+            return view('diversos.setores.formulario', compact('setor'));
         else
-            return redirect()->route('diversos.setores.criar');
+            return redirect()->route('diversos.setores.formulario');
     }
 
     public function Alterar(SetorRequest $request, $id)

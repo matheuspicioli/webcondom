@@ -72,8 +72,8 @@
                                     <td>{{ $lancamento->plano_conta->grupo->plano_de_conta->tipo }}.{{ $lancamento->plano_conta->grupo->grupo }}.{{ $lancamento->plano_conta->conta }}</td>
                                     <td>{{ $lancamento->plano_conta->descricao  }}</td>
                                     <td>{{ $lancamento->historico }}</td>
-                                    <td class="align-right"><b>{{ $lancamento->tipo == 'Credito' ? $lancamento->valor_view : '' }}</b></td>
-                                    <td class="align-right"><b>{{ $lancamento->tipo == 'Debito' ? $lancamento->valor_view : '' }}</b></td>
+                                    <td align="right"><b>{{ $lancamento->tipo == 'Credito' ? $lancamento->valor_view : '' }}</b></td>
+                                    <td align="right"><b>{{ $lancamento->tipo == 'Debito' ? $lancamento->valor_view : '' }}</b></td>
 									<td>{{ $lancamento->fornecedor_id ? $lancamento->fornecedor->entidade->nome : '' }}</td>
                                     <td>
                                         @can("exibir_balancete_lancamentos")

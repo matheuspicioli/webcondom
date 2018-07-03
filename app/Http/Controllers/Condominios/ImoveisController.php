@@ -23,16 +23,11 @@ class ImoveisController extends Controller
 
     public function Criar()
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Imóveis', 'url' => route('condominios.imoveis.listar')],
-            ['titulo' => 'Cadastrar imóvel', 'url' => '']
-        ]);
         $tiposImoveis = TipoImovel::all();
         $categorias = Categoria::all();
         $condominios = Condominio::all();
         $cidades = Cidade::all();
-        return view('condominios.imoveis.criar', compact('tiposImoveis','categorias','condominios','cidades','migalhas'));
+        return view('condominios.imoveis.formulario', compact('tiposImoveis','categorias','condominios','cidades'));
     }
 
     public function Salvar(ImovelRequest $request)
@@ -60,9 +55,9 @@ class ImoveisController extends Controller
             $categorias 	= Categoria::all();
             $condominios 	= Condominio::all();
             $cidades 		= Cidade::all();
-            return view('condominios.imoveis.exibir', compact('condominios','tiposImoveis','categorias','imovel','cidades'));
+            return view('condominios.imoveis.formulario', compact('condominios','tiposImoveis','categorias','imovel','cidades'));
         } else
-            return redirect()->route('condominios.imoveis.criar');
+            return redirect()->route('condominios.imoveis.formulario');
     }
 
     public function Alterar(ImovelRequest $request, $id)

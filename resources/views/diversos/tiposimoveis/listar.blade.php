@@ -48,9 +48,9 @@
                                 <td>{{ $tipoimovel->id }}</td>
                                 <td>{{ $tipoimovel->descricao }}</td>
                                 <td>
-                                    <a class="btn btn-warning" href="{{ route('diversos.tiposimoveis.exibir', ['id' => $tipoimovel->id ]) }}">
+                                    <a class="btn btn-xs btn-warning" href="{{ route('diversos.tiposimoveis.exibir', ['id' => $tipoimovel->id ]) }}">
                                         <i class="fa fa-pencil"></i></a>
-                                    <button type="button" data-toggle="modal" data-target="#modal-danger-{{$tipoimovel->id}}" href="#" class="btn btn-danger">
+                                    <button type="button" data-toggle="modal" data-target="#modal-danger-{{$tipoimovel->id}}" href="#" class="btn btn-xs btn-danger">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                     <!-- MODAL EXCLUSÃO -->

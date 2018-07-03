@@ -120,12 +120,13 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group @if($errors->has('data_lancamento')) has-error @endif">
-												@component('formularios.DataString',[
+												@component('formularios.Data',[
 													'nome' 			=> 'data_lancamento',
 													'id'			=> 'data',
 													'valor'			=> old('data_lancamento'),
 													'tabindex'		=> '1',
-													'texto'			=> 'Data'
+													'texto'			=> 'Data',
+													'titulo'        => 'Data do Lançamento'
                                                 ])@endcomponent
                                                 @if( $errors->has('data_lancamento') )
                                                     <span class="help-block">{{ $errors->get('data_lancamento')[0] }}</span>
@@ -135,11 +136,12 @@
                                         <div class="col-md-4">
                                             <div class="form-group @if($errors->has('documento')) has-error @endif">
 												@component('formularios.String',[
-													'nome' 			=> 'nascimento',
-													'id'			=> 'nascimento',
-													'valor'			=> old('nascimento'),
+													'nome' 			=> 'documento',
+													'id'			=> 'documento',
+													'valor'			=> old('documento'),
 													'tabindex'		=> '2',
-													'texto'			=> 'Documento'
+													'texto'			=> 'Documento',
+													'titulo'        => 'Número do Documento'
                                                 ])@endcomponent
                                                 @if( $errors->has('documento') )
                                                     <span class="help-block">{{ $errors->get('documento')[0] }}</span>
@@ -181,7 +183,8 @@
 													'id'			=> 'historico',
 													'valor'			=> old('historico'),
 													'texto'			=> 'Histórico',
-													'tabindex'		=> '4'
+													'tabindex'		=> '4',
+													'titulo'        => 'Informe o Histórico'
                                                 ])@endcomponent
                                                 @if( $errors->has('historico') )
                                                     <span class="help-block">{{ $errors->get('historico')[0] }}</span>
@@ -195,7 +198,8 @@
 													'id'			=> 'valor',
 													'valor'			=> old('valor'),
 													'texto'			=> 'Valor',
-													'tabindex'		=> '5'
+													'tabindex'		=> '5',
+													'titulo'        => 'Informe o Valor'
                                                 ])@endcomponent
                                                 @if( $errors->has('valor') )
                                                     <span class="help-block">{{ $errors->get('valor')[0] }}</span>
@@ -208,6 +212,7 @@
 													'nome' 		=> 'tipo',
 													'id'		=> 'tipo',
 													'valor'		=> 'Debito',
+													'campo'     => old('tipo'),
 													'texto'		=> 'Débito',
 													'atributos'	=> 'tabindex=6'
                                                 ])@endcomponent
@@ -215,6 +220,7 @@
 													'nome' 		=> 'tipo',
 													'id'		=> 'tipo',
 													'valor'		=> 'Credito',
+													'campo'     => old('tipo'),
 													'texto'		=> 'Crédito',
 													'atributos'	=> 'tabindex=7'
 												])@endcomponent
@@ -229,6 +235,7 @@
 													'id'		=> 'compensado',
 													'nome'		=> 'compensado',
 													'valor'		=> 'Sim',
+													'campo'     => old('compensado'),
 													'texto'		=> 'Compensado?',
 													'atributos'	=> 'tabindex=8'
 												])@endcomponent
@@ -267,7 +274,8 @@
 													'id'		=> 'nota',
 													'valor'		=> old('nota_fiscal'),
 													'texto'		=> 'Nota fiscal',
-													'tabindex'	=> '10'
+													'tabindex'	=> '10',
+													'titulo'    => 'Número da Nota Fiscal'
 												])@endcomponent
                                                 @if( $errors->has('nota_fiscal') )
                                                     <span class="help-block">{{ $errors->get('nota_fiscal')[0] }}</span>
@@ -281,7 +289,8 @@
 													'id'		=> 'parcela',
 													'valor'		=> old('parcela'),
 													'texto'		=> 'Parcela',
-													'tabindex'	=> '11'
+													'tabindex'	=> '11',
+													'titulo'    => 'Número da Parcela'
 												])@endcomponent
                                                 @if( $errors->has('parcela') )
                                                     <span class="help-block">{{ $errors->get('parcela')[0] }}</span>
@@ -299,6 +308,7 @@
 															'id'		=> 'cheque',
 															'nome'		=> 'cheque',
 															'valor'		=> 'Sim',
+															'campo'     => old('cheque'),
 															'texto'		=> 'Cheque?',
 															'atributos'	=> 'tabindex=12'
 														])@endcomponent
@@ -311,12 +321,13 @@
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group @if($errors->has('enviado_em')) has-error @endif">
-														@component('formularios.DataString',[
+														@component('formularios.Data',[
 															'nome' 			=> 'enviado_em',
 															'id'			=> 'enviado_em',
 															'valor'			=> old('enviado_em'),
 															'tabindex'		=> '13',
-															'texto'			=> 'Enviado em'
+															'texto'			=> 'Enviado em',
+															'titulo'        => 'Data de envio do malote'
 														])@endcomponent
 														@if($errors->has('enviado_em'))
 															<span class="help-block">
@@ -327,12 +338,13 @@
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group @if($errors->has('retorno_em')) has-error @endif">
-														@component('formularios.DataString',[
+														@component('formularios.Data',[
 															'nome' 			=> 'retorno_em',
 															'id'			=> 'retorno_em',
 															'valor'			=> old('retorno_em'),
 															'tabindex'		=> '14',
-															'texto'			=> 'Retorno em'
+															'texto'			=> 'Retorno em',
+															'titulo'        => 'Data de retorno do malote'
 														])@endcomponent
 														@if($errors->has('retorno_em'))
 															<span class="help-block">
@@ -347,6 +359,7 @@
 															'id'		=> 'assinado',
 															'nome'		=> 'assinado',
 															'valor'		=> 'Sim',
+															'campo'     => old('assinado'),
 															'texto'		=> 'Assinado ?',
 															'atributos'	=> 'tabindex=15'
 														])@endcomponent
@@ -357,8 +370,14 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <button class="btn btn-primary">
-                                                <i class="fa fa-save"></i> Salvar</button>
+                                            @component('formularios.Botao',[
+                                                'id'		=> 'salvar',
+                                                'classes'	=> 'btn-primary',
+                                                'texto'		=> ' Salvar',
+                                                'icone'     => 'fa fa-save',
+                                                'titulo'    => 'Clique aqui para salvar',
+                                                'atributos'	=> 'tabindex=16'
+                                            ])@endcomponent
                                         </div>
                                     </div>
                                 </form>
@@ -565,35 +584,35 @@
                                                     </button>
                                                     <h3 class="modal-title">Compensar Lançamento</h3>
                                                 </div>
-                                                <div class="modal-body">
-                                                    <h3>Dados do Lançamento: </h3>
-                                                    <p>Data:   {{ $lancamento->data_lancamento->format('d/m/Y') }}</p>
-                                                    <p>Documento: {{ $lancamento->documento }}</p>
-                                                    <p>Histórico:   {{ $lancamento->historico }}</p>
-                                                    <p>Valor:   {{ number_format($lancamento->valor, 2,',','.') }}</p>
-                                                    <label for="data" class="control-label">Data Compensado</label>
-                                                    <input id="data" type="date" class="form-control pula"
-                                                           name="data_lancamento" value="{{ $lancamento->data_lancamento->format('Y-m-d') }}">
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
-                                                    <form method="POST" action="{{ route('financeiros.lancamentos.compensar', ['id' => $lancamento->id]) }}">
-                                                        {{ csrf_field() }}
-                                                        {{ method_field('PUT') }}
-
+												<form method="POST" action="{{ route('financeiros.lancamentos.compensar', ['id' => $lancamento->id]) }}">
+													{{ csrf_field() }}
+													{{ method_field('PUT') }}
+													<div class="modal-body">
+														<h3>Dados do Lançamento: </h3>
+														<p>Data:   {{ $lancamento->data_lancamento->format('d/m/Y') }}</p>
+														<p>Documento: {{ $lancamento->documento }}</p>
+														<p>Histórico:   {{ $lancamento->historico }}</p>
+														<p>Valor:   {{ number_format($lancamento->valor, 2,',','.') }}</p>
+														<input type="hidden" name="compensado" id="compensado-cc" value="Sim">
 														@component('formularios.Hidden',[
-															'nome' 		=> 'conta_id',
-															'valor' 	=> $contaL->id
+															'nome' 	=> 'compensado',
+															'id'	=> 'compensado-cc',
+															'valor'	=> 'Sim'
 														])@endcomponent
-                                                        @component('formularios.Hidden',[
-															'nome' 		=> 'condominio_id',
-															'valor' 	=> $condominio->id
+														@component('formularios.Data',[
+															'nome' 		=> 'data_lancamento',
+															'id'		=> 'data_lancamento_compensar',
+															'valor'		=> $lancamento->data_lancamento->format('Y-m-d'),
+															'texto'		=> 'Data Compensado',
+															'titulo'	=> 'Data Compensado',
+															'tabindex'	=> '1'
 														])@endcomponent
-                                                        <input type="hidden" name="compensado" id="compensado-cc" value="Sim">
-
-                                                        <button class="btn btn-outline" type="submit" id="btn-compensar">Compensar</button>
-                                                    </form>
-                                                </div>
+													</div>
+													<div class="modal-footer">
+														<button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
+															<button class="btn btn-outline" type="submit" id="btn-compensar">Compensar</button>
+													</div>
+												</form>
                                             </div>
                                         </div>
                                     </div>

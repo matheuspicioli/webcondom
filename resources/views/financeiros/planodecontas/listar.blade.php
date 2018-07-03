@@ -1,3 +1,6 @@
+@php
+	$tab = 0;
+@endphp
 @extends('adminlte::page')
 @section('title', 'Plano de contas - Listar')
 @section('content_header')
@@ -35,54 +38,92 @@
                             <div class="col-md-12 col-md-offset-2">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        {!! Form::label('tipo', 'Tipo', ['class' => 'control-label']) !!}
-                                        <select name="plano_id" id="tipo" class="form-control">
-                                            <option disabled selected>---------------SELECIONE---------------</option>
-                                            @foreach($planos as $plano)
-                                                <option value="{{ $plano->id }}">{{ $plano->tipo }}
-                                                    - {{ $plano->descricao }}</option>
-                                            @endforeach
-                                        </select>
+										@component('formularios.Select',[
+											'id'		=> 'tipo',
+											'nome'		=> 'plano_id',
+											'texto'		=> 'Tipo',
+											'tabindex'	=> $tab += 1,
+											'classes'	=> 'select2'
+										])
+											<option disabled selected>---------------SELECIONE---------------</option>
+											@foreach($planos as $plano)
+												<option value="{{ $plano->id }}">{{ $plano->tipo }} - {{ $plano->descricao }}</option>
+											@endforeach
+										@endcomponent
                                     </div>
                                 </div>
                                 <div class="col-md-1">
                                     <div class="form-group">
-                                        {!! Form::label('grupo', 'Grupo', ['class' => 'control-label']) !!}
-                                        {!! Form::text('grupo', '', ['class' => 'form-control', 'maxlength' => '3']) !!}
+										@component('formularios.String',[
+											'id'		=> 'grupo',
+											'nome'		=> 'grupo',
+											'texto'		=> 'Grupo',
+											'valor'		=> null,
+											'tabindex'	=> $tab += 1,
+											'atributos'	=> 'maxlength=3'
+										])@endcomponent
                                     </div>
                                 </div>
                                 <div class="col-md-1">
                                     <div class="form-group">
-                                        {!! Form::label('conta', 'Conta', ['class' => 'control-label']) !!}
-                                        {!! Form::text('conta', '', ['class' => 'form-control', 'maxlength' => '4']) !!}
+										@component('formularios.String',[
+											'id'		=> 'conta',
+											'nome'		=> 'conta',
+											'texto'		=> 'Conta',
+											'valor'		=> null,
+											'tabindex'	=> $tab += 1,
+											'atributos'	=> 'maxlength=4'
+										])@endcomponent
                                     </div>
                                 </div>
                                 <div class="col-md-2">
-                                    {!! Form::label('ratear', 'Ratear?', ['class' => 'control-label']) !!}
-                                    {!! Form::select('ratear', ['Sim' => 'Sim', 'Nao' => 'Não'], null, ['class' => 'form-control']) !!}
+									@component('formularios.Select',[
+										'id'		=> 'ratear',
+										'nome'		=> 'ratear',
+										'texto'		=> 'Ratear',
+										'tabindex'	=> $tab += 1,
+										'classes'	=> 'select2'
+									])
+										<option value="Sim">Sim</option>
+										<option value="Nao">Não</option>
+									@endcomponent
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {!! Form::label('descricao_grupo', 'Descrição grupo', ['class' => 'control-label']) !!}
-                                    {!! Form::text('descricao_grupo', '', ['class' => 'form-control']) !!}
+									@component('formularios.String',[
+										'id'		=> 'descricao_grupo',
+										'nome'		=> 'descricao_grupo',
+										'texto'		=> 'Descrição grupo',
+										'valor'		=> null,
+										'tabindex'	=> $tab += 1
+									])@endcomponent
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {!! Form::label('descricao_conta', 'Descrição conta', ['class' => 'control-label']) !!}
-                                    {!! Form::text('descricao_conta', '', ['class' => 'form-control']) !!}
+									@component('formularios.String',[
+										'id'		=> 'descricao_conta',
+										'nome'		=> 'descricao_conta',
+										'texto'		=> 'Descrição conta',
+										'valor'		=> null,
+										'tabindex'	=> $tab += 1
+									])@endcomponent
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <button class="btn btn-primary" id="enviar-plano-contas" type="submit">
-                                        <i class="fa fa-save"></i> Incluir
-                                    </button>
+									@component('formularios.Botao',[
+										'id'		=> 'enviar-plano-contas',
+										'icone'		=> 'fa fa-save',
+										'texto'		=> 'Incluir',
+										'classes'	=> 'btn-primary',
+										'atributos'	=> 'type=submit'
+									])@endcomponent
                                 </div>
                             </div>
                         </div>
@@ -225,6 +266,7 @@
 @stop
 
 @section('js')
+	<script src="{{ asset('js/select2-tab-fix/select2-tab-fix.min.js') }}"></script>
     <script>
         $(document).ready(function () {
             $('#tabela').DataTable({

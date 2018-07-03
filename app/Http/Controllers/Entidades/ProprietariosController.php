@@ -34,7 +34,7 @@ class ProprietariosController extends Controller
         $estados_civis = EstadoCivil::all();
         $regimes_casamentos = RegimeCasamento::all();
         $cidades = Cidade::all();
-        return view('entidades.proprietarios.criar', compact('estados_civis', 'regimes_casamentos', 'cidades', 'migalhas'));
+        return view('entidades.proprietarios.formulario', compact('estados_civis', 'regimes_casamentos', 'cidades', 'migalhas'));
     }
 
     public function Salvar(ProprietarioRequest $request)
@@ -42,12 +42,12 @@ class ProprietariosController extends Controller
         $proprietario = Proprietario::create($request->all());
         $entidade = $proprietario->entidade()->create($request->all());
         $enderecoPrincipal = $entidade->endereco_principal()->create([
-            'logradouro'    => $request->logradouro_principal,
-            'complemento'   => $request->complemento_principal,
-            'numero'        => $request->numero_principal,
-            'cep'           => $request->cep_principal,
-            'bairro'        => $request->bairro_principal,
-            'cidade_id'     => $request->cidade_id_principal,
+            'logradouro'    => $request->logradouro,
+            'complemento'   => $request->complemento,
+            'numero'        => $request->numero,
+            'cep'           => $request->cep,
+            'bairro'        => $request->bairro,
+            'cidade_id'     => $request->cidade_id,
         ]);
 
         if($request->cep_cobranca != null){
@@ -72,20 +72,15 @@ class ProprietariosController extends Controller
 
     public function Exibir($id)
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Proprietários', 'url' => route('entidades.proprietarios.listar')],
-            ['titulo' => 'Alterar proprietario', 'url' => '']
-        ]);
         $proprietario = Proprietario::find($id) ? Proprietario::find($id) : null;
 
         if ($proprietario) {
             $estados_civis = EstadoCivil::all();
             $regimes_casamentos = RegimeCasamento::all();
             $cidades = Cidade::all();
-            return view('entidades.proprietarios.exibir', compact('estados_civis', 'regimes_casamentos', 'proprietario', 'cidades', 'migalhas'));
+            return view('entidades.proprietarios.formulario', compact('estados_civis', 'regimes_casamentos', 'proprietario', 'cidades', 'migalhas'));
         } else
-            return redirect()->route('entidades.proprietarios.criar', 'migalhas');
+            return redirect()->route('entidades.proprietarios.formulario', 'migalhas');
     }
 
     public function Alterar(ProprietarioRequest $request, $id)
@@ -94,28 +89,27 @@ class ProprietariosController extends Controller
         $proprietario->update($request->all());
         $proprietario->entidade()->update($request->all());
         //----ENDEREÇO PRINCIPAL---//
-        $proprietario->entidade->endereco_principal()->update([
-            'logradouro'    => $request->input('logradouro_principal'),
-            'numero'        => $request->input('numero_principal'),
-            'cep'           => $request->input('cep_principal'),
-            'complemento'	=> $request->input('complemento_principal'),
-            'bairro'        => $request->input('bairro_principal'),
-            'cidade_id'     => $request->input('cidade_id_principal')
-        ]);
+        $proprietario->entidade->endereco_principal()->update($request->all());
 
-		if($request->cep_cobranca != null){
+		if($request->get('cep_cobranca') != null) {
+			$dados_cobranca = [
+				'logradouro'    => $request->get('logradouro_cobranca'),
+				'numero'        => $request->get('numero_cobranca'),
+				'cep'           => $request->get('cep_cobranca'),
+				'complemento'	=> $request->get('complemento_cobranca'),
+				'bairro'        => $request->get('bairro_cobranca'),
+				'cidade_id'     => $request->get('cidade_id_cobranca')
+			];
 			//----ENDEREÇO COBRANÇA---//
-			$proprietario->entidade->endereco_cobranca()->update([
-				'logradouro'    => $request->input('logradouro_cobranca'),
-				'numero'        => $request->input('numero_cobranca'),
-				'cep'           => $request->input('cep_cobranca'),
-				'complemento'	=> $request->input('complemento_cobranca'),
-				'bairro'        => $request->input('bairro_cobranca'),
-				'cidade_id'     => $request->input('cidade_id_cobranca')
-			]);
+			if ( isset($proprietario->entidade->endereco_cobranca) ) {
+				$cobranca = $proprietario->entidade->endereco_cobranca()->update($dados_cobranca);
+			} else {
+				$cobranca = $proprietario->entidade->endereco_cobranca()->create($dados_cobranca);
+			}
+
+			$proprietario->entidade->endereco_cobranca()->associate($cobranca);
+			$proprietario->entidade->save();
 		}
-        //SALVA E SALVA OS RELACIONAMENTOS TAMBÉM
-        $proprietario->push();
 
 		Toast::success('Proprietário alterado com sucesso!', 'Alteração!');
         return redirect()->route('entidades.proprietarios.listar');

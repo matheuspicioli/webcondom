@@ -12,22 +12,13 @@ class EstadoCivilController extends Controller
 {
     public function Listar()
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Estado civil', 'url' => '']
-        ]);
         $estadoCivil = EstadoCivil::all();
-        return view('diversos.estadoCivil.listar', compact('estadoCivil', 'migalhas'));
+        return view('diversos.estadoCivil.listar', compact('estadoCivil'));
     }
 
     public function Criar()
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Estado civil', 'url' => route('diversos.estadoCivil.listar')],
-            ['titulo' => 'Cadastrar estado cívil', 'url' => '']
-        ]);
-        return view('diversos.estadoCivil.criar', compact('migalhas'));
+        return view('diversos.estadoCivil.formulario');
     }
 
     public function Salvar(EstadoCivilRequest $request)
@@ -40,22 +31,17 @@ class EstadoCivilController extends Controller
 
     public function Exibir($id)
     {
-        $migalhas = json_encode([
-            ['titulo' => 'Home', 'url' => route('home')],
-            ['titulo' => 'Estado civil', 'url' => route('diversos.estadoCivil.listar')],
-            ['titulo' => 'Alterar estado cívil', 'url' => '']
-        ]);
         $estadoCivil = EstadoCivil::find($id) ? EstadoCivil::find($id) : null;
 
         if($estadoCivil)
-            return view('diversos.estadoCivil.exibir', compact('estadoCivil', 'migalhas'));
+            return view('diversos.estadoCivil.formulario', compact('estadoCivil'));
         else
-            return redirect()->route('diversos.estadoCivil.criar');
+            return redirect()->route('diversos.estadoCivil.formulario');
     }
 
     public function Alterar(EstadoCivilRequest $request, $id)
     {
-        //dd($request->except(['_token', '_method']));
+        //dd($request->all());
         $estadoCivil = EstadoCivil::find($id);
         $estadoCivil->update($request->all());
 		Toast::success('Estado civil alterado com sucesso!', 'Alteração!');

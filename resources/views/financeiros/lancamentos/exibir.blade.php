@@ -36,29 +36,44 @@
                             <input type="hidden" name="conta_corrente_id" value="{{ $contaL->id }}">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="data" class="control-label" @if($errors->has('data_lancamento')) style="color: #f56954" @endif>Data</label>
-                                        <input id="data" type="date" class="form-control pula" @if($errors->has('data_lancamento')) style="color: #f56954" @endif
-                                               name="data_lancamento" value="{{ $lancamento->data_lancamento->format('Y-m-d') }}">
+                                    <div class="form-group @if($errors->has('data_lancamento')) has-error @endif">
+                                        @component('formularios.Data',[
+                                            'nome' 			=> 'data_lancamento',
+                                            'id'			=> 'data_lancamento',
+                                            'valor'			=> old('data_lancamento') ?? $lancamento->data_lancamento->format('Y-m-d') ?? null,
+                                            'tabindex'		=> '1',
+                                            'texto'			=> 'Data',
+                                            'titulo'        => 'Data do Lançamento'
+                                        ])@endcomponent
+                                        @if( $errors->has('data_lancamento') )
+                                            <span style="color: #f56954">{{ $errors->get('data_lancamento')[0] }}</span>
+                                        @endif
                                     </div>
-                                    @if( $errors->has('data_lancamento') )
-                                        <span style="color: #f56954">{{ $errors->get('data_lancamento')[0] }}</span>
-                                    @endif
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="documento" class="control-label" @if($errors->has('documento')) style="color: #f56954" @endif>Documento</label>
-                                        <input id="documento" type="text" class="form-control pula" @if($errors->has('documento')) style="color: #f56954" @endif
-                                               name="documento" value="{{  $lancamento->documento }}">
+                                    <div class="form-group @if($errors->has('documento')) has-error @endif">
+                                        @component('formularios.String',[
+                                            'nome' 			=> 'documento',
+                                            'id'			=> 'documento',
+                                            'valor'			=> old('documento') ?? $lancamento->documento?? null,
+                                            'tabindex'		=> '2',
+                                            'texto'			=> 'Documento',
+                                            'titulo'        => 'Número do Documento'
+                                        ])@endcomponent
+                                        @if( $errors->has('documento') )
+                                            <span style="color: #f56954">{{ $errors->get('documento')[0] }}</span>
+                                        @endif
                                     </div>
-                                    @if( $errors->has('documento') )
-                                        <span style="color: #f56954">{{ $errors->get('documento')[0] }}</span>
-                                    @endif
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-group" @if($errors->has('plano_conta_id')) style="color: #f56954" @endif>
-                                        <label for="plano_conta_id" class="control-label">Plano de contas</label>
-                                        <select name="plano_conta_id" id="plano_conta_id" class="form-control">
+                                    <div class="form-group @if($errors->has('plano_conta_id')) has-error @endif">
+                                        @component('formularios.Select', [
+                                            'nome' 		=> 'plano_conta_id',
+                                            'id'		=> 'plano_conta_id',
+                                            'tabindex'	=> '3',
+                                            'texto'		=> 'Plano de contas',
+                                            'classes'	=> 'select2',
+                                        ])
                                             <option selected disabled>SELECIONE</option>
                                             @foreach($tipos as $tipo)
                                                 @foreach($tipo->grupos as $grupo)
@@ -70,7 +85,7 @@
                                                     @endforeach
                                                 @endforeach
                                             @endforeach
-                                        </select>
+                                        @endcomponent
                                         @if( $errors->has('plano_conta_id') )
                                             <span class="help-block">{{ $errors->get('plano_conta_id')[0] }}</span>
                                         @endif
@@ -80,62 +95,88 @@
                             <!-- 2ª linha -->
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="historico" class="control-label" @if($errors->has('historico')) style="color: #f56954" @endif>Histórico</label>
-                                        <input id="historico" type="text" class="form-control pula" @if($errors->has('historico')) style="color: #f56954" @endif
-                                               name="historico" value="{{ $lancamento->historico }}">
+                                    <div class="form-group @if($errors->has('historico')) has-error @endif">
+                                        @component('formularios.String',[
+                                            'nome' 			=> 'historico',
+                                            'id'			=> 'historico',
+                                            'valor'			=> old('historico') ?? $lancamento->historico ?? null,
+                                            'texto'			=> 'Histórico',
+                                            'tabindex'		=> '4',
+                                            'titulo'        => 'Informe o Histórico'
+                                        ])@endcomponent
+                                        @if( $errors->has('historico') )
+                                            <span style="color: #f56954">{{ $errors->get('historico')[0] }}</span>
+                                        @endif
                                     </div>
-                                    @if( $errors->has('historico') )
-                                        <span style="color: #f56954">{{ $errors->get('historico')[0] }}</span>
-                                    @endif
                                 </div>
                                 <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="valor" class="control-label" @if($errors->has('valor')) style="color: #f56954" @endif>Valor</label>
-                                        <input id="valor" type="text" class="form-control pula" @if($errors->has('valor')) style="color: #f56954" @endif
-                                               name="valor" value="{{ $lancamento->valor_view }}">
+                                    <div class="form-group @if($errors->has('valor')) has-error @endif">
+                                        @component('formularios.String',[
+                                            'nome' 			=> 'valor',
+                                            'id'			=> 'valor',
+                                            'valor'			=> old('valor') ?? $lancamento->valor ?? null,
+                                            'texto'			=> 'Valor',
+                                            'tabindex'		=> '5',
+                                            'titulo'        => 'Informe o Valor'
+                                        ])@endcomponent
+                                        @if( $errors->has('valor') )
+                                            <span style="color: #f56954">{{ $errors->get('valor')[0] }}</span>
+                                        @endif
                                     </div>
-                                    @if( $errors->has('valor') )
-                                        <span style="color: #f56954">{{ $errors->get('valor')[0] }}</span>
-                                    @endif
                                 </div>
                                 <div class="col-md-2">
-                                    <div class="form-group" @if($errors->has('tipo')) style="color: #f56954" @endif>
-                                        <div class="radio">
-                                            <label><input type="radio" name="tipo"
-                                                          value="Debito" {{ $lancamento->tipo == 'Debito' ? "checked" : '' }}>Débito</label>
-                                        </div>
-                                        <div class="radio">
-                                            <label><input type="radio" name="tipo"
-                                                          value="Credito" {{ $lancamento->tipo == 'Credito' ? "checked" : '' }}>Crédito</label>
-                                        </div>
-                                    @if( $errors->has('tipo') )
-                                        <span class="help-block">{{ $errors->get('tipo')[0] }}</span>
-                                    @endif
+                                    <div class="form-group @if($errors->has('tipo')) has-error @endif">
+                                        @component('formularios.Radio',[
+                                            'nome' 		=> 'tipo',
+                                            'id'		=> 'tipo',
+                                            'valor'		=> 'Debito',
+                                            'campo'     => old('tipo') ?? $lancamento->tipo ?? '',
+                                            'texto'		=> 'Débito',
+                                            'atributos'	=> 'tabindex=6'
+                                        ])@endcomponent
+                                        @component('formularios.Radio',[
+                                            'nome' 		=> 'tipo',
+                                            'id'		=> 'tipo',
+                                            'valor'		=> 'Credito',
+                                            'campo'     => old('tipo') ?? $lancamento->tipo ?? '',
+                                            'texto'		=> 'Crédito',
+                                            'atributos'	=> 'tabindex=7'
+                                        ])@endcomponent
+                                        @if( $errors->has('tipo') )
+                                            <span class="help-block">{{ $errors->get('tipo')[0] }}</span>
+                                        @endif
                                     </div>
                                 </div>
                                     <div class="col-md-2">
-                                    <div class="checkbox">
-                                        <label for="compensado">
-                                            <input type="checkbox" class="flat-red" name="compensado"
-                                                   id="compensado" {{ $lancamento->compensado == 'Sim' ? "checked" : '' }}> Compensado?
-                                        </label>
-                                    </div>
+                                        <div class="form-group @if($errors->has('assinado')) has-error @endif">
+                                            @component('formularios.Checkbox',[
+                                                'id'		=> 'compensado',
+                                                'nome'		=> 'compensado',
+                                                'valor'		=> 'Sim',
+                                                'campo'     => old('compensado') ?? $lancamento->compensado ?? '',
+                                                'texto'		=> 'Compensado?',
+                                                'atributos'	=> 'tabindex=8'
+                                            ])@endcomponent
+                                        </div>
                                 </div>
                             </div>
                             <!-- 3ª linha -->
                             <div class="row">
                                 <div class="col-md-5">
-                                    <div class="form-group" @if($errors->has('fornecedor_id')) style="color: #f56954" @endif>
-                                        <label for="fornecedor" class="control-label">Fornecedor</label>
-                                        <select name="fornecedor_id" id="fornecedor" class="form-control">
-                                            <option selected disabled>===============SELECIONE===============
-                                            </option>
+                                    <div class="form-group @if($errors->has('fornecedor_id')) has-error @endif">
+                                        @component('formularios.Select', [
+                                            'nome' 		=> 'fornecedor_id',
+                                            'id'		=> 'fornecedor',
+                                            'tabindex'	=> '9',
+                                            'texto'		=> 'Fornecedor',
+                                            'classes'	=> 'select2',
+                                        ])
+                                            <option selected disabled>===============SELECIONE===============</option>
                                             @foreach($fornecedores as $fornecedor)
                                                 <option value="{{ $fornecedor->id }}" {{ $lancamento->fornecedor_id == $fornecedor->id ? 'selected' : '' }}>
                                                     {{ $fornecedor->entidade->nome }}</option>
                                             @endforeach
-                                        </select>
+                                        @endcomponent
                                         @if( $errors->has('fornecedor_id') )
                                             <span style="color: #f56954">{{ $errors->get('fornecedor_id')[0] }}</span>
                                         @endif
@@ -143,61 +184,100 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="nota" class="control-label" @if($errors->has('nota_fiscal')) style="color: #f56954" @endif>Nota fiscal</label>
-                                        <input id="nota" type="text" class="form-control pula" @if($errors->has('nota_fiscal')) style="color: #f56954" @endif
-                                               name="nota_fiscal" value="{{ $lancamento->nota_fiscal }}">
-                                        @if( $errors->has('nota_fiscal') )
-                                            <span style="color: #f56954">{{ $errors->get('nota_fiscal')[0] }}</span>
-                                        @endif
+                                        <div class="form-group @if($errors->has('nota_fiscal')) has-error @endif">
+                                            @component('formularios.String',[
+                                                'nome'		=> 'nota_fiscal',
+                                                'id'		=> 'nota',
+                                                'valor'		=> old('nota_fiscal') ?? $lancamento->nota_fiscal ?? null,
+                                                'texto'		=> 'Nota fiscal',
+                                                'tabindex'	=> '10',
+                                                'titulo'    => 'Número da Nota Fiscal'
+                                            ])@endcomponent
+                                            @if( $errors->has('nota_fiscal') )
+                                                <span style="color: #f56954">{{ $errors->get('nota_fiscal')[0] }}</span>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="parcela" class="control-label" @if($errors->has('parcela')) style="color: #f56954" @endif>Parcela</label>
-                                        <input id="parcela" type="text" class="form-control pula" @if($errors->has('parcela')) style="color: #f56954" @endif
-                                               name="parcela" value="{{ $lancamento->parcela }}">
-                                        @if( $errors->has('parcela') )
-                                            <span style="color: #f56954">{{ $errors->get('parcela')[0] }}</span>
-                                        @endif
+                                        <div class="form-group @if($errors->has('parcela')) has-error @endif">
+                                            @component('formularios.String',[
+                                                'nome'		=> 'parcela',
+                                                'id'		=> 'parcela',
+                                                'valor'		=> old('parcela') ?? $lancamento->parcela ?? null,
+                                                'texto'		=> 'Parcela',
+                                                'tabindex'	=> '11',
+                                                'titulo'    => 'Número da Parcela'
+                                            ])@endcomponent
+                                            @if( $errors->has('parcela') )
+                                                <span style="color: #f56954">{{ $errors->get('parcela')[0] }}</span>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- 4ª LINHA -->
                             <div class="row">
-                                <div class="col-md-offset-1">
+                                <div class="col-md-offset-2">
                                     <div class="row">
                                         <div class="col-md-2">
-                                            <div class="checkbox">
-                                                <label for="cheque">
-                                                    <input type="checkbox" name="cheque" id="cheque" {{ $lancamento->cheque == 'Sim' ? "checked" : '' }}>Cheque?
-                                                </label>
+                                            <div class="form-group @if($errors->has('cheque')) has-error @endif">
+                                                @component('formularios.Checkbox',[
+                                                    'id'		=> 'cheque',
+                                                    'nome'		=> 'cheque',
+                                                    'valor'		=> 'Sim',
+                                                    'campo'     => old('cheque') ?? $lancamento->cheque ?? '',
+                                                    'texto'		=> 'Cheque?',
+                                                    'atributos'	=> 'tabindex=12'
+                                                ])@endcomponent
+                                                @if($errors->has('cheque'))
+                                                    <span class="help-block">
+                                                            {{ $errors->get('cheque')[0] }}
+                                                        </span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="enviado_em" class="control-label" @if($errors->has('enviado_em')) style="color: #f56954" @endif>Enviado em</label>
-                                                <input type="date" name="enviado_em" id="enviado_em" @if($errors->has('enviado_em')) style="color: #f56954" @endif
-                                                       class="form-control" value="{{ $lancamento->enviado_em }}">
+                                            <div class="form-group @if($errors->has('enviado_em')) has-error @endif">
+                                                @component('formularios.Data',[
+                                                    'nome' 			=> 'enviado_em',
+                                                    'id'			=> 'enviado_em',
+                                                    'valor'			=> old('enviado_em') ?? $lancamento->enviado_em ?? null,
+                                                    'tabindex'		=> '13',
+                                                    'texto'			=> 'Enviado em',
+                                                    'titulo'        => 'Data de envio do malote'
+                                                ])@endcomponent
                                                 @if( $errors->has('enviado_em') )
                                                     <span style="color: #f56954">{{ $errors->get('enviado_em')[0] }}</span>
                                                 @endif
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="retorno_em" class="control-label" @if($errors->has('retorno_em')) style="color: #f56954" @endif>Retorno em</label>
-                                                <input type="date" name="retorno_em" id="retorno_em" @if($errors->has('retorno_em')) style="color: #f56954" @endif
-                                                       class="form-control" value="{{ $lancamento->retorno_em }}">
+                                            <div class="form-group @if($errors->has('retorno_em')) has-error @endif">
+                                                @component('formularios.Data',[
+                                                    'nome' 			=> 'retorno_em',
+                                                    'id'			=> 'retorno_em',
+                                                    'valor'			=> old('retorno_em') ?? $lancamento->retorno_em ?? null,
+                                                    'tabindex'		=> '14',
+                                                    'texto'			=> 'Retorno em',
+                                                    'titulo'        => 'Data de retorno do malote'
+                                                ])@endcomponent
                                                 @if( $errors->has('retorno_em') )
                                                     <span style="color: #f56954">{{ $errors->get('retorno_em')[0] }}</span>
                                                 @endif
                                             </div>
                                         </div>
                                         <div class="col-md-2">
-                                            <div class="checkbox">
-                                                <label for="assinado">
-                                                    <input type="checkbox" name="assinado" id="assinado" {{ $lancamento->assinado == 'Sim' ? "checked" : '' }}>Assinado?
-                                                </label>
+                                            <div class="form-group @if($errors->has('assinado')) has-error @endif">
+                                                @component('formularios.Checkbox',[
+                                                    'id'		=> 'assinado',
+                                                    'nome'		=> 'assinado',
+                                                    'valor'		=> 'Sim',
+                                                    'campo'     => old('assinado') ?? $lancamento->assinado ?? '',
+                                                    'texto'		=> 'Assinado ?',
+                                                    'atributos'	=> 'tabindex=15'
+                                                ])@endcomponent
                                             </div>
                                         </div>
                                     </div>
@@ -207,15 +287,29 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         @can("editar_lancamento")
-                                            <button class="btn btn-info" type="submit">
-                                                <i class="fa fa-save"></i> Alterar</button>
+                                            @component('formularios.Botao',[
+                                                'id'		=> 'salvar',
+                                                'classes'	=> 'btn-info',
+                                                'texto'		=> ' Alterar',
+                                                'icone'     => 'fa fa-save',
+                                                'titulo'    => 'Clique aqui para salvar',
+                                                'atributos'	=> 'tabindex=16'
+                                            ])@endcomponent
                                         @else
                                             <button disabled class="btn btn-info" type="submit">
                                                 <i class="fa fa-save"></i> Alterar</button>
                                         @endcan
                                         @can("deletar_lancamento")
-                                            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
-                                                <i class="fa fa-trash"></i> Excluir</button>
+                                                @component('formularios.Botao',[
+                                                    'id'		=> 'excluir',
+                                                    'classes'	=> 'btn-danger',
+                                                    'texto'		=> ' Excluir',
+                                                    'icone'     => 'fa fa-trash',
+                                                    'titulo'    => 'Clique aqui para excluir',
+                                                    'toogle'    => 'modal',
+                                                    'target'    => '#modal-excluir',
+                                                    'atributos'	=> 'tabindex=17 type=button'
+                                                ])@endcomponent
                                         @else
                                             <button disabled class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
                                                 <i class="fa fa-trash"></i> Excluir</button>
