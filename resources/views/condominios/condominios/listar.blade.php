@@ -76,6 +76,13 @@
                                             <button disabled type="button" class="btn btn-xs btn-warning">
                                                 <i class="fa fa-pencil"></i></button>
                                         @endcan
+                                        @can("listar_unidade")
+                                            <a class="btn btn-sm btn-primary" href="{{ route('condominios.unidades.listar', ['idCondominio' => $condominio->id ]) }}">
+                                                <i class="fa fa-th-list"></i></a>
+                                        @else
+                                                <button disabled type="button" class="btn btn-sm btn-primary">
+                                                    <i class="fa fa-th-list"></i></button>
+                                        @endcan
                                         @can("deletar_condominio")
                                             <button type="button" data-toggle="modal" data-target="#modal-danger-{{$condominio->id}}" href="#" class="btn btn-xs btn-danger">
                                                 <i class="fa fa-trash"></i></button>

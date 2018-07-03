@@ -26,6 +26,15 @@ Route::prefix('Condominios')->namespace('Condominios')->middleware('auth')->grou
         Route::delete('{id}', 'SindicosController@excluir')->name('condominios.sindicos.excluir');
     });
 
+    Route::prefix('Unidades')->group(function(){
+        Route::get('Criar/{idCondominio}', 'UnidadesController@criar')->name('condominios.unidades.criar');
+        Route::get('/{idCondominio?}', 'UnidadesController@listar')->name('condominios.unidades.listar');
+        Route::post('/{idCondominio}', 'UnidadesController@salvar')->name('condominios.unidades.salvar');
+        Route::get('{id}/Exibir/{idCondominio}', 'UnidadesController@exibir')->name('condominios.unidades.exibir');
+        Route::put('{id}/Alterar/{idCondominio}', 'UnidadesController@alterar')->name('condominios.unidades.alterar');
+        Route::delete('{id}/{idCondominio}', 'UnidadesController@excluir')->name('condominios.unidades.excluir');
+    });
+
     Route::prefix('Condominios')->group(function(){
         Route::get('/', 'CondominiosController@listar')->name('condominios.condominios.listar');
         Route::get('Criar', 'CondominiosController@criar')->name('condominios.condominios.criar');
