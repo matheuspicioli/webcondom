@@ -353,7 +353,7 @@
                                                         'nome'      => 'foneprincipal_proprietario',
                                                         'texto'     => 'Fone Principal',
                                                         'valor'     => old('foneprincipal_proprietario') ?? $unidade->proprietario->entidade->telefone_principal ?? null,
-                                                        'atributos' => 'disabled'
+                                                        'atributos' => 'disabled data-mask=(00)0000-0000'
                                                     ])@endcomponent
                                                 </div>
                                             </div>
@@ -363,8 +363,8 @@
                                                         'id'        => 'fonecomercial_proprietario',
                                                         'nome'      => 'fonecomercial_proprietario',
                                                         'texto'     => 'Fone Comercial',
-                                                        'valor'     => old('foneprincipal_proprietario') ?? $unidade->proprietario->entidade->telefone_comercial ?? null,
-                                                        'atributos' => 'disabled'
+                                                        'valor'     => old('fonecomercial_proprietario') ?? $unidade->proprietario->entidade->telefone_comercial ?? null,
+                                                        'atributos' => 'disabled data-mask=(00)0000-0000'
                                                     ])@endcomponent
                                                 </div>
                                             </div>
@@ -375,7 +375,7 @@
                                                         'nome'      => 'celular1_proprietario',
                                                         'texto'     => 'Celular 1',
                                                         'valor'     => old('celular1_proprietario') ?? $unidade->proprietario->entidade->celular_1 ?? null,
-                                                        'atributos' => 'disabled'
+                                                        'atributos' => 'disabled data-mask=(00)00000-0000'
                                                     ])@endcomponent
                                                 </div>
                                             </div>
@@ -386,7 +386,7 @@
                                                         'nome'      => 'celular2_proprietario',
                                                         'texto'     => 'Celular 2',
                                                         'valor'     => old('celular2_proprietario') ?? $unidade->proprietario->entidade->celular_2 ?? null,
-                                                        'atributos' => 'disabled'
+                                                        'atributos' => 'disabled data-mask=(00)00000-0000'
                                                     ])@endcomponent
                                                 </div>
                                             </div>
@@ -472,7 +472,7 @@
                                                         'nome'      => 'foneprincipal_inquilino',
                                                         'texto'     => 'Fone Principal',
                                                         'valor'     => old('foneprincipal_inquilino') ?? $unidade->inquilino->entidade->telefone_principal ?? null,
-                                                        'atributos' => 'disabled'
+                                                        'atributos' => 'disabled data-mask=(00)0000-0000'
                                                     ])@endcomponent
                                                 </div>
                                             </div>
@@ -483,7 +483,7 @@
                                                         'nome'      => 'fonecomercial_inquilino',
                                                         'texto'     => 'Fone Comercial',
                                                         'valor'     => old('fonecomercial_inquilino') ?? $unidade->inquilino->entidade->telefone_comercial ?? null,
-                                                        'atributos' => 'disabled'
+                                                        'atributos' => 'disabled data-mask=(00)0000-0000'
                                                     ])@endcomponent
                                                 </div>
                                             </div>
@@ -494,7 +494,7 @@
                                                         'nome'      => 'celular1_inquilino',
                                                         'texto'     => 'Celular 1',
                                                         'valor'     => old('celular1_inquilino') ?? $unidade->inquilino->entidade->celular_1 ?? null,
-                                                        'atributos' => 'disabled'
+                                                        'atributos' => 'disabled data-mask=(00)00000-0000'
                                                     ])@endcomponent
                                                 </div>
                                             </div>
@@ -505,7 +505,7 @@
                                                         'nome'      => 'celular2_inquilino',
                                                         'texto'     => 'Celular 2',
                                                         'valor'     => old('celular2_inquilino') ?? $unidade->inquilino->entidade->celular_2 ?? null,
-                                                        'atributos' => 'disabled'
+                                                        'atributos' => 'disabled data-mask=(00)00000-0000'
                                                     ])@endcomponent
                                                 </div>
                                             </div>
@@ -856,13 +856,15 @@
                                         <button disabled class="btn btn-info" type="submit">
                                             <i class="fa fa-save"></i> Salvar</button>
                                     @endcan
-                                    @can("deletar_unidade")
-                                        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
-                                            <i class="fa fa-trash"></i> Excluir</button>
-                                    @else
-                                        <button disabled class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
-                                            <i class="fa fa-trash"></i> Excluir</button>
-                                    @endcan
+									@if ( $editar )
+										@can("deletar_unidade")
+											<button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
+												<i class="fa fa-trash"></i> Excluir</button>
+										@else
+											<button disabled class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-excluir">
+												<i class="fa fa-trash"></i> Excluir</button>
+										@endcan
+									@endif
                                 </div>
                             </div>
                         </div>
@@ -920,6 +922,7 @@
     <script>
         $(document).ready(function () {
             $('#bloco').focus();
+			$('#boleto_email_destino').attr('disabled',true);
             $('#proprietario_id').on( 'change', function () {
 				let proprietario_id = $('#proprietario_id').val();
 				let url = '/Entidades/Proprietarios/GetProprietario/'+proprietario_id;
@@ -936,6 +939,20 @@
 					$('#celular2_proprietario').val( retorno.celular_2 );
 				});
             });
+
+			if ( $(this).val() == 'Nao' ) {
+				$('#boleto_email_destino').attr('disabled',true);
+			} else {
+				$('#boleto_email_destino').attr('disabled',false);
+			}
+
+			$('#boleto_email').on('change', function () {
+				if ( $(this).val() == 'Nao' ) {
+					$('#boleto_email_destino').attr('disabled',true);
+				} else {
+					$('#boleto_email_destino').attr('disabled',false);
+				}
+			});
 
 			$('#inquilino_id').on( 'change', function () {
 				let inquilino_id = $('#inquilino_id').val();

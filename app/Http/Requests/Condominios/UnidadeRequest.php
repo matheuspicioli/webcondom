@@ -24,8 +24,8 @@ class UnidadeRequest extends FormRequest
     public function rules()
     {
         return [
-            'bloco' 		            => 'nullable|max:6',
-            'unidade'		            => 'required|max:6',
+            'bloco' 		            => 'nullable|max:4',
+            'unidade'		            => 'required|max:4',
             'tipo_imovel_id'            => 'required',
             'garagem'		            => 'nullable',
             'bloquear_acesso'		    => 'required',
@@ -34,8 +34,8 @@ class UnidadeRequest extends FormRequest
             'area_util'			        => 'nullable',
             'area_total'	            => 'nullable',
             'indice'			        => 'nullable',
-            'imobiliaria'		        => 'nullable',
-            'imobiliaria_contato'       => 'nullable',
+            'imobiliaria'		        => 'nullable|max:50',
+            'imobiliaria_contato'       => 'nullable|max:50',
             'observacoes'		        => 'nullable',
             'boleto_impresso'	        => 'required',
             'boleto_impresso_destino'	=> 'required',

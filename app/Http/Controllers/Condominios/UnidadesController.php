@@ -55,17 +55,13 @@ class UnidadesController extends Controller
 
 	public function Salvar(UnidadeRequest $request, $idCondominio)
 	{
-		try {
-			DB::transaction(function () use ($request, $idCondominio) {
-				$unidade = $this->unidade->create( $request->all() );
-				$unidade->proprietario()->associate( $request->get('proprietario_id') );
-				$unidade->inquilino()->associate( $request->get('inquilino_id') );
-				$unidade->save();
-			});
+		$unidade = $this->unidade->create( $request->all() );
+
+		if ( isset($unidade) ) {
 			Toast::success('Unidade incluída com sucesso!', 'Inclusão!');
 			return redirect()->route('condominios.unidades.listar', ['idCondominio' => $idCondominio]);
-		} catch (\Throwable $e) {
-			Toast::error('Ocorreu um erro ao criar a unidade!<br>'.$e->getMessage(),'Erro!');
+		} else {
+			Toast::error('Ocorreu um erro ao criar a unidade!','Erro!');
 			return redirect()->route('condominios.unidades.listar', ['idCondominio' => $idCondominio]);
 		}
 	}
@@ -81,7 +77,7 @@ class UnidadesController extends Controller
         if ( isset($unidade) ) {
             return view('condominios.unidades.formulario', compact('unidade','condominio','proprietarios','inquilinos','tiposimoveis'));
         }
-        Toast::error('Nenhuma unidade encontrada','Erro!');
+        Toast::error('Nenhuma unidade encontrada!','Erro!');
         return view('condominios.unidades.listar',compact('id','condominio'));
     }
 
@@ -89,12 +85,12 @@ class UnidadesController extends Controller
     {
         $unidade = $this->unidade->find($id);
 
-        if($unidade){
-            $unidade->update($request->all());
+        if( isset($unidade) ){
+            $unidade->update( $request->all() );
             Toast::success('Unidade alterado com sucesso!','Alteração!');
             return redirect()->route('condominios.unidades.listar',compact('idCondominio'));
         }
-        $this->unidade->erro('Unidade não encontrada!','Erro!');
+		Toast::error('Unidade não encontrada!','Erro!');
     }
 
 	public function Excluir($id, $idCondominio)
