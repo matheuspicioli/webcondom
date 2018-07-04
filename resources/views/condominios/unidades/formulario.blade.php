@@ -24,8 +24,13 @@
 @section('content')
     <div class="row">
         <div class="col-md-1">
-            <a href="{{ route('condominios.unidades.listar',['idCondominio' => $condominio->id ]) }}" class="btn btn-default">
-                <i class="fa fa-rotate-left"></i> Voltar</a>
+			@component('formularios.Link',[
+				'texto'		=> 'Voltar',
+				'icone'		=> 'fa fa-rotate-left',
+				'link'		=> route('condominios.unidades.listar',['idCondominio' => $condominio->id ]),
+				'classes'	=> 'btn btn-default'
+			])
+			@endcomponent
             <hr>
         </div>
     </div>
@@ -36,32 +41,49 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Dados do Condomínios -> {{ $condominio->nome }} - {{ $condominio->apelido }}</h3>
                     <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" type="button" data-widget="collapse">
-                            <i class="fa fa-minus"></i>
-                        </button>
+						@component('formularios.Botao', [
+							'classes'		=> 'btn-box-tool',
+							'atributos'		=> 'type=button data-widget=collapse',
+							'icone'			=> 'fa fa-minus'
+						])@endcomponent
                     </div>
                 </div>
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="condominio" class="control-label">Condomínio</label>
-                                <input id="condominio" type="text" class="form-control pula" name="condominio"
-                                       disabled="disabled" value="{{ $condominio->nome }}">
+								@component('formularios.String',[
+									'id'		=> 'condominio',
+									'nome'		=> 'condominio',
+									'texto'		=> 'Condomínio',
+									'valor'		=> $condominio->nome ?? '',
+									'tabindex'	=> '1',
+									'atributos'	=> 'disabled'
+								])@endcomponent
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="apelido" class="control-label">Apelido</label>
-                                <input id="apelido" type="text" class="form-control pula" name="apelido"
-                                       disabled="disabled" value="{{ $condominio->apelido }}">
+								@component('formularios.String',[
+									'id'		=> 'apelido',
+									'nome'		=> 'apelido',
+									'texto'		=> 'Apelido',
+									'valor'		=> $condominio->apelido ?? '',
+									'tabindex'	=> '2',
+									'atributos'	=> 'disabled'
+								])@endcomponent
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="codigo" class="control-label">Código</label>
-                                <input id="codigo" type="text" class="form-control pula" name="codigo"
-                                       disabled="disabled" value="{{ $condominio->id }}">
+								@component('formularios.String',[
+									'id'		=> 'codigo',
+									'nome'		=> 'codigo',
+									'texto'		=> 'Código',
+									'valor'		=> $condominio->id ?? '',
+									'tabindex'	=> '3',
+									'atributos'	=> 'disabled'
+								])@endcomponent
                             </div>
                         </div>
                     </div>
@@ -78,19 +100,26 @@
 							{{ $editar ? 'Editar' : 'Cadastrar' }} unidade
 						</h3>
                         <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool" type="button" data-widget="collapse">
-                                <i class="fa fa-minus"></i></button>
+							@component('formularios.Botao', [
+	                            'classes'		    => 'btn-box-tool',
+							    'atributos'		=> 'type=button data-widget=collapse',
+							    'icone'			=> 'fa fa-minus'
+						 	])@endcomponent
                         </div>
                     </div>
                     <div class="box-body">
-						@if( isset($unidade) )
+						@if( $editar )
 							<form method="POST" action="{{ route('condominios.unidades.alterar', ['id' => $unidade->id, 'idCondominio' => $condominio->id ]) }}">
 								{{ csrf_field() }}
 								{{ method_field('PUT') }}
 						@else
 							<form method="POST" action="{{ route('condominios.unidades.salvar',['idCondominio' => $condominio->id]) }}">
 								{{ csrf_field() }}
-                                <input type="hidden" value="{{ old('condominio_id') ? old('condominio_id') : $condominio->id }}" name="condominio_id">
+                                @component('formularios.Hidden',[
+                                    'valor' => old('condominio_id') ?? $condominio->id,
+                                    'id'    => 'condominio_id',
+                                    'nome'  => 'condominio_id',
+                                ])@endcomponent
 						@endif
                         <div class="row">
                             <div class="col-md-2">
@@ -133,7 +162,7 @@
                                         'classes'	=> 'select2',
                                     ])
                                         <option selected disabled>===============SELECIONE===============</option>
-                                        @if ( isset($unidade) )
+                                        @if ( $editar )
                                             @foreach($tiposimoveis as $tipoimovel)
                                                 <option value="{{ $tipoimovel->id }}" {{ $unidade->tipo_imovel_id == $tipoimovel->id ? 'selected' : '' }}>
                                                     {{ $tipoimovel->descricao }}</option>
@@ -173,8 +202,8 @@
                                         'tabindex'	=> '5',
                                         'texto'		=> 'Bloquear Acesso?'
                                     ])
-                                    <option value="-1" selected disabled>===============SELECIONE===============</option>
-                                    @if ( isset($unidade) )
+                                    <option value="-1" selected disabled>=====SELECIONE=====</option>
+                                    @if ( $editar )
                                         <option value="Sim"
                                             {{ old('bloquar_acesso') == 'Sim' ? 'selected' : ($unidade->bloquear_acesso == 'Sim' ? 'selected' : '') }}>
                                             Sim
@@ -265,7 +294,7 @@
                                                         'classes'	=> 'select2',
                                                     ])
                                                         <option selected disabled>===============SELECIONE===============</option>
-                                                        @if ( isset($unidade) )
+                                                        @if ( $editar )
                                                             @foreach($proprietarios as $proprietario)
                                                                 <option value="{{ $proprietario->id }}" {{ $unidade->proprietario_id == $proprietario->id ? 'selected' : '' }}>
                                                                     {{ $proprietario->entidade->nome }}</option>
@@ -284,53 +313,81 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <label for="apelido_proprietario" class="control-label">Apelido</label>
-                                                    <input id="apelido_proprietario" type="text" class="form-control pula" name="apelido_proprietario"
-                                                           disabled="disabled" value="{{ old('apelido_proprietario') ?? $unidade->proprietario->entidade->apelido ?? null    }}">
+                                                    @component('formularios.String',[
+                                                        'id'        => 'apelido_proprietario',
+                                                        'nome'      => 'apelido_proprietario',
+                                                        'texto'     => 'Apelido',
+                                                        'valor'     => old('apelido_proprietario') ?? $unidade->proprietario->entidade->apelido ?? null,
+                                                        'atributos' => 'disabled'
+                                                    ])@endcomponent
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="cpfcnpj_proprietario" class="control-label">CPF/CNPJ</label>
-                                                    <input id="cpfcnpj_proprietario" type="text" class="form-control pula" name="cpfcnpj_proprietario"
-                                                           disabled="disabled" value="{{ old('cpfcnpj_proprietario') ??$unidade->proprietario->entidade->cpf_cnpj ?? null }}">
+                                                    @component('formularios.String',[
+                                                        'id'        => 'cpfcnpj_proprietario',
+                                                        'nome'      => 'cpfcnpj_proprietario',
+                                                        'texto'     => 'CPF/CNPJ',
+                                                        'valor'     => old('cpfcnpj_proprietario') ?? $unidade->proprietario->entidade->cpf_cnpj ?? null,
+                                                        'atributos' => 'disabled'
+                                                    ])@endcomponent
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="rgie_proprietario" class="control-label">RG/IE</label>
-                                                    <input id="rgie_proprietario" type="text" class="form-control pula" name="rgie_proprietario"
-                                                           disabled="disabled" value="{{ old('rgie_proprietario') ?? $unidade->proprietario->entidade->rg_ie ?? null }}">
+                                                    @component('formularios.String',[
+                                                        'id'        => 'rgie_proprietario',
+                                                        'nome'      => 'rgie_proprietario',
+                                                        'texto'     => 'RG/IE',
+                                                        'valor'     => old('rgie_proprietario') ?? $unidade->proprietario->entidade->rg_ie ?? null,
+                                                        'atributos' => 'disabled'
+                                                    ])@endcomponent
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="foneprincipal_proprietario" class="control-label">Fone Principal</label>
-                                                    <input id="foneprincipal_proprietario" type="text" class="form-control pula" name="foneprincipal_proprietario"
-                                                           disabled="disabled" value="{{ old('foneprincipal_proprietario') ?? $unidade->proprietario->entidade->fone_principal ?? null }}">
+                                                    @component('formularios.String',[
+                                                        'id'        => 'foneprincipal_proprietario',
+                                                        'nome'      => 'foneprincipal_proprietario',
+                                                        'texto'     => 'Fone Principal',
+                                                        'valor'     => old('foneprincipal_proprietario') ?? $unidade->proprietario->entidade->telefone_principal ?? null,
+                                                        'atributos' => 'disabled'
+                                                    ])@endcomponent
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="fonecomercial_proprietario" class="control-label">Fone Comercial</label>
-                                                    <input id="fonecomercial_proprietario" type="text" class="form-control pula" name="fonecomercial_proprietario"
-                                                           disabled="disabled" value="{{ old('fonecomercial_proprietario') ?? $unidade->proprietario->entidade->fone_comercial ?? null }}">
+                                                    @component('formularios.String',[
+                                                        'id'        => 'fonecomercial_proprietario',
+                                                        'nome'      => 'fonecomercial_proprietario',
+                                                        'texto'     => 'Fone Comercial',
+                                                        'valor'     => old('foneprincipal_proprietario') ?? $unidade->proprietario->entidade->telefone_comercial ?? null,
+                                                        'atributos' => 'disabled'
+                                                    ])@endcomponent
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="celular1_proprietario" class="control-label">Celular 1</label>
-                                                    <input id="celular1_proprietario" type="text" class="form-control pula" name="celular1_proprietario"
-                                                           disabled="disabled" value="{{ old('celular1_proprietario') ?? $unidade->proprietario->entidade->celular_1 ?? null }}">
+                                                    @component('formularios.String',[
+                                                        'id'        => 'celular1_proprietario',
+                                                        'nome'      => 'celular1_proprietario',
+                                                        'texto'     => 'Celular 1',
+                                                        'valor'     => old('celular1_proprietario') ?? $unidade->proprietario->entidade->celular_1 ?? null,
+                                                        'atributos' => 'disabled'
+                                                    ])@endcomponent
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="celular2_proprietario" class="control-label">Celular 2</label>
-                                                    <input id="celular2_proprietario" type="text" class="form-control pula" name="celular2_proprietario"
-                                                           disabled="disabled" value="{{ old('celular2_proprietario') ?? $unidade->proprietario->entidade->celular_2 ?? null }}">
+                                                    @component('formularios.String',[
+                                                        'id'        => 'celular2_proprietario',
+                                                        'nome'      => 'celular2_proprietario',
+                                                        'texto'     => 'Celular 2',
+                                                        'valor'     => old('celular2_proprietario') ?? $unidade->proprietario->entidade->celular_2 ?? null,
+                                                        'atributos' => 'disabled'
+                                                    ])@endcomponent
                                                 </div>
                                             </div>
                                         </div>
@@ -356,7 +413,7 @@
                                                         'classes'	=> 'select2',
                                                     ])
                                                         <option selected disabled>===============SELECIONE===============</option>
-                                                        @if ( isset($unidade) )
+                                                        @if ( $editar )
                                                             @foreach($inquilinos as $inquilino)
                                                                 <option value="{{ $inquilino->id }}" {{ $unidade->inquilino_id == $inquilino->id ? 'selected' : '' }}>
                                                                     {{ $inquilino->entidade->nome }}</option>
@@ -375,53 +432,81 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <label for="apelido_inquilino" class="control-label">Apelido</label>
-                                                    <input id="apelido_inquilino" type="text" class="form-control pula" name="apelido_inquilino"
-                                                           disabled="disabled" value="{{ old('apelido_inquilino') ?? $unidade->inquilino->entidade->apelido ?? null }}">
+                                                    @component('formularios.String',[
+                                                        'id'        => 'apelido_inquilino',
+                                                        'nome'      => 'apelido_inquilino',
+                                                        'texto'     => 'Apelido',
+                                                        'valor'     => old('apelido_inquilino') ?? $unidade->inquilino->entidade->apelido ?? null,
+                                                        'atributos' => 'disabled'
+                                                    ])@endcomponent
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="cpfcnpj_inquilino" class="control-label">CPF/CNPJ</label>
-                                                    <input id="cpfcnpj_inquilino" type="text" class="form-control pula" name="cpfcnpj_inquilino"
-                                                           disabled="disabled" value="{{ old('cpfcnpj_inquilino') ?? $unidade->inquilino->entidade->cpf_cnpj ?? null }}">
+                                                    @component('formularios.String',[
+                                                        'id'        => 'cpfcnpj_inquilino',
+                                                        'nome'      => 'cpfcnpj_inquilino',
+                                                        'texto'     => 'CPF/CNPJ',
+                                                        'valor'     => old('cpfcnpj_inquilino') ?? $unidade->inquilino->entidade->cpf_cnpj ?? null,
+                                                        'atributos' => 'disabled'
+                                                    ])@endcomponent
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="rgie_inquilino" class="control-label">RG/IE</label>
-                                                    <input id="rgie_inquilino" type="text" class="form-control pula" name="rgie_inquilino"
-                                                           disabled="disabled" value="{{ old('rgie_inquilino') ?? $unidade->inquilino->entidade->rg_ie ?? null }}">
+                                                    @component('formularios.String',[
+                                                        'id'        => 'rgie_inquilino',
+                                                        'nome'      => 'rgie_inquilino',
+                                                        'texto'     => 'RG/IE',
+                                                        'valor'     => old('rgie_inquilino') ?? $unidade->inquilino->entidade->rg_ie ?? null,
+                                                        'atributos' => 'disabled'
+                                                    ])@endcomponent
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="foneprincipal_inquilino" class="control-label">Fone Principal</label>
-                                                    <input id="foneprincipal_inquilino" type="text" class="form-control pula" name="foneprincipal_inquilino"
-                                                           disabled="disabled" value="{{ old('foneprincipal_inquilino') ?? $unidade->inquilino->entidade->fone_principal ?? null }}">
+                                                    @component('formularios.String',[
+                                                        'id'        => 'foneprincipal_inquilino',
+                                                        'nome'      => 'foneprincipal_inquilino',
+                                                        'texto'     => 'Fone Principal',
+                                                        'valor'     => old('foneprincipal_inquilino') ?? $unidade->inquilino->entidade->telefone_principal ?? null,
+                                                        'atributos' => 'disabled'
+                                                    ])@endcomponent
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="fonecomercial_inquilino" class="control-label">Fone Comercial</label>
-                                                    <input id="fonecomercial_inquilino" type="text" class="form-control pula" name="fonecomercial_inquilino"
-                                                           disabled="disabled" value="{{ old('fonecomercial_inquilino') ?? $unidade->inquilino->entidade->fone_comercial ?? null }}">
+                                                    @component('formularios.String',[
+                                                        'id'        => 'fonecomercial_inquilino',
+                                                        'nome'      => 'fonecomercial_inquilino',
+                                                        'texto'     => 'Fone Comercial',
+                                                        'valor'     => old('fonecomercial_inquilino') ?? $unidade->inquilino->entidade->telefone_comercial ?? null,
+                                                        'atributos' => 'disabled'
+                                                    ])@endcomponent
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="celular1_inquilino" class="control-label">Celular 1</label>
-                                                    <input id="celular1_inquilino" type="text" class="form-control pula" name="celular1_inquilino"
-                                                           disabled="disabled" value="{{ old('celular1_inquilino') ?? $unidade->inquilino->entidade->celular_1 ?? null }}">
+                                                    @component('formularios.String',[
+                                                        'id'        => 'celular1_inquilino',
+                                                        'nome'      => 'celular1_inquilino',
+                                                        'texto'     => 'Celular 1',
+                                                        'valor'     => old('celular1_inquilino') ?? $unidade->inquilino->entidade->celular_1 ?? null,
+                                                        'atributos' => 'disabled'
+                                                    ])@endcomponent
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="celular2_inquilino" class="control-label">Celular 2</label>
-                                                    <input id="celular2_inquilino" type="text" class="form-control pula" name="celular2_inquilino"
-                                                           disabled="disabled" value="{{ old('celular2_inquilino') ?? $unidade->inquilino->entidade->celular_2 ?? null }}">
+                                                    @component('formularios.String',[
+                                                        'id'        => 'celular2_inquilino',
+                                                        'nome'      => 'celular2_inquilino',
+                                                        'texto'     => 'Celular 2',
+                                                        'valor'     => old('celular2_inquilino') ?? $unidade->inquilino->entidade->celular_2 ?? null,
+                                                        'atributos' => 'disabled'
+                                                    ])@endcomponent
                                                 </div>
                                             </div>
                                         </div>
@@ -470,26 +555,26 @@
                                         'tabindex'	=> '13',
                                         'texto'		=> 'Boleto Impresso',
                                     ])
-                                    <option value="-1" selected disabled> Selecione </option>
-                                    @if ( isset($unidade) )
-                                        <option value="Sim"
-                                                {{ old('boleto_impresso') == 'Sim' ? 'selected' : ($unidade->boleto_impresso == 'Sim' ? 'selected' : '') }}>
-                                            Sim
-                                        </option>
-                                        <option value="Nao"
-                                                {{ old('boleto_impresso') == 'Nao' ? 'selected' : ($unidade->boleto_impresso == 'Nao' ? 'selected' : '') }}>
-                                            Nao
-                                        </option>
-                                    @else
-                                        <option value="Sim"
-                                                {{ old('boleto_impresso') == 'Sim' ? 'selected' : '' }}>
-                                            Sim
-                                        </option>
-                                        <option value="Nao"
-                                                {{ old('boleto_impresso') == 'Nao' ? 'selected' : '' }}>
-                                            Nao
-                                        </option>
-                                    @endif
+                                        <option value="-1" selected disabled> Selecione </option>
+                                        @if ( $editar )
+                                            <option value="Sim"
+                                                    {{ old('boleto_impresso') == 'Sim' ? 'selected' : ($unidade->boleto_impresso == 'Sim' ? 'selected' : '') }}>
+                                                Sim
+                                            </option>
+                                            <option value="Nao"
+                                                    {{ old('boleto_impresso') == 'Nao' ? 'selected' : ($unidade->boleto_impresso == 'Nao' ? 'selected' : '') }}>
+                                                Nao
+                                            </option>
+                                        @else
+                                            <option value="Sim"
+                                                    {{ old('boleto_impresso') == 'Sim' ? 'selected' : '' }}>
+                                                Sim
+                                            </option>
+                                            <option value="Nao"
+                                                    {{ old('boleto_impresso') == 'Nao' ? 'selected' : '' }}>
+                                                Nao
+                                            </option>
+                                        @endif
                                     @endcomponent
                                     @if( $errors->has('boleto_impresso') )
                                         <span style="color: #f56954">{{ $errors->get('boleto_impresso')[0] }}</span>
@@ -505,7 +590,7 @@
                                         'texto'		=> 'Enviar boleto impresso para',
                                     ])
                                         <option value="-1" selected disabled> Selecione </option>
-                                        @if ( isset($unidade) )
+                                        @if ( $editar )
                                             <option value="Portaria"
                                                     {{ old('boleto_impresso_destino') == 'Portaria' ? 'selected' : ($unidade->boleto_impresso_destino == 'Portaria' ? 'selected' : '') }}>
                                                 Portaria
@@ -539,7 +624,7 @@
                                         'texto'		=> 'Enviar boleto por e-mail',
                                     ])
                                         <option value="-1" selected disabled> Selecione </option>
-                                        @if ( isset($unidade) )
+                                        @if ( $editar )
                                             <option value="Sim"
                                                     {{ old('boleto_email') == 'Sim' ? 'selected' : ($unidade->boleto_email == 'Sim' ? 'selected' : '') }}>
                                                 Sim
@@ -573,7 +658,7 @@
                                         'texto'		=> 'Enviar email para',
                                     ])
                                         <option value="-1" selected disabled> Selecione </option>
-                                        @if ( isset($unidade) )
+                                        @if ( $editar )
                                             <option value="Proprietario"
                                                     {{ old('boleto_email_destino') == 'Proprietario' ? 'selected' : ($unidade->boleto_email_destino == 'Proprietario' ? 'selected' : '') }}>
                                                 Proprietário
@@ -617,7 +702,7 @@
                                         'texto'		=> 'Enviar convocação',
                                     ])
                                         <option value="-1" selected disabled> Selecione </option>
-                                        @if ( isset($unidade) )
+                                        @if ( $editar )
                                             <option value="Portaria"
                                                     {{ old('convocacao') == 'Portaria' ? 'selected' : ($unidade->convocacao == 'Portaria' ? 'selected' : '') }}>
                                                 Portaria
@@ -651,7 +736,7 @@
                                         'texto'		=> 'Enviar convocação para',
                                     ])
                                         <option value="-1" selected disabled> Selecione </option>
-                                        @if ( isset($unidade) )
+                                        @if ( $editar )
                                             <option value="Proprietario"
                                                     {{ old('convocacao_destino') == 'Proprietario' ? 'selected' : ($unidade->convocacao_destino == 'Proprietario' ? 'selected' : '') }}>
                                                 Proprietário
@@ -693,7 +778,7 @@
                                         'texto'		=> 'Enviar Correspondencia',
                                     ])
                                         <option value="-1" selected disabled> Selecione </option>
-                                        @if ( isset($unidade) )
+                                        @if ( $editar )
                                             <option value="Portaria"
                                                     {{ old('correspondencia') == 'Portaria' ? 'selected' : ($unidade->correspondencia == 'Portaria' ? 'selected' : '') }}>
                                                 Portaria
@@ -727,7 +812,7 @@
                                         'texto'		=> 'Enviar correspondencia para',
                                     ])
                                         <option value="-1" selected disabled> Selecione </option>
-                                        @if ( isset($unidade) )
+                                        @if ( $editar )
                                             <option value="Proprietario"
                                                     {{ old('correspondencia_destino') == 'Proprietario' ? 'selected' : ($unidade->correspondencia_destino == 'Proprietario' ? 'selected' : '') }}>
                                                 Proprietário
@@ -832,11 +917,42 @@
 @endsection
 @section('js')
     <script src="{{ asset('js/select2-tab-fix/select2-tab-fix.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
-    <script src="https://cdn.datatables.net/plug-ins/1.10.10/sorting/datetime-moment.js"></script>
     <script>
         $(document).ready(function () {
             $('#bloco').focus();
+            $('#proprietario_id').on( 'change', function () {
+				let proprietario_id = $('#proprietario_id').val();
+				let url = '/Entidades/Proprietarios/GetProprietario/'+proprietario_id;
+				$.ajax({
+					method: "GET",
+					url: url
+				}).done( function ( retorno ) {
+					$('#apelido_proprietario').val( retorno.apelido );
+					$('#cpfcnpj_proprietario').val( retorno.cpf_cnpj );
+					$('#rgie_proprietario').val( retorno.rg_ie );
+					$('#foneprincipal_proprietario').val( retorno.telefone_principal );
+					$('#fonecomercial_proprietario').val( retorno.telefone_comercial );
+					$('#celular1_proprietario').val( retorno.celular_1 );
+					$('#celular2_proprietario').val( retorno.celular_2 );
+				});
+            });
+
+			$('#inquilino_id').on( 'change', function () {
+				let inquilino_id = $('#inquilino_id').val();
+				let url = '/Entidades/Inquilinos/GetInquilino/'+inquilino_id;
+				$.ajax({
+					method: "GET",
+					url: url
+				}).done( function ( retorno ) {
+					$('#apelido_inquilino').val( retorno.apelido );
+					$('#cpfcnpj_inquilino').val( retorno.cpf_cnpj );
+					$('#rgie_inquilino').val( retorno.rg_ie );
+					$('#foneprincipal_inquilino').val( retorno.telefone_principal );
+					$('#fonecomercial_inquilino').val( retorno.telefone_comercial );
+					$('#celular1_inquilino').val( retorno.celular_1 );
+					$('#celular2_inquilino').val( retorno.celular_2 );
+				});
+			});
         });
     </script>
 @endsection

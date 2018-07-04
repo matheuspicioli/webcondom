@@ -108,4 +108,12 @@ class InquilinosController extends Controller
 		Toast::success('Inquilino excluído com sucesso!', 'Exclusão!');
         return redirect()->route('entidades.inquilinos.listar');
     }
+
+	public function GetInquilino($id)
+	{
+		$inquilino = Inquilino::find($id);
+		if ( isset($inquilino->entidade) ) {
+			return $inquilino->entidade;
+		}
+    }
 }

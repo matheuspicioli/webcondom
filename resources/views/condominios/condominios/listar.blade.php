@@ -77,10 +77,10 @@
                                                 <i class="fa fa-pencil"></i></button>
                                         @endcan
                                         @can("listar_unidade")
-                                            <a class="btn btn-sm btn-primary" href="{{ route('condominios.unidades.listar', ['idCondominio' => $condominio->id ]) }}">
+                                            <a class="btn btn-xs btn-primary" href="{{ route('condominios.unidades.listar', ['idCondominio' => $condominio->id ]) }}">
                                                 <i class="fa fa-th-list"></i></a>
                                         @else
-                                                <button disabled type="button" class="btn btn-sm btn-primary">
+                                                <button disabled type="button" class="btn btn-xs btn-primary">
                                                     <i class="fa fa-th-list"></i></button>
                                         @endcan
                                         @can("deletar_condominio")

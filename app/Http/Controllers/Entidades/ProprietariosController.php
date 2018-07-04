@@ -121,4 +121,12 @@ class ProprietariosController extends Controller
 		Toast::success('Proprietário excluído com sucesso!', 'Exclusão!');
         return redirect()->route('entidades.proprietarios.listar');
     }
+
+    public function GetProprietario($id)
+	{
+		$proprietario = Proprietario::find($id);
+		if ( isset($proprietario->entidade) ) {
+			return $proprietario->entidade;
+		}
+	}
 }

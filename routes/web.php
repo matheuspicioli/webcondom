@@ -223,6 +223,7 @@ Route::prefix('Entidades')->namespace('Entidades')->middleware('auth')->group(fu
         Route::get('Criar', 'ProprietariosController@criar')->name('entidades.proprietarios.criar');
         Route::post('/', 'ProprietariosController@salvar')->name('entidades.proprietarios.salvar');
         Route::get('{id}/Exibir', 'ProprietariosController@exibir')->name('entidades.proprietarios.exibir');
+        Route::get('GetProprietario/{id}', 'ProprietariosController@getProprietario')->name('entidades.proprietarios.getproprietario');
         Route::put('{id}/Alterar', 'ProprietariosController@alterar')->name('entidades.proprietarios.alterar');
         Route::delete('{id}', 'ProprietariosController@excluir')->name('entidades.proprietarios.excluir');
     });
@@ -255,6 +256,7 @@ Route::prefix('Entidades')->namespace('Entidades')->middleware('auth')->group(fu
         Route::get('Criar', 'InquilinosController@criar')->name('entidades.inquilinos.criar');
         Route::post('/', 'InquilinosController@salvar')->name('entidades.inquilinos.salvar');
         Route::get('{id}/Exibir', 'InquilinosController@exibir')->name('entidades.inquilinos.exibir');
+		Route::get('GetInquilino/{id}', 'InquilinosController@getInquilino')->name('entidades.inquilinos.getinquilino');
         Route::put('{id}/Alterar', 'InquilinosController@alterar')->name('entidades.inquilinos.alterar');
         Route::delete('{id}', 'InquilinosController@excluir')->name('entidades.inquilinos.excluir');
     });

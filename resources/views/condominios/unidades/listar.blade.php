@@ -35,33 +35,50 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Dados do Condomínios -> {{ $condominio->nome }} - {{ $condominio->apelido }}</h3>
                         <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool" type="button" data-widget="collapse">
-                                <i class="fa fa-minus"></i>
-                            </button>
+							@component('formularios.Botao', [
+								'classes'		=> 'btn-box-tool',
+								'atributos'		=> 'type=button data-widget=collapse',
+								'icone'			=> 'fa fa-minus'
+							])@endcomponent
                         </div>
                     </div>
 
                     <div class="box-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="condominio" class="control-label">Condomínio</label>
-                                    <input id="condominio" type="text" class="form-control pula" name="condominio"
-                                           disabled="disabled" value="{{ $condominio->nome }}">
-                                </div>
+								<div class="form-group">
+									@component('formularios.String',[
+										'id'		=> 'condominio',
+										'nome'		=> 'condominio',
+										'texto'		=> 'Condomínio',
+										'valor'		=> $condominio->nome ?? '',
+										'tabindex'	=> '1',
+										'atributos'	=> 'disabled'
+									])@endcomponent
+								</div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="apelido" class="control-label">Apelido</label>
-                                    <input id="apelido" type="text" class="form-control pula" name="apelido"
-                                           disabled="disabled" value="{{ $condominio->apelido }}">
+									@component('formularios.String',[
+										'id'		=> 'apelido',
+										'nome'		=> 'apelido',
+										'texto'		=> 'Apelido',
+										'valor'		=> $condominio->apelido ?? '',
+										'tabindex'	=> '1',
+										'atributos'	=> 'disabled'
+									])@endcomponent
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label for="codigo" class="control-label">Código</label>
-                                    <input id="codigo" type="text" class="form-control pula" name="codigo"
-                                           disabled="disabled" value="{{ $condominio->id }}">
+									@component('formularios.String',[
+										'id'		=> 'codigo',
+										'nome'		=> 'codigo',
+										'texto'		=> 'Código',
+										'valor'		=> $condominio->id ?? '',
+										'tabindex'	=> '1',
+										'atributos'	=> 'disabled'
+									])@endcomponent
                                 </div>
                             </div>
                         </div>
@@ -76,8 +93,6 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Lista de Unidades</h3>
                     </div>
-
-                    <hr>
                     <div class="box-body">
                         <table class="table table-striped table-hover dataTable" id="tabela" role="grid">
                             <thead>
@@ -106,15 +121,20 @@
                                     <td>{{ $unidade->bloco }}</td>
                                     <td>{{ $unidade->unidade }}</td>
                                     <td>{{ $unidade->proprietario->entidade->nome }}</td>
-                                    <td>{{ $unidade->inquilino_id ? $unidade->inquilino->entidade->nome : 'Não informado' }}</td>
+                                    <td>{{ isset($unidade->inquilino) ? $unidade->inquilino->entidade->nome : 'Não informado' }}</td>
                                     <td>{{ $unidade->indice }}</td>
                                     <td>
-                                            <a class="btn btn-xs btn-warning" href="{{ route('condominios.unidades.exibir', ['id' => $unidade->id, 'idCondominio' => $unidade->condominio_id ]) }}" title="Editar">
-                                            <i class="fa fa-pencil"></i></a>
-                                        <button type="button" data-toggle="modal"
-                                                data-target="#modal-danger-{{$unidade->id}}" href="#"
-                                                class="btn btn-xs btn-danger" title="Excluir">
-                                            <i class="fa fa-trash"></i></button>
+										<a class="btn btn-xs btn-warning" href="{{ route('condominios.unidades.exibir', ['id' => $unidade->id, 'idCondominio' => $unidade->condominio_id ]) }}" title="Editar">
+                                            <i class="fa fa-pencil"></i>
+										</a>
+										@component('formularios.Botao', [
+											'classes'		=> 'btn-xs btn-danger',
+											'atributos'		=> 'type=button',
+											'icone'			=> 'fa fa-trash',
+											'titulo'		=> 'Excluir',
+											'target'		=> "#modal-danger-{$unidade->id}",
+											'toggle'		=> 'modal'
+										])@endcomponent
                                         <!-- MODAL EXCLUSÃO -->
                                         <div id="modal-danger-{{$unidade->id}}" class="modal modal-danger fade">
                                             <div class="modal-dialog">
@@ -132,11 +152,20 @@
                                                         <p>Proprietário:   {{ $unidade->proprietario->entidade->nome }}</p>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button class="btn btn-outline pull-left" type="button" data-dismiss="modal">Fechar</button>
+														@component('formularios.Botao', [
+															'classes'		=> 'btn-outline pull-left',
+															'atributos'		=> 'type=button data-dismiss=modal',
+															'texto'			=> 'Fechar'
+														])@endcomponent
                                                         <form method="POST" action="{{ route('condominios.unidades.excluir', ['id' => $unidade->id, 'idCondominios' => $unidade->condominio_id ]) }}">
                                                             {{ csrf_field() }}
                                                             {{ method_field('DELETE') }}
-                                                            <button class="btn btn-outline" type="submit">Confirmar exclusão</button>
+															@component('formularios.Botao', [
+																'classes'		=> 'btn-outline',
+																'atributos'		=> 'type=submit',
+																'icone'			=> 'fa fa-trash',
+																'texto'			=> 'Confirmar exclusão'
+															])@endcomponent
                                                         </form>
                                                     </div>
                                                 </div>
@@ -151,32 +180,12 @@
                 </div>
             </div>
         </div>
-        <div id="modal-erro" class="modal modal-danger fade" data-toggle="modal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                        <h3 class="modal-title">Erro</h3>
-                    </div>
-                    <div class="modal-body">
-                        <h4 id="mensagem-erro"></h4>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-outline pull-left" type="button" id="botao-fechar-modal-erro"
-                                data-dismiss="modal">Fechar
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
     @else
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-warning">
                     <div class="box-header with-border">
-                        <h3 class="box-title">{{mensagem_permissao()}}</h3>
+                        <h3 class="box-title">{{ mensagem_permissao() }}</h3>
                     </div>
                 </div>
             </div>
@@ -186,11 +195,8 @@
 
 @section('js')
 	<script src="{{ asset('js/select2-tab-fix/select2-tab-fix.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
-    <script src="https://cdn.datatables.net/plug-ins/1.10.10/sorting/datetime-moment.js"></script>
     <script>
         $(document).ready(function () {
-            $.fn.dataTable.moment('DD/MM/YYYY');
             $('#tabela').DataTable({
                 "order": [[ 0, "asc" ]],
                 "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
@@ -198,8 +204,6 @@
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
                 }
             });
-            $('.select2').select2();
-            $('#data').focus();
         });
     </script>
 @stop

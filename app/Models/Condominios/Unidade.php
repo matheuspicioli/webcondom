@@ -10,8 +10,8 @@ class Unidade extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        "condominio_id", "bloco", "unidade", "tipo_imovel_id", "garagem", "bloquear_acesso", "proprietario_id",
-        "inquilino_id", "area_util", "area_total", "indice", "boleto_impresso", "boleto_impresso_destino",
+        "condominio_id", "bloco", "unidade", "tipo_imovel_id", "garagem", "bloquear_acesso",
+        "area_util", "area_total", "indice", "boleto_impresso", "boleto_impresso_destino",
         "boleto_email", "boleto_email_destino", "convocacao", "convocacao_destino", "correspondencia",
         "correspondencia_destino", "imobiliaria", "imobiliaria_contato", "observacoes"
     ];
@@ -36,7 +36,4 @@ class Unidade extends Model
     {
         return $this->belongsTo('WebCondom\Models\Entidades\Inquilino');
     }
-
-
-
 }
