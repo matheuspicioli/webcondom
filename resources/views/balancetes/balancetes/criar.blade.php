@@ -118,6 +118,13 @@
 									</div>
 								</div>
                             </div>
+							<div class="row">
+								<div class="col-md-6 col-md-offset-3">
+									<div class="form-group">
+										<textarea class="ckeditor" name="resumo" id="resumo" rows="10">{!! old('resumo') ?? '' !!}</textarea>
+									</div>
+								</div>
+							</div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -144,6 +151,7 @@
     @endcan
 @endsection
 @section('js')
+	<script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
     <script>
         $(document).ready(function () {
         	$('#condominio_id').focus();

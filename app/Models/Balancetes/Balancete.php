@@ -13,7 +13,7 @@ class Balancete extends Model
 
     protected $fillable = [
     	'referencia','competencia','data_inicial','data_final',
-		'saldo_anterior','saldo_atual', 'condominio_id'
+		'saldo_anterior','saldo_atual', 'condominio_id','resumo'
 	];
 
     protected $dates = ['data_inicial', 'data_final'];
